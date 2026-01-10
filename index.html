@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="logotipo.ico" type="image/x-icon">
+        <link rel="stylesheet" href="diseno.css">
+        <title>Reproductor Estilo Material 3</title>
+    </head>
+    <body>
+
+        <div class="glass-panel">
+            <div class="left-col">
+                <div class="video-container">
+                    <video id="bgVideo" autoplay muted loop>
+                        <source src="video.mp4" type="video/mp4">
+                        Tu navegador no soporta videos.
+                    </video>
+                </div>
+
+
+                <div class="seekbar-container">
+                    <div class="range-wrapper">
+                        <div class="track-wave" id="trackWave"></div>
+                        <div class="track-straight"></div>
+                        <input type="range" id="seekSlider" value="0" max="100" step="0.1">
+                    </div>
+                    <div class="time-info">
+                        <span id="currentTime">0:00</span>
+                        <span id="totalDuration">0:00</span>
+                    </div>
+                </div>
+                
+                <div class="controls">
+                    <button class="btn-nav" id="prevBtn">⏮</button>
+                    <button class="btn-play-pause" id="playBtn">▶</button>
+                    <button class="btn-nav" id="nextBtn">⏭</button>
+                </div>
+            </div>
+
+            <div class="playlist" id="playlist"></div>
+        </div>
+
+        <audio id="mainAudio"></audio>
+
+        <a href="tu-archivo-musica.zip" download class="fab-btn download-fab">
+            <img src="download.svg" alt="Descargar">
+        </a>
+
+       <a href="https://www.spotify.com" target="_blank" class="fab-btn spotify-fab">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" alt="Spotify">
+        </a>
+        <script type="module" src="logica.js"></script> 
+    </body>
+</html>

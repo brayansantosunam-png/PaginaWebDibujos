@@ -1,0 +1,314 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@200;300;400;500;700;800&display=swap');/*General*/
+@import url('https://fonts.googleapis.com/css2?family=Belanosima:wght@400;600;700&family=Karla:wght@200;300;400;500;700;800&display=swap');/*Logo*/
+@import url('https://fonts.googleapis.com/css2?family=Belanosima:wght@400;600;700&family=Kanit&family=Karla:wght@200;300;400;500;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Handjet:wght@300&display=swap');/*Titulos*/
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');/*Titulo Salud Activa*/
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap');/*navigation view*/
+@import url('https://fonts.googleapis.com/css2?family=Cutive&display=swap');/*Ayuda Inteligente*/
+@import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');/*Ayuda inteligente titulo*/
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap');/* Ayuda inteligente /Contenido */
+@import url('https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap');/*Ayuda inteligente 2*/
+@import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@600&display=swap');/*Perfil*/
+@import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');/*Perfil normal*/
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@600&display=swap');/*Bold Video y Titulos*/
+@import url('https://fonts.googleapis.com/css2?family=BioRhyme:wght@500&display=swap');/* Recomendaciones AI */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@500&display=swap');/* Subtitulos para section's */
+@import url('https://fonts.googleapis.com/css2?family=Patua+One&display=swap');/* Tabla alimentos */
+@import url('https://fonts.googleapis.com/css2?family=Paytone+One&display=swap');/*Titulo SeriesxRepeticiones*/
+@import url('https://fonts.googleapis.com/css2?family=Protest+Strike&display=swap');/* Texto Cargando Imagen Perfil */
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');/* Titulo CardMusica */
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap'); /* Titulo Aprender */
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap'); /* Recomendaciones Aprender */
+@import url('https://fonts.googleapis.com/css2?family=Concert+One&display=swap');/* Etiquetas */
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');/* Frace */
+@import url('https://fonts.googleapis.com/css2?family=Carrois+Gothic+SC&display=swap'); /* Nombre de perfil contact info */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap'); /* Saludo perfil */
+@import url('https://fonts.googleapis.com/css2?family=Signika+Negative&display=swap'); /* Datos perfil */
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap'); /* Subtitulos de recomendaciones */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap'); /* Ecuaciones */
+@import url('https://fonts.googleapis.com/css2?family=Anton+SC&display=swap'); /* Efect Upload Text */
+@import url('https://fonts.googleapis.com/css2?family=Squada+One&display=swap'); /* Nombre pacientes */
+@import url('https://fonts.googleapis.com/css2?family=Doto:wght@100..900&display=swap'); /* Fecha y hora */
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@800&display=swap'); /* Karla (Product sans) bold */
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@500&display=swap'); /* Karla (Product sans) medium */
+@import url('https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@1,700&display=swap'); /* Titulo Diario */
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,800&display=swap'); /* Flex Texto */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap'); /* Bebas Nue */
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Esto hace que el padding y borde no sumen ancho extra */
+}
+
+body, html {
+    width: 100%;
+    height: 100%; /* Necesario para el centrado vertical */
+    margin: 0;
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center;     /* Centra verticalmente */
+    font-family: 'Karla', sans-serif;
+    background: url('background_minecraft.png') no-repeat center center fixed;
+    background-size: cover;
+    overflow: hidden; /* Evita scrolls innecesarios en el body */
+}
+
+:root {
+    --m3-primary-container: #eaddff;
+    --m3-on-primary-container: #21005d;
+    --m3-secondary-container: #e8def8;
+    --m3-surface: rgba(255, 255, 255, 0.7);
+    --m3-active: #d0bcff;
+}
+
+.glass-panel {
+    background:rgba( 172, 206, 242, 0.15 );
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--border-glassefect); 
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    transition: background-color 0.3s ease;
+    border-radius: 50px;
+    padding: 30px;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr; 
+    gap: 30px;
+    width: 90%;
+    max-width: 1100px; 
+    height: auto;
+    max-height: 90vh; 
+}
+
+/* Sección Video */
+.video-container {
+    position: relative;
+}
+
+video {
+    width: 100%;
+    border-radius: 24px;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+/* Controles Material 3 */
+.controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.btn-play-pause {
+    background-color: var(--m3-primary-container);
+    color: var(--m3-on-primary-container);
+    border: none;
+    padding: 20px 40px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 24px;
+    transition: transform 0.2s;
+}
+
+.btn-nav {
+    background-color: #add8e6; /* Azul claro de la imagen */
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Lista de canciones */
+.playlist {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* El pequeño margen entre pistas que mencionaste */
+    max-height: 500px;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+/* Estilo base para todas las pistas (el centro) */
+.song-item {
+    display: flex;
+    align-items: center;
+    background-color: #FAF9FE; /* Fondo blanco sólido */
+    padding: 15px 25px;
+    cursor: pointer;
+    border-radius: 15px; /* Radio por defecto para todas */
+    transition: background-color 0.3s ease, transform 0.2s;
+    border: none;
+}
+
+/* Regla específica para la PRIMERA pista */
+.song-item:first-child {
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+/* Regla específica para la ÚLTIMA pista */
+.song-item:last-child {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+/* Estado activo (cuando suena la canción) */
+.song-item.active {
+    background-color: var(--m3-active);
+    border-radius: 50px;
+}
+
+/* Ajuste de la imagen de la canción */
+.song-item img {
+    width: 60px;
+    height: 60px;
+    border-radius: 20px;
+    margin-right: 25px;
+    object-fit: cover;
+}
+
+/* Ajuste del texto para que se vea: Título - Artista */
+.song-info h4 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #000;
+    margin: 0;
+}
+
+.song-info p { margin: 0; font-size: 14px; opacity: 0.8; }
+
+/* Scrollbar simple */
+.playlist::-webkit-scrollbar { width: 6px; }
+.playlist::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.2); border-radius: 10px; }
+
+
+.fab-btn {
+    position: fixed;
+    bottom: 30px;
+    z-index: 1000;
+    width: 70px;
+    height: 70px;
+    background-color: #ffffff;
+    border-radius: 22px;
+    border: 5px solid #e0e0e0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.fab-btn img {
+    width: 60%; /* Un poco más pequeño para que respire el borde */
+    height: auto;
+}
+
+/* --- Posicionamiento Individual --- */
+
+/* El de Spotify se queda a la derecha original */
+.spotify-fab {
+    right: 30px;
+}
+
+/* El de descarga se mueve más a la izquierda: 
+   30px (margen) + 70px (ancho botón) + 15px (espacio entre ellos) = 115px */
+.download-fab {
+    right: 115px;
+}
+
+/* --- Efectos Hover Individuales --- */
+
+.fab-btn:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.spotify-fab:hover {
+    border-color: #1DB954; /* Verde Spotify */
+}
+
+.download-fab:hover {
+    border-color: #709fde; /* Azul que usamos en el seekbar */
+}
+
+.fab-btn:active {
+    transform: scale(0.9);
+}
+
+.seekbar-container {
+    margin-top: 30px;
+    width: 100%;
+    padding: 0 10px;
+}
+
+.range-wrapper {
+    position: relative;
+    width: 100%;
+    height: 30px;
+    display: flex;
+    align-items: center;
+}
+
+/* Línea recta (fondo/lo que falta) */
+.track-straight {
+    position: absolute;
+    height: 5px; 
+    background-color: rgba(43, 43, 43, 0.7);
+    border-radius: 2px;
+    z-index: 1;
+}
+
+/* Línea ondulada (progreso) */
+.track-wave {
+    position: absolute;
+    left: 0;
+    height: 16px; 
+    width: 0%; 
+    z-index: 2;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 12'%3E%3Cpath d='M0 6 Q 5 0, 10 6 T 20 6' fill='none' stroke='%23709fde' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    background-size: 20px 12px;
+    pointer-events: none; 
+}
+
+/* Input Range invisible pero funcional */
+#seekSlider {
+    position: relative;
+    width: 100%;
+    -webkit-appearance: none;
+    background: transparent;
+    z-index: 3;
+    cursor: pointer;
+    margin: 0;
+}
+
+/* Estilo del Indicador (Thumb) - El palito vertical */
+#seekSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 30px;
+    width: 6px;
+    background: #709fde;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+/* Información de tiempo */
+.time-info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+    font-weight: 600;
+    font-size: 14px;
+    color: #000;
+}
