@@ -312,3 +312,72 @@ video {
     font-size: 14px;
     color: #000;
 }
+
+@media screen and (max-width: 1150px) {
+    body, html {
+        overflow-y: auto; /* Permitimos scroll vertical si el contenido es largo */
+        align-items: flex-start; /* Alineamos arriba para que no se corte el panel */
+        padding: 20px 0;
+    }
+
+    .glass-panel {
+        display: flex; /* Cambiamos de Grid a Flex */
+        flex-direction: column; /* Apilamos los elementos verticalmente */
+        width: 95%; /* Un poco más ancho en móviles */
+        max-height: none; /* Dejamos que crezca según el contenido */
+        border-radius: 35px; /* Bordes un poco menos pronunciados */
+        padding: 20px;
+        gap: 20px;
+    }
+
+    /* Ajuste de los controles */
+    .controls {
+        justify-content: center; /* Centramos los botones */
+        gap: 10px;
+    }
+
+    .btn-play-pause {
+        padding: 15px 30px; /* Botón un poco más pequeño */
+        font-size: 20px;
+    }
+
+    /* Ajuste de la Playlist */
+    .playlist {
+        max-height: 350px; /* Limitamos la altura para que no sea infinita */
+    }
+
+    .song-item {
+        padding: 12px 15px; /* Menos espacio interno */
+    }
+
+    .song-item img {
+        width: 50px; /* Imagen más pequeña */
+        height: 50px;
+        margin-right: 15px;
+    }
+
+    .song-info h4 {
+        font-size: 16px; /* Texto más legible en pantallas pequeñas */
+    }
+
+    /* Ajuste de los botones flotantes (FAB) */
+    .fab-btn {
+        width: 60px; /* Botones un poco más pequeños */
+        height: 60px;
+        bottom: 20px;
+        border-radius: 18px;
+    }
+
+    .spotify-fab {
+        right: 20px;
+    }
+
+    .download-fab {
+        right: 90px; /* Ajustamos la distancia entre ellos */
+    }
+
+    /* Seekbar en móvil */
+    .seekbar-container {
+        margin-top: 15px;
+    }
+}   
