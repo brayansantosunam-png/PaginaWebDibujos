@@ -34,6 +34,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@1,700&display=swap'); /* Titulo Diario */
 @import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,800&display=swap'); /* Flex Texto */
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap'); /* Bebas Nue */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 
 
@@ -126,6 +127,24 @@ video {
     border-radius: 50%;
     cursor: pointer;
     font-weight: bold;
+}
+
+.typewriter-container {
+    font-family: "Press Start 2P", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 10px;
+    color: #fff;
+    white-space: nowrap;
+    border-right: 2px solid #fff; /* El "cursor" que parpadea */
+    padding-right: 5px;
+    overflow: hidden;
+    animation: blink 0.7s infinite; /* Animación del cursor */
+}
+
+/* Animación para que el cursor parpadee */
+@keyframes blink {
+    50% { border-color: transparent; }
 }
 
 /* Lista de canciones */
@@ -340,7 +359,10 @@ video {
 }
 
 .footer-copy p {
-  font-size: 0.9rem;
+  font-size: 0.6rem;
+  font-family: "Press Start 2P", system-ui;
+  font-weight: 400;
+  font-style: normal;
 }
 
 
@@ -349,7 +371,9 @@ video {
 @media screen and (max-width: 1150px) {
     body, html {
         overflow-y: auto; /* Permitimos scroll vertical si el contenido es largo */
-        align-items: flex-start; /* Alineamos arriba para que no se corte el panel */
+        align-items: flex-start;
+        justify-content: center;
+        align-items: center; 
         padding: 20px 0;
     }
 
@@ -365,8 +389,25 @@ video {
 
     /* Ajuste de los controles */
     .controls {
+        flex-direction: column;
         justify-content: center; /* Centramos los botones */
         gap: 10px;
+    }
+
+    .controls .btn-nav, .controls .btn-play-pause {
+        order: 1; 
+    }
+
+    .typewriter-container {
+        order: 2;             
+        font-size: 13px;      
+        text-align: center;   
+        min-height: 1.2em;    
+        white-space: normal;  
+        border-right: none;   
+        border-bottom: 2px solid #fff; 
+        width: 100%;
+        max-width: 280px;     
     }
 
     .btn-play-pause {

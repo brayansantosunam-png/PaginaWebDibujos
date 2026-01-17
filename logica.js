@@ -1,13 +1,33 @@
 const songs = [
-    { title: "Soñé", artist: "Zoé", cover: "https://cdn-images.dzcdn.net/images/cover/8498486810fb5956153f175822b7b7d8/0x1900-000000-80-0-0.jpg", src: "sone.m4a" },
-    { title: "Droopy likes your Face", artist: "Minecraft Volume Alpha", cover: "https://cdn-images.dzcdn.net/images/cover/a6e61f6327038b8dd63ec08509c69244/0x1900-000000-80-0-0.jpg", src: "minecraft_uno.m4a" },
-    { title: "Labios rotos", artist: "Zoé", cover: "https://cdn-images.dzcdn.net/images/cover/8498486810fb5956153f175822b7b7d8/0x1900-000000-80-0-0.jpg", src: "labiosrotos.m4a" },
-    { title: "Tarde", artist: "Siddhartha", cover: "https://cdn-images.dzcdn.net/images/cover/a508833ee74e2cd3197f0641e3c73545/1900x1900-000000-80-0-0.jpg", src: "tarde.m4a" },
-    { title: "Ojos noche", artist: "Elsa y el mar", cover: "https://i.scdn.co/image/ab67616d0000b27315b34a0c485e552542339421", src: "ojosnoche.m4a" },
-    { title: "Tears", artist: "Minecraft", cover: "https://cdn-images.dzcdn.net/images/cover/a6e61f6327038b8dd63ec08509c69244/0x1900-000000-80-0-0.jpg", src: "minecraft_dos.m4a" },
-    { title: "Bruma", artist: "León Larregui", cover: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAKhj6DATZm2qKUx11gFHedys-WEO3UfFgUQ&s", src: "bruma.m4a" },
-    { title: "Velur", artist: "Zoé", cover: "https://cdn-images.dzcdn.net/images/cover/46d64f553900fcee92fdc8e364246828/0x1900-000000-80-0-0.jpg", src: "velur.m4a" }
+    { title: "Soñé", artist: "Zoé", phrase: "Pues no tengo nada que perder...", cover: "https://cdn-images.dzcdn.net/images/cover/8498486810fb5956153f175822b7b7d8/0x1900-000000-80-0-0.jpg", src: "sone.m4a" },
+    { title: "Droopy likes your Face", artist: "Minecraft Volume Alpha", phrase: "Entre cubos y nostalgia", cover: "https://cdn-images.dzcdn.net/images/cover/a6e61f6327038b8dd63ec08509c69244/0x1900-000000-80-0-0.jpg", src: "minecraft_uno.m4a" },
+    { title: "Ser parte", artist: "Siddhartha", phrase: "Te admiraré, ser parte, quiza...", cover: "https://cdn-images.dzcdn.net/images/cover/a508833ee74e2cd3197f0641e3c73545/1900x1900-000000-80-0-0.jpg", src: "ser_parte.mp3" },
+    { title: "Labios rotos", artist: "Zoé", phrase: "En el desierto de mi alma...", cover: "https://cdn-images.dzcdn.net/images/cover/8498486810fb5956153f175822b7b7d8/0x1900-000000-80-0-0.jpg", src: "labiosrotos.m4a" },
+    { title: "Tarde", artist: "Siddhartha", phrase: "Tarde se me hacía para volver a verte...", cover: "https://cdn-images.dzcdn.net/images/cover/a508833ee74e2cd3197f0641e3c73545/1900x1900-000000-80-0-0.jpg", src: "tarde.m4a" },
+    { title: "Ojos noche", artist: "Elsa y el mar", phrase: "Con tus ojos de noche (Eh-eh, eh-eh)...", cover: "https://i.scdn.co/image/ab67616d0000b27315b34a0c485e552542339421", src: "ojosnoche.m4a" },
+    { title: "Tears", artist: "Minecraft", phrase: "Geometría del espacio...", cover: "https://cdn-images.dzcdn.net/images/cover/a6e61f6327038b8dd63ec08509c69244/0x1900-000000-80-0-0.jpg", src: "minecraft_dos.m4a" },
+    { title: "Vía lactea", artist: "Zoé", phrase: "Del prisma de tus ojos, en mi caso de astronauta...", cover: "https://cdn-images.dzcdn.net/images/cover/8498486810fb5956153f175822b7b7d8/0x1900-000000-80-0-0.jpg", src: "via_lactea.mp3" },
+    { title: "Bruma", artist: "León Larregui", phrase: "Dar sin esperar nada a cambio...", cover: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAKhj6DATZm2qKUx11gFHedys-WEO3UfFgUQ&s", src: "bruma.m4a" },
+    { title: "Velur", artist: "Zoé", phrase: "Y me ajusto, pero no me aplaco... Ni rosas, ni avellanas echa formol al corazón.", cover: "https://cdn-images.dzcdn.net/images/cover/46d64f553900fcee92fdc8e364246828/0x1900-000000-80-0-0.jpg", src: "velur.m4a" }
 ];
+
+let typewriterInterval; // Variable global para controlar la animación
+
+function typeWriter(text) {
+    const container = document.getElementById('typewriter-text');
+    container.innerHTML = ""; // Limpia el texto previo
+    clearInterval(typewriterInterval); // Detiene cualquier animación en curso
+
+    let i = 0;
+    typewriterInterval = setInterval(() => {
+        if (i < text.length) {
+            container.innerHTML += text.charAt(i);
+            i++;
+        } else {
+            clearInterval(typewriterInterval); // Se detiene al terminar la frase
+        }
+    }, 100); // Velocidad en milisegundos por letra
+}
 
 let currentSongIndex = 0;
 const audio = document.getElementById('mainAudio');
@@ -36,6 +56,7 @@ function loadPlaylist() {
 function selectSong(index) {
     currentSongIndex = index;
     audio.src = songs[currentSongIndex].src;
+    typeWriter(songs[currentSongIndex].phrase || "");
     loadPlaylist(); 
     playSong();
 }
