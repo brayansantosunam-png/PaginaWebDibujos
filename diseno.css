@@ -576,12 +576,17 @@ video {
 }
 
 .footer-logo img {
-  width: 60px;
-  height: auto;
-  border-radius: 50px;
-  background-color: #aaa;
-  padding: 10px;
-  margin-bottom: 1rem;
+    width: 60px;
+    height: auto;
+    border-radius: 50px;
+    background:rgba( 172, 206, 242, 0.15 );
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--border-glassefect); 
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    transition: background-color 0.3s ease;
+    padding: 10px;
+    margin-bottom: 1rem;
 }
 
 .footer-copy p {
