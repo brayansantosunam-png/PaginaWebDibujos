@@ -42,6 +42,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box; /* Esto hace que el padding y borde no sumen ancho extra */
+    cursor: url('cursor.png'), auto;
 }
 
 body, html {
@@ -59,19 +60,242 @@ body, html {
     overflow-y: auto;        
 }
 
-:root {
+body.alt-theme {
+    background: url('background_minecraft_night.png') no-repeat center center fixed;
+    background-size: cover;
+}
+
+
+:root{
+    --black-color:#494949;
+    --background-color:#FFFFFF;
+    --background-aprender: #efe7f1;
+    --background-datos:#9ac6d8;
+    --therthary-color:#F0F2F7;
+    --card-brown-color:#fff8f5;
+    --card-green-color:#d8e4cb;
+    --card-pick-color:#efdcf5;
+    --card-blue-color:#e3eefc;
+    --card-yellow-color: #f9f1d2;
+    --card-twoblue-color:#dfedfa;
+    --neon-pulse-brown:#cecbc8;
+    --neon-pulse-pink:#fee0ca;
+    --neon-pulse-green:#dbefe4;
+    --status-bar-color: #DFEAF5;
+    --text-glasseffect:rgba(43, 43, 43, 0.7);
+    --filtro-background-portada: rgba(133, 133, 133, 0.4);
+    --background-indicator: rgba(61, 61, 61, 0.11);
+    --box-indicator: 0 4px 15px rgba(0,0,0,0.2);
+    --border-indicator: 1px solid rgba(109, 107, 107, 0.3);
+    --indicator-color: #34a853; 
+    --indicator-idle: #d1d1d1;
     --m3-primary-container: #eaddff;
     --m3-on-primary-container: #21005d;
     --m3-secondary-container: #e8def8;
     --m3-surface: rgba(255, 255, 255, 0.7);
     --m3-active: #d0bcff;
     --navigation-background:#202124;
+    --neon-pulse-green-ai: linear-gradient(
+        to right,
+        rgb(80, 130, 238),
+        rgb(125, 121, 217),
+        rgb(141, 117, 209),
+        rgb(156, 113, 201),
+        rgb(174, 110, 175),
+        rgb(183, 109, 162),
+        rgb(188, 107, 154),
+        rgb(196, 106, 143),
+        rgb(212, 122, 144),
+        rgb(214, 101, 115));
+    --neon-pulse-pink-ai: rgb(182, 157, 175);
+    --neon-pulse-blue:#94c0ed;
+    --neon-pulse-blue_banner:#EDEFFE;
+    --neon-pulse-purple:#d7c6ec;
+    --rgba-navigation:rgba(238, 238, 238, 0.8);
+    --shadown-navigation: 0 4px 8px rgba(0, 0, 0, 0.1);
+    --navigation-background:#202124;
+    --navigation-active:#34a853;
+    --navigation-text:#e6e3e3;
+    --back-ai:#EDEFFE;
+    --back-ai-perfil: #e5dff9;
+    --back-ai-portada:#709fde;
+    --back-ai-estilo-perfil:#d0e8d7;
+    --back-ai-tipo-perfil:#ffdbc9;
+    --icon-ai:#EA9854;
+    --text-ai:#B9839B;
+    --text-color-perfil:#5997bc;
+    --gradiant-ai:#a3b0ce79;
+    --gradiant-ai-green:#dae7c279;
+    --gradiant-ai-pink:  #ffc0cb6c;
+    --gradiant-red:#ca61438e;
+    --line-neon-perfil: #9d88eb;
+    --line-neon-perfil-explocion: #ffb8be;
+    --shimmer-efect:#5E8EEE;
+    --card-dialog: #f0f4f9;
+}
+body.dark-mode {
+    --black-color: #E8E7E7;
+    --background-color: #171616;
+    --background-aprender: #151018;
+    --background-datos:#1f2c35;
+    --therthary-color: #292929;
+    --card-brown-color: #463931;
+    --card-green-color: #313529;
+    --card-pick-color: #312735;
+    --card-blue-color:#1f2c35;
+    --card-twoblue-color:#243135;
+    --neon-pulse-brown: #3f3c3a;
+    --neon-pulse-pink:#302836;
+    --neon-pulse-green:#24271e;
+    --status-bar-color: #282A2B;
+    --text-glasseffect:rgba(235, 232, 232, 0.7);
+    --filtro-background-portada: rgba(0, 0, 0, 0.4);
+    --background-indicator: rgba(255, 255, 255, 0.11);
+    --box-indicator: 0 4px 30px rgba(0, 0, 0, 0.1);
+    --border-indicator: 1px solid rgba(255, 255, 255, 0.22);
+    --indicator-color: #34a853; 
+    --m3-primary-container: #eaddff;
+    --m3-on-primary-container: #21005d;
+    --m3-secondary-container: #e8def8;
+    --m3-surface: rgba(255, 255, 255, 0.7);
+    --m3-active: #d0bcff;
+    --navigation-background:#202124;
+    --indicator-idle: #d1d1d1;
+    --neon-pulse-green-ai: linear-gradient(
+        to right,
+        rgb(80, 130, 238),
+        rgb(125, 121, 217),
+        rgb(141, 117, 209),
+        rgb(156, 113, 201),
+        rgb(174, 110, 175),
+        rgb(183, 109, 162),
+        rgb(188, 107, 154),
+        rgb(196, 106, 143),
+        rgb(212, 122, 144),
+        rgb(214, 101, 115));
+    --neon-pulse-pink-ai: rgb(125, 121, 217); 
+    --neon-pulse-blue:#293a4b;
+    --neon-pulse-blue_banner:#293a4b;
+    --neon-pulse-purple: #2d2833;
+    --rgba-navigation:rgba(29, 29, 29, 0.8);
+    --shadown-navigation: 0 4px 8px rgba(255, 255, 255, 0.1);
+    --navigation-background:#2f2f30;
+    --navigation-active:#c6ff00;
+    --navigation-text:#E8E7E7;
+    --back-ai:#101524;
+    --back-ai-perfil: #201d30;
+    --back-ai-portada:#26354b;
+    --back-ai-estilo-perfil:#1f2e25;
+    --back-ai-tipo-perfil:#301a0d;
+    --icon-ai:#EB9854;
+    --text-ai:#A17CB9;
+    --text-color-perfil:#5997bc;
+    --gradiant-ai:#293a4b4f;
+    --gradiant-ai-green:#444b294f;
+    --gradiant-ai-pink:  #3a2b2e6c;
+    --gradiant-ai-red:#4b33294f;
+    --line-neon-perfil: #5b5768;
+    --line-neon-perfil-explocion: #ad7176;
+    --shimmer-efect:#4061a2;
+    --card-dialog: #282a2c;
+}
+
+/* --------------------------------------------------------------FloatingButton----------------------------------------------------*/
+/* Contenedor del switch */
+.switch-container {
+    position: fixed;
+    bottom: 120px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px; /* Ancho del switch */
+    height: 34px; /* Altura del switch */
+}
+
+/* Estilo del checkbox oculto */
+.theme-switch {
+    display: none;
+}
+
+/* Estilo del label (envoltorio principal del switch) */
+.theme-switch-label {
+    position: relative;
+    display: inline-block;
+    width: 100%; /* Asegura que el track ocupe el ancho completo */
+    height: 100%; /* Altura total del contenedor */
+    cursor: pointer;
+}
+
+/* Estilo del track (fondo del switch) */
+.switch-track {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--black-color);
+    border-radius: 17px;
+    transition: background-color 0.3s;
+    z-index: 1; /* Coloca el track detrás del thumb */
+}
+
+/* Estilo del thumb (círculo deslizante) */
+.switch-thumb {
+    position: absolute;
+    top: 3px; /* Centra el thumb verticalmente */
+    left: 3px; /* Posición inicial del thumb */
+    width: 28px;
+    height: 28px;
+    background-color: var(--black-color);
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: left 0.3s, background-color 0.3s;
+    z-index: 2; /* Coloca el thumb encima del track */
+}
+
+/* Estilo del track y thumb cuando está activado */
+.theme-switch:checked + .theme-switch-label .switch-track {
+    background-color: #a8c7fa; /* Color para el modo oscuro */
+}
+
+.theme-switch:checked + .theme-switch-label .switch-thumb {
+    left: calc(100% - 31px); /* Mueve el thumb al final del track */
+    background-color: #173566;
+}
+
+/* Hover en el switch */
+.switch-container:hover .switch-thumb {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.Titulo-Web{
+    position: relative;
+    top: 40px;
+    width: 100%;
+    text-align: center;
+    
+    /* 1. Ajuste de tamaño y fuente */
+    font-size: 40px; /* Aumentado para compensar el diseño */
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-weight: 400; /* Un peso más ligero suele verse más elegante en cristal */
+    transform: scaleY(1.8);
+    letter-spacing: -1px;
+    color: rgba(255, 255, 255, 0.322); 
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4); 
+    /* 5. Sombra para dar relieve */
+    text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    z-index: 2;
 }
 
 .glass-panel {
     background:rgba( 172, 206, 242, 0.15 );
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border: 1px solid var(--border-glassefect); 
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     transition: background-color 0.3s ease;
@@ -114,7 +338,6 @@ video {
     border: none;
     padding: 20px 40px;
     border-radius: 20px;
-    cursor: pointer;
     font-size: 24px;
     transition: transform 0.2s;
 }
@@ -125,7 +348,6 @@ video {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    cursor: pointer;
     font-weight: bold;
 }
 
@@ -338,6 +560,10 @@ video {
     color: #000;
 }
 
+.song-item, .btn-play-pause, .btn-nav, #seekSlider {
+    cursor: url('hacha_cursor.png'), pointer;
+}
+
 /* -------------------------------------------------------------- Footer -------------------------------------------------------------*/
 
 .footer {
@@ -369,6 +595,34 @@ video {
 
 
 @media screen and (max-width: 1150px) {
+
+    /* ----------------------------------------------------------- Dark mode ------------------------------------------------- */
+    .switch-container {
+        bottom: 100px;
+        right: 20px;
+        width: 80px; /* Ancho aumentado */
+        height: 38px; /* Altura aumentada */
+    }
+
+    /* 2. Ajuste del Track (Fondo) */
+    .switch-track {
+        border-radius: 80px; /* Más redondeado para el nuevo tamaño */
+    }
+
+    /* 3. Ajuste del Thumb (Círculo) */
+    .switch-thumb {
+        top: 3px;
+        left: 4px; /* Ajuste de posición inicial */
+        width: 28px; /* Más grande para fácil interacción */
+        height: 28px;
+    }
+
+    /* 4. Movimiento del Thumb al estar activado */
+    /* Calculamos el desplazamiento basado en el nuevo ancho de 100px */
+    .theme-switch:checked + .theme-switch-label .switch-thumb {
+        left: calc(100% - 34px); 
+    } 
+
     body, html {
         overflow-y: auto; /* Permitimos scroll vertical si el contenido es largo */
         align-items: flex-start;
