@@ -1,3 +1,93 @@
+/* ------------------------------------------------------ Welcome page ----------------------------------------------- */
+const bgVideo = document.getElementById('bgVideo');
+
+document.addEventListener('DOMContentLoaded', () => {
+    const startBtn = document.getElementById('startBtn');
+    const welcomeOverlay = document.getElementById('welcome-overlay');
+
+    if (startBtn) {
+        startBtn.addEventListener('click', () => {
+            // Aplicamos el efecto de desvanecimiento
+            welcomeOverlay.classList.add('fade-out');
+            
+            // REPRODUCCIÓN AL CLIC: Ahora llamamos a la primera canción aquí
+            selectSong(0);
+        });
+    }
+
+});
+
+const welcomePhrases = [
+    "Bienvenido a la bruma de la complejidad artística ...",
+    "Oxitocina que inhibe el cortisol ...",
+    "Explora el sonido de la creatividad ...",
+    "Un espacio para Marco y su arte ...",
+    "Donde la música y el diseño convergen ..."
+];
+
+const welcomeColors = [
+    "#e3eefc", 
+    "#fdf2f0", 
+    "#fcf0fd", 
+    "#f0fdf4", 
+    "#fdfaf0"  
+];
+
+let phraseIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+let typeSpeed = 100;
+
+function handleWelcomeTypewriter() {
+    const target = document.querySelector('.welcome-subtitle');
+    const overlay = document.getElementById('welcome-overlay');
+    if (!target) return;
+
+    const currentPhrase = welcomePhrases[phraseIndex];
+
+    if (isDeleting) {
+        // Borrando texto
+        target.innerText = currentPhrase.substring(0, charIndex - 1);
+        charIndex--;
+        typeSpeed = 50; // Borra más rápido
+    } else {
+        // Escribiendo texto
+        target.innerText = currentPhrase.substring(0, charIndex + 1);
+        charIndex++;
+        typeSpeed = 100; // Velocidad normal de escritura
+    }
+
+    // Lógica de cambio de estado
+    if (!isDeleting && charIndex === currentPhrase.length) {
+        // Terminó de escribir, espera antes de borrar
+        isDeleting = true;
+        typeSpeed = 2000; // Pausa de 2 segundos al terminar la frase
+    } else if (isDeleting && charIndex === 0) {
+        // Terminó de borrar, elige una nueva frase aleatoria
+        isDeleting = false;
+        
+        // Elegir una frase aleatoria diferente a la anterior
+        let nextIndex;
+        do {
+            nextIndex = Math.floor(Math.random() * welcomePhrases.length);
+        } while (nextIndex === phraseIndex);
+        
+        phraseIndex = nextIndex;
+
+        const randomColor = welcomeColors[Math.floor(Math.random() * welcomeColors.length)];
+        overlay.style.backgroundColor = randomColor;
+
+        typeSpeed = 500; // Pausa pequeña antes de empezar la nueva
+    }
+
+    setTimeout(handleWelcomeTypewriter, typeSpeed);
+}
+
+// Iniciar el efecto
+handleWelcomeTypewriter();
+
+/* ----------------------------------------------------- Playlist ----------------------------------------------------------------------------------------------- */
+
 const songs = [
     { title: "Soñé", artist: "Zoé", phrase: "Pues no tengo nada que perder...", cover: "https://cdn-images.dzcdn.net/images/cover/8498486810fb5956153f175822b7b7d8/0x1900-000000-80-0-0.jpg", src: "sone.m4a" },
     { title: "Droopy likes your Face", artist: "Minecraft Volume Alpha", phrase: "Entre cubos y nostalgia...", cover: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiYA9JFGnmzLKIhmwtyy3JimNGHTFg8cXoknIPVR_DM2J-LRxvfX4MhklD3xLGkb7ZOyDyyhsuWXLA6zOSLr2uQibClGQoETpfKGBfiYn5frqtOtFHjc4sMRcS2Uhr62OGSplpKt7qbjp3hyphenhyphenf84nSFgQ4YToMRs9a0eFGaZQ53hB0pXQ5av5CK2bWtPC9M/s640/minecraft.jpg", src: "minecraft_uno.m4a" },
@@ -11,6 +101,17 @@ const songs = [
     { title: "Ser parte", artist: "Siddhartha", phrase: "Reinventarme y ser parte de tú ser, al final si todo va a cambiar me guiare por tí.", cover: "https://cdn-images.dzcdn.net/images/cover/a508833ee74e2cd3197f0641e3c73545/1900x1900-000000-80-0-0.jpg", src: "ser_parte.mp3" }
     
 ];
+
+const maskFiles = [
+    'mascara_cuadrado.png',
+    'mascara_pildora_version_dos.png',
+    'mask.png',
+    'mask_shape_spiner.png',
+    'mask_shape_triangle.png'
+];
+
+let currentMaskIndex = 0;
+let maskInterval = null;
 
 let typewriterInterval; // Variable global para controlar la animación
 
@@ -44,13 +145,40 @@ function loadPlaylist() {
         div.onclick = () => selectSong(index);
         
         div.innerHTML = `
-            <img src="${song.cover}" alt="cover">
+            <div class="cover-song">
+                <img src="${song.cover}" alt="cover">
+            </div>
             <div class="song-info">
                 <h4>${song.title} - ${song.artist}</h4>
             </div>
         `;
         playlistContainer.appendChild(div);
     });
+}
+
+/* Cambia de forma aleatoria la mascara de la canción que este sonando */
+function changeDynamicMask() {
+    // Buscamos la imagen dentro del elemento 'active' de la playlist
+    const activeImg = document.querySelector('.song-item.active .cover-song img');
+    
+    if (activeImg) {
+        // 1. Iniciamos la animación de escala
+        activeImg.classList.add('animate-mask');
+
+        // 2. Justo a la mitad de la animación (400ms), cambiamos la imagen de la máscara
+        setTimeout(() => {
+            currentMaskIndex = (currentMaskIndex + 1) % maskFiles.length;
+            const newMaskUrl = `url('${maskFiles[currentMaskIndex]}')`;
+            
+            activeImg.style.webkitMaskImage = newMaskUrl;
+            activeImg.style.maskImage = newMaskUrl;
+        }, 300);
+
+        // 3. Quitamos la clase al terminar para poder repetirla luego
+        setTimeout(() => {
+            activeImg.classList.remove('animate-mask');
+        }, 600);
+    }
 }
 
 /* Cambia la fuente del audio y reproduce la canción seleccionada*/
@@ -78,11 +206,26 @@ function playSong() {
     }
     audio.play();
     playBtn.innerText = "⏸"; // Cambia el icono a pausa
+
+    if (bgVideo) {
+        bgVideo.classList.add('video-playing');
+    }
+
+    if (!maskInterval) {
+        maskInterval = setInterval(changeDynamicMask, 2000);
+    }
 }
 
 function pauseSong() {
     audio.pause();
     playBtn.innerText = "▶"; // Cambia el icono a play
+
+    if (bgVideo) {
+        bgVideo.classList.remove('video-playing');
+    }
+
+    clearInterval(maskInterval);
+    maskInterval = null;
 }
 
 /**
@@ -131,12 +274,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // INICIO AUTOMÁTICO:
     // Cargamos y reproducimos la primera canción inmediatamente
-    selectSong(0); 
-    
-    // Opcional: Intentar reproducir (el navegador podría bloquearlo hasta el primer clic)
-    audio.play().catch(error => {
-        console.log("El autoplay fue bloqueado por el navegador. Esperando interacción del usuario.");
-    });
 
 });
 
