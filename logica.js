@@ -18,11 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 const welcomePhrases = [
-    "Bienvenido a la bruma de la complejidad artística ...",
-    "Oxitocina que inhibe el cortisol ...",
-    "Explora el sonido de la creatividad ...",
-    "Un espacio para Marco y su arte ...",
-    "Donde la música y el diseño convergen ..."
+    "Bienvenido a la bruma de la complejidad geométrica del ser y sentir...",
+    "Nada que perder ante la oxitocina que inhibe el cortisol ...",
+    "Frecuencia de Siddhartha y la lírica de Zoé convergen entre cubos y hachas ...",
+    "Comienzo de Capitulo 01 ..."
 ];
 
 const welcomeColors = [
