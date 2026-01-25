@@ -256,6 +256,7 @@ body.dark-mode {
     border-radius: 30px;
     position: relative;
     z-index: 2;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease;
 }
 
 /* Lado del Texto */
@@ -284,20 +285,23 @@ body.dark-mode {
 
 /* Botón "Vamos allá" */
 .welcome-btn {
-    background-color: var(--back-ai-portada);; /* Color salmón claro */
-    border: none;
+    background:rgba( 172, 206, 242, 0.15 );
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--border-glassefect); 
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     padding: 15px 50px;
     font-size: 22px;
     border-radius: 50px;
-    color: white;
-    cursor: pointer;
+    color: var(--text-glasseffect);
+    cursor: url('hacha_cursor.png'), pointer;
     font-weight: bold;
     transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .welcome-btn:hover {
     transform: scale(1.05);
-    background-color: #565c6d;
+    font-size: 27px;
 }
 
 /* Clase para ocultar la pantalla */

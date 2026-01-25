@@ -32,6 +32,13 @@ const welcomeColors = [
     "#fdfaf0"  
 ];
 
+const welcomeImages = [
+    "wallpaper_01.png",       
+    "wallpaper_02.png",         
+    "wallpaper_03.png",        
+    "wallpaper_04.png"       
+];
+
 let phraseIndex = 0;
 let charIndex = 0;
 let isDeleting = false;
@@ -40,6 +47,8 @@ let typeSpeed = 100;
 function handleWelcomeTypewriter() {
     const target = document.querySelector('.welcome-subtitle');
     const overlay = document.getElementById('welcome-overlay');
+    const mainImg = document.querySelector('.welcome-main-img');
+    
     if (!target) return;
 
     const currentPhrase = welcomePhrases[phraseIndex];
@@ -76,7 +85,19 @@ function handleWelcomeTypewriter() {
         const randomColor = welcomeColors[Math.floor(Math.random() * welcomeColors.length)];
         overlay.style.backgroundColor = randomColor;
 
-        typeSpeed = 500; // Pausa pequeña antes de empezar la nueva
+        if (mainImg) {
+            // Efecto opcional: desvanecer antes de cambiar
+            mainImg.style.opacity = "0"; 
+            
+            setTimeout(() => {
+                const randomImg = welcomeImages[Math.floor(Math.random() * welcomeImages.length)];
+                mainImg.src = randomImg;
+                mainImg.style.opacity = "1";
+            }, 300); // Cambia la imagen mientras está invisible
+        }
+
+        typeSpeed = 500;
+    
     }
 
     setTimeout(handleWelcomeTypewriter, typeSpeed);
