@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="logotipo.ico" type="image/x-icon">
         <link rel="stylesheet" href="diseno.css">
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
         <title>Bruma | Para Marco</title>
     </head>
     <body>
@@ -47,6 +48,7 @@
                     </video>
                 </div>
 
+                <div id="typewriter-text" class="typewriter-container"></div>
 
                 <div class="seekbar-container">
                     <div class="range-wrapper">
@@ -58,19 +60,43 @@
                         <span id="currentTime">0:00</span>
                         <span id="totalDuration">0:00</span>
                     </div>
-                </div>
-                
-                <div class="controls">
-                    <button class="btn-nav" id="prevBtn">⏮</button>
-                    <button class="btn-play-pause" id="playBtn">▶</button>
-                    <button class="btn-nav" id="nextBtn">⏭</button>
+                </div>    
 
-                    <div id="typewriter-text" class="typewriter-container"></div>
+                <div class="controls-container">
+                    <div class="main-controls">
+                        <button class="btn-nav" id="prevBtn">
+                            <span class="material-symbols-outlined">skip_previous</span>
+                        </button>
+                        <button class="btn-play-pause" id="playBtn">
+                            <span class="material-symbols-outlined" id="playIcon">play_arrow</span>
+                        </button>
+                        <button class="btn-nav" id="nextBtn">
+                            <span class="material-symbols-outlined">skip_next</span>
+                        </button>
+                    </div>
+
+                    <div class="sub-controls">
+                        <button class="btn-sub" id="shuffleBtn" title="Aleatorio"><span class="material-symbols-outlined">shuffle</span></button>
+                        <button class="btn-sub" id="repeatBtn" title="Repetir"><span class="material-symbols-outlined">repeat</span></button>
+                        <button class="btn-sub" id="favBtn" title="Favorito"><span class="material-symbols-outlined">favorite</span></button>
+                    </div>
+
                 </div>
+
             </div>
 
             <div class="playlist" id="playlist"></div>
         </div>
+
+        <div id="original-carousel-slot">
+            <div id="photo-container" class="photo-scroll"></div>
+        </div>
+        <h1 class="Descripcion-photo">Detrás de cámaras</h1>
+        <div id="full-screen" class="full-screen">
+            <img id="full-screen-img" src="" alt="Full Screen Image">
+            <button id="close-full-screen">Cerrar</button>
+        </div>
+
 
         <audio id="mainAudio"></audio>
 
@@ -97,6 +123,11 @@
        <a href="https://open.spotify.com/playlist/7BYeqYLgLrG8iWPNu2L4PN" target="_blank" class="fab-btn spotify-fab">
             <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" alt="Spotify">
         </a>
+        <!--Modo Ambiente-->
+        <div id="ambient-overlay" class="ambient-overlay">
+            <h2 class="ambient-title">Bruma</h2>
+            <div id="ambient-carousel-wrapper"></div>
+        </div>
         <script type="module" src="logica.js"></script> 
     </body>
 </html>
