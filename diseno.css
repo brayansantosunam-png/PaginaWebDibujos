@@ -81,7 +81,7 @@ body.alt-theme {
     --neon-pulse-brown:#cecbc8;
     --neon-pulse-pink:#fee0ca;
     --neon-pulse-green:#dbefe4;
-    --status-bar-color: #DFEAF5;
+    --status-bar-color: #FFFFFF99;
     --text-glasseffect:rgba(43, 43, 43, 0.7);
     --filtro-background-portada: rgba(133, 133, 133, 0.4);
     --background-indicator: rgba(61, 61, 61, 0.11);
@@ -156,7 +156,7 @@ body.dark-mode {
     --neon-pulse-brown: #3f3c3a;
     --neon-pulse-pink:#302836;
     --neon-pulse-green:#24271e;
-    --status-bar-color: #282A2B;
+    --status-bar-color: #6E7D8C59;
     --text-glasseffect:rgba(235, 232, 232, 0.7);
     --filtro-background-portada: rgba(0, 0, 0, 0.4);
     --background-indicator: rgba(255, 255, 255, 0.11);
