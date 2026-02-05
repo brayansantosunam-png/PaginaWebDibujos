@@ -18,25 +18,24 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 const welcomePhrases = [
-    "Bienvenido a la bruma de la complejidad geométrica del ser y sentir...",
-    "Nada que perder ante la oxitocina que inhibe el cortisol ...",
-    "Frecuencia de Siddhartha y la lírica de Zoé convergen entre cubos y hachas ...",
-    "Comienzo de Capitulo 01 ..."
+    "Bienvenido a la bruma de la complejidad geométrica en el ser...",
+    "Nada que perder ...",
+    "Frecuencia y la lírica entre cubos y hachas ...",
+    "Capitulo 01 ..."
 ];
 
 const welcomeColors = [
-    "#e3eefc", 
-    "#fdf2f0", 
-    "#fcf0fd", 
-    "#f0fdf4", 
-    "#fdfaf0"  
+    "#837eadff", 
+    "#9C98BD", 
+    "#B5B2CD", 
+    "#CED0DE"
 ];
 
 const welcomeImages = [
     "wallpaper_01.png",       
-    "wallpaper_02.png",         
-    "wallpaper_03.png",        
-    "wallpaper_04.png"       
+    "Prisma.png",         
+    "Prisma.png",        
+    "Prisma.png"       
 ];
 
 let phraseIndex = 0;
