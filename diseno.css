@@ -239,6 +239,12 @@ body.dark-mode {
     transition: -webkit-mask-image 0.3s ease, mask-image 0.3s ease;
 }
 
+@keyframes wordPunch {
+    0% { opacity: 0; transform: scale(0.5); }
+    70% { transform: scale(1.1); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
 /* -------------------------------------------------------------- Welcome page ----------------------------------------------------*/
 /* Contenedor Principal de Bienvenida */
 .welcome-overlay {
@@ -269,12 +275,22 @@ body.dark-mode {
     position: relative;
 }
 
-.welcome-main-img {
-    width: 400px;
-    border-radius: 30px;
+.main-art-wrapper {
     position: relative;
-    z-index: 2;
-    transition: opacity 0.5s ease-in-out, transform 0.5s ease;
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.welcome-main-img {
+    max-width: 100%;
+    height: auto;
+    transition: opacity 0.5s ease-in-out;
+}
+
+#introVideo {
+    object-fit: cover;
 }
 
 /* Lado del Texto */
@@ -288,17 +304,14 @@ body.dark-mode {
     color: #2a3a50;
 }
 
-.welcome-subtitle {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-    margin: 20px 0 40px 0;
-    line-height: 1.4;
-    min-height: 1.5em; /* Evita que el layout salte cuando no hay texto */
-    border-right: 3px solid #acd7f4; 
-    display: inline-block;
-    padding-right: 5px;
-    animation: blink-cursor 0.8s step-end infinite;
+.welcome-subtitle{
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 25px;
+    margin: 0;
+    letter-spacing: 2px;
+    color: #2a3a50;
 }
 
 /* Botón "Vamos allá" */
@@ -443,6 +456,7 @@ body.dark-mode {
 /* Sección Video */
 .video-container {
     position: relative;
+    overflow: hidden; 
 }
 
 video {
@@ -535,19 +549,39 @@ video {
     100% { transform: scale(1); }
 }
 
-.typewriter-container {
-    font-family: "Press Start 2P", system-ui;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 10px;
-    color: var(--text-glasseffect);
-    white-space: nowrap;
-    border-right: 2px solid var(--text-glasseffect); /* El "cursor" que parpadea */
-    padding-right: 5px;
-    overflow: hidden;
-    animation: blink 0.7s infinite; 
-    max-lines: 2; 
-    margin: 30px;
+.dynamic-text-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Centrado del texto */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 20px;
+    box-sizing: border-box;
+    
+    pointer-events: none; 
+    z-index: 10;
+    text-align: center;
+}
+
+
+.word {
+    font-family: 'Impact', 'Arial Black', sans-serif; 
+    font-size: 2.5rem;
+    color: var(--color-text-inactive); 
+    -webkit-text-stroke: var(--webkit-text-inactive); 
+    text-shadow: var(--text-text-inactive);
+    text-transform: uppercase;
+    opacity: 0;
+    transform: scale(0.5);
+    display: inline-block;
+    animation: wordPunch 0.3s forwards ease-out;
 }
 
 /* Animación para que el cursor parpadee */
@@ -896,6 +930,18 @@ video {
     -webkit-text-stroke: var(--webkit-text-inactive); 
     text-shadow: var(--text-text-inactive);
     margin-bottom: 50px;
+    display: flex;
+    align-items: baseline; 
+    gap: 15px;            
+}
+
+#ambient-dynamic-text {
+    font-size: 1.2rem;    
+    font-weight: 300;     
+    color: var(--color-text-inactive); 
+    -webkit-text-stroke: var(--webkit-text-inactive); 
+    text-shadow: var(--text-text-inactive);
+    display: inline-block;
 }
 
 #ambient-carousel-wrapper {
@@ -988,6 +1034,10 @@ video {
         margin-bottom: 10px;
     }
 
+    .title-phrase-smaller {
+        font-size: 18px; 
+    }
+
     /* Ajuste del subtítulo */
     .welcome-subtitle {
         font-size: 18px;        /* Texto más legible en móvil */
@@ -1058,18 +1108,6 @@ video {
 
     .controls .btn-nav, .controls .btn-play-pause {
         order: 1; 
-    }
-
-    .typewriter-container {
-        order: 2;             
-        font-size: 13px;      
-        text-align: center;   
-        min-height: 1.2em;    
-        white-space: normal;  
-        border-right: none;   
-        border-bottom: 2px solid #fff; 
-        width: 100%;
-        max-width: 280px;     
     }
 
     .btn-play-pause {
@@ -1158,5 +1196,22 @@ video {
         font-size: 18px;
         position: absolute;
         bottom: 30px; 
+    }
+
+    /* --------------------------------------------------- Pantalla ambiente ---------------------------------*/
+    .ambient-title {
+        font-size: 15vw;       /* Tamaño fluido basado en el ancho de pantalla */
+        margin-bottom: 20px;   /* Reducimos el margen inferior */
+        gap: 10px;             /* Espacio más pequeño entre el título y la frase */
+        flex-wrap: wrap;       /* Permite que la frase baje si el título es muy largo */
+        justify-content: center; /* Centra el contenido en móviles */
+        transform: scaleY(1.3); /* Reducimos ligeramente el estiramiento para que no se corte */
+    }
+
+    #ambient-dynamic-text {
+        font-size: 0.9rem;     /* Frase más pequeña para que no compita con el título */
+        line-height: 1.2;
+        max-width: 90%;        /* Evita que el texto toque los bordes */
+        text-align: center;
     }
 }   

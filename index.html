@@ -19,9 +19,16 @@
         <div id="welcome-overlay" class="welcome-overlay">
             <div class="welcome-container">
                 <div class="welcome-image-side">
+
                     <div class="main-art-wrapper">
-                        <img src="NadaquePerder.jpg" alt="Bruma Art" class="welcome-main-img">
+                        <video id="introVideo" class="welcome-main-img" autoplay muted playsinline>
+                            <source src="video_intro.mp4" type="video/mp4">
+                            Tu navegador no soporta videos.
+                        </video>
+                        
+                        <img src="NadaquePerder.jpg" alt="Bruma Art" class="welcome-main-img" id="welcomeMainImg" style="display: none; opacity: 0;">
                     </div>
+
                 </div>
 
                 <div class="welcome-text-side">
@@ -51,9 +58,9 @@
                         <source src="video.mp4" type="video/mp4">
                         Tu navegador no soporta videos.
                     </video>
-                </div>
 
-                <div id="typewriter-text" class="typewriter-container"></div>
+                    <div id="typewriter-text" class="dynamic-text-overlay"></div>
+                </div>
 
                 <div class="seekbar-container">
                     <div class="range-wrapper">
@@ -130,7 +137,10 @@
         </a>
         <!--Modo Ambiente-->
         <div id="ambient-overlay" class="ambient-overlay">
-            <h2 class="ambient-title">Bruma</h2>
+            <h2 class="ambient-title">
+                Bruma
+                <span id="ambient-dynamic-text" class="phrase-smaller"></span>
+            </h2>
             <div id="ambient-carousel-wrapper"></div>
         </div>
         <script type="module" src="logica.js"></script> 

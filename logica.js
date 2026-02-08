@@ -1,6 +1,7 @@
 /* ------------------------------------------------------ Welcome page ----------------------------------------------- */
 const bgVideo = document.getElementById('bgVideo');
 
+
 document.addEventListener('DOMContentLoaded', () => {
     const startBtn = document.getElementById('startBtn');
     const welcomeOverlay = document.getElementById('welcome-overlay');
@@ -43,10 +44,31 @@ let charIndex = 0;
 let isDeleting = false;
 let typeSpeed = 100;
 
+
+let introVideoFinished = false;
+const introVideo = document.getElementById('introVideo');
+const mainImg = document.getElementById('welcomeMainImg');
+
+// Detectar cuando el video termina
+if (introVideo) {
+    introVideo.onended = () => {
+        introVideoFinished = true;
+        
+        // Efecto de transición: Ocultar video, mostrar imagen
+        introVideo.style.display = 'none';
+        mainImg.style.display = 'block';
+        setTimeout(() => {
+            mainImg.style.opacity = "1";
+        }, 10);
+    };
+}
+
+
 function handleWelcomeTypewriter() {
     const target = document.querySelector('.welcome-subtitle');
     const overlay = document.getElementById('welcome-overlay');
     const mainImg = document.querySelector('.welcome-main-img');
+    const currentMainImg = document.getElementById('welcomeMainImg');
     
     if (!target) return;
 
@@ -84,17 +106,16 @@ function handleWelcomeTypewriter() {
         const randomColor = welcomeColors[Math.floor(Math.random() * welcomeColors.length)];
         overlay.style.backgroundColor = randomColor;
 
-        if (mainImg) {
-            // Efecto opcional: desvanecer antes de cambiar
-            mainImg.style.opacity = "0"; 
+        if (introVideoFinished && currentMainImg) {
+            currentMainImg.style.opacity = "0"; 
             
             setTimeout(() => {
                 const randomImg = welcomeImages[Math.floor(Math.random() * welcomeImages.length)];
-                mainImg.src = randomImg;
-                mainImg.style.opacity = "1";
-            }, 300); // Cambia la imagen mientras está invisible
+                currentMainImg.src = randomImg;
+                currentMainImg.style.opacity = "1";
+            }, 300);
         }
-
+        
         typeSpeed = 500;
     
     }
@@ -135,22 +156,35 @@ let isShuffle = false;
 let isRepeat = false;
 let favoriteSongs = JSON.parse(localStorage.getItem('favoriteSongs')) || [];
 
-let typewriterInterval; // Variable global para controlar la animación
 
-function typeWriter(text) {
-    const container = document.getElementById('typewriter-text');
-    container.innerHTML = ""; // Limpia el texto previo
-    clearInterval(typewriterInterval); // Detiene cualquier animación en curso
+let wordInterval;
 
+function typeWriter(text, targetId = 'typewriter-text') {
+    const container = document.getElementById(targetId);
+    
+    if (!container) return;
+
+    container.innerHTML = ""; 
+    clearInterval(wordInterval); 
+
+    const words = text.split(" "); 
     let i = 0;
-    typewriterInterval = setInterval(() => {
-        if (i < text.length) {
-            container.innerHTML += text.charAt(i);
+
+    wordInterval = setInterval(() => {
+        if (i < words.length) {
+            const wordSpan = document.createElement('span');
+            wordSpan.classList.add('word');
+            wordSpan.innerText = words[i] + " "; // Espacio entre palabras
+            
+            // Color especial para la última palabra
+            if (i === words.length - 1) wordSpan.style.color = "#709fde"; 
+
+            container.appendChild(wordSpan);
             i++;
         } else {
-            clearInterval(typewriterInterval); // Se detiene al terminar la frase
+            clearInterval(wordInterval);
         }
-    }, 100); // Velocidad en milisegundos por letra
+    }, 250); 
 }
 
 let currentSongIndex = 0;
@@ -210,7 +244,13 @@ function changeDynamicMask() {
 function selectSong(index) {
     currentSongIndex = index;
     audio.src = songs[currentSongIndex].src;
-    typeWriter(songs[currentSongIndex].phrase || "");
+
+    // Detectamos si el modo ambiente está activo para elegir el destino del texto
+    const target = ambientModeActive ? 'ambient-dynamic-text' : 'typewriter-text';
+    
+    // Mandamos la frase al destino correcto
+    typeWriter(songs[currentSongIndex].phrase || "", target);
+    
     loadPlaylist(); 
     playSong();
 }
@@ -515,38 +555,40 @@ document.addEventListener('touchstart', resetInactivityTimer); // Para móviles
 // 3. Activar el modo ambiente
 function activateAmbientMode() {
     ambientModeActive = true;
-    
-    // A) Mover el carrusel físicamente en el DOM
-    // Lo quitamos de su lugar original y lo metemos en la pantalla de ambiente
     if (photoScrollElement && ambientWrapper) {
         ambientWrapper.appendChild(photoScrollElement);
     }
-    
-    // B) Mostrar la pantalla con efecto fade-in (CSS)
     ambientOverlay.classList.add('active');
-
-    // C) Iniciar la animación automática de las imágenes
     startAutomaticPulsing();
+
+    // Limpiamos el texto de la web principal y lo mandamos al ambiente
+    document.getElementById('typewriter-text').innerHTML = "";
+    const currentPhrase = songs[currentSongIndex].phrase || "";
+    typeWriter(currentPhrase, 'ambient-dynamic-text');
 }
+
 
 // 4. Desactivar el modo ambiente
 function deactivateAmbientMode() {
     ambientModeActive = false;
-
-    // A) Ocultar la pantalla con efecto fade-out (CSS)
     ambientOverlay.classList.remove('active');
-    
-    // B) Detener la animación automática
     stopAutomaticPulsing();
 
-    // C) Esperar a que termine la transición CSS (0.8s) antes de mover el elemento de vuelta
     setTimeout(() => {
-        // Devolver el carrusel a su lugar original en la web principal
         if (photoScrollElement && originalSlot) {
             originalSlot.appendChild(photoScrollElement);
         }
-    }, 800); // Debe coincidir con el tiempo de transition en CSS
+
+        // Limpiamos el texto del ambiente y lo devolvemos a la web principal
+        document.getElementById('ambient-dynamic-text').innerHTML = "";
+        const currentPhrase = songs[currentSongIndex].phrase || "";
+        typeWriter(currentPhrase, 'typewriter-text');
+    }, 800); 
 }
+
+
+
+
 
 
 /* ================= LÓGICA DE ANIMACIÓN AUTOMÁTICA (PULSE) ================= */
