@@ -201,7 +201,7 @@ function loadPlaylist() {
         div.onclick = () => selectSong(index);
         
         const isFav = favoriteSongs.includes(song.title);
-        const favIcon = isFav ? `<span class="material-symbols-outlined fav-indicator" style="font-size: 18px; color: #709fde; margin-left: 10px;">relax</span>` : '';
+        const favIcon = isFav ? `<span class="material-symbols-outlined fav-indicator" style="font-size: 18px; color: #709fde; margin-left: 10px;"></span>` : '';
 
         div.innerHTML = `
             <div class="cover-song">
@@ -587,7 +587,16 @@ function deactivateAmbientMode() {
 }
 
 
+/* ---------------------------------------------------------------- Efecto gradiente --------------------------------------------- */
 
+window.addEventListener('scroll', () => {
+    // Si el scroll vertical es mayor a 20px, añadimos la clase
+    if (window.scrollY > 20) {
+        document.body.classList.add('is-scrolled');
+    } else {
+        document.body.classList.remove('is-scrolled');
+    }
+});
 
 
 
