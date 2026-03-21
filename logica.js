@@ -1,3 +1,118 @@
+/* ------------------------------------------------------ Menu ------------------------------------------------------ */
+/* ------------------------------------------------------------- Efecto Menú ------------------------------------------- */
+const links = document.querySelectorAll(".nav__link");
+const indicator = document.querySelector(".nav__indicator");
+
+function moveIndicator(element) {
+    const itemRect = element.getBoundingClientRect();
+    const listRect = element.parentElement.parentElement.getBoundingClientRect();
+    const leftPosition = itemRect.left - listRect.left;
+    
+    indicator.style.width = `${itemRect.width + 20}px`;
+    indicator.style.left = `${leftPosition - 10}px`;
+}
+
+links.forEach((link) => {
+    link.addEventListener("click", (e) => {
+        const currentItem = link.parentElement; // El li correspondiente
+        const allItems = document.querySelectorAll(".nav__item");
+        let foundCurrent = false;
+
+        // 1. Gestión de clases activas y movimiento de burbuja
+        links.forEach(l => l.classList.remove("active-link"));
+        link.classList.add("active-link");
+        moveIndicator(link);
+
+        // 2. Lógica de "Empuje" para los hermanos
+        allItems.forEach((item) => {
+            // Limpiamos animaciones previas para poder repetir el efecto
+            item.classList.remove("push-left", "push-right");
+            
+            if (item === currentItem) {
+                foundCurrent = true; // Encontramos el pulsado
+                return;
+            }
+
+            // Forzamos un reflow para que la animación se reinicie si se pulsa rápido
+            void item.offsetWidth; 
+
+            if (!foundCurrent) {
+                // Los que están antes del pulsado se empujan a la izquierda
+                item.classList.add("push-left");
+            } else {
+                // Los que están después se empujan a la derecha
+                item.classList.add("push-right");
+            }
+        });
+
+        // Opcional: Limpiar las clases después de que termine la animación (0.5s)
+        setTimeout(() => {
+            allItems.forEach(item => item.classList.remove("push-left", "push-right"));
+        }, 500);
+    });
+});
+
+// Inicialización
+window.addEventListener('DOMContentLoaded', () => {
+    const activeLink = document.querySelector('.active-link') || links[0];
+    if(activeLink) {
+        activeLink.classList.add("active-link");
+        moveIndicator(activeLink);
+    }
+});
+/* ------------------------------------------------------ Background ------------------------------------------------- */
+document.addEventListener('DOMContentLoaded', () => {
+    const navLinks = document.querySelectorAll('.nav__link');
+    const body = document.body;
+
+    // Establecer capítulo 1 por defecto al cargar
+    body.classList.add('cap-1');
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            // Obtenemos el ID de la sección (ej: #Capitulo01)
+            const targetId = this.getAttribute('href');
+
+            if (targetId === '#Capitulo01') {
+                body.classList.remove('cap-2');
+                body.classList.add('cap-1');
+            } 
+            else if (targetId === '#Capitulo02') {
+                body.classList.remove('cap-1');
+                body.classList.add('cap-2');
+            }
+        });
+    });
+});
+/* ----------------------------------------------- Capitulo 02 ------------------------------------------------------- */
+const galleryImages = [
+    'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhLglp5OkXfMRE-pWuuuUUAvztnpasHsW6_NgLjNDKjFaaPEFDoYHGZHs_mAextv7dxyFDwZxCNlndbrya6JERsDsXhoZdegmpuV9sK1B1A-JdYfHZma_PF31SHkicjD1bw2LGYKV7fzZeXQn-oERZZ1mytY0ohGCcpGlk_FN_PmJG46oIY9YLQfrjxZZE/s4000/Picsart_26-03-19_18-22-14-595.jpg', 
+    'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEia2C8eyPRdHNxmUZ4Zg04Gz7NwebWlRIDWRo4yVBdFzLnVNbzmeRQY2ynqxnXJ6qkmQKXUJFHouoy8onSDrvJIUr9Oc1jHHNQW-qHZqDyawLaLSYGl3ev1v7rfZrKThGiX_kqwvMrxGoqEnTNFpsy1pwCaTf97MuO3o8WwdIctUjTbSfr7-uexEqa0Rt8/s1724/Picsart_26-03-15_17-23-29-953.jpg', 
+    'http://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhVSUgBge2DzZ5HKvMFU5wVmAng8kFKYX-3lA5UWDQRatu0q2JBIztswdQc0K6SZDJe3klHkVjDVzdgm1I-CEBQKlIlQ5miafl566wpKym6EcQxXbxBqZk83DM77gOliLpwMyzk14s6QaKjDQ5WvjcG7coatp6kOzyunV7g5FxXiEK6YXZmz9FXHl8wYbI/s2002/Pintura_03.png', 
+    'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjEEDA2PxA3uOHehTS8vMnRqrnuMptqiZo_SE2MKllQSjWfjviQ7RTwh3y6z2mUwKJId4BK_92vXLBtaRL7JAi8yEgFSiD6D2T3yVGLQToOqfyJ3BvRRsXIp2chSvhYAJgC4fs2FKabX8QThM1zgECXd-3MGHansQs3cCtHT8ayFqUkO6vYHEzcJfptfx4/s4032/PXL_20230325_010854250.jpg',     
+    'https://blogger.googleusercontent.com/img/a/AVvXsEikvYxZXBDIpLRQCh9JxNzBXTAFz-nSBPzoA8KEV5svfbigfJ3QGceQ3aT0xAvkPZjdFFcPQqvzR4eNtGUCAQVCDJop4Ve0KolnyMZ9HK6ro40nlWbkEdZ1qQNqETSrOZdudfjz4KXXIgi-rpiCvIN_Vr_UzuutRFjgHV60llp6YhVc9EYxry8KncRPXps'      
+];
+
+function loadGallery() {
+    const gridContainer = document.getElementById('asymmetric-grid');
+    
+    // Limpiamos el contenedor por si acaso
+    gridContainer.innerHTML = '';
+
+    galleryImages.forEach((url) => {
+        // Creamos el elemento imagen
+        const img = document.createElement('img');
+        img.src = url;
+        img.classList.add('gallery-item');
+        img.alt = "Imagen de galería";
+        
+        // Lo añadimos al grid
+        gridContainer.appendChild(img);
+    });
+}
+
+// Ejecutar la carga cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', loadGallery);
 /* ------------------------------------------------------ Welcome page ----------------------------------------------- */
 const bgVideo = document.getElementById('bgVideo');
 

@@ -47,17 +47,36 @@
 
 body, html {
     width: 100%;
-    min-height: 100vh; 
-    margin: 0;
-    display: flex;
-    flex-direction: column; 
-    justify-content: flex-start; 
-    align-items: center;     
     font-family: 'Karla', sans-serif;
     background: url('background_minecraft.png') no-repeat center center fixed;
-    background-size: cover;
     overflow-x: hidden;      
     overflow-y: auto;        
+}
+
+body, 
+body.cap-1 {
+    background: url('background_minecraft.png') no-repeat center center fixed;
+    background-size: cover;
+    transition: 0.5s ease-in-out; /* Transición suave al cambiar */
+}
+
+/* Capítulo 01 en Modo Oscuro */
+body.dark-mode,
+body.cap-1.dark-mode {
+    background: url('background_minecraft_night.png') no-repeat center center fixed;
+    background-size: cover;
+}
+
+/* Capítulo 02 en Modo Claro */
+body.cap-2 {
+    background: url('background_cap2_light.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+/* Capítulo 02 en Modo Oscuro */
+body.cap-2.dark-mode {
+    background: url('background_cap2_night.jpg') no-repeat center center fixed;
+    background-size: cover;
 }
 
 body.alt-theme {
@@ -245,6 +264,12 @@ body.dark-mode {
     100% { opacity: 1; transform: scale(1); }
 }
 
+@keyframes bounceIn {
+    0% { transform: scale(0.9); } /* Inicia ligeramente más pequeño */
+    50% { transform: scale(1.1); } /* Rebota ligeramente más grande */
+    100% { transform: scale(1); } /* Vuelve a su tamaño normal */
+}
+
 /* -------------------------------------------------------------- Efecto gradiente ------------------------------------------------*/
 body::before,
 body::after {
@@ -289,7 +314,201 @@ body.dark-mode::after {
     background: linear-gradient(to top, rgba(18, 18, 18, 1), rgba(18, 18, 18, 0));
 }
 
+/* -------------------------------------------------------------- Menú ------------------------------------------------------------*/
+/*Menu*/ 
+/* Estilo general para la imagen */
+.header-menu {
+    position: fixed;
+    width: auto;
+    height: auto;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 30px;
+    border-radius: 50px;
+    padding: 10px 20px;
+    background:rgba( 172, 206, 242, 0.15 );
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--border-glassefect); 
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    transition: background-color 0.3s ease;
+}
 
+.nav__action-button {
+    display: none; /* Oculto en pantallas grandes */
+}
+
+.logo {
+    margin-right: auto;
+}
+
+.logo img {
+    width: 150px;  /* Ajusta según sea necesario */
+    height: auto;
+    border-radius: 10px;
+    object-fit: contain;
+}
+
+ul {
+    list-style: none;
+}
+  
+a {
+    text-decoration: none;
+}
+
+.container {
+    max-width: 1120px;
+    margin-inline: 1.5rem;
+}
+
+.nav {
+    position: relative;
+    height: var(--header-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav__list {
+    position: relative;
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+}
+
+.nav__indicator {
+    position: absolute;
+    left: 0;
+    bottom: 50%;
+    transform: translateY(50%); 
+    height: 55px; 
+    background: var(--background-indicator);
+    box-shadow: var(--box-indicator);
+    backdrop-filter: blur(1.4px);
+    -webkit-backdrop-filter: blur(1.4px);
+    border: var(--border-indicator);
+    border-radius: 40px;
+    z-index: -1; 
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1); 
+}
+
+.active-link i {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.nav__close, 
+.nav__toggle {
+  display: flex;
+  color: var(--text-glasseffect);
+  font-size: 4rem;
+  cursor: pointer;
+  border: 2px solid var(--black-color);
+  border-radius: 40px;
+  margin: 10px;
+  padding: 10px;
+}
+  
+.nav__link {
+    position: relative;
+    color: var(--text-glasseffect);
+    font-size: 20px;
+    font-weight: bold;
+    /* Cambio clave: display flex y alineación */
+    display: flex; 
+    align-items: center;
+    column-gap: 8px; /* Espacio entre el icono y el texto */
+    
+    font-family: 'Fredoka';
+    margin: 0 10px;
+    padding: 8px 12px;
+    transition: transform 0.4s ease, color 0.4s;
+    z-index: 2;
+}
+
+.nav__link:active {
+    animation: bounceIn 0.4s ease-out;
+}
+  
+.nav__link i {
+    font-size: 1.5rem; /* Ajusta el tamaño según prefieras */
+    position: static;  /* Cambiado de absolute a static para que no flote sobre las letras */
+    opacity: 0.4;      /* Un poco transparente cuando no está seleccionado */
+    visibility: visible; 
+    transition: opacity .4s, transform .4s;
+}
+
+/* Cuando el link está activo o tiene hover, el icono se ilumina */
+.nav__link:hover i,
+.active-link i {
+    opacity: 1 !important;
+    transform: scale(1.1);
+}
+  
+.nav__link span {
+    position: relative;
+    transition: margin .4s;
+}
+  
+.nav__link span::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0;
+    height: 2px;
+    background-color: var(--navigation-active);
+    transition: width .4s ease-out;
+}
+  
+  /* Animation link on hover */
+.nav__link:hover span {
+    color: var(--text-glasseffect);
+    font-size: 20px;
+    font-family: "Concert One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+  
+.nav__link:hover span::after {
+    width: 100%;
+}
+  
+  /* Sibling fade animation */
+.nav__list:has(.nav__link:hover) .nav__link:not(:hover) {
+    opacity: .4;
+}
+  
+.nav__close {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+}  
+
+/* Show menu */
+.show-menu {
+    left: 0;
+}
+  
+  /* Animation link when displaying menu */
+.show-menu .nav__item {
+    visibility: visible;
+    transform: translateX(0);
+}
+.Capitulo01{
+    min-height: 100vh; 
+    margin: 0;
+    display: flex;
+    flex-direction: column; 
+    justify-content: flex-start; 
+    align-items: center;     
+}
 /* -------------------------------------------------------------- Welcome page ----------------------------------------------------*/
 /* Contenedor Principal de Bienvenida */
 .welcome-overlay {
@@ -458,7 +677,7 @@ body.dark-mode::after {
 
 .Titulo-Web{
     position: relative;
-    top: 40px;
+    top: 120px;
     width: 100%;
     text-align: center;
     
@@ -493,7 +712,7 @@ body.dark-mode::after {
     width: 80%;
     height: auto;
     max-height: 90vh; 
-    margin-top: 50px;       
+    margin-top: 100px;       
     margin-bottom: 50px;    
     flex-shrink: 0;
 }
@@ -1015,6 +1234,135 @@ video {
     z-index: 10;
 }
 
+/* ------------------------------------------------------------- Capitulo 02 ---------------------------------------------------------*/
+.Capitulo02 {
+    min-height: 100vh; 
+    margin: 0;
+    display: flex;
+    flex-direction: column; 
+    justify-content: flex-start; 
+    align-items: center;    
+}
+
+.banner-wrapper {
+    position: relative;
+    width: 90%;
+    margin: 50px auto;
+    border-radius: 50px; 
+    overflow: hidden;   
+}
+
+.banner-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, #E0E2F2 0%, transparent 100%);
+    z-index: 1; 
+    pointer-events: none;
+}
+
+
+.banner-cap-dos {
+    position: relative; 
+    width: 100%;
+    height: 400px;
+    object-fit: contain; 
+    display: block;
+    background-color: transparent; 
+    z-index: 2; 
+}
+
+.banner-wrapper .Titulo-Web {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scaleY(1.8);
+    margin: 0;
+    z-index: 3; 
+}
+
+#Titulo-Web-Dos{
+    font-size: 90px;
+}
+
+/* Contenedor principal de la galería */
+.gallery-container {
+    width: 90%;
+    margin: 20px auto 80px auto;
+    padding: 20px;
+    background:var(--background-navigation);
+    backdrop-filter: blur(20px) saturate(120%);
+    -webkit-backdrop-filter: blur(20px) saturate(120%);
+    border: var(--border-navigation); 
+    box-shadow: var(--box-navigation);
+    transition: background-color 0.3s ease;
+    border-radius: 40px;
+}
+
+/* Configuración del Grid Asimétrico */
+.asymmetric-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columnas iguales */
+    grid-auto-rows: 200px; /* Altura base de las filas */
+    gap: 15px;
+}
+
+/* Estilo base para cada item */
+.gallery-item {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-color: #f0f0f0; /* Color de carga */
+    transition: transform 0.3s ease;
+}
+
+/* Definición de posiciones asimétricas (siguiendo tu diseño) */
+
+/* Foto 1: Horizontal arriba a la izquierda */
+.gallery-item:nth-child(1) {
+    grid-column: 1 / 3;
+    grid-row: 1 / 2;
+    border-radius: 40px;
+}
+
+/* Foto 2: Vertical en medio */
+.gallery-item:nth-child(2) {
+    grid-column: 3 / 4;
+    grid-row: 1 / 3;
+    border-radius: 60px;
+}
+
+/* Foto 3: Vertical a la derecha */
+.gallery-item:nth-child(3) {
+    grid-column: 4 / 5;
+    grid-row: 1 / 3;
+    border-radius: 60px;
+}
+
+/* Foto 4: Cuadrado/Rectángulo grande abajo a la izquierda */
+.gallery-item:nth-child(4) {
+    grid-column: 1 / 3;
+    grid-row: 2 / 4;
+    border-radius: 50px;
+}
+
+/* Foto 5: Cápsula horizontal abajo a la derecha */
+.gallery-item:nth-child(5) {
+    grid-column: 3 / 5;
+    grid-row: 3 / 4;
+    border-radius: 100px; /* Efecto cápsula total */
+}
+
+/* Efecto hover opcional para darle vida */
+.gallery-item:hover {
+    transform: scale(1.02);
+    filter: brightness(1.1);
+}
+
+
 /* -------------------------------------------------------------- Footer -------------------------------------------------------------*/
 
 .footer {
@@ -1051,6 +1399,127 @@ video {
 
 
 @media screen and (max-width: 1150px) {
+    /* ----------------------------------------------------------- Menu -------------------------------------------------------*/
+    .header-menu {
+        top: auto;
+        bottom: 20px; 
+        width: 100%; 
+        margin: 0;
+        padding: 0 20px; 
+        height: auto;
+        background: transparent; 
+        backdrop-filter: none;    
+        -webkit-backdrop-filter: none;
+        border: none;             
+        box-shadow: none;         
+    }
+    
+
+    .nav__indicator {
+        width: auto;
+        height: 60px;
+        border-radius: 30px;
+    }
+
+    .logo img {
+        width: 100px; /* Logo más pequeño en móvil */
+    }
+
+    .header-menu .logo {
+        display: none;
+    }
+
+    .nav__list {
+        width: 100%; 
+        height: 100%;
+        display: flex; 
+        flex-direction: row; 
+        justify-content: space-around; 
+        align-items: center; 
+        gap: 0; 
+    }
+
+    
+    .nav__link {
+        display: flex;
+        flex-direction: column; 
+        align-items: center;
+        text-align: center;
+        padding: 5px; 
+        margin: 0; 
+        font-size: 24px; 
+    }
+    
+    .nav__link span {
+        font-size: 0.9rem;
+    }
+    
+    .nav__link i {
+        font-size: 1.5rem; 
+        position: static; 
+        opacity: 1; 
+        visibility: visible;
+        margin-bottom: 2px;
+    }
+    
+    
+    .nav__link:hover {
+        background-color: transparent; 
+        color: var(--text-glasseffect); 
+        transform: scale(1.0); 
+    }
+    
+    
+    .nav__link.active {
+         color: var(--navigation-active); 
+         transform: scale(1.05); 
+    }
+
+    .nav__menu {
+        flex: 1; 
+        max-width: 400px; 
+        background: rgba(172, 206, 242, 0.15);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border-radius: 50px;
+        height: 70px;
+        display: flex;
+        align-items: center;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2); 
+    }
+    
+    .show-menu {
+        left: auto; 
+    }
+
+    .nav__action-button {
+        display: flex;
+        align-items: center;
+    }
+
+    .action-btn {
+        width: 70px; 
+        height: 70px;
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 20px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .action-btn i {
+        font-size: 2.5rem;
+        color: #333;
+    }
+
+    .action-btn:active {
+        transform: scale(0.9); /* Efecto de pulsación */
+    }
+
+    /* Ajuste para que los textos del menú no se amontonen */
+    .nav__link span {
+        font-size: 0.75rem;
+    }
     /* ----------------------------------------------------------- Welcome page -----------------------------------------------*/
     .welcome-overlay {
         overflow-y: auto;
@@ -1263,5 +1732,17 @@ video {
         line-height: 1.2;
         max-width: 90%;        /* Evita que el texto toque los bordes */
         text-align: center;
+    }
+
+    /*------------------------------------------------- Capitulo 02 ------------------------------------------*/
+    .asymmetric-grid {
+        grid-template-columns: 1fr; /* Una sola columna en móvil */
+        grid-auto-rows: auto;
+    }
+    .gallery-item {
+        grid-column: auto !important;
+        grid-row: auto !important;
+        height: 250px;
+        border-radius: 30px !important;
     }
 }   
