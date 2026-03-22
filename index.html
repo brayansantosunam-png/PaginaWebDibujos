@@ -6,6 +6,7 @@
         <link rel="icon" href="logotipo.ico" type="image/x-icon">
         <link rel="stylesheet" href="diseno.css">
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css">
         <title>Bruma | Para Marco</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
         <meta name="theme-color" content="#FFFFFF99">
@@ -79,7 +80,7 @@
                         </ul>
                     </div>
 
-                    <div class="nav__action-button">
+                    <div class="nav__action-button" style="display: none;">
                         <button class="action-btn" id="floatingButton1">
                         <i class="ri-openai-fill"></i> </button>
                     </div>
@@ -157,7 +158,10 @@
         <section id="Capitulo02" class="Capitulo02">
             <div class="banner-wrapper">
                 <h1 class="Titulo-Web" id="Titulo-Web-Dos">Capitulo #02</h1>
-                <img id="banner-cap-dos" class="banner-cap-dos" src="banner_cap_dos.png" alt="Banner">
+                <picture>
+                    <source media="(max-width: 768px)" srcset="banner_cap_dos_mobile.png">
+                    <img id="banner-cap-dos" class="banner-cap-dos" src="banner_cap_dos.png" alt="Banner">
+                </picture>
             </div>
             
             <div class="gallery-container">
