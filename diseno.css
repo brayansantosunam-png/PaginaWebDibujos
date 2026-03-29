@@ -1384,6 +1384,18 @@ video {
     border-radius: 100px;
 }
 
+.gallery-item:nth-child(6) {
+    grid-column: 1 / 2; /* Ocupa todo el ancho (Cols 1 a 5) para que se vea simétrico */
+    grid-row: 4 / 5;    /* Empieza en la línea 4 (justo donde termina la fila 3) */
+    border-radius: 40px;
+}
+
+.gallery-item:nth-child(7) {
+    grid-column: 2 / 5; /* Ocupa todo el ancho (Cols 1 a 5) para que se vea simétrico */
+    grid-row: 4 / 5;    /* Empieza en la línea 4 (justo donde termina la fila 3) */
+    border-radius: 40px;
+}
+
 .gallery-item:hover {
     transform: scale(1.02);
     filter: brightness(1.1);
