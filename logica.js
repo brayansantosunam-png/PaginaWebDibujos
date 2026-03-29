@@ -92,7 +92,7 @@ const galleryImages = [
     { url: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjEEDA2PxA3uOHehTS8vMnRqrnuMptqiZo_SE2MKllQSjWfjviQ7RTwh3y6z2mUwKJId4BK_92vXLBtaRL7JAi8yEgFSiD6D2T3yVGLQToOqfyJ3BvRRsXIp2chSvhYAJgC4fs2FKabX8QThM1zgECXd-3MGHansQs3cCtHT8ayFqUkO6vYHEzcJfptfx4/s4032/PXL_20230325_010854250.jpg', text: 'Caminando' },
     { url: 'https://blogger.googleusercontent.com/img/a/AVvXsEikvYxZXBDIpLRQCh9JxNzBXTAFz-nSBPzoA8KEV5svfbigfJ3QGceQ3aT0xAvkPZjdFFcPQqvzR4eNtGUCAQVCDJop4Ve0KolnyMZ9HK6ro40nlWbkEdZ1qQNqETSrOZdudfjz4KXXIgi-rpiCvIN_Vr_UzuutRFjgHV60llp6YhVc9EYxry8KncRPXps', text: 'Bruma Final' },
     { url: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiratYj5gPTFyNAN8QcL8eET_MO999fHvr23bILi2H8GH1Dfm64R8KX5budwPjqt1J8pFbBv8fbq5eoWND1DKh_RdjgtBJHyGhETPdP8e86znH_ZaXkJvYoRZERdHjPri06w3_o37bxPMOhDmFqMAB0zSQQoDojSRggIlrXgGwKOYkG6MpR-QMStLURgDA/s1177/Screenshot_20260328-213720.png', text: 'Hallazgo valioso' },
-    { url: 'https://blogger.googleusercontent.com/img/a/AVvXsEh0Egl-mCd9f09wfOcnbosurjHMgvL3wyY-6CQmVQn3JYYT0aOGpQxc4JBrNskDpx2hIb1TxkWgjAcr81N2NKQDwE0vJeCLtbK48w6DmBjB8Pj45QwfvThuIJYkz5Xr2zPt6ZcG96qpNZSNew9pxM6ZjdX8Z6DjJX_OO16fgN6uVUtupP1XkJu-Hu4bchw', text: 'Enseñame de que estamos echos' }
+    { url: 'https://blogger.googleusercontent.com/img/a/AVvXsEh0Egl-mCd9f09wfOcnbosurjHMgvL3wyY-6CQmVQn3JYYT0aOGpQxc4JBrNskDpx2hIb1TxkWgjAcr81N2NKQDwE0vJeCLtbK48w6DmBjB8Pj45QwfvThuIJYkz5Xr2zPt6ZcG96qpNZSNew9pxM6ZjdX8Z6DjJX_OO16fgN6uVUtupP1XkJu-Hu4bchw', text: 'Enseñame de que estamos hechos' }
 ];
 
 function loadGallery() {
