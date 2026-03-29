@@ -60,6 +60,15 @@ window.addEventListener('DOMContentLoaded', () => {
         moveIndicator(activeLink);
     }
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+  const floatingButton = document.getElementById('floatingButton1');
+  const url = 'https://open.spotify.com/playlist/7BYeqYLgLrG8iWPNu2L4PN'; 
+
+  floatingButton.addEventListener('click', () => {
+      window.open(url, '_blank'); // Abre la URL en una nueva pestaña
+  });
+});
 /* ------------------------------------------------------ Background ------------------------------------------------- */
 document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('.nav__link');

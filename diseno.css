@@ -501,14 +501,23 @@ a {
     visibility: visible;
     transform: translateX(0);
 }
-.Capitulo01{
-    min-height: 100vh; 
-    margin: 0;
-    display: flex;
-    flex-direction: column; 
-    justify-content: flex-start; 
-    align-items: center;     
+/*Seccion inicio*/
+@keyframes zoomIn {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.1);
+    }
 }
+
+/* Animación de Rebote (Bounce Effect) */
+@keyframes bounceIn {
+    0% { transform: scale(0.9); } /* Inicia ligeramente más pequeño */
+    50% { transform: scale(1.1); } /* Rebota ligeramente más grande */
+    100% { transform: scale(1); } /* Vuelve a su tamaño normal */
+}
+
 /* -------------------------------------------------------------- Welcome page ----------------------------------------------------*/
 /* Contenedor Principal de Bienvenida */
 .welcome-overlay {
@@ -698,7 +707,7 @@ a {
 }
 
 .glass-panel {
-    background:rgba( 172, 206, 242, 0.15 );
+    background:rgba(172, 206, 242, 0.253);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid var(--border-glassefect); 
@@ -868,7 +877,11 @@ video {
 .song-item {
     display: flex;
     align-items: center;
-    background-color: var(--background-color); 
+    background: var(--background-indicator);
+    box-shadow: var(--box-indicator);
+    backdrop-filter: blur(1.4px);
+    -webkit-backdrop-filter: blur(1.4px);
+    border: var(--border-indicator); 
     padding: 15px 25px;
     cursor: pointer;
     border-radius: 15px; /* Radio por defecto para todas */
@@ -894,7 +907,12 @@ video {
 
 /* Estado activo (cuando suena la canción) */
 .song-item.active {
-    background-color: var(--m3-active);
+    background:var(--background-navigation);
+    backdrop-filter: blur(20px) saturate(120%);
+    -webkit-backdrop-filter: blur(20px) saturate(120%);
+    border: var(--border-navigation); 
+    box-shadow: var(--box-navigation);
+    transition: background-color 0.3s ease;
     border-radius: 50px;
 }
 
@@ -1235,7 +1253,7 @@ video {
 }
 
 /* ------------------------------------------------------------- Capitulo 02 ---------------------------------------------------------*/
-.Capitulo02 {
+.Capitulo02, .Capitulo01 {
     min-height: 100vh; 
     margin: 0;
     display: flex;
@@ -1476,7 +1494,19 @@ video {
         border: none;             
         box-shadow: none;         
     }
+
+    .fab-btn{
+        display: none;
+    }
     
+    .nav__mobile-wrapper {
+        display: flex;
+        flex-direction: row; /* Alineación horizontal */
+        align-items: center; /* Centrado vertical entre ambos */
+        justify-content: center; /* Los mantiene agrupados al centro */
+        gap: 15px; /* Espacio de separación entre la cápsula y el botón */
+        width: 100%;
+    }
 
     .nav__indicator {
         width: auto;
@@ -1539,7 +1569,7 @@ video {
     }
 
     .nav__menu {
-        flex: 1; 
+        flex: 0 1 auto;
         max-width: 400px; 
         background: rgba(172, 206, 242, 0.15);
         backdrop-filter: blur(15px);
@@ -1559,20 +1589,24 @@ video {
     .nav__action-button {
         display: flex;
         align-items: center;
+        margin: 0; 
     }
 
     .action-btn {
         width: 70px; 
         height: 70px;
-        background: rgba(255, 255, 255, 0.9);
-        border: 1px solid rgba(0, 0, 0, 0.1);
+        background:rgba( 172, 206, 242, 0.15 );
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border: 1px solid var(--border-glassefect); 
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        transition: background-color 0.3s ease;
         border-radius: 20px;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
     }
 
     .action-btn i {
         font-size: 2.5rem;
-        color: #333;
+        color: var(--text-glasseffect);
     }
 
     .action-btn:active {
