@@ -136,132 +136,84 @@ function loadGallery() {
 
 document.addEventListener('DOMContentLoaded', loadGallery);
 /* ------------------------------------------------------ Welcome page ----------------------------------------------- */
-const bgVideo = document.getElementById('bgVideo');
 
+const sequence = [
+    { char: 'B', img: 'mask_shape_triangle.png' }, 
+    { char: 'R', img: 'mask_spinner_dos.png' },
+    { char: 'U', img: 'mascara_pildora_version_dos.png' },
+    { char: 'M', img: 'mask_sol.png' },
+    { char: 'A', img: 'mascara_cuadrado.png' },
+    { char: 'BRUMA', img: 'mascara_pildora_version_dos.png', phrase: "Camara lenta y ... ♪"}
+];
 
+let step = 0;
+
+function runWelcomeSequence() {
+    const charElement = document.getElementById('intro-char');
+    const imageLayer = document.getElementById('intro-image-layer');
+    const subtitleElement = document.getElementById('intro-subtitle'); 
+    const controls = document.getElementById('welcome-controls');
+
+    const updateStep = () => {
+        if (step < sequence.length) {
+            const data = sequence[step];
+
+            charElement.classList.remove('active');
+
+            setTimeout(() => {
+                charElement.innerText = data.char;
+                imageLayer.style.backgroundImage = `url('${data.img}')`;
+                
+                if (data.char === 'BRUMA') {
+                    charElement.classList.add('word-mode');
+                } else {
+                    charElement.classList.remove('word-mode');
+                }
+                
+                
+                charElement.classList.add('active');
+                
+                step++;
+                
+                if (data.char === 'BRUMA') {
+                    setTimeout(() => {
+                        
+                        subtitleElement.innerText = data.phrase;
+                        
+                        
+                        subtitleElement.classList.add('show');
+                        subtitleElement.classList.add('flash-effect');
+                        subtitleElement.classList.add('typing-effect');
+                        
+                    }, 500); 
+
+                    setTimeout(() => {
+                        controls.classList.add('controls-visible');
+                    }, 2500); 
+                } else {
+                    
+                    setTimeout(updateStep, 1200);
+                }
+            }, 400); 
+        }
+    };
+
+    updateStep();
+}
+
+// Inicializar al cargar
 document.addEventListener('DOMContentLoaded', () => {
-    const startBtn = document.getElementById('startBtn');
-    const welcomeOverlay = document.getElementById('welcome-overlay');
+    // Iniciamos la secuencia
+    runWelcomeSequence();
 
-    if (startBtn) {
-        startBtn.addEventListener('click', () => {
-            // Aplicamos el efecto de desvanecimiento
-            welcomeOverlay.classList.add('fade-out');
-            
-            // REPRODUCCIÓN AL CLIC: Ahora llamamos a la primera canción aquí
-            selectSong(0);
-        });
-    }
-
+    // El botón para entrar sigue funcionando igual
+    document.getElementById('startBtn')?.addEventListener('click', () => {
+        document.getElementById('welcome-overlay').classList.add('fade-out');
+        selectSong(0); 
+    });
 });
 
-const welcomePhrases = [
-    "Bienvenido a la bruma de la complejidad geométrica en el ser...",
-    "Nada que perder ...",
-    "Frecuencia y la lírica entre cubos y hachas ...",
-    "Capitulo 01 ..."
-];
 
-const welcomeColors = [
-    "#837eadff", 
-    "#9C98BD", 
-    "#B5B2CD", 
-    "#CED0DE"
-];
-
-const welcomeImages = [
-    "wallpaper_01.png",       
-    "Prisma.png",         
-    "Prisma.png",        
-    "Prisma.png"       
-];
-
-let phraseIndex = 0;
-let charIndex = 0;
-let isDeleting = false;
-let typeSpeed = 100;
-
-
-let introVideoFinished = false;
-const introVideo = document.getElementById('introVideo');
-const mainImg = document.getElementById('welcomeMainImg');
-
-// Detectar cuando el video termina
-if (introVideo) {
-    introVideo.onended = () => {
-        introVideoFinished = true;
-        
-        // Efecto de transición: Ocultar video, mostrar imagen
-        introVideo.style.display = 'none';
-        mainImg.style.display = 'block';
-        setTimeout(() => {
-            mainImg.style.opacity = "1";
-        }, 10);
-    };
-}
-
-
-function handleWelcomeTypewriter() {
-    const target = document.querySelector('.welcome-subtitle');
-    const overlay = document.getElementById('welcome-overlay');
-    const mainImg = document.querySelector('.welcome-main-img');
-    const currentMainImg = document.getElementById('welcomeMainImg');
-    
-    if (!target) return;
-
-    const currentPhrase = welcomePhrases[phraseIndex];
-
-    if (isDeleting) {
-        // Borrando texto
-        target.innerText = currentPhrase.substring(0, charIndex - 1);
-        charIndex--;
-        typeSpeed = 50; // Borra más rápido
-    } else {
-        // Escribiendo texto
-        target.innerText = currentPhrase.substring(0, charIndex + 1);
-        charIndex++;
-        typeSpeed = 100; // Velocidad normal de escritura
-    }
-
-    // Lógica de cambio de estado
-    if (!isDeleting && charIndex === currentPhrase.length) {
-        // Terminó de escribir, espera antes de borrar
-        isDeleting = true;
-        typeSpeed = 2000; // Pausa de 2 segundos al terminar la frase
-    } else if (isDeleting && charIndex === 0) {
-        // Terminó de borrar, elige una nueva frase aleatoria
-        isDeleting = false;
-        
-        // Elegir una frase aleatoria diferente a la anterior
-        let nextIndex;
-        do {
-            nextIndex = Math.floor(Math.random() * welcomePhrases.length);
-        } while (nextIndex === phraseIndex);
-        
-        phraseIndex = nextIndex;
-
-        const randomColor = welcomeColors[Math.floor(Math.random() * welcomeColors.length)];
-        overlay.style.backgroundColor = randomColor;
-
-        if (introVideoFinished && currentMainImg) {
-            currentMainImg.style.opacity = "0"; 
-            
-            setTimeout(() => {
-                const randomImg = welcomeImages[Math.floor(Math.random() * welcomeImages.length)];
-                currentMainImg.src = randomImg;
-                currentMainImg.style.opacity = "1";
-            }, 300);
-        }
-        
-        typeSpeed = 500;
-    
-    }
-
-    setTimeout(handleWelcomeTypewriter, typeSpeed);
-}
-
-// Iniciar el efecto
-handleWelcomeTypewriter();
 
 /* ----------------------------------------------------- Playlist ----------------------------------------------------------------------------------------------- */
 

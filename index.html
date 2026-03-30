@@ -18,25 +18,26 @@
 
         <!--Welcome page-->
         <div id="welcome-overlay" class="welcome-overlay">
-            <div class="welcome-container">
-                <div class="welcome-image-side">
+            <div id="gradient-bg" class="gradient-bg"></div>
+            
+            <div id="intro-image-layer" class="intro-image-layer"></div>
 
-                    <div class="main-art-wrapper">
-                        <video id="introVideo" class="welcome-main-img" autoplay muted playsinline>
-                            <source src="video_intro.mp4" type="video/mp4">
-                            Tu navegador no soporta videos.
-                        </video>
-                        
-                        <img src="NadaquePerder.jpg" alt="Bruma Art" class="welcome-main-img" id="welcomeMainImg" style="display: none; opacity: 0;">
-                    </div>
+            <div class="intro-text-container">
+                <h1 id="intro-char" class="intro-char"></h1>
+                <div id="intro-subtitle" class="intro-subtitle"></div>
+            </div>
 
-                </div>
-
-                <div class="welcome-text-side">
-                    <h1 class="welcome-title">BRUMA</h1>
-                    <p class="welcome-subtitle">Bienvenido a la bruma de la <br> complejidad artística ...</p>
-                    <button id="startBtn" class="welcome-btn">Vamos allá >></button>
-                </div>
+            <div class="welcome-controls-bottom" id="welcome-controls" style="opacity: 0; visibility: hidden; transition: all 1s ease;">
+                <button class="btn-step btn-light" id="btn-prev-intro">
+                    <span class="material-symbols-outlined">chevron_left</span>
+                </button>
+                <button class="btn-step btn-medium" id="btn-next-intro">
+                    <span class="material-symbols-outlined">chevron_right</span>
+                </button>
+                <button class="btn-start-action btn-dark" id="startBtn">
+                    <span>Vamos allá</span>
+                    <span class="material-symbols-outlined">double_arrow</span>
+                </button>
             </div>
         </div>
         <!--Switch estilo Material You-->

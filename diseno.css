@@ -35,6 +35,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,800&display=swap'); /* Flex Texto */
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap'); /* Bebas Nue */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sarina&display=swap');
 
 
 
@@ -519,99 +520,178 @@ a {
 }
 
 /* -------------------------------------------------------------- Welcome page ----------------------------------------------------*/
-/* Contenedor Principal de Bienvenida */
 .welcome-overlay {
-    position: fixed;
+    position: fixed;          
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;            
+    display: flex;            
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;      
+    z-index: 99999;           
+    background-color: #fff;   
+    transition: opacity 0.8s ease, visibility 0.8s; 
+}
+
+.gradient-bg {
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #e3eefc; 
-    z-index: 10000; /* Por encima de todo */
+    z-index: 1;
+    background: linear-gradient(45deg, #f3e5f5, #e1f5fe, #e8f5e9, #fffde7);
+    background-size: 400% 400%;
+    animation: gradientFlow 10s ease infinite;
+}
+
+@keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.intro-text-container {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+    text-align: center; 
+}
+
+.intro-image-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-size: contain;
+    background-position: center;
+    opacity: 0.4; /* Sutil para que no opaque el gradiente pastel */
+    transition: background-image 0.5s ease-in-out;
+}
+
+.intro-char {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 15rem; /* Tamaño para letras sueltas */
+    color: rgba(0, 0, 0, 0.7);
+    text-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    transform: scale(0.5);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    margin-bottom: 20px; /* Espacio entre BRUMA y el subtítulo */
+}
+
+.intro-char.active {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.intro-char.word-mode {
+    font-size: 10rem !important; 
+}
+
+.controls-visible {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(-20px); 
+}
+
+.welcome-controls-bottom {
+    position: absolute;
+    bottom: 50px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    z-index: 10;
+}
+
+.intro-subtitle {
+    font-family: "Sarina", cursive;
+    font-weight: 400;
+    font-style: normal;
+    transform: scaleY(1.8);
+    letter-spacing: -1px;
+    color: rgba(255, 255, 255, 0.322); 
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4); 
+    text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    font-size: 3rem;  
+    visibility: hidden;
+    overflow: hidden; 
+    white-space: nowrap; 
+    border-right: .15em solid rgba(255, 255, 255, 0.4); 
+    transition: visibility 0.4s ease; 
+}
+
+.intro-subtitle.show {
+    visibility: visible;
+}
+
+.flash-effect {
+    animation: flash 0.6s ease-in-out forwards;
+}
+
+@keyframes flash {
+    0% { opacity: 0; }
+    30% { opacity: 1; }
+    70% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.typing-effect {
+    animation: typing 1.5s steps(30, end) forwards;
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; } 
+}
+
+.btn-step, .btn-start-action {
+    border: none;
+    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: opacity 1s ease, visibility 1s, background-color 1.5s ease;
+    transition: transform 0.2s, opacity 0.3s;
+    font-family: 'Fredoka', sans-serif;
+    color: #1a1a1a;
 }
 
-/* Layout */
-.welcome-container {
-    display: flex;
-    align-items: center;
-    gap: 80px;
-    max-width: 1000px;
-    padding: 20px;
+.btn-step {
+    width: 65px;
+    height: 75px;
+    border-radius: 35px; /* Forma de píldora vertical corta */
 }
 
-/* Lado de la Imagen */
-.welcome-image-side {
-    position: relative;
-}
-
-.main-art-wrapper {
-    position: relative;
-    width: 400px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.welcome-main-img {
-    max-width: 100%;
-    height: auto;
-    transition: opacity 0.5s ease-in-out;
-}
-
-#introVideo {
-    object-fit: cover;
-}
-
-/* Lado del Texto */
-.welcome-title {
-    font-family: "Bebas Neue", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 150px;
-    margin: 0;
-    letter-spacing: 2px;
-    color: #2a3a50;
-}
-
-.welcome-subtitle{
-    font-family: "Bebas Neue", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 25px;
-    margin: 0;
-    letter-spacing: 2px;
-    color: #2a3a50;
-}
-
-/* Botón "Vamos allá" */
-.welcome-btn {
-    background:rgba( 172, 206, 242, 0.15 );
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid var(--border-glassefect); 
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    padding: 15px 50px;
-    font-size: 22px;
-    border-radius: 50px;
-    color: black;
-    cursor: url('hacha_cursor.png'), pointer;
+/* Colores extraídos de la imagen */
+.btn-light { background-color: #f0e6f2; opacity: 0.9; }
+.btn-medium { background-color: #dfcde3; opacity: 0.9; border-radius: 50%; width: 75px; } /* Más circular como la imagen */
+.btn-dark { 
+    background-color: #a98bb2; 
+    color: white;
+    padding: 0 40px;
+    height: 80px;
+    border-radius: 40px;
+    font-size: 20px;
     font-weight: bold;
-    transition: transform 0.3s ease, background-color 0.3s ease;
+    gap: 10px;
 }
 
-.welcome-btn:hover {
+.btn-step:hover, .btn-start-action:hover {
     transform: scale(1.05);
-    font-size: 27px;
+    opacity: 1;
 }
-
 /* Clase para ocultar la pantalla */
 .fade-out {
-    opacity: 0;
-    visibility: hidden;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none;     
 }
 
 /* --------------------------------------------------------------FloatingButton----------------------------------------------------*/
@@ -1618,53 +1698,59 @@ video {
         font-size: 0.75rem;
     }
     /* ----------------------------------------------------------- Welcome page -----------------------------------------------*/
-    .welcome-overlay {
-        overflow-y: auto;
-        padding: 40px 0;
-        align-items: flex-start; /* Alinea al inicio para permitir el scroll natural */
+    .intro-char {
+        font-size: 7rem; /* De 15rem a 7rem para que las letras no se corten */
     }
 
-    .welcome-container {
-        flex-direction: column; /* Apilamos imagen y texto verticalmente */
-        gap: 30px;              /* Reducimos el espacio entre elementos */
-        text-align: center;     /* Centramos todo el contenido */
-        width: 90%;
+    .intro-char.word-mode {
+        font-size: 3.5rem !important; /* La palabra "BRUMA" ahora cabe horizontalmente */
     }
 
-    /* Redimensionamos la imagen */
-    .welcome-main-img {
-        width: 280px;           /* Tamaño más manejable para teléfonos */
-        max-width: 100%;
-        border-radius: 20px;
+    .intro-subtitle {
+        font-size: 1.4rem; /* Ajuste para que la frase quepa en una sola línea */
+        letter-spacing: 0px; /* Reducimos el espaciado para ganar espacio */
+        transform: scaleY(1.4); /* Suavizamos el estiramiento vertical */
+        border-right: .1em solid rgba(255, 255, 255, 0.4);
     }
 
-    /* Ajuste crítico del título */
-    .welcome-title {
-        font-size: 70px;        /* Reducimos de 150px a 70px */
-        line-height: 1;
-        margin-bottom: 10px;
+    /* 2. Ajuste de la Capa de Imagen */
+    .intro-image-layer {
+        background-size: cover; /* En móvil suele verse mejor cover para llenar la pantalla */
+        opacity: 0.3; /* Un poco más sutil para no distraer en pantallas pequeñas */
     }
 
-    .title-phrase-smaller {
-        font-size: 18px; 
+    /* 3. Reorganización de la Botonera */
+    .welcome-controls-bottom {
+        bottom: 40px; /* Subimos un poco para evitar barras de navegación del móvil */
+        gap: 8px; /* Espacio más compacto */
+        width: 100%;
+        justify-content: center;
+        padding: 0 15px;
     }
 
-    /* Ajuste del subtítulo */
-    .welcome-subtitle {
-        font-size: 18px;        /* Texto más legible en móvil */
-        margin: 10px 0 30px 0;
-        min-height: 3.5em;      /* Damos espacio para que el texto ocupe varias líneas */
-        display: block;         /* Cambiamos a block para que el centrado funcione mejor */
+    /* 4. Botones más ergonómicos para dedos */
+    .btn-step {
+        width: 55px;
+        height: 65px;
     }
 
-    /* Botón más adaptado */
-    .welcome-btn {
-        width: 100%;            /* El botón ocupa el ancho disponible */
-        max-width: 250px;
-        padding: 12px 30px;
-        font-size: 18px;
+    .btn-medium {
+        width: 65px;
+        height: 65px;
     }
 
+    .btn-dark {
+        height: 65px;
+        padding: 0 20px;
+        font-size: 16px;
+        gap: 8px;
+    }
+
+    /* Ajuste de la animación de escritura para móvil */
+    @keyframes typing {
+        from { width: 0; }
+        to { width: 90%; } /* Evitamos que toque los bordes laterales */
+    }
     /* ----------------------------------------------------------- Dark mode ------------------------------------------------- */
     .switch-container {
         bottom: 100px;
