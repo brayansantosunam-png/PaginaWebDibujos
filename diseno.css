@@ -1935,9 +1935,9 @@ video {
         align-items: flex-start;
         justify-content: center;
         align-items: center; 
-        padding: 20px 0;
+        padding: 0;
     }
-
+    
     .glass-panel {
         display: flex; /* Cambiamos de Grid a Flex */
         flex-direction: column; /* Apilamos los elementos verticalmente */
@@ -2072,21 +2072,23 @@ video {
     /* ------------------------------------------------ Capitulo 01 -------------------------------------------*/
 
     .profile-container {
-        margin-top: 10px; 
-        padding: 10px;
+        margin-top: 0px; 
         min-height: 100vh; 
-        justify-content: center; 
+        justify-content: center;
+        padding: 20px 03px 03px 0px;
+        margin: 0px 03px 03px 2px; 
+        justify-content: flex-start; 
     }
 
     .avatar-display {
-        width: 95%; 
-        height: 75vh; 
+        width: 90%; 
+        height: 80vh; 
         margin-bottom: 20px;
-        border-radius: 35px; 
+        border-radius: 20px 20px 95px 95px; 
     }
 
     .profile-chapter-title {
-        font-size: 3.5rem; 
+        font-size: 4.5rem; 
         top: 25px;
     }
 
@@ -2116,6 +2118,17 @@ video {
 
     .profile-description p {
         font-size: 1.6rem;
+    }
+
+    .shape-underlay {
+        height: 60%; 
+        width: auto;
+    }
+
+    .avatar-front {
+        height: 70%; 
+        width: auto;
+        bottom: 5%; 
     }
 
     /*------------------------------------------------- Capitulo 02 ------------------------------------------*/

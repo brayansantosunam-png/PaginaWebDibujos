@@ -100,7 +100,7 @@ const galleryImages = [
     { url: 'http://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhVSUgBge2DzZ5HKvMFU5wVmAng8kFKYX-3lA5UWDQRatu0q2JBIztswdQc0K6SZDJe3klHkVjDVzdgm1I-CEBQKlIlQ5miafl566wpKym6EcQxXbxBqZk83DM77gOliLpwMyzk14s6QaKjDQ5WvjcG7coatp6kOzyunV7g5FxXiEK6YXZmz9FXHl8wYbI/s2002/Pintura_03.png', text: 'Arte Gigante' },
     { url: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjEEDA2PxA3uOHehTS8vMnRqrnuMptqiZo_SE2MKllQSjWfjviQ7RTwh3y6z2mUwKJId4BK_92vXLBtaRL7JAi8yEgFSiD6D2T3yVGLQToOqfyJ3BvRRsXIp2chSvhYAJgC4fs2FKabX8QThM1zgECXd-3MGHansQs3cCtHT8ayFqUkO6vYHEzcJfptfx4/s4032/PXL_20230325_010854250.jpg', text: 'Caminando' },
     { url: 'https://blogger.googleusercontent.com/img/a/AVvXsEikvYxZXBDIpLRQCh9JxNzBXTAFz-nSBPzoA8KEV5svfbigfJ3QGceQ3aT0xAvkPZjdFFcPQqvzR4eNtGUCAQVCDJop4Ve0KolnyMZ9HK6ro40nlWbkEdZ1qQNqETSrOZdudfjz4KXXIgi-rpiCvIN_Vr_UzuutRFjgHV60llp6YhVc9EYxry8KncRPXps', text: 'Bruma Final' },
-    { url: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiratYj5gPTFyNAN8QcL8eET_MO999fHvr23bILi2H8GH1Dfm64R8KX5budwPjqt1J8pFbBv8fbq5eoWND1DKh_RdjgtBJHyGhETPdP8e86znH_ZaXkJvYoRZERdHjPri06w3_o37bxPMOhDmFqMAB0zSQQoDojSRggIlrXgGwKOYkG6MpR-QMStLURgDA/s1177/Screenshot_20260328-213720.png', text: 'Hallazgo valioso' },
+    { url: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiratYj5gPTFyNAN8QcL8eET_MO999fHvr23bILi2H8GH1Dfm64R8KX5budwPjqt1J8pFbBv8fbq5eoWND1DKh_RdjgtBJHyGhETPdP8e86znH_ZaXkJvYoRZERdHjPri06w3_o37bxPMOhDmFqMAB0zSQQoDojSRggIlrXgGwKOYkG6MpR-QMStLURgDA/s1177/Screenshot_20260328-213720.png', text: 'Valioso' },
     { url: 'https://blogger.googleusercontent.com/img/a/AVvXsEh0Egl-mCd9f09wfOcnbosurjHMgvL3wyY-6CQmVQn3JYYT0aOGpQxc4JBrNskDpx2hIb1TxkWgjAcr81N2NKQDwE0vJeCLtbK48w6DmBjB8Pj45QwfvThuIJYkz5Xr2zPt6ZcG96qpNZSNew9pxM6ZjdX8Z6DjJX_OO16fgN6uVUtupP1XkJu-Hu4bchw', text: 'Enseñame de que estamos hechos' }
 ];
 
@@ -156,22 +156,28 @@ const shapeList = [
     'mascara_pildora_version_dos.png'
 ];
 
+const borderRadiusList = [
+    '20px 20px 95px 95px', 
+    '20px 20px 20px 20px', 
+    '90px 90px 90px 90px'  
+];
+
 const themeColors = [
     { 
         light: { neon: '#ffb74d', bg: '#ffe0b2' }, 
-        dark: { neon: '#f57c00', bg: '#2a1a14' } // Naranja oscuro / Marrón
+        dark: { neon: '#f57c00', bg: '#4e3126' } // Naranja oscuro / Marrón
     },
     { 
         light: { neon: '#4a5572', bg: '#c8d0e6' }, 
-        dark: { neon: '#7986cb', bg: '#161924' } // Azul grisáceo oscuro
+        dark: { neon: '#7986cb', bg: '#30364e' } // Azul grisáceo oscuro
     },
     { 
         light: { neon: '#8e9eff', bg: '#c6d2ff' }, 
-        dark: { neon: '#5c6bc0', bg: '#141729' } // Azul índigo oscuro
+        dark: { neon: '#5c6bc0', bg: '#262e5c' } // Azul índigo oscuro
     },
     { 
         light: { neon: '#3f4b74', bg: '#c8e2e6' }, 
-        dark: { neon: '#26a69a', bg: '#101a1c' } // Verde azulado oscuro (Teal)
+        dark: { neon: '#26a69a', bg: '#2c4044' } // Verde azulado oscuro (Teal)
     }
 ];
 
@@ -195,6 +201,7 @@ const btnSave = document.getElementById('btn-save-avatar');
 const coverImg = document.getElementById('dynamic-cover');
 const controlsPanel = document.getElementById('avatar-controls');
 const shapeImg = document.querySelector('.shape-underlay');
+const avatarDisplayContainer = document.querySelector('.avatar-display');
 
 
 function rotateCover() {
@@ -244,6 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function updateAvatarDisplay() {
     avatarImg.src = avatarList[currentAvatarIndex];
 
+    avatarDisplayContainer.style.borderRadius = borderRadiusList[currentAvatarIndex];
     shapeImg.classList.remove('shape-anim'); // Quitamos la clase si ya existía
     void shapeImg.offsetWidth; // Forzamos un "reflow" para reiniciar la animación
     
@@ -299,10 +307,12 @@ function loadSavedProfile() {
         currentAvatarIndex = parseInt(savedIndex);
         avatarImg.src = avatarList[currentAvatarIndex];
         shapeImg.src = shapeList[currentAvatarIndex];
+        avatarDisplayContainer.style.borderRadius = borderRadiusList[currentAvatarIndex];
     } else {
         // Valores por defecto si no hay nada guardado
         avatarImg.src = avatarList[0];
         shapeImg.src = shapeList[0];
+        avatarDisplayContainer.style.borderRadius = borderRadiusList[0];
     }
 }
 
