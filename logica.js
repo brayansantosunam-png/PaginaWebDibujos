@@ -135,6 +135,181 @@ function loadGallery() {
 }
 
 document.addEventListener('DOMContentLoaded', loadGallery);
+/* ------------------------------------------------------ Capitulo 01 ------------------------------------------------ */
+const coverList = [
+    'background_minecraft.png',
+    'background_minecraft_night.png',
+    'background_cap2_light.jpg',
+    "background_cap2_night.jpg"
+];
+
+const avatarList = [
+    'avatar_01.png',
+    'avatar_02.png',
+    'avatar_03.png'
+    
+];
+
+const shapeList = [
+    'mask_monte_perfil.png',
+    'mask_sol.png',
+    'mascara_pildora_version_dos.png'
+];
+
+const themeColors = [
+    { 
+        light: { neon: '#ffb74d', bg: '#ffe0b2' }, 
+        dark: { neon: '#f57c00', bg: '#2a1a14' } // Naranja oscuro / Marrón
+    },
+    { 
+        light: { neon: '#4a5572', bg: '#c8d0e6' }, 
+        dark: { neon: '#7986cb', bg: '#161924' } // Azul grisáceo oscuro
+    },
+    { 
+        light: { neon: '#8e9eff', bg: '#c6d2ff' }, 
+        dark: { neon: '#5c6bc0', bg: '#141729' } // Azul índigo oscuro
+    },
+    { 
+        light: { neon: '#3f4b74', bg: '#c8e2e6' }, 
+        dark: { neon: '#26a69a', bg: '#101a1c' } // Verde azulado oscuro (Teal)
+    }
+];
+
+function applyCurrentThemeColors() {
+    const isDark = document.body.classList.contains('dark-mode');
+    
+    const currentTheme = isDark ? themeColors[currentCoverIndex].dark : themeColors[currentCoverIndex].light;
+    
+    document.documentElement.style.setProperty('--neon-color', currentTheme.neon);
+    document.documentElement.style.setProperty('--bg-color', currentTheme.bg);
+}
+
+let currentCoverIndex = 0;
+let currentAvatarIndex = 0;
+
+// Referencias al DOM
+const avatarImg = document.getElementById('main-avatar');
+const btnPrev = document.getElementById('btn-prev-avatar');
+const btnNext = document.getElementById('btn-next-avatar');
+const btnSave = document.getElementById('btn-save-avatar');
+const coverImg = document.getElementById('dynamic-cover');
+const controlsPanel = document.getElementById('avatar-controls');
+const shapeImg = document.querySelector('.shape-underlay');
+
+
+function rotateCover() {
+    coverImg.style.opacity = '0'; 
+    
+    setTimeout(() => {
+        currentCoverIndex = (currentCoverIndex + 1) % coverList.length;
+        coverImg.src = coverList[currentCoverIndex];
+        coverImg.classList.add('scale-up-anim'); // Reinicia/mantiene animación
+        coverImg.style.opacity = '1'; // Aparecer
+        
+        applyCurrentThemeColors(); 
+        
+    }, 800);
+}
+
+setInterval(rotateCover, 3000);
+
+avatarImg.addEventListener('click', () => {
+    // Al hacer clic en el avatar, mostramos la botonera
+    controlsPanel.classList.remove('hidden-panel');
+    
+    // Opcional: También cambiar el avatar al hacer clic (como antes)
+    currentAvatarIndex = (currentAvatarIndex + 1) % avatarList.length;
+    avatarImg.src = avatarList[currentAvatarIndex];
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Cargar primera portada
+    coverImg.src = coverList[0];
+    coverImg.classList.add('scale-up-anim');
+    applyCurrentThemeColors();
+
+    // Cargar avatar guardado
+    const saved = localStorage.getItem('userSelectedAvatar');
+    if (saved) {
+        avatarImg.src = saved;
+        const idx = avatarList.indexOf(saved);
+        if(idx !== -1) currentAvatarIndex = idx;
+    } else {
+        avatarImg.src = avatarList[0];
+    }
+});
+/**
+ * Actualiza la imagen mostrada en el perfil
+ */
+function updateAvatarDisplay() {
+    avatarImg.src = avatarList[currentAvatarIndex];
+
+    shapeImg.classList.remove('shape-anim'); // Quitamos la clase si ya existía
+    void shapeImg.offsetWidth; // Forzamos un "reflow" para reiniciar la animación
+    
+    setTimeout(() => {
+        shapeImg.src = shapeList[currentAvatarIndex];
+        shapeImg.classList.add('shape-anim');
+    }, 50); // Pequeño retraso para que el cambio se note con la animación
+}
+
+/**
+ * Carga el avatar guardado en el navegador (si existe)
+ */
+function loadSavedAvatar() {
+    const saved = localStorage.getItem('userSelectedAvatar');
+    if (saved) {
+        // Buscamos el índice que coincide con la URL guardada
+        const index = avatarList.indexOf(saved);
+        if (index !== -1) {
+            currentAvatarIndex = index;
+        } else {
+            // Si la URL guardada no está en la lista actual, forzamos la primera
+            avatarImg.src = saved; 
+            return;
+        }
+    }
+    updateAvatarDisplay();
+}
+
+// Eventos
+btnNext.addEventListener('click', () => {
+    currentAvatarIndex = (currentAvatarIndex + 1) % avatarList.length;
+    updateAvatarDisplay();
+});
+
+btnPrev.addEventListener('click', () => {
+    currentAvatarIndex = (currentAvatarIndex - 1 + avatarList.length) % avatarList.length;
+    updateAvatarDisplay();
+});
+
+btnSave.addEventListener('click', () => {
+    localStorage.setItem('userSelectedAvatar', avatarList[currentAvatarIndex]);
+    localStorage.setItem('userSelectedShape', shapeList[currentAvatarIndex]); 
+    localStorage.setItem('userProfileIndex', currentAvatarIndex); 
+    
+    controlsPanel.classList.add('hidden-panel');
+    console.log("Perfil guardado localmente.");
+});
+
+function loadSavedProfile() {
+    const savedIndex = localStorage.getItem('userProfileIndex');
+    
+    if (savedIndex !== null) {
+        currentAvatarIndex = parseInt(savedIndex);
+        avatarImg.src = avatarList[currentAvatarIndex];
+        shapeImg.src = shapeList[currentAvatarIndex];
+    } else {
+        // Valores por defecto si no hay nada guardado
+        avatarImg.src = avatarList[0];
+        shapeImg.src = shapeList[0];
+    }
+}
+
+// Inicialización
+document.addEventListener('DOMContentLoaded', () => {
+    loadSavedProfile()
+});
 /* ------------------------------------------------------ Welcome page ----------------------------------------------- */
 
 const sequence = [
@@ -143,7 +318,7 @@ const sequence = [
     { char: 'U', img: 'mascara_pildora_version_dos.png' },
     { char: 'M', img: 'mask_sol.png' },
     { char: 'A', img: 'mascara_cuadrado.png' },
-    { char: 'BRUMA', img: 'mascara_pildora_version_dos.png', phrase: "Camara lenta y ... ♪"}
+    { char: 'BRUMA', img: 'mask_flor_tres.png', phrase: "Camara lenta y ... ♪"}
 ];
 
 let step = 0;
@@ -227,6 +402,7 @@ const songs = [
     { title: "Vía lactea", artist: "Zoé", phrase: "Del prisma de tus ojos, en mi casco de astronauta...", cover: "https://cdn-images.dzcdn.net/images/cover/8498486810fb5956153f175822b7b7d8/0x1900-000000-80-0-0.jpg", src: "via_lactea.mp3" },
     { title: "Bruma", artist: "León Larregui", phrase: "Dar sin esperar nada a cambio...", cover: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAKhj6DATZm2qKUx11gFHedys-WEO3UfFgUQ&s", src: "bruma.m4a" },
     { title: "Velur", artist: "Zoé", phrase: "Me ajusto, pero no me aplaco, echa formol al corazón...", cover: "https://cdn-images.dzcdn.net/images/cover/46d64f553900fcee92fdc8e364246828/0x1900-000000-80-0-0.jpg", src: "velur.m4a" },
+    { title: "Doma", artist: "Jósean Log", phrase: "De este desparpajo, yo de esta no me rajo...", cover: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg5U8VJdtWDJb3S8XRk7dXFqkf8WXFTpOvw5yn3aral845kVhajX3rrQoHAHMefY7V-6AEfWwzwLUXK6SMSvFkYslAK95Vr-XUq4YYJF1OvHqUR3CC50SZ_MaeIjd87GmDAwwjPIuAmDjDqVwSnW_gFDf7w69U5ymll5KNbq0IYfpIxhIdn_enAnp1KLSY/w492-h492/doma.jpg", src: "doma.mp3" },
     { title: "Ser parte", artist: "Siddhartha", phrase: "Reinventarme y ser parte de tú ser, al final me guiare por tí.", cover: "https://cdn-images.dzcdn.net/images/cover/a508833ee74e2cd3197f0641e3c73545/1900x1900-000000-80-0-0.jpg", src: "ser_parte.mp3" }
     
 ];
@@ -756,6 +932,7 @@ function enableDarkMode() {
     document.body.classList.remove('light-mode');
     document.body.classList.add('alt-theme');
     updateThemeColor();
+    applyCurrentThemeColors();
 }
 
 // Función para activar el modo claro
@@ -764,6 +941,7 @@ function enableLightMode() {
     document.body.classList.remove('dark-mode');
     document.body.classList.remove('alt-theme');
     updateThemeColor();
+    applyCurrentThemeColors();
 }
 // Guardar la preferencia del usuario en el almacenamiento local
 function saveUserPreference(isDarkMode) {

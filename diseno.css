@@ -46,46 +46,6 @@
     cursor: url('cursor.png'), auto;
 }
 
-body, html {
-    width: 100%;
-    font-family: 'Karla', sans-serif;
-    background: url('background_minecraft.png') no-repeat center center fixed;
-    overflow-x: hidden;      
-    overflow-y: auto;        
-}
-
-body, 
-body.cap-1 {
-    background: url('background_minecraft.png') no-repeat center center fixed;
-    background-size: cover;
-    transition: 0.5s ease-in-out; /* Transición suave al cambiar */
-}
-
-/* Capítulo 01 en Modo Oscuro */
-body.dark-mode,
-body.cap-1.dark-mode {
-    background: url('background_minecraft_night.png') no-repeat center center fixed;
-    background-size: cover;
-}
-
-/* Capítulo 02 en Modo Claro */
-body.cap-2 {
-    background: url('background_cap2_light.jpg') no-repeat center center fixed;
-    background-size: cover;
-}
-
-/* Capítulo 02 en Modo Oscuro */
-body.cap-2.dark-mode {
-    background: url('background_cap2_night.jpg') no-repeat center center fixed;
-    background-size: cover;
-}
-
-body.alt-theme {
-    background: url('background_minecraft_night.png') no-repeat center center fixed;
-    background-size: cover;
-}
-
-
 :root{
     --black-color:#494949;
     --background-color:#FFFFFF;
@@ -161,6 +121,8 @@ body.alt-theme {
     --line-neon-perfil-explocion: #ffb8be;
     --shimmer-efect:#5E8EEE;
     --card-dialog: #f0f4f9;
+    --neon-color: #8e9eff; 
+    --bg-color: #c6d2ff;
 }
 body.dark-mode {
     --black-color: #E8E7E7;
@@ -237,6 +199,18 @@ body.dark-mode {
     --shimmer-efect:#4061a2;
     --card-dialog: #282a2c;
 }
+
+body, html {
+    width: 100%;
+    font-family: 'Karla', sans-serif;
+    background: var(--background-color);
+    overflow-x: hidden;      
+    overflow-y: auto;
+    background-color: var(--bg-color);
+    background-image: radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.4) 0%, transparent 80%);
+    transition: background-color 1.5s ease-in-out;        
+}
+
 /* -------------------------------------------------------------- Animaciones -----------------------------------------------------*/
 @keyframes maskScaleAnimation {
     0% { transform: scale(1); }
@@ -269,6 +243,16 @@ body.dark-mode {
     0% { transform: scale(0.9); } /* Inicia ligeramente más pequeño */
     50% { transform: scale(1.1); } /* Rebota ligeramente más grande */
     100% { transform: scale(1); } /* Vuelve a su tamaño normal */
+}
+
+@keyframes shapeScaleDown {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(0.5); opacity: 0.5; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.shape-anim {
+    animation: shapeScaleDown 0.6s ease-in-out;
 }
 
 /* -------------------------------------------------------------- Efecto gradiente ------------------------------------------------*/
@@ -316,8 +300,6 @@ body.dark-mode::after {
 }
 
 /* -------------------------------------------------------------- Menú ------------------------------------------------------------*/
-/*Menu*/ 
-/* Estilo general para la imagen */
 .header-menu {
     position: fixed;
     width: auto;
@@ -542,7 +524,7 @@ a {
     width: 100%;
     height: 100%;
     z-index: 1;
-    background: linear-gradient(45deg, #f3e5f5, #e1f5fe, #e8f5e9, #fffde7);
+    background: linear-gradient(45deg, #f3e5f5, #e1f5fe, #e8f5e9, #58563d);
     background-size: 400% 400%;
     animation: gradientFlow 10s ease infinite;
 }
@@ -1331,7 +1313,177 @@ video {
                 0 0 50px 10px rgba(86, 92, 109, 0.4);
     z-index: 10;
 }
+/* ------------------------------------------------------------- Capitulo 01 ---------------------------------------------------------*/
+.avatar-display {
+    position: relative;
+    width: 90%;
+    height: 560px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    border-radius: 40px; 
+    overflow: hidden; 
+    background-color: #aed0eb; 
+    border: 3px solid var(--neon-color);
+    box-shadow: 0 0 40px var(--neon-color), 
+                inset 0 0 20px var(--neon-color), 
+                0 10px 30px rgba(0, 0, 0, 0.3); 
+    transition: border-color 1.2s ease, box-shadow 1.2s ease;
+}
 
+/* Capa 1: Imagen de fondo */
+.cover-underlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Asegura que llene todo el espacio sin deformarse */
+    z-index: 1;
+    filter: brightness(0.9); /* Opcional: Oscurece un 10% el fondo para que resalte el texto */
+    transition: opacity 0.8s ease-in-out;
+}
+
+.profile-chapter-title {
+    position: absolute;
+    top: 40px; /* Lo empuja hacia arriba */
+    z-index: 2; /* Encima del fondo, pero detrás de la mancha rosa */
+    font-family: 'Bebas Neue', sans-serif; /* Usamos la fuente condensada que ya tienes importada */
+    font-size: 5.5rem;
+    color: #ffffff;
+    margin: 0;
+    letter-spacing: 2px;
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-weight: 400; /* Un peso más ligero suele verse más elegante en cristal */
+    transform: scaleY(1.8);
+    letter-spacing: -1px;
+    color: rgba(255, 255, 255, 0.322); 
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4); 
+    /* 5. Sombra para dar relieve */
+    text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.shape-underlay {
+    position: absolute;
+    z-index: 3;
+    height: 85%; /* Se ajusta a la altura del contenedor */
+    width: auto;
+    object-fit: contain;
+    pointer-events: none; /* Evita que interfiera si das clic al avatar */
+}
+
+.avatar-front {
+    position: absolute;
+    z-index: 4; 
+    height: 90%; 
+    width: auto;
+    bottom: 5%; 
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.avatar-front:hover {
+    transform: scale(1.05); /* Efecto genial al pasar el ratón */
+}
+
+.profile-container {
+    width: 100%;
+    height: auto;
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.scale-up-anim {
+    animation: scaleUpEffect 3s infinite alternate ease-in-out;
+}
+
+@keyframes scaleUpEffect {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.2); }
+}
+
+.side-btn {
+    background-color: #a689a9; /* Morado claro de la imagen */
+    color: black;
+    border: none;
+    border-radius: 50px;
+    width: 60px;
+    height: 100px; /* Forma ovalada vertical */
+    font-size: 2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.center-btn {
+    background-color: #f5d3f0; /* Rosa claro de la imagen */
+    color: black;
+    border: none;
+    border-radius: 40px;
+    padding: 0 50px;
+    height: 100px;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.side-btn:hover, .center-btn:hover {
+    filter: brightness(0.9);
+}
+
+.avatar-controls-panel {
+    position: absolute; 
+    bottom: 8%; 
+    z-index: 5; 
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.4); 
+    backdrop-filter: blur(10px);
+    padding: 15px 25px;
+    border-radius: 40px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    
+    /* Animación fluida de aparición */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.hidden-panel {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(30px) scale(0.9); 
+    pointer-events: none;
+}
+
+.profile-description {
+    width: 90%;
+    max-width: 800px; 
+    background-color: var(--therthary-color); 
+    border-radius: 100px; 
+    padding: 15px 40px; 
+    margin: 0 auto; 
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); 
+}
+
+.profile-description p {
+    font-family: 'Pacifico', cursive; 
+    font-size: 2.5rem; 
+    color: var(--black-color); 
+    margin: 0; 
+    letter-spacing: 1px; 
+}
 /* ------------------------------------------------------------- Capitulo 02 ---------------------------------------------------------*/
 .Capitulo02, .Capitulo01 {
     min-height: 100vh; 
@@ -1915,6 +2067,55 @@ video {
         line-height: 1.2;
         max-width: 90%;        /* Evita que el texto toque los bordes */
         text-align: center;
+    }
+
+    /* ------------------------------------------------ Capitulo 01 -------------------------------------------*/
+
+    .profile-container {
+        margin-top: 10px; 
+        padding: 10px;
+        min-height: 100vh; 
+        justify-content: center; 
+    }
+
+    .avatar-display {
+        width: 95%; 
+        height: 75vh; 
+        margin-bottom: 20px;
+        border-radius: 35px; 
+    }
+
+    .profile-chapter-title {
+        font-size: 3.5rem; 
+        top: 25px;
+    }
+
+    .avatar-controls-panel {
+        bottom: 5%;
+        padding: 10px 15px;
+        gap: 10px;
+        border-radius: 30px;
+    }
+
+    .side-btn {
+        width: 45px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+
+    .center-btn {
+        padding: 0 30px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+
+    .profile-description {
+        width: 95%;
+        padding: 12px 20px;
+    }
+
+    .profile-description p {
+        font-size: 1.6rem;
     }
 
     /*------------------------------------------------- Capitulo 02 ------------------------------------------*/
