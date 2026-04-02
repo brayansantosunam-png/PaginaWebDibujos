@@ -325,10 +325,10 @@ document.addEventListener('DOMContentLoaded', () => {
 const sequence = [
     { char: 'B', img: 'mask_shape_triangle.png' }, 
     { char: 'R', img: 'mask_spinner_dos.png' },
-    { char: 'U', img: 'mascara_pildora_version_dos.png' },
+    { char: 'U', img: 'mask_flor_tres.png' },
     { char: 'M', img: 'mask_sol.png' },
     { char: 'A', img: 'mascara_cuadrado.png' },
-    { char: 'BRUMA', img: 'mask_flor_tres.png', phrase: "Camara lenta y ... ♪"}
+    { char: 'BRUMA', img: 'mascara_pildora_version_dos.png', phrase: "Camara lenta y ... ♪"}
 ];
 
 let step = 0;
@@ -385,6 +385,21 @@ function runWelcomeSequence() {
 
     updateStep();
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const welcomeButtons = document.querySelectorAll('.btn-step, .btn-start-action');
+
+    welcomeButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            
+            button.classList.add('scale-up-animation');
+
+            setTimeout(() => {
+                button.classList.remove('scale-up-animation');
+            }, 300);
+        });
+    });
+});
 
 // Inicializar al cargar
 document.addEventListener('DOMContentLoaded', () => {

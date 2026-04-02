@@ -84,6 +84,9 @@
     --color-main-btn: #5e4f6a;      
     --color-nav-bg: #dbd3e1;       
     --color-sub-bg: #f7f2f9;
+    --color-sub-bg-dos: #eddff3;
+    --color-sub-bg-tres: #e8cef1;
+    --color-sub-bg-cuatro: #e5c5f1;
     --neon-pulse-green-ai: linear-gradient(
         to right,
         rgb(80, 130, 238),
@@ -123,6 +126,12 @@
     --card-dialog: #f0f4f9;
     --neon-color: #8e9eff; 
     --bg-color: #c6d2ff;
+    --bg-wood: #d2acdb;
+    --line-wood: #bea2c5;
+    --shadow-inner: #6a4a7d;
+    --light-inner: #d4a5e6;
+    --border-outer: #1a0f1c;
+    --icon-color: #1a1a1a;
 }
 body.dark-mode {
     --black-color: #E8E7E7;
@@ -161,6 +170,9 @@ body.dark-mode {
     --color-main-btn: #bbb1c7;      
     --color-nav-bg: #5e4f6a;       
     --color-sub-bg:#5e4f6a;
+    --color-sub-bg-dos: #4d4157;
+    --color-sub-bg-tres: #4c4055;
+    --color-sub-bg-cuatro: #332c3a;
     --neon-pulse-green-ai: linear-gradient(
         to right,
         rgb(80, 130, 238),
@@ -198,6 +210,12 @@ body.dark-mode {
     --line-neon-perfil-explocion: #ad7176;
     --shimmer-efect:#4061a2;
     --card-dialog: #282a2c;
+    --bg-wood: #484050;        
+    --line-wood: #3a3441;      
+    --shadow-inner: #1a1a1a;   
+    --light-inner: #666666;    
+    --border-outer: #000000;   
+    --icon-color: #e0e0e0;
 }
 
 body, html {
@@ -249,6 +267,16 @@ body, html {
     0% { transform: scale(1); opacity: 1; }
     50% { transform: scale(0.5); opacity: 0.5; }
     100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes buttonClickScale {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); } /* Crece un 20% */
+    100% { transform: scale(1); }
+}
+
+.scale-up-animation {
+    animation: buttonClickScale 0.3s ease-out;
 }
 
 .shape-anim {
@@ -593,6 +621,35 @@ a {
     z-index: 10;
 }
 
+.btn-image-prev, .btn-image-next, .btn-image-start {
+    background-color: transparent;
+    border: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    image-rendering: pixelated; 
+    transition: transform 0.1s ease;
+}
+
+.btn-image-prev {
+    width: 90px;
+    height: 120px;
+    background-image: url('boton_anterior.png');
+}
+
+.btn-image-next {
+    width: 90px;
+    height: 110px;
+    background-image: url('boton_siguiente.png');
+}
+
+.btn-image-start {
+    width: 190px; /* Ajusta según el tamaño de tu imagen de "Vamos allá" */
+    height: 120px;
+    background-image: url('boton_inicio.png');
+}
+
 .intro-subtitle {
     font-family: "Sarina", cursive;
     font-weight: 400;
@@ -634,41 +691,6 @@ a {
     to { width: 100%; } 
 }
 
-.btn-step, .btn-start-action {
-    border: none;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: transform 0.2s, opacity 0.3s;
-    font-family: 'Fredoka', sans-serif;
-    color: #1a1a1a;
-}
-
-.btn-step {
-    width: 65px;
-    height: 75px;
-    border-radius: 35px; /* Forma de píldora vertical corta */
-}
-
-/* Colores extraídos de la imagen */
-.btn-light { background-color: #f0e6f2; opacity: 0.9; }
-.btn-medium { background-color: #dfcde3; opacity: 0.9; border-radius: 50%; width: 75px; } /* Más circular como la imagen */
-.btn-dark { 
-    background-color: #a98bb2; 
-    color: white;
-    padding: 0 40px;
-    height: 80px;
-    border-radius: 40px;
-    font-size: 20px;
-    font-weight: bold;
-    gap: 10px;
-}
-
-.btn-step:hover, .btn-start-action:hover {
-    transform: scale(1.05);
-    opacity: 1;
-}
 /* Clase para ocultar la pantalla */
 .fade-out {
     opacity: 0 !important;
@@ -836,6 +858,17 @@ video {
     display: flex;
     justify-content: center;
     align-items: center;
+    image-rendering: pixelated;
+    background: repeating-linear-gradient(
+        var(--bg-wood),
+        var(--bg-wood) 18px,
+        var(--line-wood) 19px,
+        var(--line-wood) 20px
+    );
+    box-shadow: 
+        inset -4px -4px 0px 0px var(--shadow-inner),
+        inset 4px 4px 0px 0px var(--light-inner),
+        0px 4px 0px 0px var(--border-outer);
 }
 
 /* Botón Play/Pause (Squircle) */
@@ -850,6 +883,11 @@ video {
     display: flex;
     justify-content: center;
     align-items: center;
+    image-rendering: pixelated;
+    box-shadow: 
+        inset -4px -4px 0px 0px var(--shadow-inner),
+        inset 4px 4px 0px 0px var(--light-inner),
+        0px 4px 0px 0px var(--border-outer);
 }
 
 .btn-play-pause .material-symbols-rounded {
@@ -858,12 +896,25 @@ video {
 
 /* Fila inferior (Píldora blanca) */
 .sub-controls {
-    background-color: var(--color-sub-bg);
     padding: 15px 25px;
     border-radius: 50px;
     display: flex;
     gap: 20px;
     height: fit-content;
+    background: repeating-linear-gradient(
+        var(--color-sub-bg),
+        var(--color-sub-bg-dos) 18px,
+        var(--color-sub-bg-tres) 19px,
+        var(--color-sub-bg-cuatro) 20px
+    );
+    box-shadow: 
+        inset -4px -4px 0px 0px var(--shadow-inner),
+        inset 4px 4px 0px 0px var(--light-inner),
+        0px 4px 0px 0px var(--border-outer);
+}
+
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 1, 'wght' 700, 'GRAD' 0, 'opsz' 48;
 }
 
 .btn-sub {
@@ -1851,24 +1902,24 @@ video {
     }
     /* ----------------------------------------------------------- Welcome page -----------------------------------------------*/
     .intro-char {
-        font-size: 7rem; /* De 15rem a 7rem para que las letras no se corten */
+        font-size: 10rem; /* De 15rem a 7rem para que las letras no se corten */
     }
 
     .intro-char.word-mode {
-        font-size: 3.5rem !important; /* La palabra "BRUMA" ahora cabe horizontalmente */
+        font-size: 6.5rem !important; 
     }
 
     .intro-subtitle {
-        font-size: 1.4rem; /* Ajuste para que la frase quepa en una sola línea */
-        letter-spacing: 0px; /* Reducimos el espaciado para ganar espacio */
-        transform: scaleY(1.4); /* Suavizamos el estiramiento vertical */
+        font-size: 1.4rem; 
+        letter-spacing: 0px; 
+        transform: scaleY(1.4); 
         border-right: .1em solid rgba(255, 255, 255, 0.4);
     }
 
     /* 2. Ajuste de la Capa de Imagen */
     .intro-image-layer {
-        background-size: cover; /* En móvil suele verse mejor cover para llenar la pantalla */
-        opacity: 0.3; /* Un poco más sutil para no distraer en pantallas pequeñas */
+        background-size: contain; 
+        opacity: 0.3; 
     }
 
     /* 3. Reorganización de la Botonera */
@@ -1880,22 +1931,22 @@ video {
         padding: 0 15px;
     }
 
-    /* 4. Botones más ergonómicos para dedos */
-    .btn-step {
-        width: 55px;
-        height: 65px;
+    .btn-image-prev {
+    width: 80px;
+    height: 110px;
+    background-image: url('boton_anterior.png');
     }
 
-    .btn-medium {
-        width: 65px;
-        height: 65px;
+    .btn-image-next {
+        width: 80px;
+        height: 100px;
+        background-image: url('boton_siguiente.png');
     }
 
-    .btn-dark {
-        height: 65px;
-        padding: 0 20px;
-        font-size: 16px;
-        gap: 8px;
+    .btn-image-start {
+        width: 180px; /* Ajusta según el tamaño de tu imagen de "Vamos allá" */
+        height: 110px;
+        background-image: url('boton_inicio.png');
     }
 
     /* Ajuste de la animación de escritura para móvil */
@@ -2012,7 +2063,7 @@ video {
 
     /* -------------------------------------------------------- Detras de camaras ---------------------------------------- */
     .photo-scroll {
-        margin: 20px 10px 5px 10px; 
+        margin: 50px 50px 3px 50px; 
         padding: 8px;
         border-radius: 30px; 
     }
@@ -2054,18 +2105,18 @@ video {
 
     /* --------------------------------------------------- Pantalla ambiente ---------------------------------*/
     .ambient-title {
-        font-size: 15vw;       /* Tamaño fluido basado en el ancho de pantalla */
-        margin-bottom: 20px;   /* Reducimos el margen inferior */
-        gap: 10px;             /* Espacio más pequeño entre el título y la frase */
-        flex-wrap: wrap;       /* Permite que la frase baje si el título es muy largo */
-        justify-content: center; /* Centra el contenido en móviles */
-        transform: scaleY(1.3); /* Reducimos ligeramente el estiramiento para que no se corte */
+        font-size: 15vw;       
+        margin-bottom: 20px;   
+        gap: 10px;             
+        flex-wrap: wrap;       
+        justify-content: center; 
+        transform: scaleY(1.3); 
     }
 
     #ambient-dynamic-text {
-        font-size: 0.9rem;     /* Frase más pequeña para que no compita con el título */
+        font-size: 0.9rem;     
         line-height: 1.2;
-        max-width: 90%;        /* Evita que el texto toque los bordes */
+        max-width: 90%;        
         text-align: center;
     }
 
