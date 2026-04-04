@@ -331,7 +331,17 @@ const sequence = [
     { char: 'BRUMA', img: 'mascara_pildora_version_dos.png', phrase: "Camara lenta y ... ♪"}
 ];
 
+const extraImages = [
+    'welcome_01.png',
+    'welcome_02.png',
+    'welcome_03.png',
+    'welcome_04.png',
+    'welcome_05.png'
+];
+
 let step = 0;
+let currentExtraIndex = 0;
+
 
 function runWelcomeSequence() {
     const charElement = document.getElementById('intro-char');
@@ -386,9 +396,42 @@ function runWelcomeSequence() {
     updateStep();
 }
 
+function updateIntroImage() {
+    const imageLayer = document.getElementById('intro-image-layer');
+    if (imageLayer) {
+        // Aplicamos la imagen de la lista extraImages
+        imageLayer.style.backgroundImage = `url('${extraImages[currentExtraIndex]}')`;
+    }
+}
+
+function nextIntroImage() {
+    currentExtraIndex = (currentExtraIndex + 1) % extraImages.length;
+    updateIntroImage();
+}
+
+function prevIntroImage() {
+    currentExtraIndex = (currentExtraIndex - 1 + extraImages.length) % extraImages.length;
+    updateIntroImage();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const welcomeButtons = document.querySelectorAll('.btn-step, .btn-start-action');
+    const btnNextIntro = document.getElementById('btn-next-intro');
+    const btnPrevIntro = document.getElementById('btn-prev-intro');
 
+    if (btnNextIntro) {
+        btnNextIntro.addEventListener('click', (e) => {
+            e.stopPropagation(); // Evita interferencias con otros clics
+            nextIntroImage();
+        });
+    }
+
+    if (btnPrevIntro) {
+        btnPrevIntro.addEventListener('click', (e) => {
+            e.stopPropagation();
+            prevIntroImage();
+        });
+    }
     welcomeButtons.forEach(button => {
         button.addEventListener('click', () => {
             
