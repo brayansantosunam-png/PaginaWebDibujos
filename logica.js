@@ -461,18 +461,18 @@ document.addEventListener('DOMContentLoaded', () => {
 /* ----------------------------------------------------- Playlist ----------------------------------------------------------------------------------------------- */
 
 const songs = [
-    { title: "Soñé", artist: "Zoé", phrase: "Pues no tengo nada que perder...", cover: "https://cdn-images.dzcdn.net/images/cover/8498486810fb5956153f175822b7b7d8/0x1900-000000-80-0-0.jpg", src: "sone.m4a" },
-    { title: "Droopy likes your Face", artist: "Minecraft Volume Alpha", phrase: "Entre cubos y nostalgia...", cover: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiYA9JFGnmzLKIhmwtyy3JimNGHTFg8cXoknIPVR_DM2J-LRxvfX4MhklD3xLGkb7ZOyDyyhsuWXLA6zOSLr2uQibClGQoETpfKGBfiYn5frqtOtFHjc4sMRcS2Uhr62OGSplpKt7qbjp3hyphenhyphenf84nSFgQ4YToMRs9a0eFGaZQ53hB0pXQ5av5CK2bWtPC9M/s640/minecraft.jpg", src: "minecraft_uno.m4a" },
-    { title: "Labios rotos", artist: "Zoé", phrase: "En el desierto de mi alma...", cover: "https://cdn-images.dzcdn.net/images/cover/8498486810fb5956153f175822b7b7d8/0x1900-000000-80-0-0.jpg", src: "labiosrotos.m4a" },
-    { title: "Tarde", artist: "Siddhartha", phrase: "Tarde se me hacía para volver a verte...", cover: "https://cdn-images.dzcdn.net/images/cover/a508833ee74e2cd3197f0641e3c73545/1900x1900-000000-80-0-0.jpg", src: "tarde.m4a" },
-    { title: "Me hace falta", artist: "Siddhartha", phrase: "Con la luz intermitente, Vibra tu frecuencia...", cover: "https://images.genius.com/4d612579eb7472076b70e67617e12fb6.1000x1000x1.png", src: "me_hace_falta.mp3" },
-    { title: "Tears", artist: "Minecraft", phrase: "Fantastica geometría multicolor...", cover: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiYA9JFGnmzLKIhmwtyy3JimNGHTFg8cXoknIPVR_DM2J-LRxvfX4MhklD3xLGkb7ZOyDyyhsuWXLA6zOSLr2uQibClGQoETpfKGBfiYn5frqtOtFHjc4sMRcS2Uhr62OGSplpKt7qbjp3hyphenhyphenf84nSFgQ4YToMRs9a0eFGaZQ53hB0pXQ5av5CK2bWtPC9M/s640/minecraft.jpg", src: "minecraft_dos.m4a" },
-    { title: "Vía lactea", artist: "Zoé", phrase: "Del prisma de tus ojos, en mi casco de astronauta...", cover: "https://cdn-images.dzcdn.net/images/cover/8498486810fb5956153f175822b7b7d8/0x1900-000000-80-0-0.jpg", src: "via_lactea.mp3" },
-    { title: "Bruma", artist: "León Larregui", phrase: "Dar sin esperar nada a cambio...", cover: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAKhj6DATZm2qKUx11gFHedys-WEO3UfFgUQ&s", src: "bruma.m4a" },
-    { title: "Velur", artist: "Zoé", phrase: "Me ajusto, pero no me aplaco, echa formol al corazón...", cover: "https://cdn-images.dzcdn.net/images/cover/46d64f553900fcee92fdc8e364246828/0x1900-000000-80-0-0.jpg", src: "velur.m4a" },
-    { title: "Doma", artist: "Jósean Log", phrase: "De este desparpajo, yo de esta no me rajo...", cover: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg5U8VJdtWDJb3S8XRk7dXFqkf8WXFTpOvw5yn3aral845kVhajX3rrQoHAHMefY7V-6AEfWwzwLUXK6SMSvFkYslAK95Vr-XUq4YYJF1OvHqUR3CC50SZ_MaeIjd87GmDAwwjPIuAmDjDqVwSnW_gFDf7w69U5ymll5KNbq0IYfpIxhIdn_enAnp1KLSY/w492-h492/doma.jpg", src: "doma.mp3" },
-    { title: "Ser parte", artist: "Siddhartha", phrase: "Reinventarme y ser parte de tú ser, al final me guiare por tí.", cover: "https://cdn-images.dzcdn.net/images/cover/a508833ee74e2cd3197f0641e3c73545/1900x1900-000000-80-0-0.jpg", src: "ser_parte.mp3" }
-    
+    { title: "Soñé", artist: "Zoé", phrase: "Pues no tengo nada que perder...", cover: "https://cdn-images.dzcdn.net/images/cover/8498486810fb5956153f175822b7b7d8/0x1900-000000-80-0-0.jpg", src: "sone.m4a", link: "https://open.spotify.com/intl-es/track/2VhJ4nrPorAbySEgO4V0BS" },
+    { title: "Droopy likes your Face", artist: "Minecraft Volume Alpha", phrase: "Entre cubos y nostalgia...", cover: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiYA9JFGnmzLKIhmwtyy3JimNGHTFg8cXoknIPVR_DM2J-LRxvfX4MhklD3xLGkb7ZOyDyyhsuWXLA6zOSLr2uQibClGQoETpfKGBfiYn5frqtOtFHjc4sMRcS2Uhr62OGSplpKt7qbjp3hyphenhyphenf84nSFgQ4YToMRs9a0eFGaZQ53hB0pXQ5av5CK2bWtPC9M/s640/minecraft.jpg", src: "minecraft_uno.m4a", link: "https://open.spotify.com/intl-es/track/0kZEfdlIq3sfQklsGcUZDm" },
+    { title: "Labios rotos", artist: "Zoé", phrase: "En el desierto de mi alma...", cover: "https://cdn-images.dzcdn.net/images/cover/8498486810fb5956153f175822b7b7d8/0x1900-000000-80-0-0.jpg", src: "labiosrotos.m4a", link: "https://share.google/aimode/FJutnTOeOMxUojUVq" },
+    { title: "Tarde", artist: "Siddhartha", phrase: "Tarde se me hacía para volver a verte...", cover: "https://cdn-images.dzcdn.net/images/cover/a508833ee74e2cd3197f0641e3c73545/1900x1900-000000-80-0-0.jpg", src: "tarde.m4a", link: "https://share.google/aimode/1N4OOnvlG6KLJVtCE" },
+    { title: "Me hace falta", artist: "Siddhartha", phrase: "Con la luz intermitente, Vibra tu frecuencia...", cover: "https://images.genius.com/4d612579eb7472076b70e67617e12fb6.1000x1000x1.png", src: "me_hace_falta.mp3", link: "https://open.spotify.com/intl-es/track/7EAr8k0WiV9ybItof6utFj" },
+    { title: "Tears", artist: "Minecraft", phrase: "Fantastica geometría multicolor...", cover: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiYA9JFGnmzLKIhmwtyy3JimNGHTFg8cXoknIPVR_DM2J-LRxvfX4MhklD3xLGkb7ZOyDyyhsuWXLA6zOSLr2uQibClGQoETpfKGBfiYn5frqtOtFHjc4sMRcS2Uhr62OGSplpKt7qbjp3hyphenhyphenf84nSFgQ4YToMRs9a0eFGaZQ53hB0pXQ5av5CK2bWtPC9M/s640/minecraft.jpg", src: "minecraft_dos.m4a", link: "https://open.spotify.com/intl-es/track/0kZEfdlIq3sfQklsGcUZDm" },
+    { title: "Vía lactea", artist: "Zoé", phrase: "Del prisma de tus ojos, en mi casco de astronauta...", cover: "https://cdn-images.dzcdn.net/images/cover/8498486810fb5956153f175822b7b7d8/0x1900-000000-80-0-0.jpg", src: "via_lactea.mp3", link: "https://open.spotify.com/intl-es/track/1nquycJ4zLhrT23rwtH5Wj" },
+    { title: "Bruma", artist: "León Larregui", phrase: "Dar sin esperar nada a cambio...", cover: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAKhj6DATZm2qKUx11gFHedys-WEO3UfFgUQ&s", src: "bruma.m4a", link: "https://share.google/aimode/uegIMAnAy3DAhwNIg"},
+    { title: "Velur", artist: "Zoé", phrase: "Me ajusto, pero no me aplaco, echa formol al corazón...", cover: "https://cdn-images.dzcdn.net/images/cover/46d64f553900fcee92fdc8e364246828/0x1900-000000-80-0-0.jpg", src: "velur.m4a", link: "https://open.spotify.com/intl-es/track/6Bpw7j4WL3IwdM1xLPcH7Q" },
+    { title: "Doma", artist: "Jósean Log", phrase: "De este desparpajo, yo de esta no me rajo...", cover: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg5U8VJdtWDJb3S8XRk7dXFqkf8WXFTpOvw5yn3aral845kVhajX3rrQoHAHMefY7V-6AEfWwzwLUXK6SMSvFkYslAK95Vr-XUq4YYJF1OvHqUR3CC50SZ_MaeIjd87GmDAwwjPIuAmDjDqVwSnW_gFDf7w69U5ymll5KNbq0IYfpIxhIdn_enAnp1KLSY/w492-h492/doma.jpg", src: "doma.mp3", link: "https://open.spotify.com/intl-es/track/58cLm4PaHNt8DDr9ayZnNz" },
+    { title: "Unicos", artist: "Siddhartha", phrase: "Veinte millas de calor... y otra vez...", cover: "https://cdn-images.dzcdn.net/images/cover/a508833ee74e2cd3197f0641e3c73545/1900x1900-000000-80-0-0.jpg", src: "Unicos.mp3",  link: "https://share.google/aimode/zGdg3R3v1hB7VW9NG"},
+    { title: "Ser parte", artist: "Siddhartha", phrase: "Reinventarme y ser parte de tú ser, al final me guiare por tí.", cover: "https://cdn-images.dzcdn.net/images/cover/a508833ee74e2cd3197f0641e3c73545/1900x1900-000000-80-0-0.jpg", src: "ser_parte.mp3",  link: "https://share.google/aimode/hMmWd26Wkbf9XoTUs"}
 ];
 
 const maskFiles = [
@@ -524,6 +524,7 @@ let currentSongIndex = 0;
 const audio = document.getElementById('mainAudio');
 const playBtn = document.getElementById('playBtn');
 const playlistContainer = document.getElementById('playlist');
+const songBtn = document.getElementById('SongBtn');
 
 function loadPlaylist() {
     playlistContainer.innerHTML = ''; // Limpia la lista actual
@@ -687,8 +688,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const shuffleBtn = document.getElementById('shuffleBtn');
     const repeatBtn = document.getElementById('repeatBtn');
     const favBtn = document.getElementById('favBtn');
+    const songBtn = document.getElementById('SongBtn');
+    const allControlButtons = document.querySelectorAll('.main-controls button, .sub-controls button');
 
     // 2. Asignar las funciones a los eventos de clic
+    if (songBtn) {
+        songBtn.addEventListener('click', () => {
+            const currentLink = songs[currentSongIndex].link;
+            if (currentLink) {
+                window.open(currentLink, '_blank');
+            }
+            triggerPushEffect(songBtn); // También aplica empuje
+        });
+    }
     if (playBtn) {
         playBtn.addEventListener('click', togglePlay);
     }
@@ -712,6 +724,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     favBtn.addEventListener('click', toggleFavorite);
 
+    allControlButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            triggerPushEffect(btn);
+            
+            // Si quieres que también mantenga el efecto de escala que ya tenías:
+            if (typeof addMagneticEffect === "function") {
+                addMagneticEffect(btn);
+            }
+        });
+    });
+
     // 3. Cargar la playlist inicial
     loadPlaylist();
 
@@ -726,6 +749,7 @@ function addMagneticEffect(element) {
         element.classList.remove('magnetic-effect');
     }, 400); // Duración de la animación CSS
 }
+
 
 
 /* ------------------------------------------------------ Seek bar --------------------------------------------- */
@@ -775,6 +799,21 @@ function formatTime(seconds) {
     const min = Math.floor(seconds / 60);
     const sec = Math.floor(seconds % 60);
     return `${min}:${sec < 10 ? '0' + sec : sec}`;
+}
+
+function triggerPushEffect(element) {
+    const prevSibling = element.previousElementSibling;
+    const nextSibling = element.nextElementSibling;
+
+    if (prevSibling) {
+        prevSibling.classList.add('push-left');
+        setTimeout(() => prevSibling.classList.remove('push-left'), 500);
+    }
+
+    if (nextSibling) {
+        nextSibling.classList.add('push-right');
+        setTimeout(() => nextSibling.classList.remove('push-right'), 500);
+    }
 }
 
 /* --------------------------------------------------- Detras de camaras ------------------------------------------------ */
