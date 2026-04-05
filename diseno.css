@@ -283,6 +283,27 @@ body, html {
     animation: shapeScaleDown 0.6s ease-in-out;
 }
 
+.push-left {
+    animation: pushLeft 0.5s ease;
+}
+
+/* Empuje hacia la derecha */
+.push-right {
+    animation: pushRight 0.5s ease;
+}
+
+@keyframes pushLeft {
+    0% { transform: translateX(0); }
+    30% { transform: translateX(-15px); } /* Empujón */
+    100% { transform: translateX(0); }    /* Regreso elástico */
+}
+
+@keyframes pushRight {
+    0% { transform: translateX(0); }
+    30% { transform: translateX(15px); }  /* Empujón */
+    100% { transform: translateX(0); }    /* Regreso elástico */
+}
+
 /* -------------------------------------------------------------- Efecto gradiente ------------------------------------------------*/
 body::before,
 body::after {
