@@ -1000,11 +1000,18 @@ video {
 .playlist {
     display: flex;
     flex-direction: column;
-    gap: 8px; /* El pequeño margen entre pistas que mencionaste */
-    max-height: 600px;
+    gap: 0; /* El espacio lo controlaremos con márgenes para el efecto 3D */
+    height: 450px; /* Altura fija para la ventana del carrusel */
     overflow-y: auto;
-    padding: 10px;
+    padding: 180px 10px; /* Mucho espacio arriba y abajo para que la primera/última canción puedan centrarse */
     margin-left: 50px;
+    scroll-behavior: smooth; /* Desplazamiento fluido nativo */
+    -ms-overflow-style: none;  /* IE y Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.playlist::-webkit-scrollbar {
+    display: none; /* Chrome, Safari y Opera */
 }
 
 /* Estilo base para todas las pistas (el centro) */
@@ -1012,15 +1019,17 @@ video {
     display: flex;
     align-items: center;
     background: var(--background-indicator);
-    box-shadow: var(--box-indicator);
     backdrop-filter: blur(1.4px);
     -webkit-backdrop-filter: blur(1.4px);
     border: var(--border-indicator); 
     padding: 15px 25px;
     cursor: pointer;
-    border-radius: 15px; /* Radio por defecto para todas */
-    transition: background-color 0.3s ease, transform 0.2s;
-    border: none;
+    border-radius: 25px !important; 
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    transform: scale(0.85); 
+    opacity: 0.4;
+    margin: -5px 0; 
+    z-index: 1;
 }
 
 /* Regla específica para la PRIMERA pista */
@@ -1041,23 +1050,27 @@ video {
 
 /* Estado activo (cuando suena la canción) */
 .song-item.active {
-    background:var(--background-navigation);
-    backdrop-filter: blur(20px) saturate(120%);
-    -webkit-backdrop-filter: blur(20px) saturate(120%);
-    border: var(--border-navigation); 
-    box-shadow: var(--box-navigation);
-    transition: background-color 0.3s ease;
-    border-radius: 50px;
+    background:rgba( 172, 206, 242, 0.15 );
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--border-glassefect); 
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    transform: scale(1.05);
+    opacity: 1;
+    margin: 20px 10px; 
+    z-index: 5;
+    border-radius: 90px !important;
 }
 
 /* Ajuste de la imagen de la canción */
-.cover-song{
+.cover-song {
     position: relative;
-    margin-right: 25px;
-    width: 75px;
-    height: 75px;
+    margin-right: 20px;
+    width: 65px;
+    height: 65px;
     overflow: hidden;
     z-index: 2;
+    transition: all 0.5s ease;
 }
 
 .cover-song img{
@@ -1072,6 +1085,11 @@ video {
     mask-size: cover;
     mask-repeat: no-repeat;
     mask-position: center;
+}
+
+.song-item.active .cover-song {
+    width: 80px; /* La imagen del activo también crece un poco */
+    height: 80px;
 }
 
 /* Ajuste del texto para que se vea: Título - Artista */
@@ -1136,7 +1154,7 @@ video {
 }
 
 .download-fab:hover {
-    border-color: #709fde; /* Azul que usamos en el seekbar */
+    border-color: #DDAB72; /* Azul que usamos en el seekbar */
 }
 
 .fab-btn:active {
@@ -1161,7 +1179,7 @@ video {
 .track-straight {
     position: absolute;
     height: 5px; 
-    background-color: rgba(43, 43, 43, 0.7);
+    background-color: #45311d;
     border-radius: 2px;
     z-index: 1;
 }
@@ -1173,10 +1191,11 @@ video {
     height: 16px; 
     width: 0%; 
     z-index: 2;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 12'%3E%3Cpath d='M0 6 Q 5 0, 10 6 T 20 6' fill='none' stroke='%23709fde' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 12'%3E%3Cpath d='M0 6 Q 10 1, 20 6 T 40 6' fill='none' stroke='%23DDAB72' stroke-width='3.5' stroke-linecap='round'/%3E%3C/svg%3E");
     background-repeat: repeat-x;
-    background-size: 20px 12px;
+    background-size: 40px 12px; 
     pointer-events: none; 
+    transition: width 0.1s linear; 
 }
 
 /* Input Range invisible pero funcional */
@@ -1195,10 +1214,19 @@ video {
     -webkit-appearance: none;
     height: 30px;
     width: 6px;
-    background: #709fde;
+    background: #DDAB72;
     border-radius: 10px;
     cursor: pointer;
     margin: 10px;
+}
+
+.track-wave.wave-playing {
+    animation: moveWave 1s linear infinite;
+}
+
+@keyframes moveWave {
+    from { background-position-x: 0; }
+    to { background-position-x: -40px; } /* Mismo valor que el ancho del background-size */
 }
 
 /* Información de tiempo */

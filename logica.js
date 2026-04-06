@@ -550,6 +550,19 @@ function loadPlaylist() {
     });
 }
 
+function scrollToActiveSong() {
+    const activeItem = document.querySelector('.song-item.active');
+    if (activeItem) {
+        // Un pequeño retraso asegura que el DOM ya aplicó las clases CSS
+        setTimeout(() => {
+            activeItem.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'center' // ¡Esto es la magia que lo centra en el carrusel!
+            });
+        }, 50);
+    }
+}
+
 /* Cambia de forma aleatoria la mascara de la canción que este sonando */
 function changeDynamicMask() {
     // Buscamos la imagen dentro del elemento 'active' de la playlist
@@ -588,6 +601,7 @@ function selectSong(index) {
     
     loadPlaylist(); 
     playSong();
+    scrollToActiveSong();
 }
 
 /* Alterna entre reproducción y pausa */
@@ -600,7 +614,7 @@ function togglePlay() {
 }
 
 function playSong() {
-    // Si es la primera vez que se pulsa play, carga la canción actual
+    
     if (!audio.src || audio.src === "") {
         audio.src = songs[currentSongIndex].src;
     }
@@ -615,6 +629,9 @@ function playSong() {
     if (!maskInterval) {
         maskInterval = setInterval(changeDynamicMask, 2000);
     }
+
+    const waveElement = document.getElementById('trackWave');
+    if (waveElement) waveElement.classList.add('wave-playing');
 }
 
 function pauseSong() {
@@ -628,6 +645,9 @@ function pauseSong() {
 
     clearInterval(maskInterval);
     maskInterval = null;
+
+    const waveElement = document.getElementById('trackWave');
+    if (waveElement) waveElement.classList.remove('wave-playing');
 }
 
 /**
