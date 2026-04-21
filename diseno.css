@@ -1247,16 +1247,22 @@ video {
 
 .photo-scroll {
     display: flex;
-    overflow-x: auto;
-    padding: 10px;
-    margin: 50px 50px 3px 50px;
-    background:var(--background-navigation);
-    backdrop-filter: blur(20px) saturate(120%);
-    -webkit-backdrop-filter: blur(20px) saturate(120%);
-    border: var(--border-navigation); 
-    box-shadow: var(--box-navigation);
-    transition: background-color 0.3s ease;
-    border-radius: 50px;
+    align-items: center;
+    justify-content: flex-start; 
+    padding: 60px 0;
+    margin: 20px 50px;
+    height: 450px;
+    overflow: visible; 
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform;
+}
+
+#original-carousel-slot {
+    width: 100%;
+    overflow: hidden; 
+    position: relative;
+    display: flex;
+    justify-content: center;
 }
 
 .Descripcion-photo{
@@ -1319,21 +1325,40 @@ video {
     background-color: #494949; 
     color: #fcfcfc; 
 }
+
 .user-photo {
-    cursor: pointer;
-    width: 100px;
+    flex: 0 0 200px; 
     height: 320px;
-    margin: 10px;
-    border-radius: 50px;
-    position: relative;
+    margin: 0 10px; 
+    border-radius: 30px; 
     object-fit: cover;
-    transition: width 0.5s;
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    cursor: pointer;
+    filter: brightness(0.6); 
+    transform: scale(0.85); 
+    opacity: 1 !important; 
+    z-index: 1; 
+    -webkit-mask-size: cover;
+    mask-size: cover;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: none;
+    mask-image: none;
 }
-.user-photo:hover{
-    width: 300px;
-    animation: neonPulsePink 2s infinite alternate; 
-    border-radius: 20px;
+
+
+.user-photo.active {
+    flex: 0 0 250px; 
+    transform: scale(1.25) translateZ(0);   
+    filter: brightness(1) drop-shadow(0 15px 20px rgba(0,0,0,0.6)); 
+    opacity: 1 !important;
+    z-index: 10; 
+    pointer-events: auto;
 }
+
+
 
 /* -------------------------------------------------------------- Modo ambiente ------------------------------------------------------*/
 
@@ -1390,6 +1415,8 @@ video {
 
 #ambient-carousel-wrapper {
     width: 100%;
+    overflow: hidden; 
+    position: relative;
     display: flex;
     justify-content: center;
 }
@@ -1400,10 +1427,10 @@ video {
     backdrop-filter: none;
     border: none;
     box-shadow: none;
-    padding: 30px 0; 
-    overflow-x: hidden; 
-    justify-content: center; 
-    width: 90%;
+    padding: 60px 0; 
+    overflow: visible; 
+    justify-content: flex-start; 
+    width: max-content; 
 }
 
 .user-photo.auto-pulse {
@@ -2112,22 +2139,22 @@ video {
 
     /* -------------------------------------------------------- Detras de camaras ---------------------------------------- */
     .photo-scroll {
-        margin: 50px 50px 3px 50px; 
-        padding: 8px;
-        border-radius: 30px; 
+        height: 350px; 
+        margin: 20px 10px; 
+        padding: 40px 0; 
     }
 
     .user-photo {
-        width: 80px;   
-        height: 220px; 
-        margin: 5px;
-        border-radius: 35px;
+        flex: 0 0 130px; 
+        width: 130px;
+        height: 220px;   
+        margin: 0 10px;  
+        border-radius: 20px; 
     }
 
-    
-    .user-photo:hover {
-        width: 160px; 
-        border-radius: 20px;
+    .user-photo.active {
+        flex: 0 0 200px;
+        width: 200px; 
     }
 
     .Descripcion-photo {
@@ -2167,6 +2194,10 @@ video {
         line-height: 1.2;
         max-width: 90%;        
         text-align: center;
+    }
+
+    .ambient-overlay .photo-scroll {
+        padding: 40px 0; 
     }
 
     /* ------------------------------------------------ Capitulo 01 -------------------------------------------*/

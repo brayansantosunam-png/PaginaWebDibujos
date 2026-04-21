@@ -848,6 +848,8 @@ const misFotos = [
 ];
 
 let descTypewriterInterval; 
+let focusedPhotoIndex = 0;
+let autoPlayInterval;
 
 function typeWriterDescription(text) {
     const target = document.querySelector('.Descripcion-photo');
@@ -867,30 +869,91 @@ function typeWriterDescription(text) {
     }, 40); 
 }
 
+function nextPhoto() {
+    const photos = document.querySelectorAll('#photo-container .user-photo');
+    if (!photos.length) return;
+    
+    focusedPhotoIndex = (focusedPhotoIndex + 1) % photos.length;
+    updatePhotoCarousel();
+}
+
+function startAutoPlay() {
+    clearInterval(autoPlayInterval); 
+    autoPlayInterval = setInterval(nextPhoto, 2500); 
+}
+
 function displayUserPhotos(photoUrls) {
     const photoContainer = document.getElementById('photo-container');
     photoContainer.innerHTML = ''; 
 
-    photoUrls.forEach(foto => {
+    photoUrls.forEach((foto, index) => {
         const img = document.createElement('img');
         img.src = foto.url; 
         img.className = 'user-photo';
+        img.setAttribute('data-index', index);
         
+        img.addEventListener('click', () => {
+            focusedPhotoIndex = index;
+            updatePhotoCarousel();
+            
+            startAutoPlay(); 
+            
+            showImageInFullScreen(foto.url); 
+        });
+
         img.addEventListener('mouseenter', () => {
             typeWriterDescription(foto.phrase);
+            clearInterval(autoPlayInterval); 
         });
 
         img.addEventListener('mouseleave', () => {
             typeWriterDescription("Detrás de cámaras");
-        });
-
-        img.addEventListener('click', () => {
-            showImageInFullScreen(foto.url);
+            startAutoPlay(); 
         });
         
         photoContainer.appendChild(img);
     });
+
+    updatePhotoCarousel();
+    startAutoPlay();
 }
+
+function updatePhotoCarousel() {
+    const container = document.getElementById('photo-container');
+    const photos = document.querySelectorAll('.user-photo');
+    
+
+    if (!photos.length) return;
+
+    photos.forEach((img, index) => {
+        
+        img.classList.remove('active');
+        img.style.webkitMaskImage = "none";
+        img.style.maskImage = "none";
+
+        if (index === focusedPhotoIndex) {
+            
+            img.classList.add('active');
+
+            const randomIndex = Math.floor(Math.random() * maskFiles.length);
+            const selectedMask = maskFiles[randomIndex];
+
+            img.style.webkitMaskImage = `url('${selectedMask}')`;
+            img.style.maskImage = `url('${selectedMask}')`;
+        }
+    });
+
+    
+    const isMobile = window.innerWidth <= 1150;
+    const containerWidth = container.parentElement.offsetWidth; 
+    const photoWidth = isMobile ? 100 : 170; 
+    
+    const centerOffset = (containerWidth / 2) - (photoWidth / 2) - (focusedPhotoIndex * photoWidth);
+    
+    container.style.transform = `translateX(${centerOffset}px)`;
+}
+
+window.addEventListener('resize', updatePhotoCarousel);
 
 function showImageInFullScreen(url) {
     const fullScreenDiv = document.getElementById('full-screen');
@@ -952,9 +1015,7 @@ function activateAmbientMode() {
         ambientWrapper.appendChild(photoScrollElement);
     }
     ambientOverlay.classList.add('active');
-    startAutomaticPulsing();
-
-    // Limpiamos el texto de la web principal y lo mandamos al ambiente
+    
     document.getElementById('typewriter-text').innerHTML = "";
     const currentPhrase = songs[currentSongIndex].phrase || "";
     typeWriter(currentPhrase, 'ambient-dynamic-text');
@@ -965,8 +1026,7 @@ function activateAmbientMode() {
 function deactivateAmbientMode() {
     ambientModeActive = false;
     ambientOverlay.classList.remove('active');
-    stopAutomaticPulsing();
-
+    
     setTimeout(() => {
         if (photoScrollElement && originalSlot) {
             originalSlot.appendChild(photoScrollElement);
