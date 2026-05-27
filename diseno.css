@@ -1803,6 +1803,69 @@ video {
     transform: translateY(0);
 }
 
+.astronaut-showcase {
+    width: 90%;
+    margin: 0 auto 40px auto; /* Centrado y con margen inferior */
+    background:var(--background-navigation);
+    backdrop-filter: blur(20px) saturate(120%);
+    -webkit-backdrop-filter: blur(20px) saturate(120%);
+    border: var(--border-navigation); 
+    box-shadow: var(--box-navigation);
+    transition: background-color 0.3s ease;
+    border-radius: 40px;
+    padding: 25px;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr; /* Proporción: Imagen izquierda más grande que la derecha */
+    gap: 30px;
+    align-items: center;
+}
+
+.astronaut-img-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 30px; 
+    display: block;
+    object-fit: cover;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.astronaut-text-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    text-align: center;
+    gap: 35px; /* Espacio entre el párrafo y el ojo */
+}
+
+.astronaut-text-container p {
+    font-family: 'Karla', sans-serif;
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: var(--black-color);
+    margin: 0;
+}
+
+.astronaut-text-container p u {
+    text-decoration-color: var(--text-color-perfil); /* Toma el color de tu paleta */
+    text-decoration-thickness: 2px;
+}
+
+.eye-pill-img {
+    width: 80%; 
+    max-width: 250px;
+    border-radius: 60px; /* Da el efecto de píldora */
+    display: block;
+    object-fit: cover;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.eye-pill-img:hover {
+    transform: scale(1.05);
+}
+
 /* -------------------------------------------------------------- Footer -------------------------------------------------------------*/
 
 .footer {
@@ -2285,5 +2348,21 @@ video {
         grid-row: auto !important;
         height: 250px;
         border-radius: 30px !important;
+    }
+
+    .astronaut-showcase {
+        grid-template-columns: 1fr; /* Colapsa a una sola columna */
+        padding: 20px;
+        gap: 20px;
+        border-radius: 30px;
+    }
+    
+    .astronaut-text-container {
+        padding: 10px;
+        gap: 25px;
+    }
+    
+    .astronaut-text-container p {
+        font-size: 1.1rem;
     }
 }   
