@@ -19,6 +19,7 @@
         <!--Welcome page-->
         <div id="welcome-overlay" class="welcome-overlay">
             <div id="gradient-bg" class="gradient-bg"></div>
+            <div class="glass-layer"></div>
             
             <div id="intro-image-layer" class="intro-image-layer"></div>
 
@@ -62,14 +63,20 @@
                             <li class="nav__item">
                                 <a href="#Capitulo01" class="nav__link">
                                     <i class="ri-contrast-2-fill"></i>
-                                <span>Capitulo 01</span>
+                                <span>Cap 01</span>
                                 </a>
                             </li>
 
                             <li class="nav__item">
                                 <a href="#Capitulo02" class="nav__link">
                                     <i class="ri-music-2-fill"></i>
-                                <span>Capitulo 02</span>
+                                <span>Cap 02</span>
+                                </a>
+                            </li>
+
+                            <li class="nav__item">
+                                <a href="#Capitulo03" class="nav__link">
+                                    <i class="ri-movie-2-fill"></i> <span>...</span>
                                 </a>
                             </li>
 
@@ -205,6 +212,45 @@
             <img id="full-screen-img" src="" alt="Full Screen Image">
             <button id="close-full-screen">Cerrar</button>
         </div>
+
+        <!--Capitulo 03-->
+        <section id="Capitulo03" class="Capitulo03">
+            <div class="video-blur-container">
+                <video autoplay muted loop playsinline class="bg-video-cap3">
+                    <source src="video_cap_tres.mp4" type="video/mp4">
+                </video>
+                <div class="video-glass-overlay"></div>
+            </div>
+
+            <div class="cap3-grid">
+                
+                <div class="text-block top-left">
+                    <p><span class="k-font small">SIEMPRE</span> VOY <span class="b-font big">BUSCÁNDOTE</span></p>
+                    <p class="b-font big">ENTENDERTE DE FORMA<span class="b-font huge">MAS REAL</span></p>
+                </div>
+
+                <div class="text-block top-right">
+                    <p class="b-font big">QUE EL MIEDO NO ME <span class="huge">GANE,</span></p>
+                    <p class="b-font big">PORQUE <span class="k-font small">NO SIRVE</span> NI MADRES</p>
+                </div>
+
+                <div class="center-pill">
+                    <span class="loading-text">Loading ...</span>
+                </div>
+
+                <div class="text-block bottom-left">
+                    <p class="b-font big">AMAR <span class="k-font small">ES</span> <span class="huge">LIBERAR</span></p>
+                </div>
+
+                <div class="text-block bottom-right">
+                    <p class="b-font big">SOLO <span>POR QUE</span> TE QUIERO,</p>
+                    <p class="b-font big">SOLO PORQUE ES ASÍ ...</p>
+                </div>
+
+            </div>
+        </section>
+
+        
         <!--Footer-->
         <footer class="footer">
             

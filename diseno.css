@@ -304,6 +304,29 @@ body, html {
     100% { transform: translateX(0); }    /* Regreso elástico */
 }
 
+@keyframes fluidColors {
+    0% {
+        transform: rotate(0deg) scale(1);
+        filter: blur(80px) hue-rotate(0deg);
+    }
+    25% { /* Fase 1: A los 3 segundos */
+        transform: rotate(90deg) scale(1.1);
+        filter: blur(80px) hue-rotate(45deg);
+    }
+    50% { /* Fase 2: A los 6 segundos */
+        transform: rotate(180deg) scale(0.9);
+        filter: blur(80px) hue-rotate(90deg);
+    }
+    75% { /* Fase 3: A los 9 segundos */
+        transform: rotate(270deg) scale(1.1);
+        filter: blur(80px) hue-rotate(135deg);
+    }
+    100% { /* Fase 4: A los 12 segundos */
+        transform: rotate(360deg) scale(1);
+        filter: blur(80px) hue-rotate(180deg);
+    }
+}
+
 /* -------------------------------------------------------------- Efecto gradiente ------------------------------------------------*/
 body::before,
 body::after {
@@ -562,20 +585,39 @@ a {
     justify-content: center;
     align-items: center;      
     z-index: 99999;           
-    background-color: #fff;   
+    background-color: transparent; 
     transition: opacity 0.8s ease, visibility 0.8s; 
+    overflow: hidden; /* Evita que las manchas de color generen scroll */
 }
 
 .gradient-bg {
+    position: absolute;
+    top: -30%;
+    left: -30%;
+    width: 160%;
+    height: 160%;
+    z-index: 1;
+    background: 
+        radial-gradient(circle at 25% 25%, #e7bba6 0%, transparent 50%),
+        radial-gradient(circle at 75% 25%, #8bc0ce 0%, transparent 50%),
+        radial-gradient(circle at 50% 75%, #9e7f81 0%, transparent 50%),
+        radial-gradient(circle at 20% 80%, #bda495 0%, transparent 50%);
+    filter: blur(80px);
+    animation: fluidColors 12s linear infinite alternate;
+}
+
+.glass-layer {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
-    background: linear-gradient(45deg, #f3e5f5, #e1f5fe, #e8f5e9, #58563d);
-    background-size: 400% 400%;
-    animation: gradientFlow 10s ease infinite;
+    z-index: 2; 
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px) saturate(120%);
+    -webkit-backdrop-filter: blur(20px) saturate(120%);
+    border: var(--border-navigation); 
+    box-shadow: var(--box-navigation); 
 }
 
 @keyframes gradientFlow {
@@ -1866,6 +1908,121 @@ video {
     transform: scale(1.05);
 }
 
+/* -------------------------------------------------------------- Capitulo 03 --------------------------------------------------------*/
+
+.Capitulo03 {
+    position: relative;
+    min-height: 85vh;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin: 50px auto;
+    border-radius: 50px; 
+}
+
+/* --- Fondo de Video Blur --- */
+.video-blur-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.bg-video-cap3 {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(20px);
+    transform: scale(1.1); /* El scale evita que se vean bordes blancos por el blur */
+}
+
+.video-glass-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(240, 242, 247, 0.85);
+    
+}
+
+/* Adaptación al Modo Oscuro */
+body.dark-mode .video-glass-overlay {
+    background: rgba(23, 22, 22, 0.85);
+}
+
+/* --- Grid y Tipografía --- */
+.cap3-grid {
+    position: relative;
+    z-index: 2;
+    width: 90%;
+    max-width: 1200px;
+    height: 80vh;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    grid-template-rows: 1fr auto 1fr;
+    gap: 20px;
+    align-items: center;
+    color: var(--black-color);
+}
+
+.text-block {
+    display: flex;
+    flex-direction: column;
+}
+
+.text-block p {
+    margin: 0;
+    line-height: 1.1;
+}
+
+/* Posiciones Grid */
+.top-left { grid-column: 1 / 2; grid-row: 1 / 2; text-align: left; }
+.top-right { grid-column: 3 / 4; grid-row: 1 / 2; text-align: right; }
+.bottom-left { grid-column: 1 / 2; grid-row: 3 / 4; text-align: left; align-self: end; }
+.bottom-right { grid-column: 3 / 4; grid-row: 3 / 4; text-align: right; align-self: end; }
+
+/* Fuentes y Tamaños */
+.b-font { font-family: 'Bebas Neue', sans-serif; letter-spacing: 1px; }
+.k-font { font-family: 'Karla', sans-serif; font-weight: 800; letter-spacing: -0.5px; }
+
+.small { font-size: 1.4rem; }
+.big { font-size: 3rem; }
+.huge { font-size: 4.2rem; }
+
+.underline-blue {
+    text-decoration: underline;
+    text-decoration-color: #3b82f6; /* Azul similar a la imagen */
+    text-decoration-thickness: 3px;
+    text-underline-offset: 4px;
+}
+
+/* --- Botón Loading --- */
+.center-pill {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    border: 2px solid var(--black-color);
+    border-radius: 60px;
+    padding: 10px 40px;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.loading-text {
+    font-family: 'Pacifico', cursive; 
+    font-size: 2.2rem;
+    color: var(--black-color);
+    position: relative;
+}
+
 /* -------------------------------------------------------------- Footer -------------------------------------------------------------*/
 
 .footer {
@@ -2365,4 +2522,21 @@ video {
     .astronaut-text-container p {
         font-size: 1.1rem;
     }
+    /*---------------------------------------------- Capitulo 03 ---------------------------------------------------*/
+    .cap3-grid {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        height: 90vh;
+        padding-top: 80px;
+        padding-bottom: 80px;
+    }
+    
+    .text-block {
+        text-align: center !important;
+    }
+
+    .small { font-size: 1rem; }
+    .big { font-size: 2rem; }
+    .huge { font-size: 3rem; }
 }   

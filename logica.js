@@ -613,16 +613,36 @@ function togglePlay() {
     }
 }
 
+const FADE_TIME = 3;
+let fadeInInterval = null;
+
 function playSong() {
-    
     if (!audio.src || audio.src === "") {
         audio.src = songs[currentSongIndex].src;
     }
+
+    audio.volume = 0; 
     audio.play();
+
+    clearInterval(fadeInInterval); 
+    
+    const stepMs = 50; 
+    const volumeStep = 1 / ((FADE_TIME * 1000) / stepMs); 
+
+    fadeInInterval = setInterval(() => {
+        if (audio.volume + volumeStep < 1) {
+            audio.volume += volumeStep; 
+        } else {
+            audio.volume = 1; 
+            clearInterval(fadeInInterval); 
+        }
+    }, stepMs);
+    
     document.getElementById('playIcon').textContent = "pause";
     addMagneticEffect(playBtn);
 
-    if (bgVideo) {
+    // Pequeña validación de seguridad por si bgVideo no está en el HTML actual
+    if (typeof bgVideo !== 'undefined' && bgVideo) {
         bgVideo.classList.add('video-playing');
     }
 
@@ -791,6 +811,19 @@ function updateSeekBar() {
         trackStraight.style.left = `calc(${percentage}% + 10px)`;
         trackStraight.style.width = `calc(${100 - percentage}% - 10px)`;
         currentTimeLabel.innerText = formatTime(audio.currentTime);
+
+        
+        const timeLeft = audio.duration - audio.currentTime; 
+
+        if (timeLeft <= FADE_TIME) {
+            const targetVolume = Math.max(0, timeLeft / FADE_TIME);
+            
+            
+            if (audio.volume >= targetVolume) {
+                audio.volume = targetVolume;
+            }
+        }
+       
     }
 }
 
@@ -809,11 +842,16 @@ seekSlider.oninput = () => {
     const seekTo = audio.duration * (percentage / 100);
     audio.currentTime = seekTo;
     
-    // Actualización inmediata al arrastrar
     trackWave.style.width = percentage + "%";
     trackStraight.style.left = `calc(${percentage}% + 10px)`;
     trackStraight.style.width = `calc(${100 - percentage}% - 10px)`;
+
+    clearInterval(fadeInInterval); 
+    if (audio.duration - audio.currentTime > FADE_TIME) {
+        audio.volume = 1;
+    }
 };
+
 
 // Función para convertir segundos a formato 0:00
 function formatTime(seconds) {
