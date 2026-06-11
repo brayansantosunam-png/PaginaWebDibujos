@@ -1246,3 +1246,157 @@ function updateThemeColor() {
         metaThemeColor.setAttribute('content', statusBarColor);
     }
 }
+
+/* --------------------------------------------------- Galería Estilo Video (Con Efecto Cápsula) ---------------------------------------------------- */
+const videoGalleryData = [
+    { 
+        url: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgfV_mXKwnmu385otixx-RtO_ubELlox-QrM7k9ZsKr8c44061JHKqJv-BOyv9rCLgBtLPwxFj7zFwx7TqtEuQvCZWpWS4Wq5tnq42DM9ci4ipMWvn3WZH4ysOR-x9SE1k9orKZriJDExJkrKRUSnZHO24pW3kqLVmA-NyEjdpgE7HYGz1pHOIv5w5S4Ak/s1195/1780887784539.png', 
+        title: 'Cosas que dije/ no dije estuvieron mal...', 
+        subtitle: 'Cariño te he buscado, buscame otra vez' 
+    },
+    { 
+        url: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjGCEQlZOVVOJChVxF3BS6KVYBPMxvbXad6JxUP_lYUKY-_JBR52DW0kMRwtGkQd6AfOdT34y4fSzf2DjWSSMYVYve7soGwTMFDWfeQAdLtJO7UxskYbuuVZIL2r0dpqeUD74iNfjTBdSp46L71n9BwnRNkrh9OVkM0bfh2bP88MvCdwKoOh4ujey325Dw/s4624/PXL_20260530_022717262.NIGHT.jpg', 
+        title: 'Y duele añorar lo que no esta...', 
+        subtitle: 'No creo que entiendas el "quiza"' 
+    },
+    { 
+        url: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhcTmanC-9wHbUyTc1z8cwJy1eBnBPyytFEbjc_4hepkTXnbIWITDPm24XTvZF62Snm_IFBprLq7ebkdzw6zSrZJ_ZJe7GW7mtIo0eIry8QORmOWzaEe7wN8HLEwREOamNj8VD8MoufJDfb1Nv_l2iwHpgYKqKpnzW9c2KrIiM497Wy5WnJaGIcBhAmzTk/s4080/PXL_20260602_220748383.jpg', 
+        title: 'Soltarte, pero no olvidarte...', 
+        subtitle: 'Sonrio cuando recuerdo todo' 
+    },
+    { 
+        url: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhK6mj6FpuiOkwbv_ogsAewtMaEVcivdxHE3cEY8FjoaYuzcYSUguvHOSrMVrc1rPjE2lIVsOVjzyIa2jW2tMrOKzbQ4L8F7IGkCxml4CcJoKnCAcJ4Y3udUgP7MT6-oRFfrBWslGZbK1LRXEL6GxHxYre3E-5I1GzdyZDeM8gBUqE1bP1idla0XACRvmw/s4032/PXL_20250616_201528824.jpg', 
+        title: 'Que bonito fue ver tus ojitos, convivir...', 
+        subtitle: 'El tiempo no fue en vano' 
+    },
+    { 
+        url: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh7sp07TbCqOAjVqGOYmFhu5TYUwpHp2snFuOcQhLqy2UYMkk2u-LmHOfEvtkDp1xgxU8HJ48RlgqWFI21SpmvmTzpzwyDZf_roY9V1NhsDhsqB_n9BFTcUGqG6qbVtHs6izWqAyoc4URabp0qNiRaHceSoEuQ17xyrNYm8ip72nHkfgRZnNxof2GKyYvg/s4624/PXL_20260213_185630350.MP.jpg', 
+        title: 'A veces tan triste, a veces tan libre...', 
+        subtitle: '¿Es el sol o es la luna?' 
+    },
+    { 
+        url: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjtLwVsbKm7z998cnJCClTmecamKTOC9CdqwzpxH275Dy8VXuyz_Spu_kxqdpTZ9NrEhQ6js19S1STHLKJo8dMBM2pt_rGWfqxFTMT0UVVoQn_EVGik9q3tIeClhbI22FWNHYWAckleNWwvKfSly4X-9TARVvn-tODWBq0DhFp9vA3Gp3c5CAxAwxBcu_s/s1350/IMG_01072025_1256.webp', 
+        title: 'Quisiera fuera mentira Y de chingaso despertar ...', 
+        subtitle: 'Un día más, una vez más' 
+    },
+    { 
+        url: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgit4CQR8jSEyuU7IYjVbiV5-ycpPDjvilwHfiZO-ZTMzSUk9kx8qhSyeIfGH8yzDn6IhB19oxYG7tOSBwdoQk3n4407HCj6vSUDbJPkdq5DMvYdwn5dULnZpmgk1LPZtS4TaJEDFv1dBcRTr4O01Fl1VviE6KLQAwrEHzf-kP_8URxJxFltD0HuwUb9bE/s4032/PXL_20250529_215057923.jpg', 
+        title: 'Solo por que te quiero, solo porque es así...', 
+        subtitle: 'No me perteneces, pero lo siento asi' 
+    },
+    { 
+        url: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjrRJ-BmCIOvDgd-T02_GJET4v5DLtE5QcqDrKOgUwfzb31765FT5CNYn3RdD4DwLwta8fcAs8-SYOLfoTSYKEDs5Paizbs6xJhXAkxGzQthscdpKB72F1bXyuKRqNs_B0CzEgk0XnSkieFNolcwh5t9P5AAJx0PWb8wtCFsJnfzNokUa_pGPKkftwfqW4/s4624/PXL_20260108_171245714.jpg', 
+        title: 'Etapa magic box que termina aquí...', 
+        subtitle: 'Da comienzo a algo más' 
+    },
+    { 
+        url: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhX-NPWMhAPcRHOXmohPrkH0q70FUO7arB9gdceQ5mBB7yfpxkJRlZm1w9DXbI1R0ts-jck8KEslJdvBja-cfpkR1meej_ZBtju72a1kRuRz5ykzWYUFxgsPoLjihtUSsCyZ0OjAU37f81IyACBn_AnNQSwa9Jam9_DFRoBWETacThkfASjOFHHgVGg3f4/s4624/PXL_20260115_161055036.jpg', 
+        title: 'Queda un recuerdo y anhelo esporadico de...', 
+        subtitle: 'Descubrirte de forma más real futuro' 
+    }
+];
+
+function buildHorizontalGallery() {
+    const container = document.getElementById('gp-gallery-container');
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    videoGalleryData.forEach((item, index) => {
+        const card = document.createElement('div');
+        card.classList.add('gp-card');
+        
+        // Hacemos que la primera tarjeta esté activa al iniciar
+        if(index === 0) card.classList.add('active-card');
+
+        card.innerHTML = `
+            <img src="${item.url}" alt="${item.title}">
+            
+            <div class="gp-info">
+                <p class="gp-title">${item.title}</p>
+                <p class="gp-subtitle">${item.subtitle}</p>
+            </div>
+        `;
+
+        container.appendChild(card);
+    });
+
+    initGalleryScrollEffects(container);
+}
+
+function initGalleryScrollEffects(container) {
+    const cards = container.querySelectorAll('.gp-card');
+    
+    // Función para calcular qué tarjeta está más cerca del centro de la pantalla
+    function updateCenterCard() {
+        const containerRect = container.getBoundingClientRect();
+        const containerCenter = containerRect.left + containerRect.width / 2;
+
+        let closestCard = null;
+        let closestDistance = Infinity;
+
+        cards.forEach(card => {
+            const cardRect = card.getBoundingClientRect();
+            const cardCenter = cardRect.left + cardRect.width / 2;
+            const distance = Math.abs(containerCenter - cardCenter);
+
+            if (distance < closestDistance) {
+                closestDistance = distance;
+                closestCard = card;
+            }
+        });
+
+        // Aplicamos la clase solo a la tarjeta central
+        cards.forEach(card => {
+            if (card === closestCard) {
+                card.classList.add('active-card');
+            } else {
+                card.classList.remove('active-card');
+            }
+        });
+    }
+
+    // Escuchamos el evento de scroll para actualizar el centro en tiempo real
+    let isScrolling;
+    container.addEventListener('scroll', () => {
+        window.cancelAnimationFrame(isScrolling);
+        isScrolling = window.requestAnimationFrame(updateCenterCard);
+    });
+
+    // --- Lógica de Deslizamiento Automático ---
+    let autoScrollInterval = setInterval(scrollNext, 3500); // Cambia cada 3.5 segundos
+
+    function scrollNext() {
+        const activeCard = container.querySelector('.gp-card.active-card');
+        if (!activeCard) return;
+
+        const cardsArray = Array.from(cards);
+        let nextIndex = cardsArray.indexOf(activeCard) + 1;
+        
+        // Si llegamos al final, volvemos a la primera
+        if (nextIndex >= cardsArray.length) {
+            nextIndex = 0;
+        }
+
+        // Movemos el contenedor para centrar la siguiente tarjeta
+        const nextCard = cardsArray[nextIndex];
+        
+        // Calculamos la posición: offset de la tarjeta - la mitad del contenedor + la mitad de la tarjeta
+        const scrollPosition = nextCard.offsetLeft - (container.clientWidth / 2) + (nextCard.clientWidth / 2);
+
+        container.scrollTo({
+            left: scrollPosition,
+            behavior: 'smooth'
+        });
+    }
+
+    // Pausar la animación si el usuario interactúa con la galería
+    container.addEventListener('touchstart', () => clearInterval(autoScrollInterval));
+    container.addEventListener('mouseenter', () => clearInterval(autoScrollInterval));
+    container.addEventListener('mouseleave', () => {
+        autoScrollInterval = setInterval(scrollNext, 3500);
+    });
+}
+
+// Ejecutar cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', buildHorizontalGallery);
