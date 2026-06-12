@@ -1256,17 +1256,17 @@ const videoGalleryData = [
     },
     { 
         url: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjGCEQlZOVVOJChVxF3BS6KVYBPMxvbXad6JxUP_lYUKY-_JBR52DW0kMRwtGkQd6AfOdT34y4fSzf2DjWSSMYVYve7soGwTMFDWfeQAdLtJO7UxskYbuuVZIL2r0dpqeUD74iNfjTBdSp46L71n9BwnRNkrh9OVkM0bfh2bP88MvCdwKoOh4ujey325Dw/s4624/PXL_20260530_022717262.NIGHT.jpg', 
-        title: 'Y duele añorar lo que no esta...', 
-        subtitle: 'No creo que entiendas el "quiza"' 
+        title: 'No creo que entiendas el "quiza" que yo siento...', 
+        subtitle: 'Y duele añorar lo que ya no esta' 
     },
     { 
         url: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhcTmanC-9wHbUyTc1z8cwJy1eBnBPyytFEbjc_4hepkTXnbIWITDPm24XTvZF62Snm_IFBprLq7ebkdzw6zSrZJ_ZJe7GW7mtIo0eIry8QORmOWzaEe7wN8HLEwREOamNj8VD8MoufJDfb1Nv_l2iwHpgYKqKpnzW9c2KrIiM497Wy5WnJaGIcBhAmzTk/s4080/PXL_20260602_220748383.jpg', 
-        title: 'Soltarte, pero no olvidarte...', 
+        title: 'Se que debo soltarte, pero no olvidarte...', 
         subtitle: 'Sonrio cuando recuerdo todo' 
     },
     { 
         url: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhK6mj6FpuiOkwbv_ogsAewtMaEVcivdxHE3cEY8FjoaYuzcYSUguvHOSrMVrc1rPjE2lIVsOVjzyIa2jW2tMrOKzbQ4L8F7IGkCxml4CcJoKnCAcJ4Y3udUgP7MT6-oRFfrBWslGZbK1LRXEL6GxHxYre3E-5I1GzdyZDeM8gBUqE1bP1idla0XACRvmw/s4032/PXL_20250616_201528824.jpg', 
-        title: 'Que bonito fue ver tus ojitos, convivir...', 
+        title: 'Que bonito fue ver tus ojitos, compartir...', 
         subtitle: 'El tiempo no fue en vano' 
     },
     { 
@@ -1282,17 +1282,27 @@ const videoGalleryData = [
     { 
         url: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgit4CQR8jSEyuU7IYjVbiV5-ycpPDjvilwHfiZO-ZTMzSUk9kx8qhSyeIfGH8yzDn6IhB19oxYG7tOSBwdoQk3n4407HCj6vSUDbJPkdq5DMvYdwn5dULnZpmgk1LPZtS4TaJEDFv1dBcRTr4O01Fl1VviE6KLQAwrEHzf-kP_8URxJxFltD0HuwUb9bE/s4032/PXL_20250529_215057923.jpg', 
         title: 'Solo por que te quiero, solo porque es así...', 
-        subtitle: 'No me perteneces, pero lo siento asi' 
+        subtitle: 'Se que no me perteneces, pero lo siento asi' 
+    },
+    { 
+        url: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhGyPY66R38HuzRa0en-5RrtzYlhpqqvB6x3SkWwceav7us3hWOJ4BHIJLAs96ltHZDSkrUmFjMwZBDC5m6WSxWqt7auwsZ3g7uLDMMGfyfoTd_tp1fP5dfOla33AKyEjH5ZY6AZvq234hZiJG6c74Llwgc-kOz4HvMDQSbl7qfBUOEybTvV3ffEjZBGxk/s4624/PXL_20251212_165552598.jpg', 
+        title: 'Silencioso y lunar...', 
+        subtitle: 'Me hipnotizaste como Obsidiana' 
     },
     { 
         url: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjrRJ-BmCIOvDgd-T02_GJET4v5DLtE5QcqDrKOgUwfzb31765FT5CNYn3RdD4DwLwta8fcAs8-SYOLfoTSYKEDs5Paizbs6xJhXAkxGzQthscdpKB72F1bXyuKRqNs_B0CzEgk0XnSkieFNolcwh5t9P5AAJx0PWb8wtCFsJnfzNokUa_pGPKkftwfqW4/s4624/PXL_20260108_171245714.jpg', 
         title: 'Etapa magic box que termina aquí...', 
-        subtitle: 'Da comienzo a algo más' 
+        subtitle: 'Para dar comienzo a algo más y seguir' 
     },
     { 
         url: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhX-NPWMhAPcRHOXmohPrkH0q70FUO7arB9gdceQ5mBB7yfpxkJRlZm1w9DXbI1R0ts-jck8KEslJdvBja-cfpkR1meej_ZBtju72a1kRuRz5ykzWYUFxgsPoLjihtUSsCyZ0OjAU37f81IyACBn_AnNQSwa9Jam9_DFRoBWETacThkfASjOFHHgVGg3f4/s4624/PXL_20260115_161055036.jpg', 
-        title: 'Queda un recuerdo y anhelo esporadico de...', 
+        title: 'Queda un recuerdo y anhelo esporadico...', 
         subtitle: 'Descubrirte de forma más real futuro' 
+    },
+    { 
+        url: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgvoVrxXywUtruU4nBXnJX7KRn2MTNO-WKGOZZAmIWHPneL__PWewjw-Rxjo5kYBego2RVHZbMfK6MzXcVCwDiB2WIDp9xbeZG1t_bdolHbSN5suYz2KUpRBMYHW-hPdnk0PFiiVomEADpVUPeDyPRFPJPx8h-3x8oQuNeADXgLSJa54SAmMAzQTbQ9TmI/s3878/PXL_20260411_183230387~3%20(1).jpg', 
+        title: 'Conocerte y entenderte desde un mejor lugar...', 
+        subtitle: '...' 
     }
 ];
 
