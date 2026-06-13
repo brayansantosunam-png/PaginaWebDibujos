@@ -1261,8 +1261,8 @@ const videoGalleryData = [
     },
     { 
         url: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhcTmanC-9wHbUyTc1z8cwJy1eBnBPyytFEbjc_4hepkTXnbIWITDPm24XTvZF62Snm_IFBprLq7ebkdzw6zSrZJ_ZJe7GW7mtIo0eIry8QORmOWzaEe7wN8HLEwREOamNj8VD8MoufJDfb1Nv_l2iwHpgYKqKpnzW9c2KrIiM497Wy5WnJaGIcBhAmzTk/s4080/PXL_20260602_220748383.jpg', 
-        title: 'Se que debo soltarte, pero no olvidarte...', 
-        subtitle: 'Sonrio cuando recuerdo todo' 
+        title: 'Escuche que al querer hay que saber soltar…', 
+        subtitle: 'Me encabrona termino siendo verdad y aún asi sonrio al recordar' 
     },
     { 
         url: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhK6mj6FpuiOkwbv_ogsAewtMaEVcivdxHE3cEY8FjoaYuzcYSUguvHOSrMVrc1rPjE2lIVsOVjzyIa2jW2tMrOKzbQ4L8F7IGkCxml4CcJoKnCAcJ4Y3udUgP7MT6-oRFfrBWslGZbK1LRXEL6GxHxYre3E-5I1GzdyZDeM8gBUqE1bP1idla0XACRvmw/s4032/PXL_20250616_201528824.jpg', 
