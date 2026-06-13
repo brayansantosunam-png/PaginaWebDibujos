@@ -1296,12 +1296,12 @@ const videoGalleryData = [
     },
     { 
         url: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhX-NPWMhAPcRHOXmohPrkH0q70FUO7arB9gdceQ5mBB7yfpxkJRlZm1w9DXbI1R0ts-jck8KEslJdvBja-cfpkR1meej_ZBtju72a1kRuRz5ykzWYUFxgsPoLjihtUSsCyZ0OjAU37f81IyACBn_AnNQSwa9Jam9_DFRoBWETacThkfASjOFHHgVGg3f4/s4624/PXL_20260115_161055036.jpg', 
-        title: 'Queda un recuerdo y anhelo esporadico...', 
+        title: 'Queda un anhelo esporadico...', 
         subtitle: 'Para descubrirte de forma más real futuro' 
     },
     { 
         url: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgvoVrxXywUtruU4nBXnJX7KRn2MTNO-WKGOZZAmIWHPneL__PWewjw-Rxjo5kYBego2RVHZbMfK6MzXcVCwDiB2WIDp9xbeZG1t_bdolHbSN5suYz2KUpRBMYHW-hPdnk0PFiiVomEADpVUPeDyPRFPJPx8h-3x8oQuNeADXgLSJa54SAmMAzQTbQ9TmI/s3878/PXL_20260411_183230387~3%20(1).jpg', 
-        title: 'Esperanza de conocerte y entenderte desde un mejor lugar...', 
+        title: 'Esperanza de un día conocerte y entenderte desde un mejor lugar...', 
         subtitle: '...'
     }
 ];
