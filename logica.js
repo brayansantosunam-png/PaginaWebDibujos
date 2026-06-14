@@ -461,20 +461,334 @@ document.addEventListener('DOMContentLoaded', () => {
 /* ----------------------------------------------------- Playlist ----------------------------------------------------------------------------------------------- */
 
 const songs = [
-    { title: "Soñé", artist: "Zoé", phrase: "Pues no tengo nada que perder...", cover: "https://cdn-images.dzcdn.net/images/cover/8498486810fb5956153f175822b7b7d8/0x1900-000000-80-0-0.jpg", src: "sone.m4a", link: "https://open.spotify.com/intl-es/track/2VhJ4nrPorAbySEgO4V0BS" },
-    { title: "Droopy likes your Face", artist: "Minecraft Volume Alpha", phrase: "Entre cubos y nostalgia...", cover: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiYA9JFGnmzLKIhmwtyy3JimNGHTFg8cXoknIPVR_DM2J-LRxvfX4MhklD3xLGkb7ZOyDyyhsuWXLA6zOSLr2uQibClGQoETpfKGBfiYn5frqtOtFHjc4sMRcS2Uhr62OGSplpKt7qbjp3hyphenhyphenf84nSFgQ4YToMRs9a0eFGaZQ53hB0pXQ5av5CK2bWtPC9M/s640/minecraft.jpg", src: "minecraft_uno.m4a", link: "https://open.spotify.com/intl-es/track/0kZEfdlIq3sfQklsGcUZDm" },
-    { title: "Labios rotos", artist: "Zoé", phrase: "En el desierto de mi alma...", cover: "https://cdn-images.dzcdn.net/images/cover/8498486810fb5956153f175822b7b7d8/0x1900-000000-80-0-0.jpg", src: "labiosrotos.m4a", link: "https://share.google/aimode/FJutnTOeOMxUojUVq" },
-    { title: "Tarde", artist: "Siddhartha", phrase: "Tarde se me hacía para volver a verte...", cover: "https://cdn-images.dzcdn.net/images/cover/a508833ee74e2cd3197f0641e3c73545/1900x1900-000000-80-0-0.jpg", src: "tarde.m4a", link: "https://share.google/aimode/1N4OOnvlG6KLJVtCE" },
-    { title: "Me hace falta", artist: "Siddhartha", phrase: "Con la luz intermitente, Vibra tu frecuencia...", cover: "https://images.genius.com/4d612579eb7472076b70e67617e12fb6.1000x1000x1.png", src: "me_hace_falta.mp3", link: "https://open.spotify.com/intl-es/track/7EAr8k0WiV9ybItof6utFj" },
-    { title: "Tears", artist: "Minecraft", phrase: "Fantastica geometría multicolor...", cover: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiYA9JFGnmzLKIhmwtyy3JimNGHTFg8cXoknIPVR_DM2J-LRxvfX4MhklD3xLGkb7ZOyDyyhsuWXLA6zOSLr2uQibClGQoETpfKGBfiYn5frqtOtFHjc4sMRcS2Uhr62OGSplpKt7qbjp3hyphenhyphenf84nSFgQ4YToMRs9a0eFGaZQ53hB0pXQ5av5CK2bWtPC9M/s640/minecraft.jpg", src: "minecraft_dos.m4a", link: "https://open.spotify.com/intl-es/track/0kZEfdlIq3sfQklsGcUZDm" },
-    { title: "Vía lactea", artist: "Zoé", phrase: "Del prisma de tus ojos, en mi casco de astronauta...", cover: "https://cdn-images.dzcdn.net/images/cover/8498486810fb5956153f175822b7b7d8/0x1900-000000-80-0-0.jpg", src: "via_lactea.mp3", link: "https://open.spotify.com/intl-es/track/1nquycJ4zLhrT23rwtH5Wj" },
-    { title: "Bruma", artist: "León Larregui", phrase: "Dar sin esperar nada a cambio...", cover: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAKhj6DATZm2qKUx11gFHedys-WEO3UfFgUQ&s", src: "bruma.m4a", link: "https://share.google/aimode/uegIMAnAy3DAhwNIg"},
-    { title: "Velur", artist: "Zoé", phrase: "Me ajusto, pero no me aplaco, echa formol al corazón...", cover: "https://cdn-images.dzcdn.net/images/cover/46d64f553900fcee92fdc8e364246828/0x1900-000000-80-0-0.jpg", src: "velur.m4a", link: "https://open.spotify.com/intl-es/track/6Bpw7j4WL3IwdM1xLPcH7Q" },
-    { title: "Doma", artist: "Jósean Log", phrase: "De este desparpajo, yo de esta no me rajo...", cover: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg5U8VJdtWDJb3S8XRk7dXFqkf8WXFTpOvw5yn3aral845kVhajX3rrQoHAHMefY7V-6AEfWwzwLUXK6SMSvFkYslAK95Vr-XUq4YYJF1OvHqUR3CC50SZ_MaeIjd87GmDAwwjPIuAmDjDqVwSnW_gFDf7w69U5ymll5KNbq0IYfpIxhIdn_enAnp1KLSY/w492-h492/doma.jpg", src: "doma.mp3", link: "https://open.spotify.com/intl-es/track/58cLm4PaHNt8DDr9ayZnNz" },
-    { title: "Búscame otra vez", artist: "Kevin Kaarl", phrase: "Cariño, te he esperado, buscame otra vez...", cover: "http://blogger.googleusercontent.com/img/a/AVvXsEg06Yf5cixLCsleroAlH70uig4NT9x44T9BlnO0sopNXZ3YNsiAFwpOfMXzIj-57B25ioovhLGe6s9M5OsI_O5C0J62wnB4vp5i8YjmgnrLSjdyL9nDF5vKc9FSqC5SFO6leo0JqMT0zomOxa4lTwyQgVTjNBltJujnKHzQUQ8lKqk9nEY0Y3UCMcAJzZU", src: "buscame_otravez.mp3", link: "https://open.spotify.com/intl-es/track/4YnjesWFrSEkhwERM5Fhj7" },
-    { title: "Unicos", artist: "Siddhartha", phrase: "Veinte millas de calor... y otra vez...", cover: "https://cdn-images.dzcdn.net/images/cover/a508833ee74e2cd3197f0641e3c73545/1900x1900-000000-80-0-0.jpg", src: "Unicos.mp3",  link: "https://share.google/aimode/zGdg3R3v1hB7VW9NG"},
-    { title: "Mice on venus", artist: "Minecraft", phrase: "Calma, curiosidad, antender y ganas de...", cover: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiYA9JFGnmzLKIhmwtyy3JimNGHTFg8cXoknIPVR_DM2J-LRxvfX4MhklD3xLGkb7ZOyDyyhsuWXLA6zOSLr2uQibClGQoETpfKGBfiYn5frqtOtFHjc4sMRcS2Uhr62OGSplpKt7qbjp3hyphenhyphenf84nSFgQ4YToMRs9a0eFGaZQ53hB0pXQ5av5CK2bWtPC9M/s640/minecraft.jpg", src: "mice_on_venus.mp3",  link: "https://share.google/aimode/8qZ0Jop9EApVncwKy"},
-    { title: "Ser parte", artist: "Siddhartha", phrase: "Reinventarme y ser parte de tú ser, al final me guiare por tí.", cover: "https://cdn-images.dzcdn.net/images/cover/a508833ee74e2cd3197f0641e3c73545/1900x1900-000000-80-0-0.jpg", src: "ser_parte.mp3",  link: "https://share.google/aimode/hMmWd26Wkbf9XoTUs"}
+    { 
+        title: "Soñé", 
+        artist: "Zoé", 
+        phrase: "Pues no tengo nada que perder...", 
+        cover: "https://cdn-images.dzcdn.net/images/cover/8498486810fb5956153f175822b7b7d8/0x1900-000000-80-0-0.jpg", 
+        src: "sone.m4a", 
+        link: "https://open.spotify.com/intl-es/track/2VhJ4nrPorAbySEgO4V0BS",
+        lyrics: [
+            "Ruego al tiempo aquel momento",
+            "En que mi mundo se paraba",
+            "Entre tus labios",
+            "Solo para revivir",
+            "Derretirme una vez más",
+            "Mirando tus ojos negros",
+            "<br>",
+            "<span class='lyrics-highlight'>Tengo ganas de ser aire</span>",
+            "<span class='lyrics-highlight'>Y me respires para siempre</span>",
+            "Pues no tengo nada que perder",
+            "<br>",
+            "Todo el tiempo estoy pensando en ti",
+            "En el brillo del sol en un rincón del cielo",
+            "Todo el tiempo estoy pensando en ti",
+            "En el eco del mar que retumba en tus ojos, soñé",
+            "<br>",
+            "Solo para revivir",
+            "Derretirme una vez más",
+            "Mirando tus ojos negros",
+            "<br>",
+            "<span class='lyrics-highlight'>Tengo ganas de ser aire</span>",
+            "<span class='lyrics-highlight'>Y me respires para siempre</span>",
+            "Pues no tengo nada que perder"
+        ]
+    },
+    {   title: "Droopy likes your Face", 
+        artist: "Minecraft Volume Alpha", 
+        phrase: "Entre cubos y nostalgia...", 
+        cover: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiYA9JFGnmzLKIhmwtyy3JimNGHTFg8cXoknIPVR_DM2J-LRxvfX4MhklD3xLGkb7ZOyDyyhsuWXLA6zOSLr2uQibClGQoETpfKGBfiYn5frqtOtFHjc4sMRcS2Uhr62OGSplpKt7qbjp3hyphenhyphenf84nSFgQ4YToMRs9a0eFGaZQ53hB0pXQ5av5CK2bWtPC9M/s640/minecraft.jpg", 
+        src: "minecraft_uno.m4a", 
+        link: "https://open.spotify.com/intl-es/track/0kZEfdlIq3sfQklsGcUZDm",
+        lyrics: [
+            "Entre cubos y nostalgia, construí una ciudad,",
+            "con torres de recuerdos suspendidas sobre el mar.",
+            "Cada detalle parecía perfecto al mirar,",
+            "como si el tiempo hubiera decidido no avanzar.",
+            "Y sin darme cuenta empecé a imaginar,",
+            "más de lo que realmente pude encontrar.",
+            "<br>",
+            "Entre cubos y nostalgia levanté un lugar,",
+            "hecho de momentos que no dejan de brillar.",
+            "Pero algunas luces nacen de mi propia visión,",
+            "y confundo lo que fue con lo que quiso el corazón.",
+            "<span class='lyrics-highlight'>Hay caminos que embellece la distancia al recordar,</span>",
+            "<span class='lyrics-highlight'>como texturas que se suavizan al cargar.</span>"
+        ]
+    },
+    {   title: "Labios rotos", 
+        artist: "Zoé", 
+        phrase: "En el desierto de mi alma...", 
+        cover: "https://cdn-images.dzcdn.net/images/cover/8498486810fb5956153f175822b7b7d8/0x1900-000000-80-0-0.jpg", 
+        src: "labiosrotos.m4a", 
+        link: "https://share.google/aimode/FJutnTOeOMxUojUVq",
+        lyrics: [
+            "Moja el desierto de mi alma",
+            "Con tu mirar, con tu tierna voz",
+            "Con tu mano en mi mano",
+            "Por la eternidad",
+            "<br>",
+            "<span class='lyrics-highlight'>Y entrégame esos labios rotos</span>",
+            "<span class='lyrics-highlight'>Los quiero besar, los quiero curar</span>",
+            "Los voy a cuidar",
+            "Con todo mi amor",
+            "<br>",
+            "Es raro el amor, ah-ah-ah-ah",
+            "Es raro el amor, ah-ah-ah",
+            "Que se te aparece",
+            "Cuando menos piensas"
+        ] 
+    },
+    {   title: "Tarde", 
+        artist: "Siddhartha", 
+        phrase: "Tarde se me hacía para volver a verte...", 
+        cover: "https://cdn-images.dzcdn.net/images/cover/a508833ee74e2cd3197f0641e3c73545/1900x1900-000000-80-0-0.jpg", 
+        src: "tarde.m4a", 
+        link: "https://share.google/aimode/1N4OOnvlG6KLJVtCE",
+        lyrics: [
+            "Tarde se me hacia por volver a verte",
+            "Mientras tu dormías visité tu mente",
+            "Y el sueño nos reunió en un bosque de cámara lenta",
+            "Y un árbol pronunció tu nombre",
+            "<br>",
+            "<span class='lyrics-highlight'>Ahora solo tú y yo, y los ojos abiertos</span>",
+            "<span class='lyrics-highlight'>Ahora solo tú y yo, y nosotros despiertos</span>",
+            "Brillas como Luna en el camino",
+            "<br>",
+            "Tarde se me hacía por poder tenerte",
+            "Mientras tú dormías visité tu mente",
+            "Y el sueño nos reunió en un bosque de cámara lenta",
+            "Y un árbol pronunció tu nombre"
+        ] 
+    },
+    {   title: "Me hace falta", 
+        artist: "Siddhartha", 
+        phrase: "Con la luz intermitente, Vibra tu frecuencia...", 
+        cover: "https://images.genius.com/4d612579eb7472076b70e67617e12fb6.1000x1000x1.png", 
+        src: "me_hace_falta.mp3", 
+        link: "https://open.spotify.com/intl-es/track/7EAr8k0WiV9ybItof6utFj",
+        lyrics: [
+            "Sueño tu silencio y te recuerdo",
+            "Sin dudarte en ninguna parte",
+            "Luego yo te suelto y presiento",
+            "Que es momento de esperarte",
+            "Oh me hace falta verte hoy",
+            "<br>",
+            "Sé que somos diferentes",
+            "Y aunque todo esté en la mente",
+            "Quien manda es el corazón",
+            "Que abre y cierra su telón",
+            "<br>",
+            "<span class='lyrics-highlight'>Con la luz intermitente nos miramos ciegamente</span>",
+            "<span class='lyrics-highlight'>Y aunque duerma sale el sol</span>",
+            "<br>",
+            "Vibra tu frecuencia en mi cabeza",
+            "Como una frase interminable",
+            "Surgen melodías con tu acento",
+            "En todas partes"
+        ] 
+    },
+    {   title: "Tears", 
+        artist: "Minecraft", 
+        phrase: "Fantastica geometría multicolor...", 
+        cover: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiYA9JFGnmzLKIhmwtyy3JimNGHTFg8cXoknIPVR_DM2J-LRxvfX4MhklD3xLGkb7ZOyDyyhsuWXLA6zOSLr2uQibClGQoETpfKGBfiYn5frqtOtFHjc4sMRcS2Uhr62OGSplpKt7qbjp3hyphenhyphenf84nSFgQ4YToMRs9a0eFGaZQ53hB0pXQ5av5CK2bWtPC9M/s640/minecraft.jpg", 
+        src: "minecraft_dos.m4a", 
+        link: "https://open.spotify.com/intl-es/track/0kZEfdlIq3sfQklsGcUZDm",
+        lyrics: [
+            "Fantástica geometría multicolor,",
+            "dibujas rutas donde no veía dirección,",
+            "cuadrados, círculos girando alrededor,",
+            "como un rompecabezas cantando una canción.",
+            "Pensé que el mapa estaba roto al caminar,",
+            "pero las piezas aprendieron a encajar.",
+            "<br>",
+            "Saltando entre caminos que cambiaron de lugar,",
+            "persiguiendo posibilidades sin terminar,",
+            "cada error pintó una línea diferente,",
+            "cada vuelta hizo el paisaje más consciente.",
+            "<span class='lyrics-highlight'>Lo que parecía un desorden al pasar,</span>",
+            "<span class='lyrics-highlight'>era otro rumbo intentando despertar.</span>"
+        ] 
+    },
+    {   title: "Vía lactea", 
+        artist: "Zoé", 
+        phrase: "Del prisma de tus ojos, en mi casco de astronauta...", 
+        cover: "https://cdn-images.dzcdn.net/images/cover/8498486810fb5956153f175822b7b7d8/0x1900-000000-80-0-0.jpg", 
+        src: "via_lactea.mp3", 
+        link: "https://open.spotify.com/intl-es/track/1nquycJ4zLhrT23rwtH5Wj", 
+        lyrics: [
+            "Y en la alfombra de tus sueños",
+            "Soy el rayo vagabundo",
+            "Y desmaya, y dolece",
+            "Pero no se apaga",
+            "<br>",
+            "<span class='lyrics-highlight'>Y todas las noches bajo la vía láctea</span>",
+            "<span class='lyrics-highlight'>Parecen eternas si tú no estás</span>",
+            "Todas las noches, desde mi ventana",
+            "Conjuro tu nombre inmortal",
+            "<br>",
+            "Vía láctea, vía láctea, vía láctea",
+            "Si tú no estás",
+            "Vía láctea, vía láctea, vía láctea",
+            "Y sé que te vuelvo a encontrar"
+        ]
+    },
+    {   title: "Bruma", 
+        artist: "León Larregui", 
+        phrase: "Dar sin esperar nada a cambio...", 
+        cover: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAKhj6DATZm2qKUx11gFHedys-WEO3UfFgUQ&s", 
+        src: "bruma.m4a", 
+        link: "https://share.google/aimode/uegIMAnAy3DAhwNIg",
+        lyrics: [
+            "Melodías de otra dimensión",
+            "Tú que vas y yo que vengo",
+            "Nubes grises como un edredón",
+            "Cubren todo el hemisferio",
+            "<br>",
+            "Soledad que me desgarra",
+            "Esperanza desmembrada, oh",
+            "<br>",
+            "<span class='lyrics-highlight'>Tú das amor y no esperas nada a cambio</span>",
+            "<span class='lyrics-highlight'>Tú sabes bien que el amor no se arrebata, nene</span>",
+            "<br>",
+            "Espejismos de mi otro yo",
+            "Entre aplausos y nostalgia"
+        ]
+    },
+    {   title: "Velur", 
+        artist: "Zoé", 
+        phrase: "Me ajusto, pero no me aplaco, echa formol al corazón...", 
+        cover: "https://cdn-images.dzcdn.net/images/cover/46d64f553900fcee92fdc8e364246828/0x1900-000000-80-0-0.jpg", 
+        src: "velur.m4a", 
+        link: "https://open.spotify.com/intl-es/track/6Bpw7j4WL3IwdM1xLPcH7Q",
+        lyrics: [
+            "Devórame, desolación, arrójame",
+            "Mejor me voy, no quiero estar aquí",
+            "Juré ser fiel, ser parque de tu piel",
+            "Ya no hay nada, no queda más velur",
+            "<br>",
+            "Oh, oh",
+            "Ni rosas ni avellanas",
+            "<br>",
+            "Desvísteme, prepárame",
+            "<span class='lyrics-highlight'>Echa el formol</span>",
+            "<span class='lyrics-highlight'>Al corazón</span>"
+        ]
+    },
+    {   title: "Doma", 
+        artist: "Jósean Log", 
+        phrase: "De este desparpajo, yo de esta no me rajo...", 
+        cover: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg5U8VJdtWDJb3S8XRk7dXFqkf8WXFTpOvw5yn3aral845kVhajX3rrQoHAHMefY7V-6AEfWwzwLUXK6SMSvFkYslAK95Vr-XUq4YYJF1OvHqUR3CC50SZ_MaeIjd87GmDAwwjPIuAmDjDqVwSnW_gFDf7w69U5ymll5KNbq0IYfpIxhIdn_enAnp1KLSY/w492-h492/doma.jpg", 
+        src: "doma.mp3", 
+        link: "https://open.spotify.com/intl-es/track/58cLm4PaHNt8DDr9ayZnNz",
+        lyrics: [
+            "Debo buscar dentro de tanto desperfecto",
+            "La moraleja de este cuento",
+            "Debo domar tu corazón",
+            "<br>",
+            "Y debo de enterrar el filo de tu espada",
+            "En los secretos de tu almohada",
+            "Hasta que entiendas la lección",
+            "<br>",
+            "<span class='lyrics-highlight'>Debo llegar al fondo de este desparpajo</span>",
+            "<span class='lyrics-highlight'>Que yo de esta no me rajo</span>",
+            "Hasta domar tu corazón"
+        ]
+    },
+    {   title: "Búscame otra vez", 
+        artist: "Kevin Kaarl", 
+        phrase: "Cariño, te he esperado, buscame otra vez...", 
+        cover: "http://blogger.googleusercontent.com/img/a/AVvXsEg06Yf5cixLCsleroAlH70uig4NT9x44T9BlnO0sopNXZ3YNsiAFwpOfMXzIj-57B25ioovhLGe6s9M5OsI_O5C0J62wnB4vp5i8YjmgnrLSjdyL9nDF5vKc9FSqC5SFO6leo0JqMT0zomOxa4lTwyQgVTjNBltJujnKHzQUQ8lKqk9nEY0Y3UCMcAJzZU", 
+        src: "buscame_otravez.mp3", 
+        link: "https://open.spotify.com/intl-es/track/4YnjesWFrSEkhwERM5Fhj7",
+        lyrics: [
+            "Cariño, te he esperado de diciembre para acá",
+            "Deseando que me digas que no me vaya a marchar",
+            "Dormítate en mi pecho mientras cantas la canción",
+            "O acuéstate en el techo hasta que se nos vaya el sol",
+            "<br>",
+            "Búscame otra vez",
+            "Tal vez siga aquí",
+            "Búscame otra vez",
+            "<br>",
+            "Quisimos tanto hasta perdernos y llorarnos al dormir",
+            "No había notado que tus labios ya no estaban para mí",
+            "<span class='lyrics-highlight'>Hay muchas cosas que no dije y sé que estuvieron muy mal</span>",
+            "<span class='lyrics-highlight'>Pero quisiera regresarme y sostenerte una vez más</span>"
+        ] 
+    },
+    {   title: "Unicos", 
+        artist: "Siddhartha", 
+        phrase: "Veinte millas de calor... y otra vez...", 
+        cover: "https://cdn-images.dzcdn.net/images/cover/a508833ee74e2cd3197f0641e3c73545/1900x1900-000000-80-0-0.jpg", 
+        src: "Unicos.mp3",  
+        link: "https://share.google/aimode/zGdg3R3v1hB7VW9NG",
+        lyrics: [
+            "Veinte millas de calor",
+            "Y el camino no tiene retorno",
+            "Algo pasa entre tú y yo",
+            "Sudo gotas de licor y polvo",
+            "<br>",
+            "<span class='lyrics-highlight'>Y ahora que te vuelvo a ver</span>",
+            "<span class='lyrics-highlight'>Ya no quiero amanecer tan solo</span>",
+            "Otra vez",
+            "<br>",
+            "Porque ahora somos únicos, los únicos",
+            "<br>",
+            "Y ahora que te vuelvo a ver",
+            "Ya no quiero amanecer tan solo",
+            "<br>",
+            "Veinte millas de calor",
+            "Y el camino que se hundió en el polvo",
+            "Una ráfaga de amor",
+            "Lentamente sacudió el entorno"
+        ]
+    },
+    {   title: "Mice on venus", 
+        artist: "Minecraft", 
+        phrase: "Calma, curiosidad, antender y ganas de...", 
+        cover: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiYA9JFGnmzLKIhmwtyy3JimNGHTFg8cXoknIPVR_DM2J-LRxvfX4MhklD3xLGkb7ZOyDyyhsuWXLA6zOSLr2uQibClGQoETpfKGBfiYn5frqtOtFHjc4sMRcS2Uhr62OGSplpKt7qbjp3hyphenhyphenf84nSFgQ4YToMRs9a0eFGaZQ53hB0pXQ5av5CK2bWtPC9M/s640/minecraft.jpg", 
+        src: "mice_on_venus.mp3",  
+        link: "https://share.google/aimode/8qZ0Jop9EApVncwKy",
+        lyrics: [
+            "Calma en los caminos que no recorrí,",
+            "luces de bloques al caer la tarde gris,",
+            "curiosidad por todo lo que pudo ser,",
+            "intentar entender lo que no supe ver.",
+            "Guardo los momentos donde el tiempo se escondió,",
+            "y las preguntas que el silencio me dejó.",
+            "<br>",
+            "Entre paisajes que construimos sin hablar,",
+            "quedan recuerdos que no quieren terminar,",
+            "acepto el cambio aunque no sepa bien por qué,",
+            "si cada despedida guarda algo de ayer.",
+            "<span class='lyrics-highlight'>Hay cariño en las huellas que el viento no borró,</span>",
+            "<span class='lyrics-highlight'>aunque el mapa haya cambiado de dirección.</span>"
+        ]
+    },
+    {   title: "Ser parte", 
+        artist: "Siddhartha", 
+        phrase: "Reinventarme y ser parte de tú ser, al final me guiare por tí.", 
+        cover: "https://cdn-images.dzcdn.net/images/cover/a508833ee74e2cd3197f0641e3c73545/1900x1900-000000-80-0-0.jpg", 
+        src: "ser_parte.mp3",  
+        link: "https://share.google/aimode/hMmWd26Wkbf9XoTUs",
+        lyrics: [
+            "Tu, tus ojos brillantes",
+            "Y el olor de la fauna y la sal se transpira",
+            "Tu, tu boca dormida",
+            "Y el sabor del amor natural, se desliza",
+            "<br>",
+            "Quiero ser el calor, para despertarte",
+            "Puedo reinventarme y ser parte de tu ser",
+            "En la orilla del mar, quiero desnudarte",
+            "Y volar en el viento, ser parte de tu ser",
+            "<br>",
+            "<span class='lyrics-highlight'>Y al final, si todo va a cambiar</span>",
+            "<span class='lyrics-highlight'>Yo me guiaré por ti, hasta la inmensidad</span>",
+            "Te admiraré y quizá, ya no recuerde nada",
+            "Te llevaré conmigo, hasta la inmensidad"
+        ]
+    }
 ];
 
 const maskFiles = [
@@ -527,28 +841,136 @@ const audio = document.getElementById('mainAudio');
 const playBtn = document.getElementById('playBtn');
 const playlistContainer = document.getElementById('playlist');
 const songBtn = document.getElementById('SongBtn');
+let isVideoHidden = false;
+let isLyricsMode = false;
+
+function toggleVideo(e) {
+    e.stopPropagation(); // Evita que se dispare el evento click de la canción
+    isVideoHidden = !isVideoHidden;
+    
+    const staticImg = document.getElementById('static-cover-fallback');
+    const btnIcon = e.currentTarget.querySelector('.material-symbols-outlined');
+
+    if (isVideoHidden) {
+        staticImg.src = songs[currentSongIndex].cover;
+        staticImg.classList.add('show-static');
+        btnIcon.textContent = "videocam"; // Icono indicando que puede volver a encenderlo
+    } else {
+        staticImg.classList.remove('show-static');
+        btnIcon.textContent = "videocam_off";
+    }
+}
+
+function toggleLyricsMode(e) {
+    e.stopPropagation();
+    isLyricsMode = !isLyricsMode;
+    loadPlaylist(); // Recarga la interfaz según el estado
+}
 
 function loadPlaylist() {
-    playlistContainer.innerHTML = ''; // Limpia la lista actual
-    songs.forEach((song, index) => {
-        const div = document.createElement('div');
-        // Si el índice coincide con la canción actual, añade la clase CSS 'active'
-        div.className = `song-item ${index === currentSongIndex ? 'active' : ''}`;
-        div.onclick = () => selectSong(index);
-        
-        const isFav = favoriteSongs.includes(song.title);
-        const favIcon = isFav ? `<span class="material-symbols-outlined fav-indicator" style="font-size: 18px; color: #709fde; margin-left: 10px;"></span>` : '';
+    playlistContainer.innerHTML = ''; 
 
-        div.innerHTML = `
-            <div class="cover-song">
-                <img src="${song.cover}" alt="cover">
-            </div>
-            <div class="song-info">
-                <h4>${song.title}${favIcon} - ${song.artist}</h4>
-            </div>
+    if (isLyricsMode) {
+        // 1. Mostrar SÓLO la canción actual activa con sus controles
+        const currentSong = songs[currentSongIndex];
+        const activeDiv = createSongElement(currentSong, currentSongIndex, true);
+        playlistContainer.appendChild(activeDiv);
+
+        // 2. Mostrar la siguiente canción de forma compacta
+        const nextIndex = isShuffle ? 
+            Math.floor(Math.random() * songs.length) : // (Nota: idealmente aquí pre-calculas el siguiente índice)
+            (currentSongIndex + 1) % songs.length;
+        
+        const nextSong = songs[nextIndex];
+        const nextDiv = document.createElement('div');
+        nextDiv.className = 'compact-next-song';
+        nextDiv.innerHTML = `
+            <img src="${nextSong.cover}" alt="Siguiente">
+            <span>${nextSong.title} - ${nextSong.artist}</span>
         `;
-        playlistContainer.appendChild(div);
-    });
+        playlistContainer.appendChild(nextDiv);
+
+        // 3. Renderizar las letras
+        const lyricsDiv = document.createElement('div');
+        lyricsDiv.className = 'lyrics-container';
+        
+        // Formatear líneas
+        const lyricsData = currentSong.lyrics || ["Letras no disponibles aún."];
+        const lyricsHTML = lyricsData.map(line => {
+            if(line.includes('lyrics-highlight') || line === '<br>') return line;
+            return `<div class="lyrics-line">${line}</div>`;
+        }).join('');
+        
+        lyricsDiv.innerHTML = lyricsHTML;
+        playlistContainer.appendChild(lyricsDiv);
+
+    } else {
+        // Comportamiento normal: listar todas las canciones
+        songs.forEach((song, index) => {
+            const div = createSongElement(song, index, index === currentSongIndex);
+            playlistContainer.appendChild(div);
+        });
+    }
+}
+
+function createSongElement(song, index, isActive) {
+    const div = document.createElement('div');
+    div.className = `song-item ${isActive ? 'active' : ''}`;
+    
+    div.onclick = () => {
+        if (isLyricsMode && index !== currentSongIndex) {
+            isLyricsMode = false;
+        }
+        selectSong(index);
+    };
+
+    const isFav = favoriteSongs.includes(song.title);
+    const favIcon = isFav ? `<span class="material-symbols-outlined fav-indicator" style="font-size: 18px; color: #709fde; margin-left: 10px;">favorite</span>` : '';
+
+    const actionButtons = isActive ? `
+        <div class="song-actions">
+            <button class="action-pill btn-lyrics">
+                <span class="material-symbols-outlined">${isLyricsMode ? 'queue_music' : 'lyrics'}</span>
+            </button>
+            <button class="action-pill-video btn-video">
+                <span class="material-symbols-outlined">${isVideoHidden ? 'videocam' : 'videocam_off'}</span>
+            </button>
+        </div>
+    ` : '';
+
+    // Lógica para el formato del texto: En línea si está activa, apilado si no.
+    const titleArtistHTML = isActive 
+        ? `<h4>${song.title} – ${song.artist}${favIcon}</h4>` 
+        : `<h4>${song.title}${favIcon}</h4><p>${song.artist}</p>`;
+
+    div.innerHTML = `
+        <div class="cover-song">
+            <img src="${song.cover}" alt="cover">
+        </div>
+        <div class="song-content">
+            <div class="song-info">
+                ${titleArtistHTML}
+            </div>
+            ${actionButtons}
+        </div>
+    `;
+
+    if (isActive) {
+        const btnLyrics = div.querySelector('.btn-lyrics');
+        const btnVideo = div.querySelector('.btn-video');
+
+        btnLyrics.addEventListener('click', (e) => {
+            e.stopPropagation(); 
+            toggleLyricsMode(e);
+        });
+
+        btnVideo.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleVideo(e);
+        });
+    }
+
+    return div;
 }
 
 function scrollToActiveSong() {
@@ -647,12 +1069,19 @@ function playSong() {
         bgVideo.classList.add('video-playing');
     }
 
+    const staticImg = document.getElementById('static-cover-fallback');
+    if (staticImg) {
+        staticImg.classList.add('video-playing');
+        if (isVideoHidden) staticImg.src = songs[currentSongIndex].cover;
+    }
+
     if (!maskInterval) {
         maskInterval = setInterval(changeDynamicMask, 2000);
     }
 
     const waveElement = document.getElementById('trackWave');
     if (waveElement) waveElement.classList.add('wave-playing');
+    
 }
 
 function pauseSong() {

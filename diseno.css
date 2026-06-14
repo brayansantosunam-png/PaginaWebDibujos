@@ -1075,16 +1075,16 @@ video {
     display: none; /* Chrome, Safari y Opera */
 }
 
-/* Estilo base para todas las pistas (el centro) */
 .song-item {
     display: flex;
+    flex-direction: row;
     align-items: center;
+    justify-content: flex-start;
     background: var(--background-indicator);
     backdrop-filter: blur(1.4px);
     -webkit-backdrop-filter: blur(1.4px);
     border: var(--border-indicator); 
     padding: 15px 25px;
-    cursor: pointer;
     border-radius: 25px !important; 
     transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
     transform: scale(0.85); 
@@ -1092,6 +1092,155 @@ video {
     margin: -5px 0; 
     z-index: 1;
 }
+
+.song-item.active {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background:rgba( 172, 206, 242, 0.15 );
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--border-glassefect); 
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    transform: scale(1.05);
+    opacity: 1;
+    margin: 20px 10px; 
+    z-index: 5;
+    border-radius: 90px !important;
+}
+
+.song-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-grow: 1;
+}
+
+.song-actions {
+    display: flex;
+    gap: 5px;
+    margin-top: 5px;
+    animation: fadeIn 0.4s ease;
+}
+
+.action-pill {
+    background-color: var(--therthary-color);
+    color: var(--black-color);
+    border: none;
+    padding: 6px 18px;
+    border-radius: 20px 5px 5px 20px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.action-pill-video {
+    background-color: var(--therthary-color);
+    color: var(--black-color);
+    border: none;
+    padding: 6px 18px;
+    border-radius: 5px 20px 20px 5px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.action-pill:hover, .action-pill-video:hover {
+    background-color: var(--background-color);
+    transform: scale(1.05);
+    border-radius: 20px;
+}
+
+.action-pill .material-symbols-outlined {
+    font-size: 20px;
+}
+
+.static-cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50px;
+    z-index: 5;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease-in-out, border-radius 0.8s ease-in-out;
+}
+
+.static-cover.show-static {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.static-cover.video-playing {
+    border-radius: 180px !important;
+    transform: scale(1.05);
+}
+
+.compact-next-song {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 30px;
+    padding: 8px 15px;
+    margin: 10px auto 20px auto;
+    width: max-content;
+    border: 1px solid rgba(0,0,0,0.05);
+    animation: fadeIn 0.5s ease;
+}
+
+.compact-next-song img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-right: 12px;
+    object-fit: cover;
+}
+
+.compact-next-song span {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--black-color);
+}
+
+.lyrics-container {
+    padding: 10px 20px 40px 20px;
+    text-align: left;
+    animation: fadeIn 0.5s ease;
+}
+
+.lyrics-line {
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+    opacity: 0.8;
+    color: var(--black-color);
+}
+
+.lyrics-highlight {
+    font-family: 'Lexend', sans-serif; /* Puedes cambiarla a 'Bebas Neue' o 'Fredoka' según prefieras */
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--black-color);
+    opacity: 1;
+    margin: 15px 0;
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 
 /* Regla específica para la PRIMERA pista */
 .song-item:first-child {
@@ -1107,20 +1256,6 @@ video {
     border-top-right-radius: 15px;
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
-}
-
-/* Estado activo (cuando suena la canción) */
-.song-item.active {
-    background:rgba( 172, 206, 242, 0.15 );
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid var(--border-glassefect); 
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    transform: scale(1.05);
-    opacity: 1;
-    margin: 20px 10px; 
-    z-index: 5;
-    border-radius: 90px !important;
 }
 
 /* Ajuste de la imagen de la canción */
