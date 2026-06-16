@@ -146,8 +146,8 @@ const coverList = [
 const avatarList = [
     'avatar_01.png',
     'avatar_02.png',
-    'avatar_03.png'
-    
+    'avatar_03.png',
+    'avatar_04.png'
 ];
 
 const shapeList = [
