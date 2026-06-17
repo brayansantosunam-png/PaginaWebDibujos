@@ -146,19 +146,21 @@ const coverList = [
 const avatarList = [
     'avatar_01.png',
     'avatar_02.png',
-    'avatar_03.png',
-    'avatar_04.png'
+    'avatar_04.png',
+    'avatar_03.png'
 ];
 
 const shapeList = [
     'mask_monte_perfil.png',
     'mask_sol.png',
+    'mask_shape_triangle.png',
     'mascara_pildora_version_dos.png'
 ];
 
 const borderRadiusList = [
     '20px 20px 95px 95px', 
-    '20px 20px 20px 20px', 
+    '20px 20px 20px 20px',
+    '20px 50px 20px 50px', 
     '90px 90px 90px 90px'  
 ];
 
