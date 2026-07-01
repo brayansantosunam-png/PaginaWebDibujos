@@ -722,7 +722,7 @@ a {
     color: rgba(255, 255, 255, 0.322); 
     -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4); 
     text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    font-size: 3rem;  
+    font-size: 1.8rem;  
     visibility: hidden;
     overflow: hidden; 
     white-space: nowrap; 
@@ -1797,7 +1797,9 @@ video {
     display: flex;
     justify-content: center; 
     align-items: center; 
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    flex-direction: column;
+    
 }
 
 .profile-description p {
@@ -1806,6 +1808,11 @@ video {
     color: var(--black-color); 
     margin: 0; 
     letter-spacing: 1px; 
+}
+
+.profile-description h1{
+    font-size: 1.2rem;
+    color: var(--black-color);
 }
 /* ------------------------------------------------------------- Capitulo 02 ---------------------------------------------------------*/
 .Capitulo02, .Capitulo01 {
@@ -2500,7 +2507,7 @@ body.dark-mode .video-glass-overlay {
     }
 
     .intro-subtitle {
-        font-size: 1.4rem; 
+        font-size: 0.8rem; 
         letter-spacing: 0px; 
         transform: scaleY(1.4); 
         border-right: .1em solid rgba(255, 255, 255, 0.4);

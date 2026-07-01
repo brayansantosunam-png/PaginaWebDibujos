@@ -343,6 +343,22 @@ const extraImages = [
 
 let step = 0;
 let currentExtraIndex = 0;
+let burstInterval = null;
+
+function startBurstMode() {
+    const subtitleElement = document.getElementById('intro-subtitle');
+    
+    // Cambiamos la frase a la solicitada
+    subtitleElement.innerText = "Moja el desierto de mi alma con tu mirar, tierna voz…";
+    
+    // Mostramos la primera imagen extra inmediatamente
+    updateIntroImage(); 
+    
+    // Iniciamos el ciclo continuo cada 1 segundo (1000 ms)
+    burstInterval = setInterval(() => {
+        nextIntroImage();
+    }, 1000);
+}
 
 
 function runWelcomeSequence() {
@@ -386,6 +402,7 @@ function runWelcomeSequence() {
 
                     setTimeout(() => {
                         controls.classList.add('controls-visible');
+                        startBurstMode();
                     }, 2500); 
                 } else {
                     
@@ -436,6 +453,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     welcomeButtons.forEach(button => {
         button.addEventListener('click', () => {
+            
+            if (burstInterval) {
+                clearInterval(burstInterval);
+                burstInterval = null;
+            }
             
             button.classList.add('scale-up-animation');
 
