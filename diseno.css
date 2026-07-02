@@ -36,6 +36,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap'); /* Bebas Nue */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Sarina&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');/*Descripcion perfil*/
 
 
 
@@ -714,6 +715,7 @@ a {
 }
 
 .intro-subtitle {
+    white-space: normal;
     font-family: "Sarina", cursive;
     font-weight: 400;
     font-style: normal;
@@ -724,10 +726,13 @@ a {
     text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     font-size: 1.8rem;  
     visibility: hidden;
-    overflow: hidden; 
-    white-space: nowrap; 
-    border-right: .15em solid rgba(255, 255, 255, 0.4); 
+    overflow: hidden;   
     transition: visibility 0.4s ease; 
+    text-align: center; 
+    line-height: 1.4; 
+    width: 90%; 
+    border-right: none;
+    margin: 0 auto;
 }
 
 .intro-subtitle.show {
@@ -1788,31 +1793,53 @@ video {
 }
 
 .profile-description {
-    width: 90%;
-    max-width: 800px; 
+    width: 90%; 
     background-color: var(--therthary-color); 
-    border-radius: 100px; 
+    border-radius: 50px 10px 50px 50px; /* Esquina inferior derecha recta para simular la colita */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15); /* Ligera sombra para dar relieve */
+    align-self: flex-end;
     padding: 15px 40px; 
     margin: 0 auto; 
     display: flex;
     justify-content: center; 
     align-items: center; 
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     flex-direction: column;
     
+}
+
+.profile-description p, 
+.profile-description h1 {
+    position: relative; 
+    padding-bottom: 28px !important;
+}
+
+.msg-meta {
+    font-family: 'Karla', sans-serif; 
+    font-size: 0.75rem;
+    color: var(--black-color); 
+    position: absolute;
+    bottom: 6px;
+    right: 12px;
+    display: flex;
+    align-items: center;
+    gap: 4px; /* Espacio entre el reloj y las palomitas */
+    letter-spacing: 0;
 }
 
 .profile-description p {
     font-family: 'Pacifico', cursive; 
     font-size: 2.5rem; 
     color: var(--black-color); 
-    margin: 0; 
-    letter-spacing: 1px; 
+    margin: 10px; 
+    letter-spacing: 1px;
 }
 
 .profile-description h1{
     font-size: 1.2rem;
     color: var(--black-color);
+    font-family: "Special Elite", system-ui;
+    font-weight: 400;
+    font-style: normal;
 }
 /* ------------------------------------------------------------- Capitulo 02 ---------------------------------------------------------*/
 .Capitulo02, .Capitulo01 {
@@ -2507,7 +2534,7 @@ body.dark-mode .video-glass-overlay {
     }
 
     .intro-subtitle {
-        font-size: 0.8rem; 
+        font-size: 1.4rem; 
         letter-spacing: 0px; 
         transform: scaleY(1.4); 
         border-right: .1em solid rgba(255, 255, 255, 0.4);
