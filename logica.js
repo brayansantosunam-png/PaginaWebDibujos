@@ -1329,8 +1329,7 @@ function triggerPushEffect(element) {
     }
 }
 
-/* --------------------------------------------------- Detras de camaras ------------------------------------------------ */
-
+/* --------------------------------------------------- Detras de camaras Animado ------------------------------------------------ */
 const misFotos = [
     { url: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiHVbluVfk3EzFTrxLAjsQ8UL7KSkVgHBJVb2ow0_PAA9jDHLR0KkzW-w6Zp1Dsdmtirvgpt0yFzsver7_O85OVi8FPekf7T6FZVF-7ExyyC0PF7pboe5gSvYFz4QACztj57MFTgph6UYrdxeF6gJtzGEddgcQmYpsOI2jAb8Y7sjMD5OHkNWMOTifAl7I/s2101/Gemini_Generated_Image_hd0kuwhd0kuwhd0k.png", phrase: "Explorando nuevas texturas en el arte." },
     { url: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjhvF_mr9O61Im6hMldXxun81RCoIi45FPE6XeNW2FYtVOZhD-Q67tg_akqWy5mp_2BnZ5pgrV4hstFVjLMElrElaKgaon3zCidkECJfBMMAKzWXb8CT5vl65eV-Sc5QjhQxYf_RSTr2_RN5EiSoL6LZkuqPL1K551f94Suvq6l9jXloRfQvOSzpozhqsY/s2164/Gemini_Generated_Image_u8xiu9u8xiu9u8xi.png", phrase: "La geometría de lo cotidiano." },
@@ -1340,8 +1339,8 @@ const misFotos = [
 ];
 
 let descTypewriterInterval; 
-let focusedPhotoIndex = 0;
-let autoPlayInterval;
+let currentAnimIndex = 0;
+let dynamicShapeInterval;
 
 function typeWriterDescription(text) {
     const target = document.querySelector('.Descripcion-photo');
@@ -1361,107 +1360,45 @@ function typeWriterDescription(text) {
     }, 40); 
 }
 
-function nextPhoto() {
-    const photos = document.querySelectorAll('#photo-container .user-photo');
-    if (!photos.length) return;
-    
-    focusedPhotoIndex = (focusedPhotoIndex + 1) % photos.length;
-    updatePhotoCarousel();
+function initDynamicShapeAnimation() {
+    const dynamicImg = document.getElementById('dynamic-shape-img');
+    if (!dynamicImg) return;
+
+    // Set inicial
+    updateDynamicShape(dynamicImg);
+
+    // Bucle para cambiar imagen y forma cada 4 segundos
+    dynamicShapeInterval = setInterval(() => {
+        currentAnimIndex = (currentAnimIndex + 1) % misFotos.length;
+        updateDynamicShape(dynamicImg);
+    }, 4000);
 }
 
-function startAutoPlay() {
-    clearInterval(autoPlayInterval); 
-    autoPlayInterval = setInterval(nextPhoto, 2500); 
-}
+function updateDynamicShape(imgElement) {
+    // Breve desvanecimiento antes de cambiar
+    imgElement.style.opacity = '0';
 
-function displayUserPhotos(photoUrls) {
-    const photoContainer = document.getElementById('photo-container');
-    photoContainer.innerHTML = ''; 
-
-    photoUrls.forEach((foto, index) => {
-        const img = document.createElement('img');
-        img.src = foto.url; 
-        img.className = 'user-photo';
-        img.setAttribute('data-index', index);
+    setTimeout(() => {
+        // Asignar nueva imagen
+        imgElement.src = misFotos[currentAnimIndex].url;
         
-        img.addEventListener('click', () => {
-            focusedPhotoIndex = index;
-            updatePhotoCarousel();
-            
-            startAutoPlay(); 
-            
-            showImageInFullScreen(foto.url); 
-        });
+        // Escribir nueva frase
+        typeWriterDescription(misFotos[currentAnimIndex].phrase);
 
-        img.addEventListener('mouseenter', () => {
-            typeWriterDescription(foto.phrase);
-            clearInterval(autoPlayInterval); 
-        });
-
-        img.addEventListener('mouseleave', () => {
-            typeWriterDescription("Detrás de cámaras");
-            startAutoPlay(); 
-        });
+        // Asignar una máscara aleatoria de tu arreglo maskFiles
+        const randomMask = maskFiles[Math.floor(Math.random() * maskFiles.length)];
+        const maskUrl = `url('${randomMask}')`;
         
-        photoContainer.appendChild(img);
-    });
-
-    updatePhotoCarousel();
-    startAutoPlay();
-}
-
-function updatePhotoCarousel() {
-    const container = document.getElementById('photo-container');
-    const photos = document.querySelectorAll('.user-photo');
-    
-
-    if (!photos.length) return;
-
-    photos.forEach((img, index) => {
+        imgElement.style.webkitMaskImage = maskUrl;
+        imgElement.style.maskImage = maskUrl;
         
-        img.classList.remove('active');
-        img.style.webkitMaskImage = "none";
-        img.style.maskImage = "none";
-
-        if (index === focusedPhotoIndex) {
-            
-            img.classList.add('active');
-
-            const randomIndex = Math.floor(Math.random() * maskFiles.length);
-            const selectedMask = maskFiles[randomIndex];
-
-            img.style.webkitMaskImage = `url('${selectedMask}')`;
-            img.style.maskImage = `url('${selectedMask}')`;
-        }
-    });
-
-    
-    const isMobile = window.innerWidth <= 1150;
-    const containerWidth = container.parentElement.offsetWidth; 
-    const photoWidth = isMobile ? 100 : 170; 
-    
-    const centerOffset = (containerWidth / 2) - (photoWidth / 2) - (focusedPhotoIndex * photoWidth);
-    
-    container.style.transform = `translateX(${centerOffset}px)`;
+        // Regresar opacidad
+        imgElement.style.opacity = '1';
+    }, 400); // 400ms después para dar tiempo al fade out
 }
-
-window.addEventListener('resize', updatePhotoCarousel);
-
-function showImageInFullScreen(url) {
-    const fullScreenDiv = document.getElementById('full-screen');
-    const fullScreenImg = document.getElementById('full-screen-img');
-    fullScreenImg.src = url;
-    fullScreenDiv.style.display = 'flex';
-}
-
-document.getElementById('close-full-screen').addEventListener('click', () => {
-    const fullScreenDiv = document.getElementById('full-screen');
-    fullScreenDiv.style.display = 'none';
-});
-
 
 document.addEventListener('DOMContentLoaded', () => {
-    displayUserPhotos(misFotos);
+    initDynamicShapeAnimation();
 });
 
 /* --------------------------------------------------- Modo ambiente ---------------------------------------------------- */
@@ -1503,8 +1440,13 @@ document.addEventListener('touchstart', resetInactivityTimer); // Para móviles
 // 3. Activar el modo ambiente
 function activateAmbientMode() {
     ambientModeActive = true;
-    if (photoScrollElement && ambientWrapper) {
-        ambientWrapper.appendChild(photoScrollElement);
+    const dynamicContainer = document.getElementById('dynamic-shape-container');
+    
+    if (dynamicContainer && ambientWrapper) {
+        ambientWrapper.appendChild(dynamicContainer);
+        // Opcional: Aumentar el tamaño un poco en modo ambiente
+        dynamicContainer.style.transform = 'scale(1.3)';
+        dynamicContainer.style.transition = 'transform 1s ease';
     }
     ambientOverlay.classList.add('active');
     
@@ -1519,9 +1461,12 @@ function deactivateAmbientMode() {
     ambientModeActive = false;
     ambientOverlay.classList.remove('active');
     
+    const dynamicContainer = document.getElementById('dynamic-shape-container');
+
     setTimeout(() => {
-        if (photoScrollElement && originalSlot) {
-            originalSlot.appendChild(photoScrollElement);
+        if (dynamicContainer && originalSlot) {
+            originalSlot.appendChild(dynamicContainer);
+            dynamicContainer.style.transform = 'scale(1)';
         }
 
         // Limpiamos el texto del ambiente y lo devolvemos a la web principal

@@ -328,6 +328,58 @@ body, html {
     }
 }
 
+@keyframes brumaCosmica {
+    /* --- VUELTA 1: De 0º a 360º (ScaleUp / Agrandamiento) --- */
+    0% {
+        transform: rotate(0deg) scale(0.9);
+        filter: drop-shadow(0 0 12px var(--neon-color, #00f5d4)) 
+                drop-shadow(0 0 25px var(--neon-color, #00f5d4))
+                brightness(1);
+    }
+    25% {
+        /* Punto medio del agrandamiento */
+        transform: rotate(180deg) scale(1.05);
+    }
+    48% {
+        /* Mantiene el brillo estable antes del barrido */
+        filter: drop-shadow(0 0 12px var(--neon-color, #00f5d4)) 
+                drop-shadow(0 0 25px var(--neon-color, #00f5d4))
+                brightness(1);
+    }
+    50% {
+        /* Fin de la primera vuelta (360º): Tamaño máximo + EFECTO BARRIDO (Destello de luz) */
+        transform: rotate(360deg) scale(1.15);
+        filter: drop-shadow(0 0 30px var(--neon-color, #00f5d4)) 
+                drop-shadow(0 0 60px var(--neon-color, #00f5d4))
+                brightness(1.6);
+    }
+    52% {
+        /* Transición rápida de salida del efecto barrido */
+        filter: drop-shadow(0 0 12px var(--neon-color, #00f5d4)) 
+                drop-shadow(0 0 25px var(--neon-color, #00f5d4))
+                brightness(1);
+    }
+
+    /* --- VUELTA 2: De 360º a 720º (ScaleDown / Encogimiento) --- */
+    75% {
+        /* Punto medio del encogimiento */
+        transform: rotate(540deg) scale(1.05);
+    }
+    98% {
+        /* Mantiene el brillo estable antes del segundo barrido */
+        filter: drop-shadow(0 0 12px var(--neon-color, #00f5d4)) 
+                drop-shadow(0 0 25px var(--neon-color, #00f5d4))
+                brightness(1);
+    }
+    100% {
+        /* Fin de la segunda vuelta (720º): Retorno al tamaño base + EFECTO BARRIDO */
+        transform: rotate(720deg) scale(0.9);
+        filter: drop-shadow(0 0 30px var(--neon-color, #00f5d4)) 
+                drop-shadow(0 0 60px var(--neon-color, #00f5d4))
+                brightness(1.6);
+    }
+}
+
 /* -------------------------------------------------------------- Efecto gradiente ------------------------------------------------*/
 body::before,
 body::after {
@@ -1446,24 +1498,35 @@ video {
 
 /* -------------------------------------------------------------- Detras de camaras --------------------------------------------------*/
 
-.photo-scroll {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start; 
-    padding: 60px 0;
-    margin: 20px 50px;
-    height: 450px;
-    overflow: visible; 
-    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-    will-change: transform;
-}
-
-#original-carousel-slot {
-    width: 100%;
-    overflow: hidden; 
-    position: relative;
+#dynamic-shape-container {
     display: flex;
     justify-content: center;
+    align-items: center;
+    margin: 40px auto;
+    width: 100%;
+    min-height: 300px;
+}
+
+.neon-glow-wrapper {
+    position: relative;
+    width: 350px;
+    height: 350px;
+    /* Controla rotación, escala y barrido lumínico en un ciclo de 6s (3s por vuelta) */
+    animation: brumaCosmica 6s linear infinite;
+}
+
+#dynamic-shape-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.4s ease, -webkit-mask-image 0.4s ease;
+    
+    -webkit-mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
 }
 
 .Descripcion-photo{
@@ -2699,6 +2762,11 @@ body.dark-mode .video-glass-overlay {
         padding: 40px 0; 
     }
 
+    .neon-glow-wrapper{
+        width: 250px;
+        height: 250px;
+    }
+
     .user-photo {
         flex: 0 0 130px; 
         width: 130px;
@@ -2804,6 +2872,10 @@ body.dark-mode .video-glass-overlay {
 
     .profile-description p {
         font-size: 1.6rem;
+    }
+
+    .profile-description h1{
+        font-size: 1rem;
     }
 
     .shape-underlay {
