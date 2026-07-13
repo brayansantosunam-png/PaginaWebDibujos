@@ -626,6 +626,95 @@ a {
     100% { transform: scale(1); } /* Vuelve a su tamaño normal */
 }
 
+/* --------------------------------------------------------- Mini Reproductor Dinámico ------------------------------------------------------------ */
+.mini-player-nav {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 5px 15px 5px 5px; 
+    box-sizing: border-box;
+    gap: 12px;
+    animation: fadeIn 0.4s ease;
+}
+
+.mini-cover {
+    width: 50px;
+    height: 50px;
+    border-radius: 16px;
+    object-fit: cover;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.mini-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1; 
+    overflow: hidden;
+}
+
+.mini-title {
+    font-family: 'Karla', sans-serif;
+    font-weight: 800;
+    font-size: 1.05rem;
+    color: var(--text-glasseffect);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.2;
+}
+
+.mini-artist {
+    font-family: 'Karla', sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: var(--text-glasseffect);
+    opacity: 0.7;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mini-controls {
+    display: flex;
+    gap: 6px;
+}
+
+.mini-btn {
+    width: 38px;
+    height: 48px;
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.6);
+    border: none;
+    color: var(--black-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+/* Adaptación al modo oscuro */
+body.dark-mode .mini-btn {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+}
+
+.mini-btn:active {
+    transform: scale(0.85);
+}
+
+.mini-btn i {
+    font-size: 1.3rem;
+}
+
+/* Estilo para los links de navegación dentro del FAB */
+.nav-fab-link {
+    text-decoration: none;
+    color: inherit;
+}
+
 /* -------------------------------------------------------------- Welcome page ----------------------------------------------------*/
 .welcome-overlay {
     position: fixed;          
@@ -816,76 +905,6 @@ a {
     opacity: 0 !important;
     visibility: hidden !important;
     pointer-events: none;     
-}
-
-/* --------------------------------------------------------------FloatingButton----------------------------------------------------*/
-/* Contenedor del switch */
-.switch-container {
-    position: fixed;
-    bottom: 120px;
-    right: 20px;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 60px; /* Ancho del switch */
-    height: 34px; /* Altura del switch */
-}
-
-/* Estilo del checkbox oculto */
-.theme-switch {
-    display: none;
-}
-
-/* Estilo del label (envoltorio principal del switch) */
-.theme-switch-label {
-    position: relative;
-    display: inline-block;
-    width: 100%; /* Asegura que el track ocupe el ancho completo */
-    height: 100%; /* Altura total del contenedor */
-    cursor: pointer;
-}
-
-/* Estilo del track (fondo del switch) */
-.switch-track {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: 2px solid var(--black-color);
-    border-radius: 17px;
-    transition: background-color 0.3s;
-    z-index: 1; /* Coloca el track detrás del thumb */
-}
-
-/* Estilo del thumb (círculo deslizante) */
-.switch-thumb {
-    position: absolute;
-    top: 3px; /* Centra el thumb verticalmente */
-    left: 3px; /* Posición inicial del thumb */
-    width: 28px;
-    height: 28px;
-    background-color: var(--black-color);
-    border-radius: 50%;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    transition: left 0.3s, background-color 0.3s;
-    z-index: 2; /* Coloca el thumb encima del track */
-}
-
-/* Estilo del track y thumb cuando está activado */
-.theme-switch:checked + .theme-switch-label .switch-track {
-    background-color: #a8c7fa; /* Color para el modo oscuro */
-}
-
-.theme-switch:checked + .theme-switch-label .switch-thumb {
-    left: calc(100% - 31px); /* Mueve el thumb al final del track */
-    background-color: #173566;
-}
-
-/* Hover en el switch */
-.switch-container:hover .switch-thumb {
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .Titulo-Web{
@@ -1115,13 +1134,6 @@ video {
     scroll-behavior: smooth; 
     -ms-overflow-style: none;  
     scrollbar-width: none;  
-    background:rgba(172, 206, 242, 0.253);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid var(--border-glassefect); 
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    transition: background-color 0.3s ease;
-    border-radius: 15px 50px 50px 15px;
 }
 
 .playlist:hover{
@@ -1181,11 +1193,6 @@ video {
 }
 
 .action-pill {
-    background-color: var(--therthary-color);
-    color: var(--black-color);
-    border: none;
-    padding: 6px 18px;
-    border-radius: 20px 5px 5px 20px;
     cursor: pointer;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     display: flex;
@@ -1286,7 +1293,7 @@ video {
 .lyrics-highlight {
     font-family: 'Lexend', sans-serif; /* Puedes cambiarla a 'Bebas Neue' o 'Fredoka' según prefieras */
     font-weight: 700;
-    font-size: 1.25rem;
+    font-size: 1.4rem;
     color: var(--black-color);
     opacity: 1;
     margin: 15px 0;
@@ -1366,10 +1373,12 @@ video {
     z-index: 1000;
     width: 70px;
     height: 70px;
-    background-color: #ffffff;
-    border-radius: 22px;
-    border: 5px solid #e0e0e0;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    background: rgba(172, 206, 242, 0.15);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 35px; 
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1377,14 +1386,47 @@ video {
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
+.desktop-theme-fab {
+    position: fixed;
+    bottom: 30px;
+    right: 115px; 
+    z-index: 1000;
+    width: 46px;  
+    height: 70px; 
+    background: rgba(172, 206, 242, 0.15);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 35px; 
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.desktop-theme-fab .theme-icon {
+    font-size: 1.5rem;
+    color: var(--text-glasseffect);
+    transition: transform 0.4s ease;
+}
+
+.desktop-theme-fab:active {
+    transform: scale(0.9);
+}
+
+/* Ajuste temático para modo oscuro en escritorio */
+body.dark-mode .desktop-theme-fab {
+    background-color: #292929;
+    border-color: #3f3c3a;
+}
+
 .fab-btn img {
-    width: 60%; /* Un poco más pequeño para que respire el borde */
+    width: 60%; 
     height: auto;
 }
 
-/* --- Posicionamiento Individual --- */
-
-/* El de Spotify se queda a la derecha original */
 .spotify-fab {
     right: 30px;
 }
@@ -1395,20 +1437,6 @@ video {
     right: 115px;
 }
 
-/* --- Efectos Hover Individuales --- */
-
-.fab-btn:hover {
-    transform: scale(1.1) rotate(5deg);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-}
-
-.spotify-fab:hover {
-    border-color: #1DB954; /* Verde Spotify */
-}
-
-.download-fab:hover {
-    border-color: #DDAB72; /* Azul que usamos en el seekbar */
-}
 
 .fab-btn:active {
     transform: scale(0.9);
@@ -1432,9 +1460,10 @@ video {
 .track-straight {
     position: absolute;
     height: 5px; 
-    background-color: #45311d;
+    background-color: var(--dyn-seek-track, #45311d); 
     border-radius: 2px;
     z-index: 1;
+    transition: background-color 0.4s ease;
 }
 
 /* Línea ondulada (progreso) */
@@ -1444,22 +1473,36 @@ video {
     height: 16px; 
     width: 0%; 
     z-index: 2;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 12'%3E%3Cpath d='M0 6 Q 10 1, 20 6 T 40 6' fill='none' stroke='%23DDAB72' stroke-width='3.5' stroke-linecap='round'/%3E%3C/svg%3E");
-    background-repeat: repeat-x;
-    background-size: 40px 12px; 
+    background-color: var(--dyn-seek-thumb, #DDAB72); 
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 12'%3E%3Cpath d='M0 6 Q 10 1, 20 6 T 40 6' fill='none' stroke='black' stroke-width='3.5' stroke-linecap='round'/%3E%3C/svg%3E");
+    -webkit-mask-repeat: repeat-x;
+    -webkit-mask-size: 40px 12px;
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 12'%3E%3Cpath d='M0 6 Q 10 1, 20 6 T 40 6' fill='none' stroke='black' stroke-width='3.5' stroke-linecap='round'/%3E%3C/svg%3E");
+    mask-repeat: repeat-x;
+    mask-size: 40px 12px;
+    
     pointer-events: none; 
-    transition: width 0.1s linear; 
+    transition: width 0.1s linear, background-color 0.4s ease; 
 }
 
-/* Input Range invisible pero funcional */
 #seekSlider {
     position: relative;
     width: 100%;
-    -webkit-appearance: none;
-    background: transparent;
+    -webkit-appearance: none; /* Elimina estilos nativos */
+    background: transparent; 
+    outline: none; /* Elimina la línea azul de selección */
     z-index: 3;
     cursor: pointer;
     margin: 0;
+}
+
+#seekSlider::-webkit-slider-runnable-track {
+    background: transparent;
+    border: transparent;
+    color: transparent;
+}
+#seekSlider::-moz-range-track {
+    background: transparent;
 }
 
 /* Estilo del Indicador (Thumb) - El palito vertical */
@@ -1467,10 +1510,11 @@ video {
     -webkit-appearance: none;
     height: 30px;
     width: 6px;
-    background: #DDAB72;
+    background: var(--dyn-seek-thumb, #DDAB72);
     border-radius: 10px;
     cursor: pointer;
-    margin: 10px;
+    margin-top: -7px; 
+    transition: background-color 0.4s ease;
 }
 
 .track-wave.wave-playing {
@@ -1494,6 +1538,335 @@ video {
 
 .song-item, .btn-play-pause, .btn-nav, #seekSlider {
     cursor: url('hacha_cursor.png'), pointer;
+}
+
+/*--------------------------------------------------------------- Reproductor multimedia ---------------------------------------------*/
+
+.new-desktop-layout {
+    display: grid !important;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 20px;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin-top: 50px;
+    height: 620px;
+    align-items: stretch;
+}
+
+/* Columna Izquierda */
+.left-col-new {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap: 20px;
+}
+
+.lyrics-overlay {
+    position: absolute;
+    top: 370px; 
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: var(--dyn-card-bg, rgba(255, 255, 255, 0.35));
+    backdrop-filter: blur(45px) saturate(200%);
+    -webkit-backdrop-filter: blur(45px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.2); 
+    border-radius: 40px;
+    padding: 30px;
+    z-index: 20;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    overflow-y: auto;
+    box-shadow: 0 -10px 40px rgba(0,0,0,0.15);
+}
+
+.lyrics-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.lyrics-overlay::-webkit-scrollbar {
+    display: none; 
+}
+
+.top-left-card, .bottom-left-card, .right-col-new {
+    background: var(--dyn-card-bg, rgba(255, 255, 255, 0.15)); 
+    backdrop-filter: blur(25px) saturate(150%);
+    -webkit-backdrop-filter: blur(25px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, 0.15); 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.4s ease;
+    border-radius: 40px;
+    padding: 30px;
+    position: relative;
+}
+
+.top-left-card {
+    padding: 30px;
+    position: relative;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.bottom-left-card, .right-col-new {
+    padding: 30px;
+    position: relative;
+    overflow: hidden; 
+}
+
+/* Tarjeta Superior Izquierda */
+.top-left-card {
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.quote-prefix {
+    font-family: 'Karla', sans-serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: #1a1a1a;
+    margin-bottom: 10px;
+}
+
+.dynamic-text-quote {
+    text-align: left;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 60%;
+    gap: 8px;
+    z-index: 10;
+}
+
+/* Sobreescribiendo el estilo de .word para esta tarjeta */
+.dynamic-text-quote .word {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.5rem;
+    color: #1a1a1a !important;
+    -webkit-text-stroke: 0;
+    text-shadow: none;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+.artist-cutout {
+    position: absolute;
+    right: 15px;     
+    bottom: 0;       
+    height: 115%;     
+    object-fit: contain;
+    z-index: 1;
+    pointer-events: none;
+    filter: drop-shadow(-8px 10px 15px rgba(0,0,0,0.15)); 
+}
+
+.new-seekbar {
+    position: relative;
+    z-index: 10;
+    margin-top: auto;
+}
+
+/* Tarjeta Inferior Izquierda (Controles 3D) */
+.bottom-left-card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1;
+    justify-content: center;
+}
+
+.sub-controls-new {
+    display: flex;
+    gap: 05px;
+}
+
+.btn-sub-new_one {
+    background: var(--therthary-color);
+    border: none;
+    border-radius: 15px 5px 5px 15px;
+    padding: 10px 15px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    color: var(--black-color);
+    transition: transform 0.2s;
+}
+
+.btn-sub-new_two, .btn-sub-new_three {
+    background: var(--therthary-color);
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    color: var(--black-color);
+    transition: transform 0.2s;
+}
+
+.btn-sub-new_for{
+    background: var(--therthary-color);
+    border: none;
+    border-radius: 5px 15px 15px 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    color: var(--black-color);
+    transition: transform 0.2s;
+}
+
+.btn-sub-new_one:active, .btn-sub-new_two:active, .btn-sub-new_three:active, .btn-sub-new_for:active{
+     transform: scale(0.9); }
+
+.main-controls-new {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px; 
+    padding: 20px 0;
+}
+
+/* Botones 3D estilo imagen */
+.btn-nav-3d, .btn-play-pause-3d {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    box-shadow: none; /* Adiós sombras 3D */
+    transition: transform 0.2s ease, background-color 0.4s ease;
+}
+
+.btn-nav-3d {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--dyn-nav-bg, rgba(255, 255, 255, 0.15));
+    color: var(--dyn-nav-text, #ffffff);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.btn-play-pause-3d {
+    width: 95px;
+    height: 95px;
+    border-radius: 35px; 
+    background: var(--dyn-play-bg, #f5d3f0); 
+    color: var(--dyn-play-text, #33213a);
+}
+
+.btn-nav-3d:active, .btn-play-pause-3d:active {
+    transform: scale(0.9);
+}
+
+/* Columna Derecha */
+.right-col-new {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px;
+    height: 100%;
+    max-height: 100%;
+}
+
+.now-playing-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    width: 100%;
+}
+
+.now-playing-header h3 {
+    font-family: 'Karla', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.playing-animation {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 20px;
+}
+
+.playing-animation span {
+    display: block;
+    width: 4px;
+    background-color: #1a1a1a;
+    animation: eq 1s ease-in-out infinite alternate;
+}
+
+.playing-animation span:nth-child(1) { height: 10px; animation-delay: 0.1s; }
+.playing-animation span:nth-child(2) { height: 20px; animation-delay: 0.3s; }
+.playing-animation span:nth-child(3) { height: 15px; animation-delay: 0.5s; }
+
+@keyframes eq {
+    0% { height: 5px; }
+    100% { height: 20px; }
+}
+
+.video-container-new {
+    width: 220px;
+    height: 220px;
+    border-radius: 30px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.video-container-new video, .video-container-new .static-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 30px !important;
+}
+
+.global-toggles {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.action-pill-global {
+    background: #ffffff;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    cursor: pointer;
+    color: #1a1a1a;
+    transition: transform 0.2s;
+}
+
+.action-pill-global:active { transform: scale(0.9); }
+
+.new-playlist-style {
+    width: 100%;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    flex: 1;
+    overflow-y: auto;
+    max-height: none !important; 
+}
+
+.new-playlist-style::-webkit-scrollbar {
+    display: none;
+}
+
+.dynamic-text-quote.long-text-mode .word {
+    font-size: 2.2rem !important; 
+    line-height: 1.1;
 }
 
 /* -------------------------------------------------------------- Detras de camaras --------------------------------------------------*/
@@ -1903,6 +2276,33 @@ video {
     font-family: "Special Elite", system-ui;
     font-weight: 400;
     font-style: normal;
+}
+
+#collapsible-text .hidden-text {
+    display: none; 
+}
+
+#collapsible-text.text-expanded .hidden-text {
+    display: inline; 
+}
+
+#collapsible-text.text-expanded .read-more-trigger {
+    display: none; 
+}
+
+.read-more-trigger {
+    color: #709fde; 
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0 5px;
+    display: inline-block;
+    letter-spacing: 2px;
+    animation: pulseDots 1.5s infinite ease-in-out;
+}
+
+@keyframes pulseDots {
+    0%, 100% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.2); opacity: 1; }
 }
 /* ------------------------------------------------------------- Capitulo 02 ---------------------------------------------------------*/
 .Capitulo02, .Capitulo01 {
@@ -2454,28 +2854,156 @@ body.dark-mode .video-glass-overlay {
     .header-menu {
         top: auto;
         bottom: 20px; 
+        left: 0;
+        transform: none; 
         width: 100%; 
         margin: 0;
-        padding: 0 20px; 
+        padding: 0 10px; 
         height: auto;
+        
+        /* El contenedor exterior es transparente para que las cápsulas internas floten de forma independiente */
         background: transparent; 
-        backdrop-filter: none;    
+        backdrop-filter: none;
         -webkit-backdrop-filter: none;
-        border: none;             
-        box-shadow: none;         
+        border: none;
+        box-shadow: none;
+        z-index: 99;
     }
 
-    .fab-btn{
+    .desktop-theme-fab {
         display: none;
+    }
+
+    /* Anulamos los márgenes por defecto del contenedor para aprovechar todo el ancho disponible */
+    .header-menu .container {
+        margin-inline: 0;
+        width: 100%;
+        max-width: none;
+        padding: 0;
     }
     
     .nav__mobile-wrapper {
         display: flex;
-        flex-direction: row; /* Alineación horizontal */
-        align-items: center; /* Centrado vertical entre ambos */
-        justify-content: center; /* Los mantiene agrupados al centro */
-        gap: 15px; /* Espacio de separación entre la cápsula y el botón */
+        flex-direction: row; 
+        align-items: center; 
+        justify-content: space-between;
+        gap: 10px; 
         width: 100%;
+    }
+
+    .nav__menu {
+        flex: 1; /* Obliga al menú a expandirse y ocupar todo el ancho restante de la pantalla */
+        
+        /* Estilo independiente de cristal para el menú principal */
+        background: rgba(172, 206, 242, 0.15);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 30px; /* Forma de cápsula alargada */
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2); 
+        height: 70px;
+        display: flex;
+        align-items: center;
+    }
+
+    .nav__action-button {
+        position: relative;
+        display: flex;
+        align-items: center;
+        margin: 0; 
+        z-index: 100;
+    }
+
+    .fab-menu-container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .action-btn {
+        width: 60px; 
+        height: 60px;
+        background: rgba(172, 206, 242, 0.15); 
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 20px; 
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 2; 
+    }
+
+    .action-btn i.transition-icon {
+        font-size: 2.5rem;
+        color: var(--text-glasseffect);
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .fab-menu-container.open .action-btn i.transition-icon {
+        transform: rotate(135deg);
+        color: var(--navigation-active); /* Un toque de color para indicar estado activo */
+    }
+
+    .fab-menu-options {
+        position: absolute;
+        bottom: 75px; /* Sube las opciones por encima del botón principal */
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-end;
+        
+        /* Estado oculto por defecto */
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(20px) scale(0.9);
+        transform-origin: bottom right;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1;
+    }
+
+    .fab-menu-container.open .fab-menu-options {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0) scale(1);
+    }
+
+    .fab-pill-option {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 20px;
+        background: rgba(172, 206, 242, 0.25); 
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 30px; 
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        color: var(--text-glasseffect);
+        font-family: 'Karla', sans-serif;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        
+        white-space: nowrap; /* Evita que el texto se rompa en dos líneas */
+    }
+
+    .fab-pill-option i {
+        font-size: 1.5rem;
+    }
+
+    .fab-pill-option:active {
+        transform: scale(0.92);
+        background: rgba(172, 206, 242, 0.4);
+    }
+
+    .fab-btn {
+        display: none;
     }
 
     .nav__indicator {
@@ -2485,7 +3013,7 @@ body.dark-mode .video-glass-overlay {
     }
 
     .logo img {
-        width: 100px; /* Logo más pequeño en móvil */
+        width: 100px; 
     }
 
     .header-menu .logo {
@@ -2501,7 +3029,6 @@ body.dark-mode .video-glass-overlay {
         align-items: center; 
         gap: 0; 
     }
-
     
     .nav__link {
         display: flex;
@@ -2514,7 +3041,7 @@ body.dark-mode .video-glass-overlay {
     }
     
     .nav__link span {
-        font-size: 0.9rem;
+        font-size: 0.75rem;
     }
     
     .nav__link i {
@@ -2525,53 +3052,19 @@ body.dark-mode .video-glass-overlay {
         margin-bottom: 2px;
     }
     
-    
     .nav__link:hover {
         background-color: transparent; 
         color: var(--text-glasseffect); 
         transform: scale(1.0); 
     }
     
-    
     .nav__link.active {
          color: var(--navigation-active); 
          transform: scale(1.05); 
     }
-
-    .nav__menu {
-        flex: 0 1 auto;
-        max-width: 400px; 
-        background: rgba(172, 206, 242, 0.15);
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        border-radius: 50px;
-        height: 70px;
-        display: flex;
-        align-items: center;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2); 
-    }
     
     .show-menu {
         left: auto; 
-    }
-
-    .nav__action-button {
-        display: flex;
-        align-items: center;
-        margin: 0; 
-    }
-
-    .action-btn {
-        width: 70px; 
-        height: 70px;
-        background:rgba( 172, 206, 242, 0.15 );
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        border: 1px solid var(--border-glassefect); 
-        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-        transition: background-color 0.3s ease;
-        border-radius: 20px;
     }
 
     .action-btn i {
@@ -2580,13 +3073,9 @@ body.dark-mode .video-glass-overlay {
     }
 
     .action-btn:active {
-        transform: scale(0.9); /* Efecto de pulsación */
+        transform: scale(0.9);
     }
-
-    /* Ajuste para que los textos del menú no se amontonen */
-    .nav__link span {
-        font-size: 0.75rem;
-    }
+    
     /* ----------------------------------------------------------- Welcome page -----------------------------------------------*/
     .intro-char {
         font-size: 10rem; /* De 15rem a 7rem para que las letras no se corten */
@@ -2753,6 +3242,235 @@ body.dark-mode .video-glass-overlay {
     body::before,
     body::after {
         height: 60px; 
+    }
+
+    /* -------------------------------------------------------- Reproductor de multimedia ---------------------------------*/
+    .new-desktop-layout {
+        display: flex !important;
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+        margin-top: 10px;
+        gap: 10px;
+    }
+
+    .top-left-card {
+        background: transparent !important;
+        box-shadow: none !important;
+        border: none !important;
+        backdrop-filter: none !important;
+        padding: 10px 0;
+        height: auto;
+        border-radius: 0;
+        position: relative;
+    }
+
+    .top-left-card::before {
+        content: "";
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 340px; /* Tamaño del gráfico de fondo */
+        height: 340px;
+        background-image: url('mask_sol.png'); /* ◄ CAMBIA ESTO por la ruta de tu pluma o fondo */
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        z-index: 1; /* Nivel inferior */
+        opacity: 0.55; /* Opacidad sutil para fundirse bien */
+        pointer-events: none;
+    }
+
+    /* 3. Imagen del Artista con z-index superior para quedar al frente de la pluma */
+    .artist-cutout {
+        position: relative;
+        height: 300px; 
+        width: 100%;
+        right: 0;
+        margin: 15px 0;
+        object-fit: contain;
+        z-index: 2; /* Por delante del pseudo-elemento de fondo */
+        filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.2)); 
+    }
+
+    /* Textos y Controles Superiores */
+    .bottom-left-card {
+        background: transparent !important;
+        box-shadow: none !important;
+        border: none !important;
+        backdrop-filter: none !important;
+        padding: 10px 0;
+        height: auto;
+        border-radius: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .quote-prefix {
+        font-size: 1.3rem;
+        margin-bottom: 5px;
+    }
+
+    .dynamic-text-quote .word {
+        font-size: 2.3rem !important;
+        line-height: 1.1;
+    }
+
+    .dynamic-text-quote {
+        max-width: 100%;
+    }
+
+    .sub-controls-new {
+        justify-content: flex-start;
+        gap: 5px;
+        background: transparent;
+        box-shadow: none;
+        padding: 0;
+    }
+
+    .btn-sub-new {
+        background: #ffffff;
+        padding: 10px 14px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+    }
+
+    .main-controls-new {
+        gap: 15px;
+        padding: 20px 0;
+    }
+
+    .btn-nav-3d {
+        width: 85px;
+        height: 55px;
+        border-width: 2px;
+        border-radius: 20px;
+    }
+
+    .btn-play-pause-3d {
+        width: 130px;
+        height: 75px;
+        border-width: 2px;
+    }
+
+    /* 4. Tarjeta Derecha ("A continuación") con 3 filas para ordenar los Toggles */
+    .right-col-new {
+        display: grid !important;
+        grid-template-columns: 140px 1fr;
+        grid-template-rows: auto auto 1fr; 
+        gap: 10px;
+        border-radius: 30px;
+        padding: 25px 20px;
+        height: auto;
+        max-height: none;
+        align-items: start;
+    }
+
+    .now-playing-header {
+        grid-column: 1 / -1;
+        margin-bottom: 5px;
+    }
+
+    .playing-animation {
+        display: none;
+    }
+
+    .now-playing-header h3 {
+        font-size: 0;
+    }
+
+    .now-playing-header h3::after {
+        content: "A continuación:";
+        font-size: 1.4rem;
+        color: #1a1a1a;
+    }
+
+    /* Contenedor de video/carátula (Fila 2) */
+    .video-container-new {
+        grid-column: 1 / 2;
+        grid-row: 2 / 3;
+        width: 140px;
+        height: 140px;
+        border-radius: 20px;
+        margin: 0;
+        box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+    }
+
+    .global-toggles {
+        display: flex !important;
+        grid-column: 1 / 2;
+        grid-row: 3 / 4; /* Se posicionan alineados justo debajo de la carátula izquierda */
+        gap: 12px;
+        justify-content: center;
+        margin-top: 5px;
+        width: 100%;
+    }
+
+    .action-pill-global {
+        background: #ffffff;
+        border: none;
+        border-radius: 50%; 
+        width: 42px;
+        height: 42px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+        color: #1a1a1a;
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+    
+    .action-pill-global:active {
+        transform: scale(0.9);
+    }
+
+    .new-playlist-style {
+        grid-column: 2 / 3;
+        grid-row: 2 / 4;
+        max-height: 200px !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .new-playlist-style .song-item {
+        background: rgba(255, 255, 255, 0.4) !important;
+        border: none !important;
+        border-radius: 20px !important;
+        padding: 8px 12px !important;
+        margin: 0 0 10px 0 !important;
+        transform: none !important;
+        opacity: 1 !important;
+        box-shadow: none !important;
+    }
+
+    .new-playlist-style .song-item.active {
+        background: rgba(255, 255, 255, 0.7) !important;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05) !important;
+    }
+
+    .new-playlist-style .cover-song {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        margin-right: 12px;
+    }
+
+    .new-playlist-style .song-info h4 {
+        font-size: 14px;
+        font-weight: 700;
+    }
+    
+    .new-playlist-style .song-info p {
+        font-size: 11px;
+    }
+
+    .lyrics-overlay {
+        top: 0; /* Cubre desde el borde superior */
+        height: 100%;
+        border-radius: 20px;
+        padding: 20px;
     }
 
     /* -------------------------------------------------------- Detras de camaras ---------------------------------------- */

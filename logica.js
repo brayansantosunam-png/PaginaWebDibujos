@@ -1,4 +1,51 @@
-/* ------------------------------------------------------ Menu ------------------------------------------------------ */
+/* ---------------------------------------------------- Menú FAB Móvil ------------------------------------------------ */
+
+function setupMobileFab() {
+    const fabContainer = document.querySelector('.fab-menu-container');
+    const mainFabToggle = document.getElementById('mainFabToggle');
+    const mobileSpotifyBtn = document.getElementById('mobileSpotifyBtn');
+
+    if (!fabContainer || !mainFabToggle) return;
+
+    // Abrir/Cerrar menú al tocar el botón principal (+)
+    mainFabToggle.addEventListener('click', (e) => {
+        e.stopPropagation(); // Evita que se cierre instantáneamente por el evento del document
+        fabContainer.classList.toggle('open');
+    });
+
+    // Acción para la píldora de Spotify
+    if (mobileSpotifyBtn) {
+        mobileSpotifyBtn.addEventListener('click', () => {
+            window.open('https://open.spotify.com/playlist/7BYeqYLgLrG8iWPNu2L4PN', '_blank');
+            fabContainer.classList.remove('open'); // Cierra el menú tras hacer clic
+        });
+    }
+
+    // Cerrar menú al hacer clic en la píldora del tema (mejora la UX)
+    const themePill = fabContainer.querySelector('.theme-toggle-trigger');
+    if (themePill) {
+        themePill.addEventListener('click', () => {
+            // Un breve retraso para permitir que la animación del sol/luna se note antes de cerrarse
+            setTimeout(() => {
+                fabContainer.classList.remove('open');
+            }, 300);
+        });
+    }
+
+    // Cerrar menú si el usuario toca cualquier otra parte de la pantalla
+    document.addEventListener('click', (e) => {
+        if (!fabContainer.contains(e.target) && fabContainer.classList.contains('open')) {
+            fabContainer.classList.remove('open');
+        }
+    });
+}
+
+// Inicializar cuando el DOM cargue
+document.addEventListener('DOMContentLoaded', () => {
+    setupMobileFab();
+});
+
+
 /* ------------------------------------------------------------- Efecto Menú ------------------------------------------- */
 const links = document.querySelectorAll(".nav__link");
 const indicator = document.querySelector(".nav__indicator");
@@ -322,6 +369,19 @@ function loadSavedProfile() {
 document.addEventListener('DOMContentLoaded', () => {
     loadSavedProfile()
 });
+//Texto de perfil
+document.addEventListener('DOMContentLoaded', () => {
+    const trigger = document.querySelector('.read-more-trigger');
+    const container = document.getElementById('collapsible-text');
+
+    if (trigger && container) {
+        trigger.addEventListener('click', (e) => {
+            e.stopPropagation(); // Evita burbujeos accidentales
+            container.classList.remove('text-collapsed');
+            container.classList.add('text-expanded');
+        });
+    }
+});
 /* ------------------------------------------------------ Welcome page ----------------------------------------------- */
 
 const sequence = [
@@ -489,7 +549,22 @@ const songs = [
         title: "Soñé", 
         artist: "Zoé", 
         phrase: "Pues no tengo nada que perder...", 
+        colors: {
+            // navBg usa rgba (el último valor es la opacidad, 0.2 = 20%)
+            navBg: "rgba(90, 50, 75, 0.25)", 
+            navText: "#ffffff",
+            
+            // playBg usa un color sólido (Hexadecimal)
+            playBg: "#e8c5d8",      
+            playText: "#3b2031",
+            
+            // La barra de progreso (Seekbar)
+            seekTrack: "rgba(224, 214, 202, 0.4)", // Fondo de la barra
+            seekThumb: "#e8c5d8",                   // Relleno de la barra
+            cardBg: "rgba(90, 50, 75, 0.35)"
+        },
         cover: "https://cdn-images.dzcdn.net/images/cover/8498486810fb5956153f175822b7b7d8/0x1900-000000-80-0-0.jpg", 
+        artistImg: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEikM-2x-VJrZSzhH8mQIBDUPtYs9Lnl-SC_-Qy0T-YjOEZpCFPIAQpjSwUMpP9FshprLmMtlVTQwcWuo4IHZUfMBzFU8ojcpyUn8xcpMxuI2mZKV4L1HHZ5g73MBRLoK6-3gm4-GTKZuxk7ZyyglhonXAaEM13SdryoyZtFHvnPI04lVuqtGIXbOi2DAx8/w409-h377/1783880970930.png",
         src: "sone.m4a", 
         link: "https://open.spotify.com/intl-es/track/2VhJ4nrPorAbySEgO4V0BS",
         lyrics: [
@@ -521,6 +596,21 @@ const songs = [
     {   title: "Droopy likes your Face", 
         artist: "Minecraft Volume Alpha", 
         phrase: "Entre cubos y nostalgia...", 
+        colors: {
+            // navBg usa rgba (el último valor es la opacidad, 0.2 = 20%)
+            navBg: "rgba(94, 201, 38, 0.22)", 
+            navText: "#ffffff",
+            
+            // playBg usa un color sólido (Hexadecimal)
+            playBg: "#866043",      
+            playText: "#ffffff",
+            
+            // La barra de progreso (Seekbar)
+            seekTrack: "rgba(134, 96, 67, 0.35)", // Fondo de la barra
+            seekThumb: "#5ec926",                 // Relleno de la barra
+            cardBg: "rgba(109, 160, 82, 0.25)"
+        },  
+        artistImg: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjcLlO7CCclC9xgFURexMSs5YUzyljb461zQuNp88tVCKkdzEDejJfjw7yJqkSi9T9KzPWzNvKxa8CsrKm0_sJ94NYAPor-mu9MQ7_p5jhwWWS5UMrGUNCKXEI4YylOHR7C03vNXvZTLmXkRMvKc9N8CK02DMKbLODnd9lwMU90_40f49UOhOZGaU_-t60/w304-h507/1783881677788.png",
         cover: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiYA9JFGnmzLKIhmwtyy3JimNGHTFg8cXoknIPVR_DM2J-LRxvfX4MhklD3xLGkb7ZOyDyyhsuWXLA6zOSLr2uQibClGQoETpfKGBfiYn5frqtOtFHjc4sMRcS2Uhr62OGSplpKt7qbjp3hyphenhyphenf84nSFgQ4YToMRs9a0eFGaZQ53hB0pXQ5av5CK2bWtPC9M/s640/minecraft.jpg", 
         src: "minecraft_uno.m4a", 
         link: "https://open.spotify.com/intl-es/track/0kZEfdlIq3sfQklsGcUZDm",
@@ -543,6 +633,22 @@ const songs = [
     {   title: "Labios rotos", 
         artist: "Zoé", 
         phrase: "En el desierto de mi alma...", 
+        colors: {
+            // navBg usa rgba (el último valor es la opacidad, 0.2 = 20%)
+            navBg: "rgba(90, 50, 75, 0.25)", 
+            navText: "#ffffff",
+            
+            // playBg usa un color sólido (Hexadecimal)
+            playBg: "#e8c5d8",      
+            playText: "#3b2031",
+            
+            // La barra de progreso (Seekbar)
+            seekTrack: "rgba(224, 214, 202, 0.4)", // Fondo de la barra
+            seekThumb: "#e8c5d8",                   // Relleno de la barra
+            cardBg: "rgba(90, 50, 75, 0.1)",
+            cardBg: "rgba(90, 50, 75, 0.35)"
+        },
+        artistImg: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg2Bna2H2hKJxS-OayFMBlafTVq11tOVcmYs5DecDwWAQpjU3hoA80u8jlhM2o-unXY24tgYZmlxe9TJbEJoLDd1Y_7VVNgqyQjhHBNteH7hC2DfpLkeW25UyLi-Sevx9tViDJBpEM5TbJZEwgTLwHBqDiKPgIuSqhFXaHQFDnHXsumQ8u_trZPNssc3-I/w434-h309/1783880991778.png",
         cover: "https://cdn-images.dzcdn.net/images/cover/8498486810fb5956153f175822b7b7d8/0x1900-000000-80-0-0.jpg", 
         src: "labiosrotos.m4a", 
         link: "https://share.google/aimode/FJutnTOeOMxUojUVq",
@@ -566,6 +672,21 @@ const songs = [
     {   title: "Tarde", 
         artist: "Siddhartha", 
         phrase: "Tarde se me hacía para volver a verte...", 
+        colors: {
+            // navBg usa rgba (el último valor es la opacidad, 0.2 = 20%)
+            navBg: "rgba(216, 123, 90, 0.25)", 
+            navText: "#ffffff",
+            
+            // playBg usa un color sólido (Hexadecimal)
+            playBg: "#d87b5a",      
+            playText: "#2e2a28",
+            
+            // La barra de progreso (Seekbar)
+            seekTrack: "rgba(228, 219, 204, 0.5)", // Fondo de la barra
+            seekThumb: "#d87b5a",                   // Relleno de la barra
+            cardBg: "rgba(216, 123, 90, 0.35)"
+        },
+        artistImg: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgXFqGjXFOS8CJcehWdxs_1tatbC-ggFlvUeXbVt0X5CQ2W-d8VpugSo8pa5CnGyngkFeK1PEP6J5MdOJ4f-tz7en_bclntaKFy405QnFVKQoMLhaKjOP9B6bA0JM3c5VdCfPC53IVw5c_1f61qKYZgtEgLhyphenhyphenpt7meGVIitoF1uJ0knzHSIMPqcS0Ddsew/w410-h410/1783881029450.png",
         cover: "https://cdn-images.dzcdn.net/images/cover/a508833ee74e2cd3197f0641e3c73545/1900x1900-000000-80-0-0.jpg", 
         src: "tarde.m4a", 
         link: "https://share.google/aimode/1N4OOnvlG6KLJVtCE",
@@ -587,7 +708,22 @@ const songs = [
     },
     {   title: "Me hace falta", 
         artist: "Siddhartha", 
-        phrase: "Con la luz intermitente, Vibra tu frecuencia...", 
+        phrase: "Con la luz intermitente, Vibra tu frecuencia...",
+        colors: {
+            // navBg usa rgba (el último valor es la opacidad, 0.2 = 20%)
+            navBg: "rgba(31, 89, 153, 0.25)", 
+            navText: "#ffffff",
+            
+            // playBg usa un color sólido (Hexadecimal)
+            playBg: "#d9b88c",      
+            playText: "#1a2b4c",
+            
+            // La barra de progreso (Seekbar)
+            seekTrack: "rgba(217, 184, 140, 0.4)", // Fondo de la barra
+            seekThumb: "#d9b88c",                   // Relleno de la barra
+            cardBg: "rgba(31, 89, 153, 0.35)"
+        }, 
+        artistImg: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgXFqGjXFOS8CJcehWdxs_1tatbC-ggFlvUeXbVt0X5CQ2W-d8VpugSo8pa5CnGyngkFeK1PEP6J5MdOJ4f-tz7en_bclntaKFy405QnFVKQoMLhaKjOP9B6bA0JM3c5VdCfPC53IVw5c_1f61qKYZgtEgLhyphenhyphenpt7meGVIitoF1uJ0knzHSIMPqcS0Ddsew/w410-h410/1783881029450.png",
         cover: "https://images.genius.com/4d612579eb7472076b70e67617e12fb6.1000x1000x1.png", 
         src: "me_hace_falta.mp3", 
         link: "https://open.spotify.com/intl-es/track/7EAr8k0WiV9ybItof6utFj",
@@ -614,7 +750,22 @@ const songs = [
     },
     {   title: "Tears", 
         artist: "Minecraft", 
-        phrase: "Fantastica geometría multicolor...", 
+        phrase: "Fantastica geometría multicolor...",
+        colors: {
+            // navBg usa rgba (el último valor es la opacidad, 0.2 = 20%)
+            navBg: "rgba(94, 201, 38, 0.22)", 
+            navText: "#ffffff",
+            
+            // playBg usa un color sólido (Hexadecimal)
+            playBg: "#866043",      
+            playText: "#ffffff",
+            
+            // La barra de progreso (Seekbar)
+            seekTrack: "rgba(134, 96, 67, 0.35)", // Fondo de la barra
+            seekThumb: "#5ec926",                 // Relleno de la barra
+            cardBg: "rgba(109, 160, 82, 0.25)"
+        },   
+        artistImg: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjcLlO7CCclC9xgFURexMSs5YUzyljb461zQuNp88tVCKkdzEDejJfjw7yJqkSi9T9KzPWzNvKxa8CsrKm0_sJ94NYAPor-mu9MQ7_p5jhwWWS5UMrGUNCKXEI4YylOHR7C03vNXvZTLmXkRMvKc9N8CK02DMKbLODnd9lwMU90_40f49UOhOZGaU_-t60/w304-h507/1783881677788.png",
         cover: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiYA9JFGnmzLKIhmwtyy3JimNGHTFg8cXoknIPVR_DM2J-LRxvfX4MhklD3xLGkb7ZOyDyyhsuWXLA6zOSLr2uQibClGQoETpfKGBfiYn5frqtOtFHjc4sMRcS2Uhr62OGSplpKt7qbjp3hyphenhyphenf84nSFgQ4YToMRs9a0eFGaZQ53hB0pXQ5av5CK2bWtPC9M/s640/minecraft.jpg", 
         src: "minecraft_dos.m4a", 
         link: "https://open.spotify.com/intl-es/track/0kZEfdlIq3sfQklsGcUZDm",
@@ -636,7 +787,22 @@ const songs = [
     },
     {   title: "Vía lactea", 
         artist: "Zoé", 
-        phrase: "Del prisma de tus ojos, en mi casco de astronauta...", 
+        phrase: "Del prisma de tus ojos, en mi casco de astronauta...",
+        colors: {
+            // navBg usa rgba (el último valor es la opacidad, 0.2 = 20%)
+            navBg: "rgba(90, 50, 75, 0.25)", 
+            navText: "#ffffff",
+            
+            // playBg usa un color sólido (Hexadecimal)
+            playBg: "#e8c5d8",      
+            playText: "#3b2031",
+            
+            // La barra de progreso (Seekbar)
+            seekTrack: "rgba(224, 214, 202, 0.4)", // Fondo de la barra
+            seekThumb: "#e8c5d8",                   // Relleno de la barra
+            cardBg: "rgba(90, 50, 75, 0.35)"
+        }, 
+        artistImg: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEikM-2x-VJrZSzhH8mQIBDUPtYs9Lnl-SC_-Qy0T-YjOEZpCFPIAQpjSwUMpP9FshprLmMtlVTQwcWuo4IHZUfMBzFU8ojcpyUn8xcpMxuI2mZKV4L1HHZ5g73MBRLoK6-3gm4-GTKZuxk7ZyyglhonXAaEM13SdryoyZtFHvnPI04lVuqtGIXbOi2DAx8/w409-h377/1783880970930.png",
         cover: "https://cdn-images.dzcdn.net/images/cover/8498486810fb5956153f175822b7b7d8/0x1900-000000-80-0-0.jpg", 
         src: "via_lactea.mp3", 
         link: "https://open.spotify.com/intl-es/track/1nquycJ4zLhrT23rwtH5Wj", 
@@ -659,7 +825,22 @@ const songs = [
     },
     {   title: "Bruma", 
         artist: "León Larregui", 
-        phrase: "Dar sin esperar nada a cambio...", 
+        phrase: "Dar sin esperar nada a cambio...",
+        colors: {
+            // navBg usa rgba (el último valor es la opacidad, 0.2 = 20%)
+            navBg: "rgba(92, 139, 176, 0.25)", 
+            navText: "#ffffff",
+            
+            // playBg usa un color sólido (Hexadecimal)
+            playBg: "#5c8bb0",      
+            playText: "#1c1d21",
+            
+            // La barra de progreso (Seekbar)
+            seekTrack: "rgba(92, 139, 176, 0.3)", // Fondo de la barra
+            seekThumb: "#5c8bb0",                   // Relleno de la barra
+            cardBg: "rgba(92, 139, 176, 0.35)"
+        },  
+        artistImg: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg2Bna2H2hKJxS-OayFMBlafTVq11tOVcmYs5DecDwWAQpjU3hoA80u8jlhM2o-unXY24tgYZmlxe9TJbEJoLDd1Y_7VVNgqyQjhHBNteH7hC2DfpLkeW25UyLi-Sevx9tViDJBpEM5TbJZEwgTLwHBqDiKPgIuSqhFXaHQFDnHXsumQ8u_trZPNssc3-I/w434-h309/1783880991778.png",
         cover: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAKhj6DATZm2qKUx11gFHedys-WEO3UfFgUQ&s", 
         src: "bruma.m4a", 
         link: "https://share.google/aimode/uegIMAnAy3DAhwNIg",
@@ -682,6 +863,21 @@ const songs = [
     {   title: "Velur", 
         artist: "Zoé", 
         phrase: "Me ajusto, pero no me aplaco, echa formol al corazón...", 
+        colors: {
+            // navBg usa rgba (el último valor es la opacidad, 0.2 = 20%)
+            navBg: "rgba(153, 43, 50, 0.25)", 
+            navText: "#ffffff",
+            
+            // playBg usa un color sólido (Hexadecimal)
+            playBg: "#bd4f56",      
+            playText: "#2f1b1a",
+            
+            // La barra de progreso (Seekbar)
+            seekTrack: "rgba(237, 230, 220, 0.5)", // Fondo de la barra
+            seekThumb: "#bd4f56",                   // Relleno de la barra
+            cardBg: "rgba(153, 43, 50, 0.35)"
+        }, 
+        artistImg: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEikM-2x-VJrZSzhH8mQIBDUPtYs9Lnl-SC_-Qy0T-YjOEZpCFPIAQpjSwUMpP9FshprLmMtlVTQwcWuo4IHZUfMBzFU8ojcpyUn8xcpMxuI2mZKV4L1HHZ5g73MBRLoK6-3gm4-GTKZuxk7ZyyglhonXAaEM13SdryoyZtFHvnPI04lVuqtGIXbOi2DAx8/w409-h377/1783880970930.png",
         cover: "https://cdn-images.dzcdn.net/images/cover/46d64f553900fcee92fdc8e364246828/0x1900-000000-80-0-0.jpg", 
         src: "velur.m4a", 
         link: "https://open.spotify.com/intl-es/track/6Bpw7j4WL3IwdM1xLPcH7Q",
@@ -702,6 +898,21 @@ const songs = [
     {   title: "Doma", 
         artist: "Jósean Log", 
         phrase: "De este desparpajo, yo de esta no me rajo...", 
+        colors: {
+            // navBg usa rgba (el último valor es la opacidad, 0.2 = 20%)
+            navBg: "rgba(15, 20, 35, 0.25)", 
+            navText: "#ffffff",
+            
+            // playBg usa un color sólido (Hexadecimal)
+            playBg: "#5ec926",      
+            playText: "#0f1423",
+            
+            // La barra de progreso (Seekbar)
+            seekTrack: "rgba(94, 201, 38, 0.25)", // Fondo de la barra
+            seekThumb: "#5ec926",                  // Relleno de la barra
+            cardBg: "rgba(15, 20, 35, 0.35)"
+        }, 
+        artistImg: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEghzcEbx9GeXJbabInJJ7Sv-jFoHgZOyN8jwz-qRbbBTt939nfLhQpH9mk4uTiMfv0VVcefxfNbWYM5XgHURdgZlSq8sL9WFSVFATlj_Q7QyWBNois7EPw3Qj0omiEdgDCYBYmOvAuIZCHPU3PCCK5_k6TBqzqxFlZhChVIkhjYi14zZtQ_QBlnsqanwek/w334-h445/1783881050324.png",
         cover: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg5U8VJdtWDJb3S8XRk7dXFqkf8WXFTpOvw5yn3aral845kVhajX3rrQoHAHMefY7V-6AEfWwzwLUXK6SMSvFkYslAK95Vr-XUq4YYJF1OvHqUR3CC50SZ_MaeIjd87GmDAwwjPIuAmDjDqVwSnW_gFDf7w69U5ymll5KNbq0IYfpIxhIdn_enAnp1KLSY/w492-h492/doma.jpg", 
         src: "doma.mp3", 
         link: "https://open.spotify.com/intl-es/track/58cLm4PaHNt8DDr9ayZnNz",
@@ -722,6 +933,21 @@ const songs = [
     {   title: "Búscame otra vez", 
         artist: "Kevin Kaarl", 
         phrase: "Cariño, te he esperado, buscame otra vez...", 
+        colors: {
+            // navBg usa rgba (el último valor es la opacidad, 0.2 = 20%)
+            navBg: "rgba(45, 20, 22, 0.25)", 
+            navText: "#ffffff",
+            
+            // playBg usa un color sólido (Hexadecimal)
+            playBg: "#d46b33",      
+            playText: "#24100a",
+            
+            // La barra de progreso (Seekbar)
+            seekTrack: "rgba(212, 107, 51, 0.3)", // Fondo de la barra
+            seekThumb: "#d46b33",                  // Relleno de la barra
+            cardBg: "rgba(45, 20, 22, 0.35)"
+        }, 
+        artistImg: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgBlbkJejoxd621lsUn9MjMMfOmOZ8JBVjJp61N_HuVQ_C7ZjtCg89aax8piSYXk7oNw38PepoyoMrRJ8wpaNFqGDnLFQXCh0xAymHxeBRJR8dGmSL-0lYabPoIOX26qlQv7jgkgCiWDtwV7-ji_s3JMkDq7P0eDB2yf5z8NkJoL0Yewu19h3ba00IHHHg/w343-h378/1783881013290.png",
         cover: "http://blogger.googleusercontent.com/img/a/AVvXsEg06Yf5cixLCsleroAlH70uig4NT9x44T9BlnO0sopNXZ3YNsiAFwpOfMXzIj-57B25ioovhLGe6s9M5OsI_O5C0J62wnB4vp5i8YjmgnrLSjdyL9nDF5vKc9FSqC5SFO6leo0JqMT0zomOxa4lTwyQgVTjNBltJujnKHzQUQ8lKqk9nEY0Y3UCMcAJzZU", 
         src: "buscame_otravez.mp3", 
         link: "https://open.spotify.com/intl-es/track/4YnjesWFrSEkhwERM5Fhj7",
@@ -744,6 +970,21 @@ const songs = [
     {   title: "Unicos", 
         artist: "Siddhartha", 
         phrase: "Veinte millas de calor... y otra vez...", 
+        colors: {
+            // navBg usa rgba (el último valor es la opacidad, 0.2 = 20%)
+            navBg: "rgba(216, 123, 90, 0.25)", 
+            navText: "#ffffff",
+            
+            // playBg usa un color sólido (Hexadecimal)
+            playBg: "#d87b5a",      
+            playText: "#2e2a28",
+            
+            // La barra de progreso (Seekbar)
+            seekTrack: "rgba(228, 219, 204, 0.5)", // Fondo de la barra
+            seekThumb: "#d87b5a",                   // Relleno de la barra
+            cardBg: "rgba(216, 123, 90, 0.35)"
+        },
+        artistImg: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgXFqGjXFOS8CJcehWdxs_1tatbC-ggFlvUeXbVt0X5CQ2W-d8VpugSo8pa5CnGyngkFeK1PEP6J5MdOJ4f-tz7en_bclntaKFy405QnFVKQoMLhaKjOP9B6bA0JM3c5VdCfPC53IVw5c_1f61qKYZgtEgLhyphenhyphenpt7meGVIitoF1uJ0knzHSIMPqcS0Ddsew/w410-h410/1783881029450.png",
         cover: "https://cdn-images.dzcdn.net/images/cover/a508833ee74e2cd3197f0641e3c73545/1900x1900-000000-80-0-0.jpg", 
         src: "Unicos.mp3",  
         link: "https://share.google/aimode/zGdg3R3v1hB7VW9NG",
@@ -770,7 +1011,22 @@ const songs = [
     },
     {   title: "Mice on venus", 
         artist: "Minecraft", 
-        phrase: "Calma, curiosidad, antender y ganas de...", 
+        phrase: "Calma, curiosidad, antender y ganas de...",
+        colors: {
+            // navBg usa rgba (el último valor es la opacidad, 0.2 = 20%)
+            navBg: "rgba(94, 201, 38, 0.22)", 
+            navText: "#ffffff",
+            
+            // playBg usa un color sólido (Hexadecimal)
+            playBg: "#866043",      
+            playText: "#ffffff",
+            
+            // La barra de progreso (Seekbar)
+            seekTrack: "rgba(134, 96, 67, 0.35)", // Fondo de la barra
+            seekThumb: "#5ec926",                 // Relleno de la barra
+            cardBg: "rgba(109, 160, 82, 0.25)"
+        },  
+        artistImg: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjcLlO7CCclC9xgFURexMSs5YUzyljb461zQuNp88tVCKkdzEDejJfjw7yJqkSi9T9KzPWzNvKxa8CsrKm0_sJ94NYAPor-mu9MQ7_p5jhwWWS5UMrGUNCKXEI4YylOHR7C03vNXvZTLmXkRMvKc9N8CK02DMKbLODnd9lwMU90_40f49UOhOZGaU_-t60/w304-h507/1783881677788.png",
         cover: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiYA9JFGnmzLKIhmwtyy3JimNGHTFg8cXoknIPVR_DM2J-LRxvfX4MhklD3xLGkb7ZOyDyyhsuWXLA6zOSLr2uQibClGQoETpfKGBfiYn5frqtOtFHjc4sMRcS2Uhr62OGSplpKt7qbjp3hyphenhyphenf84nSFgQ4YToMRs9a0eFGaZQ53hB0pXQ5av5CK2bWtPC9M/s640/minecraft.jpg", 
         src: "mice_on_venus.mp3",  
         link: "https://share.google/aimode/8qZ0Jop9EApVncwKy",
@@ -793,6 +1049,21 @@ const songs = [
     {   title: "Ser parte", 
         artist: "Siddhartha", 
         phrase: "Reinventarme y ser parte de tú ser, al final me guiare por tí.", 
+        colors: {
+            // navBg usa rgba (el último valor es la opacidad, 0.2 = 20%)
+            navBg: "rgba(216, 123, 90, 0.25)", 
+            navText: "#ffffff",
+            
+            // playBg usa un color sólido (Hexadecimal)
+            playBg: "#d87b5a",      
+            playText: "#2e2a28",
+            
+            // La barra de progreso (Seekbar)
+            seekTrack: "rgba(228, 219, 204, 0.5)", // Fondo de la barra
+            seekThumb: "#d87b5a",                   // Relleno de la barra
+            cardBg: "rgba(216, 123, 90, 0.35)"
+        },
+        artistImg: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgXFqGjXFOS8CJcehWdxs_1tatbC-ggFlvUeXbVt0X5CQ2W-d8VpugSo8pa5CnGyngkFeK1PEP6J5MdOJ4f-tz7en_bclntaKFy405QnFVKQoMLhaKjOP9B6bA0JM3c5VdCfPC53IVw5c_1f61qKYZgtEgLhyphenhyphenpt7meGVIitoF1uJ0knzHSIMPqcS0Ddsew/w410-h410/1783881029450.png",
         cover: "https://cdn-images.dzcdn.net/images/cover/a508833ee74e2cd3197f0641e3c73545/1900x1900-000000-80-0-0.jpg", 
         src: "ser_parte.mp3",  
         link: "https://share.google/aimode/hMmWd26Wkbf9XoTUs",
@@ -836,6 +1107,12 @@ function typeWriter(text, targetId = 'typewriter-text') {
     const container = document.getElementById(targetId);
     
     if (!container) return;
+
+    if (text.length > 40) {
+        container.classList.add('long-text-mode');
+    } else {
+        container.classList.remove('long-text-mode');
+    }
 
     container.innerHTML = ""; 
     clearInterval(wordInterval); 
@@ -886,54 +1163,46 @@ function toggleVideo(e) {
 }
 
 function toggleLyricsMode(e) {
-    e.stopPropagation();
+    if (e) e.preventDefault(); // Evita que la página salte al hacer clic en el link
     isLyricsMode = !isLyricsMode;
-    loadPlaylist(); // Recarga la interfaz según el estado
+    
+    const overlay = document.getElementById('lyrics-overlay');
+    const navLinkIcon = document.querySelector('#nav-item-letra .nav__link');
+    
+    if (isLyricsMode) {
+        overlay.classList.add('active');
+        if(navLinkIcon) navLinkIcon.classList.add('active-link');
+        renderLyricsInOverlay();
+    } else {
+        overlay.classList.remove('active');
+        if(navLinkIcon) navLinkIcon.classList.remove('active-link');
+    }
+}
+
+function renderLyricsInOverlay() {
+    const currentSong = songs[currentSongIndex];
+    const lyricsDiv = document.getElementById('lyrics-content');
+    if (!lyricsDiv) return;
+    
+    const lyricsData = currentSong.lyrics || ["Letras no disponibles aún."];
+    const lyricsHTML = lyricsData.map(line => {
+        if (line.includes('lyrics-highlight') || line === '<br>') return line;
+        return `<div class="lyrics-line" style="color: var(--black-color);">${line}</div>`;
+    }).join('');
+    
+    lyricsDiv.innerHTML = `<div class="lyrics-container" style="padding: 0;">${lyricsHTML}</div>`;
 }
 
 function loadPlaylist() {
     playlistContainer.innerHTML = ''; 
-
+    songs.forEach((song, index) => {
+        const div = createSongElement(song, index, index === currentSongIndex);
+        playlistContainer.appendChild(div);
+    });
+    
+    // Si la capa de letras está abierta, la actualizamos automáticamente al cambiar de canción
     if (isLyricsMode) {
-        // 1. Mostrar SÓLO la canción actual activa con sus controles
-        const currentSong = songs[currentSongIndex];
-        const activeDiv = createSongElement(currentSong, currentSongIndex, true);
-        playlistContainer.appendChild(activeDiv);
-
-        // 2. Mostrar la siguiente canción de forma compacta
-        const nextIndex = isShuffle ? 
-            Math.floor(Math.random() * songs.length) : // (Nota: idealmente aquí pre-calculas el siguiente índice)
-            (currentSongIndex + 1) % songs.length;
-        
-        const nextSong = songs[nextIndex];
-        const nextDiv = document.createElement('div');
-        nextDiv.className = 'compact-next-song';
-        nextDiv.innerHTML = `
-            <img src="${nextSong.cover}" alt="Siguiente">
-            <span>${nextSong.title} - ${nextSong.artist}</span>
-        `;
-        playlistContainer.appendChild(nextDiv);
-
-        // 3. Renderizar las letras
-        const lyricsDiv = document.createElement('div');
-        lyricsDiv.className = 'lyrics-container';
-        
-        // Formatear líneas
-        const lyricsData = currentSong.lyrics || ["Letras no disponibles aún."];
-        const lyricsHTML = lyricsData.map(line => {
-            if(line.includes('lyrics-highlight') || line === '<br>') return line;
-            return `<div class="lyrics-line">${line}</div>`;
-        }).join('');
-        
-        lyricsDiv.innerHTML = lyricsHTML;
-        playlistContainer.appendChild(lyricsDiv);
-
-    } else {
-        // Comportamiento normal: listar todas las canciones
-        songs.forEach((song, index) => {
-            const div = createSongElement(song, index, index === currentSongIndex);
-            playlistContainer.appendChild(div);
-        });
+        renderLyricsInOverlay();
     }
 }
 
@@ -951,22 +1220,12 @@ function createSongElement(song, index, isActive) {
     const isFav = favoriteSongs.includes(song.title);
     const favIcon = isFav ? `<span class="material-symbols-outlined fav-indicator" style="font-size: 18px; color: #709fde; margin-left: 10px;">favorite</span>` : '';
 
-    const actionButtons = isActive ? `
-        <div class="song-actions">
-            <button class="action-pill btn-lyrics">
-                <span class="material-symbols-outlined">${isLyricsMode ? 'queue_music' : 'lyrics'}</span>
-            </button>
-            <button class="action-pill-video btn-video">
-                <span class="material-symbols-outlined">${isVideoHidden ? 'videocam' : 'videocam_off'}</span>
-            </button>
-        </div>
-    ` : '';
-
     // Lógica para el formato del texto: En línea si está activa, apilado si no.
     const titleArtistHTML = isActive 
         ? `<h4>${song.title} – ${song.artist}${favIcon}</h4>` 
         : `<h4>${song.title}${favIcon}</h4><p>${song.artist}</p>`;
 
+    // NOTA: Se eliminó la variable ${actionButtons} que causaba el error.
     div.innerHTML = `
         <div class="cover-song">
             <img src="${song.cover}" alt="cover">
@@ -975,24 +1234,10 @@ function createSongElement(song, index, isActive) {
             <div class="song-info">
                 ${titleArtistHTML}
             </div>
-            ${actionButtons}
         </div>
     `;
 
-    if (isActive) {
-        const btnLyrics = div.querySelector('.btn-lyrics');
-        const btnVideo = div.querySelector('.btn-video');
-
-        btnLyrics.addEventListener('click', (e) => {
-            e.stopPropagation(); 
-            toggleLyricsMode(e);
-        });
-
-        btnVideo.addEventListener('click', (e) => {
-            e.stopPropagation();
-            toggleVideo(e);
-        });
-    }
+    // NOTA: Se eliminó el bloque que buscaba .btn-lyrics y .btn-video porque ya son globales.
 
     return div;
 }
@@ -1040,7 +1285,30 @@ function selectSong(index) {
     currentSongIndex = index;
     audio.src = songs[currentSongIndex].src;
 
+    document.getElementById('artist-quote-prefix').innerText = `Y como dijo ${songs[currentSongIndex].artist}...`;
+    document.getElementById('artist-image').src = songs[currentSongIndex].artistImg || 'default_artist.png';
     // Detectamos si el modo ambiente está activo para elegir el destino del texto
+    const root = document.documentElement;
+    const songColors = songs[currentSongIndex].colors;
+
+    if (songColors) {
+        root.style.setProperty('--dyn-nav-bg', songColors.navBg);
+        root.style.setProperty('--dyn-nav-text', songColors.navText);
+        root.style.setProperty('--dyn-play-bg', songColors.playBg);
+        root.style.setProperty('--dyn-play-text', songColors.playText);
+        root.style.setProperty('--dyn-seek-track', songColors.seekTrack);
+        root.style.setProperty('--dyn-seek-thumb', songColors.seekThumb);
+        root.style.setProperty('--dyn-card-bg', songColors.cardBg);
+    } else {
+        root.style.setProperty('--dyn-nav-bg', 'rgba(255, 255, 255, 0.15)');
+        root.style.setProperty('--dyn-nav-text', '#ffffff');
+        root.style.setProperty('--dyn-play-bg', '#ceadd0');
+        root.style.setProperty('--dyn-play-text', '#33213a');
+        root.style.setProperty('--dyn-seek-track', 'rgba(255, 255, 255, 0.2)');
+        root.style.setProperty('--dyn-seek-thumb', '#ceadd0');
+        root.style.setProperty('--dyn-card-bg', 'rgba(255, 255, 255, 0.1)');
+    }
+    
     const target = ambientModeActive ? 'ambient-dynamic-text' : 'typewriter-text';
     
     // Mandamos la frase al destino correcto
@@ -1049,6 +1317,7 @@ function selectSong(index) {
     loadPlaylist(); 
     playSong();
     scrollToActiveSong();
+    updateMiniPlayerUI();
 }
 
 /* Alterna entre reproducción y pausa */
@@ -1105,6 +1374,9 @@ function playSong() {
 
     const waveElement = document.getElementById('trackWave');
     if (waveElement) waveElement.classList.add('wave-playing');
+
+    const miniPlayIcon = document.getElementById('mini-play-icon');
+    if (miniPlayIcon) miniPlayIcon.className = "ri-pause-fill";
     
 }
 
@@ -1122,11 +1394,30 @@ function pauseSong() {
 
     const waveElement = document.getElementById('trackWave');
     if (waveElement) waveElement.classList.remove('wave-playing');
+
+    const miniPlayIcon = document.getElementById('mini-play-icon');
+    if (miniPlayIcon) miniPlayIcon.className = "ri-play-fill";
 }
 
 /**
  * Salta a la siguiente canción (Circular)
  */
+
+function toggleGlobalVideo() {
+    isVideoHidden = !isVideoHidden;
+    const staticImg = document.getElementById('static-cover-fallback');
+    const btnIcon = document.getElementById('global-video-btn').querySelector('.material-symbols-outlined');
+
+    if (isVideoHidden) {
+        staticImg.src = songs[currentSongIndex].cover;
+        staticImg.classList.add('show-static');
+        btnIcon.textContent = "videocam";
+    } else {
+        staticImg.classList.remove('show-static');
+        btnIcon.textContent = "videocam_off";
+    }
+}
+
 function toggleFavorite() {
     const currentSong = songs[currentSongIndex];
     if (favoriteSongs.includes(currentSong.title)) {
@@ -1185,6 +1476,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const favBtn = document.getElementById('favBtn');
     const songBtn = document.getElementById('SongBtn');
     const allControlButtons = document.querySelectorAll('.main-controls button, .sub-controls button');
+
+    document.getElementById('global-video-btn')?.addEventListener('click', toggleGlobalVideo);
+    document.getElementById('nav-item-letra')?.addEventListener('click', toggleLyricsMode);
+    document.getElementById('fab-item-letra')?.addEventListener('click', (e) => {
+        toggleLyricsMode(e);
+        
+        document.querySelector('.fab-menu-container')?.classList.remove('open');
+    });
 
     // 2. Asignar las funciones a los eventos de clic
     if (songBtn) {
@@ -1262,22 +1561,20 @@ function updateSeekBar() {
         const percentage = (audio.currentTime / audio.duration) * 100;
         seekSlider.value = percentage;
         trackWave.style.width = percentage + "%";
-        trackStraight.style.left = `calc(${percentage}% + 10px)`;
-        trackStraight.style.width = `calc(${100 - percentage}% - 10px)`;
+        
+        /* CÁLCULO CORREGIDO: Sin el + 10px */
+        trackStraight.style.left = percentage + "%";
+        trackStraight.style.width = (100 - percentage) + "%";
+        
         currentTimeLabel.innerText = formatTime(audio.currentTime);
 
-        
         const timeLeft = audio.duration - audio.currentTime; 
-
         if (timeLeft <= FADE_TIME) {
             const targetVolume = Math.max(0, timeLeft / FADE_TIME);
-            
-            
             if (audio.volume >= targetVolume) {
                 audio.volume = targetVolume;
             }
         }
-       
     }
 }
 
@@ -1297,8 +1594,10 @@ seekSlider.oninput = () => {
     audio.currentTime = seekTo;
     
     trackWave.style.width = percentage + "%";
-    trackStraight.style.left = `calc(${percentage}% + 10px)`;
-    trackStraight.style.width = `calc(${100 - percentage}% - 10px)`;
+    
+    /* CÁLCULO CORREGIDO: Sin el + 10px */
+    trackStraight.style.left = percentage + "%";
+    trackStraight.style.width = (100 - percentage) + "%";
 
     clearInterval(fadeInInterval); 
     if (audio.duration - audio.currentTime > FADE_TIME) {
@@ -1549,9 +1848,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-//---------------------------------------------------- Switch ------------------------------------------------
+/* ---------------------------------------------------- Switch (Píldoras de Tema Multiplataforma) ------------------------------------------------ */
 
-// Función para activar el modo oscuro
 function enableDarkMode() {
     document.body.classList.add('dark-mode');
     document.body.classList.remove('light-mode');
@@ -1560,7 +1858,6 @@ function enableDarkMode() {
     applyCurrentThemeColors();
 }
 
-// Función para activar el modo claro
 function enableLightMode() {
     document.body.classList.add('light-mode');
     document.body.classList.remove('dark-mode');
@@ -1568,17 +1865,15 @@ function enableLightMode() {
     updateThemeColor();
     applyCurrentThemeColors();
 }
-// Guardar la preferencia del usuario en el almacenamiento local
+
 function saveUserPreference(isDarkMode) {
     localStorage.setItem('isDarkMode', isDarkMode);
 }
 
-// Cargar la preferencia del usuario desde el almacenamiento local
 function loadUserPreference() {
     return localStorage.getItem('isDarkMode') === 'true';
 }
 
-// Aplicar el modo basado en la preferencia del sistema
 function applySystemPreference() {
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
         enableDarkMode();
@@ -1587,51 +1882,76 @@ function applySystemPreference() {
     }
 }
 
-// Escuchar cambios en la preferencia del sistema
 window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
-    if (loadUserPreference() === null) { // Solo aplicar el cambio si el usuario no ha guardado una preferencia
-        if (e.matches) {
-            enableDarkMode();
+    if (loadUserPreference() === null) { 
+        const isDark = e.matches;
+        if (isDark) enableDarkMode(); else enableLightMode();
+        updateThemeIcons(isDark);
+    }
+});
+
+// ACTUALIZA TODOS LOS ICONOS AUTOMÁTICAMENTE (MÓVIL Y DESKTOP)
+function updateThemeIcons(isDark) {
+    const themeIcons = document.querySelectorAll(".theme-icon");
+    themeIcons.forEach(icon => {
+        if (isDark) {
+            icon.className = "theme-icon ri-moon-clear-fill"; // Cambia a Luna
+            icon.style.transform = "rotate(360deg)";         // Efecto de giro
         } else {
-            enableLightMode();
+            icon.className = "theme-icon ri-sun-fill";        // Cambia a Sol
+            icon.style.transform = "rotate(0deg)";
         }
-    }
-});
+    });
+}
 
+// ESCUCHA EL CLIC EN CUALQUIERA DE LAS DOS PÍLDORAS
+function setupThemeButtons() {
+    const themeButtons = document.querySelectorAll(".theme-toggle-trigger");
 
-document.getElementById("themeSwitch").addEventListener("change", function () {
-    const isChecked = this.checked;
+    themeButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const isDark = document.body.classList.contains('dark-mode');
+            
+            if (isDark) {
+                enableLightMode();
+                saveUserPreference(false);
+                updateThemeIcons(false);
+            } else {
+                enableDarkMode();
+                saveUserPreference(true);
+                updateThemeIcons(true);
+            }
 
-    if (isChecked) {
-        enableDarkMode();
-    } else {
-        enableLightMode();
-    }
+            if (typeof updatePDFThumbnails === "function") {
+                updatePDFThumbnails();
+            }
+        });
+    });
+}
 
-    saveUserPreference(isChecked);
-    updatePDFThumbnails();
-});
-
-// Inicializar el modo según la preferencia guardada
 function initializeMode() {
     const userPreference = loadUserPreference();
-    const themeSwitch = document.getElementById("themeSwitch");
 
     if (userPreference !== null) {
-        themeSwitch.checked = userPreference;
         if (userPreference) {
             enableDarkMode();
+            updateThemeIcons(true);
         } else {
             enableLightMode();
+            updateThemeIcons(false);
         }
     } else {
         applySystemPreference();
-        themeSwitch.checked = document.body.classList.contains('dark-mode');
+        const isDarkSystem = document.body.classList.contains('dark-mode');
+        updateThemeIcons(isDarkSystem);
     }
+    
+    setupThemeButtons();
 }
 
-// Llama a initializeMode al cargar la página
-initializeMode();
+document.addEventListener('DOMContentLoaded', () => {
+    initializeMode();
+});
 
 function updateThemeColor() {
     const statusBarColor = getComputedStyle(document.body)
@@ -1808,3 +2128,74 @@ function initGalleryScrollEffects(container) {
 
 // Ejecutar cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', buildHorizontalGallery);
+
+/* ---------------------------------------------------- Mini Reproductor Dinámico (Observer) ------------------------------------------------ */
+
+function updateMiniPlayerUI() {
+    const song = songs[currentSongIndex];
+    if (!song) return;
+    
+    const cover = document.getElementById('mini-cover');
+    const title = document.getElementById('mini-title');
+    const artist = document.getElementById('mini-artist');
+    
+    if(cover) cover.src = song.cover;
+    if(title) title.innerText = song.title;
+    if(artist) artist.innerText = song.artist;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const glassPanel = document.querySelector('.glass-panel'); // Tu reproductor principal
+    const mainNavList = document.getElementById('main-nav-list');
+    const miniPlayerNav = document.getElementById('mini-player-nav');
+    
+    // 1. Observer: Vigila si el panel principal está visible
+    if (glassPanel && mainNavList && miniPlayerNav) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                
+                const navLetra = document.getElementById('nav-item-letra');
+                const fabLetra = document.getElementById('fab-item-letra');
+
+                if (entry.isIntersecting) {
+                    mainNavList.style.display = 'flex';
+                    miniPlayerNav.style.display = 'none';
+                    
+                    // MOSTRAR OPCIÓN "LETRA"
+                    if (navLetra) navLetra.style.display = 'block';
+                    if (fabLetra) fabLetra.style.display = 'flex';
+                } else {
+                    mainNavList.style.display = 'none';
+                    miniPlayerNav.style.display = 'flex';
+                    updateMiniPlayerUI(); 
+                    
+                    // OCULTAR OPCIÓN "LETRA" Y CERRAR OVERLAY SI ESTÁ ABIERTO
+                    if (navLetra) navLetra.style.display = 'none';
+                    if (fabLetra) fabLetra.style.display = 'none';
+                    if (isLyricsMode) toggleLyricsMode(); // Lo apaga al hacer scroll
+                }
+            });
+        }, {
+            threshold: 0.1 
+        });
+        
+        observer.observe(glassPanel);
+    }
+
+    // 2. Conectar los botones del mini reproductor
+    const miniPlayBtn = document.getElementById('mini-play-btn');
+    const miniNextBtn = document.getElementById('mini-next-btn');
+
+    if (miniPlayBtn) miniPlayBtn.addEventListener('click', togglePlay);
+    if (miniNextBtn) miniNextBtn.addEventListener('click', nextSong);
+    
+    // 3. Cerrar el menú FAB cuando el usuario selecciona un capítulo
+    const fabLinks = document.querySelectorAll('.nav-fab-link');
+    const fabContainer = document.querySelector('.fab-menu-container');
+    
+    fabLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if(fabContainer) fabContainer.classList.remove('open');
+        });
+    });
+});

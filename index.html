@@ -36,56 +36,49 @@
                 <button class="btn-start-action btn-image-start" id="startBtn"></button>
             </div>
         </div>
-        <!--Switch estilo Material You-->
-        <div class="switch-container">
-            <input type="checkbox" id="themeSwitch" class="theme-switch" />
-            <label for="themeSwitch" class="theme-switch-label">
-                <span class="switch-track"></span>
-                <span class="switch-thumb"></span>
-            </label>
-        </div>
         <!--Menú-->
         <header class="header-menu" id="header-menu">
             <nav class="nav container">
                 <div class="nav__mobile-wrapper">
 
                     <div class="nav__menu" id="nav-menu">
-                        <ul class="nav__list">
+                        <ul class="nav__list" id="main-nav-list">
                             <div class="nav__indicator"></div>
-
-                            <!-- Logo separado de las opciones -->
                             <div class="logo">
-                                <a href="#">
-                                    <img src="menu_bruma.png" alt="Logo Era Salud Activa" class="logo-img">
-                                </a>
+                                <a href="#"><img src="menu_bruma.png" alt="Logo Era Salud Activa" class="logo-img"></a>
                             </div>
-
-                            <li class="nav__item">
-                                <a href="#Capitulo01" class="nav__link">
-                                    <i class="ri-contrast-2-fill"></i>
-                                <span>Cap 01</span>
-                                </a>
-                            </li>
-
-                            <li class="nav__item">
-                                <a href="#Capitulo02" class="nav__link">
-                                    <i class="ri-music-2-fill"></i>
-                                <span>Cap 02</span>
-                                </a>
-                            </li>
-
-                            <li class="nav__item">
-                                <a href="#Capitulo03" class="nav__link">
-                                    <i class="ri-movie-2-fill"></i> <span>...</span>
-                                </a>
-                            </li>
-
+                            <li class="nav__item"><a href="#Capitulo01" class="nav__link"><i class="ri-contrast-2-fill"></i><span>Cap 01</span></a></li>
+                            <li class="nav__item"><a href="#Capitulo02" class="nav__link"><i class="ri-music-2-fill"></i><span>Cap 02</span></a></li>
+                            <li class="nav__item" id="nav-item-letra" style="display: none;"><a href="#Letra" class="nav__link"><i class="ri-article-fill"></i><span>Letra</span></a></li>
+                            <li class="nav__item"><a href="#Capitulo03" class="nav__link"><i class="ri-movie-2-fill"></i><span>...</span></a></li>
                         </ul>
+
+                        <div class="mini-player-nav" id="mini-player-nav" style="display: none;">
+                            <img src="" alt="Cover" id="mini-cover" class="mini-cover">
+                            <div class="mini-info">
+                                <span id="mini-title" class="mini-title">Título</span>
+                                <span id="mini-artist" class="mini-artist">Artista</span>
+                            </div>
+                            <div class="mini-controls">
+                                <button id="mini-play-btn" class="mini-btn"><i class="ri-play-fill" id="mini-play-icon"></i></button>
+                                <button id="mini-next-btn" class="mini-btn"><i class="ri-skip-forward-fill"></i></button>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="nav__action-button">
-                        <button class="action-btn" id="floatingButton1">
-                        <i class="ri-spotify-fill"></i>
+                        <div class="fab-menu-container">
+                            <div class="fab-menu-options" id="fabMenuOptions">
+                                <a href="#Capitulo01" class="fab-pill-option nav-fab-link"><i class="ri-contrast-2-fill"></i><span>Cap 01</span></a>
+                                <a href="#Capitulo02" class="fab-pill-option nav-fab-link"><i class="ri-music-2-fill"></i><span>Cap 02</span></a>
+                                <a href="#Letra" class="fab-pill-option nav-fab-link" id="fab-item-letra" style="display: none;"><i class="ri-article-fill"></i><span>Letra</span></a>
+                                <a href="#Capitulo03" class="fab-pill-option nav-fab-link"><i class="ri-movie-2-fill"></i><span>...</span></a>
+                                
+                                <button class="fab-pill-option" id="mobileSpotifyBtn"><i class="ri-spotify-fill"></i><span>Spotify</span></button>
+                                <button class="fab-pill-option theme-toggle-trigger"><i class="theme-icon ri-sun-fill"></i><span>Tema</span></button>
+                            </div>
+                            <button class="action-btn" id="mainFabToggle"><i class="ri-add-line transition-icon"></i></button>
+                        </div>
                     </div>
 
                 </div>
@@ -121,66 +114,83 @@
                         <p>
                             Y entrégame esos labios rotos ♩.
                         </p>
-                        <h1>
-                            "Si te soy sincero: Fui honesto casi todo el tiempo, y aunque mi querer no nació en el mejor de los escenarios, mi cariño y mi interés por ti siempre fueron de verdad. Como dice Kevin Kaarl: 'esta fue la última noche que te lloré'; no porque me hayas dejado de importar, sino por tranquilidad mia. Hoy ya no extraño tanto cómo pasaron las cosas, pero a ti sí. Ojalá algún día volvamos a coincidir, pero desde un lugar mucho más sano. Puedo decir que te quise bonito y TQM bobito🫰🏼"
-                            <!-- Etiqueta con la hora y el icono -->
+                        <h1 id="collapsible-text" class="text-collapsed">
+                            <span class="visible-text">"Si te soy sincero: Fui honesto casi todo el tiempo, y aunque mi querer no nació en el mejor de los escenarios... </span>
+                            <span class="read-more-trigger">...</span>
+                            <span class="hidden-text">mi cariño y mi interés por ti siempre fueron de verdad. Como dice Kevin Kaarl: 'esta fue la última noche que te lloré'; no porque me hayas dejado de importar, sino por tranquilidad mia. Hoy ya no extraño tanto cómo pasaron las cosas, pero a ti sí. Ojalá algún día volvamos a coincidir, pero desde un lugar mucho más sano. Puedo decir que te quise bonito y TQM bobito🫰🏼"</span>
+                            
                             <span class="msg-meta">16:05 <i class="ri-check-double-fill blue-check"></i></span>
                         </h1>
                 </div>
 
             </div>
 
-            <div class="glass-panel">
-            
-                <div class="left-col">
-                    <div class="video-container">
-                        <video id="bgVideo" autoplay muted loop>
-                            <source src="video.mp4" type="video/mp4">
-                            Tu navegador no soporta videos.
-                        </video>
-
-                        <img id="static-cover-fallback" class="static-cover" src="" alt="Portada de la canción">
-
-                        <div id="typewriter-text" class="dynamic-text-overlay"></div>
+            <div class="glass-panel new-desktop-layout">
+                <div class="left-col-new">
+                    
+                    <div class="top-left-card">
+                        <div class="quote-container">
+                            <h3 id="artist-quote-prefix" class="quote-prefix">Y como dijo Zoé...</h3>
+                            <div id="typewriter-text" class="dynamic-text-quote"></div>
+                        </div>
+                        <img id="artist-image" src="tu_imagen_recortada.png" alt="Artista" class="artist-cutout">
+                        
+                        <div class="seekbar-container new-seekbar">
+                            <div class="range-wrapper">
+                                <div class="track-wave" id="trackWave"></div>
+                                <div class="track-straight"></div>
+                                <input type="range" id="seekSlider" value="0" max="100" step="0.1">
+                            </div>
+                            <div class="time-info">
+                                <span id="currentTime">0:00</span>
+                                <span id="totalDuration">0:00</span>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="seekbar-container">
-                        <div class="range-wrapper">
-                            <div class="track-wave" id="trackWave"></div>
-                            <div class="track-straight"></div>
-                            <input type="range" id="seekSlider" value="0" max="100" step="0.1">
+                    <div class="bottom-left-card">
+                        <div class="sub-controls-new">
+                            <button class="btn-sub-new_one" id="favBtn"><span class="material-symbols-outlined">thumb_up</span></button>
+                            <button class="btn-sub-new_two" id="SongBtn"><span class="material-symbols-outlined">queue_music</span></button>
+                            <button class="btn-sub-new_three" id="shuffleBtn"><span class="material-symbols-outlined">shuffle</span></button>
+                            <button class="btn-sub-new_for" id="repeatBtn"><span class="material-symbols-outlined">music_note</span></button>
                         </div>
-                        <div class="time-info">
-                            <span id="currentTime">0:00</span>
-                            <span id="totalDuration">0:00</span>
+                        <div class="main-controls-new">
+                            <button class="btn-nav-3d" id="prevBtn"><span class="material-symbols-outlined">skip_previous</span></button>
+                            <button class="btn-play-pause-3d" id="playBtn"><span class="material-symbols-outlined" id="playIcon">play_arrow</span></button>
+                            <button class="btn-nav-3d" id="nextBtn"><span class="material-symbols-outlined">skip_next</span></button>
                         </div>
-                    </div>    
-
-                    <div class="controls-container">
-                        <div class="main-controls">
-                            <button class="btn-nav" id="prevBtn">
-                                <span class="material-symbols-outlined">skip_previous</span>
-                            </button>
-                            <button class="btn-play-pause" id="playBtn">
-                                <span class="material-symbols-outlined" id="playIcon">play_arrow</span>
-                            </button>
-                            <button class="btn-nav" id="nextBtn">
-                                <span class="material-symbols-outlined">skip_next</span>
-                            </button>
-                        </div>
-
-                        <div class="sub-controls">
-                            <button class="btn-sub" id="shuffleBtn" title="Aleatorio"><span class="material-symbols-outlined">shuffle</span></button>
-                            <button class="btn-sub" id="repeatBtn" title="Repetir"><span class="material-symbols-outlined">repeat</span></button>
-                            <button class="btn-sub" id="favBtn" title="Favorito"><span class="material-symbols-outlined">favorite</span></button>
-                            <button class="btn-sub" id="SongBtn" title="Cancion"><span class="material-symbols-outlined">music_note_2</span></button>
-                        </div>
-
                     </div>
 
+                    <div id="lyrics-overlay" class="lyrics-overlay">
+                        <div id="lyrics-content" class="lyrics-content"></div>
+                    </div>
+                    
                 </div>
 
-                <div class="playlist" id="playlist"></div>
+                <div class="right-col-new">
+                    <div class="now-playing-header">
+                        <div class="playing-animation">
+                            <span></span><span></span><span></span>
+                        </div>
+                        <h3>Reproduciendo</h3>
+                    </div>
+
+                    <div class="video-container-new">
+                        <video id="bgVideo" autoplay muted loop>
+                            <source src="video.mp4" type="video/mp4">
+                        </video>
+                        <img id="static-cover-fallback" class="static-cover" src="" alt="Portada de la canción">
+                    </div>
+
+                    <div class="global-toggles">
+                        <button class="action-pill-global" id="global-video-btn">
+                            <span class="material-symbols-outlined">videocam_off</span>
+                        </button>
+                    </div>
+
+                    <div class="playlist new-playlist-style" id="playlist"></div>
+                </div>
             </div>
 
             <audio id="mainAudio"></audio>
@@ -287,6 +297,10 @@
         <a href="https://open.spotify.com/playlist/7BYeqYLgLrG8iWPNu2L4PN" target="_blank" class="fab-btn spotify-fab">
             <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" alt="Spotify">
         </a>
+
+        <button class="desktop-theme-fab theme-toggle-trigger">
+            <i class="theme-icon ri-sun-fill"></i>
+        </button>
        
         <!--Modo Ambiente-->
         <div id="ambient-overlay" class="ambient-overlay">
