@@ -390,7 +390,7 @@ const sequence = [
     { char: 'U', img: 'mask_flor_tres.png' },
     { char: 'M', img: 'mask_sol.png' },
     { char: 'A', img: 'mascara_cuadrado.png' },
-    { char: 'BRUMA', img: 'mascara_pildora_version_dos.png', phrase: "Camara lenta y ... ♪"}
+    { char: 'BRUMA', img: 'mascara_pildora_version_dos.png', phrase: ""}
 ];
 
 const extraImages = [
