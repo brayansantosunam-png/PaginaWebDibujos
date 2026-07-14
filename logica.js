@@ -411,13 +411,9 @@ function startBurstMode() {
     // Cambiamos la frase a la solicitada
     subtitleElement.innerText = "Moja el desierto de mi alma con tu mirar, tierna voz…";
     
-    // Mostramos la primera imagen extra inmediatamente
+    // Mostramos la primera imagen extra de forma estática
     updateIntroImage(); 
     
-    // Iniciamos el ciclo continuo cada 1 segundo (1000 ms)
-    burstInterval = setInterval(() => {
-        nextIntroImage();
-    }, 1000);
 }
 
 
@@ -2149,37 +2145,50 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainNavList = document.getElementById('main-nav-list');
     const miniPlayerNav = document.getElementById('mini-player-nav');
     
+    // ✨ Nuevas referencias para los contenedores del menú (Desktop y Móvil)
+    const headerMenu = document.getElementById('header-menu');
+    const mobileNavMenu = document.getElementById('nav-menu');
+    
     // 1. Observer: Vigila si el panel principal está visible
     if (glassPanel && mainNavList && miniPlayerNav) {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                
-                const navLetra = document.getElementById('nav-item-letra');
-                const fabLetra = document.getElementById('fab-item-letra');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            
+            const navLetra = document.getElementById('nav-item-letra');
+            const fabLetra = document.getElementById('fab-item-letra');
 
-                if (entry.isIntersecting) {
-                    mainNavList.style.display = 'flex';
-                    miniPlayerNav.style.display = 'none';
-                    
-                    // MOSTRAR OPCIÓN "LETRA"
-                    if (navLetra) navLetra.style.display = 'block';
-                    if (fabLetra) fabLetra.style.display = 'flex';
-                } else {
-                    mainNavList.style.display = 'none';
-                    miniPlayerNav.style.display = 'flex';
-                    updateMiniPlayerUI(); 
-                    
-                    // OCULTAR OPCIÓN "LETRA" Y CERRAR OVERLAY SI ESTÁ ABIERTO
-                    if (navLetra) navLetra.style.display = 'none';
-                    if (fabLetra) fabLetra.style.display = 'none';
-                    if (isLyricsMode) toggleLyricsMode(); // Lo apaga al hacer scroll
-                }
-            });
-        }, {
-            threshold: 0.1 
+            // Muestra el menú normal si el usuario está arriba (viendo el reproductor gigante)
+            if (entry.isIntersecting) {
+                mainNavList.style.display = 'flex';
+                miniPlayerNav.style.display = 'none';
+                
+                // Desactivamos el efecto de fondo dinámico
+                if (headerMenu) headerMenu.classList.remove('player-active-nav');
+                if (mobileNavMenu) mobileNavMenu.classList.remove('player-active-nav');
+                
+                if (navLetra) navLetra.style.display = 'block';
+                if (fabLetra) fabLetra.style.display = 'flex';
+            } 
+            // Muestra el mini reproductor cuando el usuario hace scroll hacia ABAJO
+            else {
+                mainNavList.style.display = 'none';
+                miniPlayerNav.style.display = 'flex';
+                updateMiniPlayerUI(); 
+                
+                // Activamos el cristal esmerilado animado con el color de la canción
+                if (headerMenu) headerMenu.classList.add('player-active-nav');
+                if (mobileNavMenu) mobileNavMenu.classList.add('player-active-nav');
+                
+                if (navLetra) navLetra.style.display = 'none';
+                if (fabLetra) fabLetra.style.display = 'none';
+                if (isLyricsMode) toggleLyricsMode(); 
+            }
         });
-        
-        observer.observe(glassPanel);
+    }, {
+        threshold: 0.1 
+    });
+    
+    observer.observe(glassPanel);
     }
 
     // 2. Conectar los botones del mini reproductor

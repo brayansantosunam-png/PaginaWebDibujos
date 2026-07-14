@@ -29,11 +29,17 @@
             </div>
 
             <div class="welcome-controls-bottom" id="welcome-controls" style="opacity: 0; visibility: hidden; transition: all 1s ease;">
-                <button class="btn-step btn-image-prev" id="btn-prev-intro"></button>
+                <button class="btn-step" id="btn-prev-intro">
+                    <i class="material-symbols-outlined">chevron_left</i>
+                </button>
                 
-                <button class="btn-step btn-image-next" id="btn-next-intro"></button>
-                
-                <button class="btn-start-action btn-image-start" id="startBtn"></button>
+                <button class="btn-start-action" id="startBtn">
+                    <span>Vamos</span>
+                </button>
+
+                <button class="btn-step" id="btn-next-intro">
+                    <i class="material-symbols-outlined">chevron_right</i>
+                </button>
             </div>
         </div>
         <!--Menú-->
@@ -47,10 +53,35 @@
                             <div class="logo">
                                 <a href="#"><img src="menu_bruma.png" alt="Logo Era Salud Activa" class="logo-img"></a>
                             </div>
-                            <li class="nav__item"><a href="#Capitulo01" class="nav__link"><i class="ri-contrast-2-fill"></i><span>Cap 01</span></a></li>
-                            <li class="nav__item"><a href="#Capitulo02" class="nav__link"><i class="ri-music-2-fill"></i><span>Cap 02</span></a></li>
-                            <li class="nav__item" id="nav-item-letra" style="display: none;"><a href="#Letra" class="nav__link"><i class="ri-article-fill"></i><span>Letra</span></a></li>
-                            <li class="nav__item"><a href="#Capitulo03" class="nav__link"><i class="ri-movie-2-fill"></i><span>...</span></a></li>
+
+                            <li class="nav__item">
+                                <a href="#Capitulo01" class="nav__link">
+                                    <i class="material-symbols-outlined">music_note</i>
+                                    <span>CPT 01</span>
+                                </a>
+                            </li>
+
+                            <li class="nav__item">
+                                <a href="#Capitulo02" class="nav__link">
+                                    <i class="material-symbols-outlined">movie</i>
+                                    <span>CPT 02</span>
+                                </a>
+                            </li>
+
+                            <li class="nav__item" id="nav-item-letra" style="display: none;">
+                                <a href="#Letra" class="nav__link">
+                                    <i class="material-symbols-outlined">lyrics</i>
+                                    <span>Letra</span>
+                                </a>
+                            </li>
+
+                            <li class="nav__item">
+                                <a href="#Capitulo03" class="nav__link">
+                                    <i class="material-symbols-outlined">acute</i>
+                                    <span>...</span>
+                                </a>
+                            </li>
+
                         </ul>
 
                         <div class="mini-player-nav" id="mini-player-nav" style="display: none;">
@@ -69,15 +100,29 @@
                     <div class="nav__action-button">
                         <div class="fab-menu-container">
                             <div class="fab-menu-options" id="fabMenuOptions">
-                                <a href="#Capitulo01" class="fab-pill-option nav-fab-link"><i class="ri-contrast-2-fill"></i><span>Cap 01</span></a>
-                                <a href="#Capitulo02" class="fab-pill-option nav-fab-link"><i class="ri-music-2-fill"></i><span>Cap 02</span></a>
-                                <a href="#Letra" class="fab-pill-option nav-fab-link" id="fab-item-letra" style="display: none;"><i class="ri-article-fill"></i><span>Letra</span></a>
-                                <a href="#Capitulo03" class="fab-pill-option nav-fab-link"><i class="ri-movie-2-fill"></i><span>...</span></a>
+                                <a href="#Capitulo01" class="fab-pill-option nav-fab-link">
+                                    <i class="material-symbols-outlined">music_note</i><span>CPT 01</span>
+                                </a>
+                                <a href="#Capitulo02" class="fab-pill-option nav-fab-link">
+                                    <i class="material-symbols-outlined">movie</i><span>CPT 02</span>
+                                </a>
+                                <a href="#Letra" class="fab-pill-option nav-fab-link" id="fab-item-letra" style="display: none;">
+                                    <i class="material-symbols-outlined">lyrics</i><span>Letra</span>
+                                </a>
+                                <a href="#Capitulo03" class="fab-pill-option nav-fab-link">
+                                    <i class="material-symbols-outlined">acute</i><span>...</span>
+                                </a>
                                 
-                                <button class="fab-pill-option" id="mobileSpotifyBtn"><i class="ri-spotify-fill"></i><span>Spotify</span></button>
-                                <button class="fab-pill-option theme-toggle-trigger"><i class="theme-icon ri-sun-fill"></i><span>Tema</span></button>
+                                <button class="fab-pill-option" id="mobileSpotifyBtn">
+                                    <i class="ri-spotify-fill"></i><span>Spotify</span>
+                                </button>
+                                <button class="fab-pill-option theme-toggle-trigger">
+                                    <i class="theme-icon ri-sun-fill"></i><span>Tema</span>
+                                </button>
                             </div>
-                            <button class="action-btn" id="mainFabToggle"><i class="ri-add-line transition-icon"></i></button>
+                            <button class="action-btn" id="mainFabToggle">
+                                <i class="material-symbols-outlined transition-icon">add</i>
+                            </button>
                         </div>
                     </div>
 
