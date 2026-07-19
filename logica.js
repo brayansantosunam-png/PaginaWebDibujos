@@ -1211,6 +1211,8 @@ function createSongElement(song, index, isActive) {
             isLyricsMode = false;
         }
         selectSong(index);
+        addMagneticEffect(this);
+        triggerVerticalPushEffect(this);
     };
 
     const isFav = favoriteSongs.includes(song.title);
@@ -1471,7 +1473,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const repeatBtn = document.getElementById('repeatBtn');
     const favBtn = document.getElementById('favBtn');
     const songBtn = document.getElementById('SongBtn');
-    const allControlButtons = document.querySelectorAll('.main-controls button, .sub-controls button');
+    const allButtons = document.querySelectorAll('button');
 
     document.getElementById('global-video-btn')?.addEventListener('click', toggleGlobalVideo);
     document.getElementById('nav-item-letra')?.addEventListener('click', toggleLyricsMode);
@@ -1514,7 +1516,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     favBtn.addEventListener('click', toggleFavorite);
 
-    allControlButtons.forEach(btn => {
+    allButtons.forEach(btn => {
         btn.addEventListener('click', () => {
             triggerPushEffect(btn);
             
@@ -1621,6 +1623,21 @@ function triggerPushEffect(element) {
     if (nextSibling) {
         nextSibling.classList.add('push-right');
         setTimeout(() => nextSibling.classList.remove('push-right'), 500);
+    }
+}
+
+function triggerVerticalPushEffect(element) {
+    const prevSibling = element.previousElementSibling;
+    const nextSibling = element.nextElementSibling;
+
+    if (prevSibling) {
+        prevSibling.classList.add('push-up');
+        setTimeout(() => prevSibling.classList.remove('push-up'), 500);
+    }
+
+    if (nextSibling) {
+        nextSibling.classList.add('push-down');
+        setTimeout(() => nextSibling.classList.remove('push-down'), 500);
     }
 }
 
