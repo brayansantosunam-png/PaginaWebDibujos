@@ -1120,7 +1120,7 @@ function typeWriter(text, targetId = 'typewriter-text') {
         if (i < words.length) {
             const wordSpan = document.createElement('span');
             wordSpan.classList.add('word');
-            wordSpan.innerText = words[i] + " "; // Espacio entre palabras
+            wordSpan.innerHTML = words[i] + "&nbsp;"; 
             
             // Color especial para la última palabra
             if (i === words.length - 1) wordSpan.style.color = "#709fde"; 
@@ -1652,61 +1652,109 @@ const misFotos = [
 
 let descTypewriterInterval; 
 let currentAnimIndex = 0;
-let dynamicShapeInterval;
+let mainCycleTimeout;
 
 function typeWriterDescription(text) {
-    const target = document.querySelector('.Descripcion-photo');
-    if (!target) return;
+    const targetMain = document.querySelector('.Descripcion-photo');
+    const targetAmbient = document.getElementById('ambient-photo-desc');
 
     clearInterval(descTypewriterInterval); 
-    target.innerText = ""; 
+    
+    if (targetMain) targetMain.innerHTML = ""; 
+    if (targetAmbient) targetAmbient.innerHTML = ""; 
 
+    const words = text.split(" ");
     let i = 0;
+
     descTypewriterInterval = setInterval(() => {
-        if (i < text.length) {
-            target.innerText += text.charAt(i);
+        if (i < words.length) {
+            
+            if (targetMain) {
+                const spanMain = document.createElement('span');
+                spanMain.className = 'desc-word';
+                spanMain.innerHTML = words[i] + "&nbsp;";
+                targetMain.appendChild(spanMain);
+            }
+            
+            if (targetAmbient) {
+                const spanAmbient = document.createElement('span');
+                spanAmbient.className = 'desc-word';
+                spanAmbient.innerHTML = words[i] + "&nbsp;";
+                targetAmbient.appendChild(spanAmbient);
+            }
+            
             i++;
         } else {
             clearInterval(descTypewriterInterval);
         }
-    }, 40); 
+    }, 250); 
 }
 
 function initDynamicShapeAnimation() {
     const dynamicImg = document.getElementById('dynamic-shape-img');
-    if (!dynamicImg) return;
+    const glassLoader = document.getElementById('glass-shape-loader');
+    if (!dynamicImg || !glassLoader) return;
 
-    // Set inicial
-    updateDynamicShape(dynamicImg);
-
-    // Bucle para cambiar imagen y forma cada 4 segundos
-    dynamicShapeInterval = setInterval(() => {
-        currentAnimIndex = (currentAnimIndex + 1) % misFotos.length;
-        updateDynamicShape(dynamicImg);
-    }, 4000);
+    // Arranca el ciclo principal
+    runShapeCycle(dynamicImg, glassLoader);
 }
 
-function updateDynamicShape(imgElement) {
-    // Breve desvanecimiento antes de cambiar
-    imgElement.style.opacity = '0';
+function runShapeCycle(dynamicImg, glassLoader) {
+    // 1. FASE DE CARGA (5 SEGUNDOS): Ocultar foto, mostrar vidrio
+    dynamicImg.style.opacity = '0';
+    glassLoader.style.opacity = '1';
+    
+    // Mostramos un texto temporal mientras carga la animación
+    const descTarget = document.querySelector('.Descripcion-photo');
+    if (descTarget) {
+        clearInterval(descTypewriterInterval);
+        descTarget.innerText = "Sintonizando recuerdo...";
+    }
 
-    setTimeout(() => {
-        // Asignar nueva imagen
-        imgElement.src = misFotos[currentAnimIndex].url;
-        
-        // Escribir nueva frase
-        typeWriterDescription(misFotos[currentAnimIndex].phrase);
+    let maskCount = 0;
+    let lastMaskUrl = '';
 
-        // Asignar una máscara aleatoria de tu arreglo maskFiles
+    // Función interna para cambiar la máscara aleatoriamente
+    const changeMask = () => {
         const randomMask = maskFiles[Math.floor(Math.random() * maskFiles.length)];
-        const maskUrl = `url('${randomMask}')`;
-        
-        imgElement.style.webkitMaskImage = maskUrl;
-        imgElement.style.maskImage = maskUrl;
-        
-        // Regresar opacidad
-        imgElement.style.opacity = '1';
-    }, 400); // 400ms después para dar tiempo al fade out
+        lastMaskUrl = `url('${randomMask}')`;
+        glassLoader.style.webkitMaskImage = lastMaskUrl;
+        glassLoader.style.maskImage = lastMaskUrl;
+        maskCount++;
+    };
+
+    // Ejecutamos el primer cambio inmediatamente
+    changeMask();
+
+    // Bucle interno que cambia la máscara cada 1 segundo
+    const maskCycle = setInterval(() => {
+        if (maskCount >= 5) { // Al llegar a 5 segundos (5 máscaras)
+            clearInterval(maskCycle);
+            
+            // 2. FASE DE REVELACIÓN
+            currentAnimIndex = (currentAnimIndex + 1) % misFotos.length;
+            
+            // Le pasamos la última máscara generada a la imagen real para que coincidan
+            dynamicImg.style.webkitMaskImage = lastMaskUrl;
+            dynamicImg.style.maskImage = lastMaskUrl;
+            dynamicImg.src = misFotos[currentAnimIndex].url;
+            
+            // Transición cruzada: ocultamos el vidrio y mostramos la foto
+            glassLoader.style.opacity = '0';
+            dynamicImg.style.opacity = '1';
+            
+            // Iniciamos el efecto de máquina de escribir de la foto real
+            typeWriterDescription(misFotos[currentAnimIndex].phrase);
+            
+            // Mantenemos la foto visible por 6 segundos antes de reiniciar todo el ciclo
+            mainCycleTimeout = setTimeout(() => {
+                runShapeCycle(dynamicImg, glassLoader);
+            }, 6000); 
+            
+        } else {
+            changeMask();
+        }
+    }, 1000); // Se ejecuta cada 1000ms (1 segundo)
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -2039,27 +2087,32 @@ const videoGalleryData = [
 
 function buildHorizontalGallery() {
     const container = document.getElementById('gp-gallery-container');
-    if (!container) return;
+    const dotsContainer = document.getElementById('gp-dots-container');
+    if (!container || !dotsContainer) return;
 
     container.innerHTML = '';
+    dotsContainer.innerHTML = ''; // Limpiamos el contenedor de puntos
 
     videoGalleryData.forEach((item, index) => {
+        // Crear las tarjetas de la galería
         const card = document.createElement('div');
         card.classList.add('gp-card');
-        
-        // Hacemos que la primera tarjeta esté activa al iniciar
         if(index === 0) card.classList.add('active-card');
 
         card.innerHTML = `
             <img src="${item.url}" alt="${item.title}">
-            
             <div class="gp-info">
                 <p class="gp-title">${item.title}</p>
                 <p class="gp-subtitle">${item.subtitle}</p>
             </div>
         `;
-
         container.appendChild(card);
+
+        // Crear los puntos para el contador visual
+        const dot = document.createElement('div');
+        dot.classList.add('gp-dot');
+        if (index === 0) dot.classList.add('active'); // El primero inicia activo
+        dotsContainer.appendChild(dot);
     });
 
     initGalleryScrollEffects(container);
@@ -2067,8 +2120,9 @@ function buildHorizontalGallery() {
 
 function initGalleryScrollEffects(container) {
     const cards = container.querySelectorAll('.gp-card');
+    const dots = document.querySelectorAll('.gp-dot');
     
-    // Función para calcular qué tarjeta está más cerca del centro de la pantalla
+    // Calcula qué tarjeta está más cerca del centro y actualiza su punto correspondiente
     function updateCenterCard() {
         const containerRect = container.getBoundingClientRect();
         const containerCenter = containerRect.left + containerRect.width / 2;
@@ -2076,7 +2130,17 @@ function initGalleryScrollEffects(container) {
         let closestCard = null;
         let closestDistance = Infinity;
 
-        cards.forEach(card => {
+        // Formas dinámicas que rotarán en el punto activo
+        const dynamicMasks = [
+            'mascara_cuadrado.png',
+            'mask_shape_triangle.png',
+            'mascara_pildora_version_dos.png',
+            'mask_sol.png',
+            'mask_shape_spiner.png'
+        ];
+
+        // 1. Identificar la tarjeta más centrada
+        cards.forEach((card) => {
             const cardRect = card.getBoundingClientRect();
             const cardCenter = cardRect.left + cardRect.width / 2;
             const distance = Math.abs(containerCenter - cardCenter);
@@ -2087,43 +2151,63 @@ function initGalleryScrollEffects(container) {
             }
         });
 
-        // Aplicamos la clase solo a la tarjeta central
-        cards.forEach(card => {
-            if (card === closestCard) {
+        // 2. Obtener el índice de la tarjeta activa
+        const cardsArray = Array.from(cards);
+        const activeIndex = cardsArray.indexOf(closestCard);
+
+        // 3. Aplicar clases y máscaras según la posición relativa al elemento activo
+        cardsArray.forEach((card, index) => {
+            const dot = dots[index];
+
+            if (index === activeIndex) {
+                // ESTADO ACTIVO: Asignamos la máscara dinámica
                 card.classList.add('active-card');
-            } else {
+                dot.classList.add('active');
+                dot.classList.remove('visited');
+                
+                const maskUrl = `url('${dynamicMasks[index % dynamicMasks.length]}')`;
+                dot.style.webkitMaskImage = maskUrl;
+                dot.style.maskImage = maskUrl;
+                
+            } else if (index < activeIndex) {
+                // ESTADO VISITADO: Las tarjetas que quedaron a la izquierda
                 card.classList.remove('active-card');
+                dot.classList.remove('active');
+                dot.classList.add('visited');
+                
+                // Removemos cualquier máscara para que vuelva a ser un círculo
+                dot.style.webkitMaskImage = 'none';
+                dot.style.maskImage = 'none';
+                
+            } else {
+                // ESTADO FUTURO (No visitado): Las tarjetas a la derecha
+                card.classList.remove('active-card');
+                dot.classList.remove('active');
+                dot.classList.remove('visited');
+                
+                // Removemos la máscara para que sea un aro hueco
+                dot.style.webkitMaskImage = 'none';
+                dot.style.maskImage = 'none';
             }
         });
     }
 
-    // Escuchamos el evento de scroll para actualizar el centro en tiempo real
     let isScrolling;
     container.addEventListener('scroll', () => {
         window.cancelAnimationFrame(isScrolling);
         isScrolling = window.requestAnimationFrame(updateCenterCard);
     });
 
-    // --- Lógica de Deslizamiento Automático ---
-    let autoScrollInterval = setInterval(scrollNext, 3500); // Cambia cada 3.5 segundos
+    // --- LÓGICA DE NAVEGACIÓN MANUAL CON BOTONES ---
+    const prevBtn = document.getElementById('gp-prev-btn');
+    const nextBtn = document.getElementById('gp-next-btn');
 
-    function scrollNext() {
-        const activeCard = container.querySelector('.gp-card.active-card');
-        if (!activeCard) return;
-
+    function scrollToCard(index) {
         const cardsArray = Array.from(cards);
-        let nextIndex = cardsArray.indexOf(activeCard) + 1;
+        if (index < 0 || index >= cardsArray.length) return; 
         
-        // Si llegamos al final, volvemos a la primera
-        if (nextIndex >= cardsArray.length) {
-            nextIndex = 0;
-        }
-
-        // Movemos el contenedor para centrar la siguiente tarjeta
-        const nextCard = cardsArray[nextIndex];
-        
-        // Calculamos la posición: offset de la tarjeta - la mitad del contenedor + la mitad de la tarjeta
-        const scrollPosition = nextCard.offsetLeft - (container.clientWidth / 2) + (nextCard.clientWidth / 2);
+        const targetCard = cardsArray[index];
+        const scrollPosition = targetCard.offsetLeft - (container.clientWidth / 2) + (targetCard.clientWidth / 2);
 
         container.scrollTo({
             left: scrollPosition,
@@ -2131,12 +2215,33 @@ function initGalleryScrollEffects(container) {
         });
     }
 
-    // Pausar la animación si el usuario interactúa con la galería
-    container.addEventListener('touchstart', () => clearInterval(autoScrollInterval));
-    container.addEventListener('mouseenter', () => clearInterval(autoScrollInterval));
-    container.addEventListener('mouseleave', () => {
-        autoScrollInterval = setInterval(scrollNext, 3500);
-    });
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            const activeCard = container.querySelector('.gp-card.active-card');
+            const cardsArray = Array.from(cards);
+            let currentIndex = cardsArray.indexOf(activeCard);
+            
+            // Lógica circular: si está en la primera, salta a la última
+            let prevIndex = currentIndex - 1;
+            if (prevIndex < 0) prevIndex = cardsArray.length - 1; 
+            
+            scrollToCard(prevIndex);
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            const activeCard = container.querySelector('.gp-card.active-card');
+            const cardsArray = Array.from(cards);
+            let currentIndex = cardsArray.indexOf(activeCard);
+            
+            // Lógica circular: si está en la última, salta a la primera
+            let nextIndex = currentIndex + 1;
+            if (nextIndex >= cardsArray.length) nextIndex = 0;
+            
+            scrollToCard(nextIndex);
+        });
+    }
 }
 
 // Ejecutar cuando el DOM esté listo

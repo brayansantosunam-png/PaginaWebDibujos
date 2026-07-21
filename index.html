@@ -160,9 +160,9 @@
                             Y entrégame esos labios rotos ♩.
                         </p>
                         <h1 id="collapsible-text" class="text-collapsed">
-                            <span class="visible-text">"Si te soy sincero: Fui honesto casi todo el tiempo, y aunque mi querer no nació en el mejor de los escenarios... </span>
+                            <span class="visible-text">Si te soy sincero: Fui honesto casi todo el tiempo, y aunque tal vez mi querer y forma de expresarlo no nació en el mejor de los lugares</span>
                             <span class="read-more-trigger">...</span>
-                            <span class="hidden-text">mi cariño y mi interés por ti siempre fueron de verdad. Como dice Kevin Kaarl: 'esta fue la última noche que te lloré'; no porque me hayas dejado de importar, sino por tranquilidad. No extraño el lugar donde te conocí, pero a ti sí. Ojalá algún día volvamos a coincidir, pero desde un lugar mucho más sano. Puedo decir que te quise bonito y TQM bobito🫰🏼"</span>
+                            <span class="hidden-text">mi cariño e interés por ti siempre fueron reales. Hay una frase que me gusta: 'esta fue la última noche que te lloré' - Kevin Kaarl; no precisamente porque me hayas dejado de importar, sino por tranquilidad. No extraño el contexto donde te conocí, pero a ti sí. Si es que te vuelvo a conocer, que sea desde un lugar mucho más sano y libre. Puedo decir que si te quise bonito y TQM🫰🏼</span>
                             
                             <span class="msg-meta">16:05 <i class="ri-check-double-fill blue-check"></i></span>
                         </h1>
@@ -251,8 +251,23 @@
             </div>
 
             <div class="gp-gallery-wrapper">
+                
                 <div class="gp-scroll-container" id="gp-gallery-container">
-                    </div>
+                    <!-- Imágenes se insertan por JS -->
+                </div>
+
+                <!-- Contenedor del contador visual (puntos) -->
+                <div class="gp-dots-container" id="gp-dots-container"></div>
+
+                <!-- Botones manuales -->
+                <div class="gp-controls-container">
+                    <button class="gp-nav-btn-previous" id="gp-prev-btn">
+                        <span class="material-symbols-outlined">skip_previous</span>
+                    </button>
+                    <button class="gp-nav-btn-next" id="gp-next-btn">
+                        <span class="material-symbols-outlined">skip_next</span>
+                    </button>
+                </div>
             </div>
 
             <div class="astronaut-showcase">
@@ -313,6 +328,9 @@
         <div id="original-carousel-slot">
             <div id="dynamic-shape-container">
                 <div class="neon-glow-wrapper">
+                    <!-- NUEVO: Contenedor para el efecto de vidrio esmerilado -->
+                    <div id="glass-shape-loader" class="glass-shape-loader"></div>
+                    
                     <img id="dynamic-shape-img" src="" alt="Detrás de cámaras dinámico">
                 </div>
             </div>
@@ -354,6 +372,7 @@
                 <span id="ambient-dynamic-text" class="phrase-smaller"></span>
             </h2>
             <div id="ambient-carousel-wrapper"></div>
+            <p id="ambient-photo-desc" class="ambient-photo-desc"></p>
         </div>
         <script type="module" src="logica.js"></script> 
     </body>
