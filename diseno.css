@@ -2007,27 +2007,6 @@ body.dark-mode .desktop-theme-fab {
     mask-position: center;
 }
 
-.Descripcion-photo{
-    background:var(--background-navigation);
-    backdrop-filter: blur(20px) saturate(120%);
-    -webkit-backdrop-filter: blur(20px) saturate(120%);
-    border: var(--border-navigation); 
-    box-shadow: var(--box-navigation);
-    transition: background-color 0.3s ease;
-    border-radius: 25px;
-    margin: 20px;
-    color: var(--text-glasseffect);
-    font-family: 'Bebas Neue', sans-serif; 
-    font-weight: 400;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    min-height: 60px;
-    padding: 15px 30px;
-    white-space: pre-wrap;
-}
-
 .full-screen {
     display: none;
     position: fixed;
@@ -2106,17 +2085,15 @@ body.dark-mode .desktop-theme-fab {
     left: 0;
     width: 100%;
     height: 100%;
-    /* Gradiente animado para darle vida a la forma mientras carga */
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(112, 159, 222, 0.3), rgba(235, 152, 84, 0.3));
     background-size: 300% 300%;
     animation: glassGradientFlow 3s ease infinite;
     backdrop-filter: blur(20px) saturate(160%);
     -webkit-backdrop-filter: blur(20px) saturate(160%);
     box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.4);
-    opacity: 0;
+    opacity: 1; 
     transition: opacity 0.5s ease, -webkit-mask-image 0.4s ease;
     z-index: 2;
-
     -webkit-mask-size: contain;
     -webkit-mask-repeat: no-repeat;
     -webkit-mask-position: center;
@@ -2125,6 +2102,114 @@ body.dark-mode .desktop-theme-fab {
     mask-position: center;
 }
 
+.memory-widget {
+    position: relative;
+    width: 80%;
+    max-width: 700px;
+    margin: 40px auto;
+    min-height: 350px; /* Mantiene la altura estable para que no brinque al cargar */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    background: transparent;
+    transition: background-color 0.8s ease, box-shadow 0.8s ease, transform 1s ease;
+}
+
+.memory-widget.revealed {
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.2), 
+        inset 0 1px 1px rgba(255, 255, 255, 0.4),
+        inset 0 0 20px rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .memory-widget.revealed {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.5), 
+        inset 0 1px 1px rgba(255, 255, 255, 0.15),
+        inset 0 0 20px rgba(255, 255, 255, 0.02);
+}
+
+.widget-loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.8s ease, visibility 0.8s;
+    z-index: 5;
+}
+
+.widget-loader.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+
+.neon-glow-wrapper.rotating {
+    animation: brumaCosmica 6s linear infinite;
+}
+
+.widget-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.95);
+    transition: opacity 0.8s ease, transform 0.8s ease, visibility 0.8s;
+    width: 100%;
+    padding: 10px 30px;
+}
+
+.widget-content {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+
+.neon-glow-wrapper.static {
+    animation: none !important;
+    transform: none !important;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));
+}
+
+.widget-image-container {
+    flex: 0 0 auto;
+}
+
+.widget-text-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.memory-widget .Descripcion-photo {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    backdrop-filter: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    font-size: 2.8rem;
+    text-align: left;
+    line-height: 1.2;
+    color: var(--black-color);
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-style: normal; 
+}
+
+.memory-widget .Descripcion-photo .big-word {
+    font-size: 1.4em; 
+    font-weight: 700; 
+}
 
 /* -------------------------------------------------------------- Modo ambiente ------------------------------------------------------*/
 
@@ -2229,16 +2314,60 @@ body.dark-mode .desktop-theme-fab {
     transform: scale(0.5);
     animation: wordPunch 0.3s forwards ease-out;
 }
-/* ------------------------------------------------------------- Capitulo 01 ---------------------------------------------------------*/
-.avatar-display {
+
+.lottie-ambient {
+    position: absolute;
+    width: 180px; 
+    height: 180px;
+    pointer-events: none; 
+    z-index: 1; 
+    opacity: 0.5; 
+}
+
+.lottie-ambient.top-left {
+    top: 15%;
+    left: 8%;
+    transform: rotate(15deg); 
+}
+
+.lottie-ambient.bottom-right {
+    bottom: 20%;
+    right: 10%;
+    transform: scale(0.8) rotate(-20deg);
+}    
+
+.lottie-ambient.center-right {
+    top: 45%;
+    right: 5%;
+    transform: scale(1.2) rotate(45deg); 
+}
+
+.ambient-title, #ambient-carousel-wrapper {
+    z-index: 10;
     position: relative;
-    width: 90%;
-    height: 560px;
+}
+
+/* ------------------------------------------------------------- Capitulo 01 ---------------------------------------------------------*/
+.profile-container {
+    width: 100%;
+    height: 92vh; /* Ocupa todo el alto de la pantalla */
+    padding: 30px 40px; /* Da un ligero margen lateral */
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 25px;
-    border-radius: 40px; 
+    margin-top: 60px; 
+}
+
+.avatar-display {
+    width: 100%; /* Ocupa todo el ancho disponible */
+    max-width: 1800px; /* Límite para pantallas ultra anchas */
+    height: 95%; /* Toma casi todo el contenedor */
+    border-radius: 40px; /* Bordes suaves como en la foto */
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     overflow: hidden; 
     background-color: #aed0eb; 
     border: 3px solid var(--neon-color);
@@ -2246,17 +2375,28 @@ body.dark-mode .desktop-theme-fab {
                 inset 0 0 20px var(--neon-color), 
                 0 10px 30px rgba(0, 0, 0, 0.3); 
     transition: border-color 1.2s ease, box-shadow 1.2s ease;
+    isolation: isolate; 
 }
 
-/* Capa 1: Imagen de fondo */
-.cover-underlay {
+.profile-description.glass-effect-panel {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Asegura que llene todo el espacio sin deformarse */
-    z-index: 1;
-    filter: brightness(0.9); /* Opcional: Oscurece un 10% el fondo para que resalte el texto */
-    transition: opacity 0.8s ease-in-out;
+    bottom: 30px; 
+    width: 90%;
+    background: rgba(255, 255, 255, 0.40); 
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 40px; 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px 35px;
+    gap: 25px;
+    z-index: 10; 
+    margin: 0;
+    align-self: auto;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .profile-chapter-title {
@@ -2301,18 +2441,6 @@ body.dark-mode .desktop-theme-fab {
 
 .avatar-front:hover {
     transform: scale(1.05); /* Efecto genial al pasar el ratón */
-}
-
-.profile-container {
-    width: 100%;
-    height: auto;
-    margin-top: 100px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 40px 20px;
-    text-align: center;
 }
 
 .scale-up-anim {
@@ -2380,74 +2508,84 @@ body.dark-mode .desktop-theme-fab {
     pointer-events: none;
 }
 
-.profile-description {
-    width: 90%; 
-    background-color: var(--therthary-color); 
-    border-radius: 50px 10px 50px 50px; /* Esquina inferior derecha recta para simular la colita */
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15); /* Ligera sombra para dar relieve */
-    align-self: flex-end;
-    padding: 15px 40px; 
-    margin: 0 auto; 
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
-    flex-direction: column;
-    
-}
-
-.profile-description p, 
-.profile-description h1 {
-    position: relative; 
-    padding-bottom: 28px !important;
-}
-
-.msg-meta {
-    font-family: 'Karla', sans-serif; 
-    font-size: 0.75rem;
-    color: var(--black-color); 
-    position: absolute;
-    bottom: 6px;
-    right: 12px;
+.desc-author-col {
     display: flex;
     align-items: center;
-    gap: 4px; /* Espacio entre el reloj y las palomitas */
-    letter-spacing: 0;
+    justify-content: center;
+    flex-shrink: 0;
 }
 
-.profile-description p {
-    font-family: "Patua One", serif;
-    font-weight: 400;
-    font-style: normal; 
-    font-size: 2.5rem; 
-    color: var(--black-color); 
-    margin: 10px; 
-    letter-spacing: 1px;
+.desc-profile-img {
+    width: 65px;
+    height: 65px;
+    border-radius: 20px;
+    background-color: var(--therthary-color);
+    object-fit: contain;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
 }
 
-.profile-description h1{
-    font-size: 1.2rem;
+.desc-profile-img.img-updating {
+    transform: scale(0.4);
+    opacity: 0;
+}
+
+.desc-text-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    flex-grow: 1;
+    position: relative; 
+}
+
+.msg-meta-author {
+    position: absolute;
+    top: -15px;
+    left: 0;
+    font-family: 'Karla', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
     color: var(--black-color);
+    opacity: 0.85;
+}
+
+.profile-description p.desc-phrase {
+    font-family: "Patua One", serif;
+    font-size: 1.5rem;
+    text-align: center;
+    color: var(--black-color);
+    margin: 15px 0 5px 0 !important;
+    padding-bottom: 5px !important;
+}
+
+.profile-description h1 {
+    text-align: center;
     font-family: "Special Elite", system-ui;
-    font-weight: 400;
-    font-style: normal;
+    font-size: 1rem;
+    color: var(--black-color);
+    line-height: 1.5;
+    margin: 0 !important;
+    padding-bottom: 0 !important;
 }
 
-#collapsible-text .hidden-text {
-    display: none; 
+h1#collapsible-text .hidden-text {
+    display: none !important; 
 }
 
-#collapsible-text.text-expanded .hidden-text {
-    display: inline; 
+h1#collapsible-text.text-expanded .hidden-text {
+    display: inline !important; 
 }
 
-#collapsible-text.text-expanded .read-more-trigger {
-    display: none; 
+h1#collapsible-text.text-expanded .read-more-trigger {
+    display: none !important; 
 }
 
-.read-more-trigger {
-    color: #709fde; 
-    font-weight: bold;
-    cursor: pointer;
+/* Animación y color de los tres puntos */
+h1#collapsible-text .read-more-trigger {
+    color: var(--text-glasseffect) !important; 
+    font-weight: bold !important;
+    cursor: pointer !important;
     padding: 0 5px;
     display: inline-block;
     letter-spacing: 2px;
@@ -2457,6 +2595,42 @@ body.dark-mode .desktop-theme-fab {
 @keyframes pulseDots {
     0%, 100% { transform: scale(1); opacity: 0.6; }
     50% { transform: scale(1.2); opacity: 1; }
+}
+
+.mobile-expand-btn {
+    display: none;
+}
+
+.cover-underlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important; 
+    aspect-ratio: auto !important; /* Ignora el 16/9 de la regla global de videos */
+    z-index: 1;
+    filter: brightness(0.9); 
+    transition: opacity 0.8s ease-in-out;
+    border-radius: inherit;
+}
+
+#collapsible-text.text-expanded { 
+    overflow-y: auto;  
+    padding-right: 15px; 
+}
+
+/* Estilo del scrollbar personalizado (Transparente y sutil) */
+#collapsible-text::-webkit-scrollbar {
+    width: 5px;
+}
+#collapsible-text::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+#collapsible-text::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
 }
 /* ------------------------------------------------------------- Capitulo 02 ---------------------------------------------------------*/
 .Capitulo02, .Capitulo01 {
@@ -3085,9 +3259,89 @@ body.dark-mode .video-glass-overlay {
   font-weight: 400;
   font-style: normal;
 }
+/* ------------------------------------------------------------- Final Bruma --------------------------------------------------*/
 
+.lottie-bruma-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100dvh;
+    pointer-events: none; 
+    z-index: 9998; 
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 3s ease-in-out, visibility 3s ease-in-out; 
+}
 
+.lottie-bruma-overlay.bruma-activa {
+    opacity: 1; 
+    visibility: visible;
+}
 
+.bruma-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.4; 
+    transition: opacity 4s ease-in-out; 
+}
+
+.bruma-layer.intensa {
+    opacity: 0; 
+    transform: scaleX(-1); 
+}
+
+.bruma-layer.intensa.activa {
+    opacity: 0.6; 
+}
+
+.bruma-layer svg {
+    width: 100% !important;
+    height: 100% !important;
+    transform: scale(1.1); 
+}
+
+.lottie-bruma-overlay svg {
+    width: 100% !important;
+    height: 100% !important;
+    transform: scale(1.1); 
+}
+
+.bruma-closing-text {
+    position: absolute;
+    bottom: 50px; 
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Karla', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    color: var(--text-glasseffect); 
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; 
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 2s ease-in-out 1.5s, visibility 2s ease-in-out 1.5s; 
+    z-index: 10;
+    background-color: var(--background-color);
+    border-radius: 90px;
+    padding: 10px;
+}
+
+.bruma-closing-text .material-symbols-outlined {
+    font-size: 1.1rem; 
+    font-weight: 300; 
+}
+
+.lottie-bruma-overlay.bruma-activa .bruma-closing-text {
+    opacity: 1;
+    visibility: visible;
+}
 
 @media screen and (max-width: 1150px) {
     /* ----------------------------------------------------------- Menu -------------------------------------------------------*/
@@ -3813,6 +4067,35 @@ body.dark-mode .video-glass-overlay {
         bottom: 30px; 
     }
 
+    .memory-widget {
+        flex-direction: column;
+        padding: 30px 20px;
+        border-radius: 40px;
+        gap: 20px;
+        text-align: center;
+        margin: 50px;
+    }
+    
+    .memory-widget .Descripcion-photo {
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .widget-text-container {
+        transform: translateY(20px);
+    }
+
+    .memory-widget.revealed .widget-text-container {
+        transform: translateY(0);
+    }
+
+    .widget-content {
+        flex-direction: column;
+        padding: 30px 20px;
+        gap: 20px;
+        text-align: center;
+    }
+
     /* --------------------------------------------------- Pantalla ambiente ---------------------------------*/
     .ambient-title {
         font-size: 15vw;       
@@ -3842,22 +4125,6 @@ body.dark-mode .video-glass-overlay {
 
     /* ------------------------------------------------ Capitulo 01 -------------------------------------------*/
 
-    .profile-container {
-        margin-top: 0px; 
-        min-height: 100vh; 
-        justify-content: center;
-        padding: 20px 03px 03px 0px;
-        margin: 0px 03px 03px 2px; 
-        justify-content: flex-start; 
-    }
-
-    .avatar-display {
-        width: 90%; 
-        height: 80vh; 
-        margin-bottom: 20px;
-        border-radius: 20px 20px 95px 95px; 
-    }
-
     .profile-chapter-title {
         font-size: 4.5rem; 
         top: 25px;
@@ -3882,28 +4149,172 @@ body.dark-mode .video-glass-overlay {
         font-size: 1.5rem;
     }
 
-    .profile-description {
-        width: 95%;
-        padding: 12px 20px;
-    }
-
-    .profile-description p {
-        font-size: 1.6rem;
-    }
-
-    .profile-description h1{
-        font-size: 1rem;
-    }
-
     .shape-underlay {
-        height: 60%; 
+        height: 45%; 
         width: auto;
     }
 
     .avatar-front {
-        height: 70%; 
+        height: 55%; 
         width: auto;
         bottom: 5%; 
+    }
+
+    .profile-container {
+        height: 90vh;
+        padding: 10px;
+        margin-top: 30px;
+    }
+    
+    .avatar-display {
+        width: 100%;
+        height: 100%;
+        border-radius: 30px;
+    }
+
+    .mobile-expand-btn {
+        display: flex;
+        background: rgba(0, 0, 0, 0.05);
+        border: none;
+        border-radius: 12px;
+        width: 40px;
+        height: 30px;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 10;
+        grid-column: 3 / 4;
+        grid-row: 1 / 2;
+        align-self: flex-start;
+    }
+
+    .mobile-expand-btn i {
+        font-size: 1.6rem;
+        color: var(--black-color);
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .profile-description.glass-effect-panel {
+        width: 92%;
+        display: grid !important;
+        grid-template-columns: auto 1fr auto; 
+        grid-template-rows: auto auto; 
+        column-gap: 15px;
+        padding: 20px 20px 20px 25px !important;
+        bottom: 15px;
+        transition: all 0.4s ease;
+    }
+
+    .desc-author-col {
+        margin-top: 0;
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
+        align-self: flex-start;
+    }
+
+    .desc-profile-img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .desc-text-col {
+        grid-column: 2 / 4;
+        grid-row: 1 / 2;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        padding-right: 45px; 
+    }
+
+    .msg-meta-author {
+        position: static !important;
+        margin-bottom: 5px;
+        font-size: 1.1rem;
+        font-weight: 700;
+    }
+
+    .profile-description p.desc-phrase {
+        font-size: 1.15rem;
+        text-align: left;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100%;
+        transition: transform 0.5s ease, text-align 0.5s ease;
+        transform: translateX(0); 
+    }
+
+    #collapsible-text {
+        display: none;
+        opacity: 0;
+        grid-column: 1 / 4;
+        grid-row: 2 / 3;
+        font-size: 0.95rem;
+        text-align: justify;
+        line-height: 1.6;
+        margin-top: 15px !important;
+        color: var(--black-color);
+        font-family: 'Karla', sans-serif;
+        font-weight: 400;
+    }
+
+    #collapsible-text .read-more-trigger {
+        display: none !important;
+    }
+    #collapsible-text .hidden-text {
+        display: inline !important;
+    }
+    #collapsible-text .visible-text {
+        display: inline !important;
+    }
+
+    .profile-description.glass-effect-panel.card-expanded .mobile-expand-btn i {
+        transform: rotate(180deg);
+    }
+
+    .profile-description.glass-effect-panel.card-expanded p.desc-phrase {
+        text-align: center;
+        transform: translateX(-25px); 
+        margin-top: 10px !important;
+    }
+
+    .profile-description.glass-effect-panel.card-expanded #collapsible-text {
+        display: block;
+        max-height: 140px; 
+        overflow-y: auto;  
+        padding-right: 10px;
+        animation: fadeInText 0.5s ease forwards;
+    }
+
+    @keyframes fadeInText {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1#collapsible-text {
+        display: none;
+        opacity: 0;
+        grid-column: 1 / 4;
+        grid-row: 2 / 3;
+        font-size: 0.95rem;
+        text-align: justify;
+        line-height: 1.6;
+        margin-top: 15px !important;
+        color: var(--black-color);
+        font-family: 'Karla', sans-serif;
+        font-weight: 400;
+    }
+
+    h1#collapsible-text .read-more-trigger {
+        display: none !important;
+    }
+    
+    h1#collapsible-text .hidden-text {
+        display: inline !important;
+    }
+    
+    h1#collapsible-text .visible-text {
+        display: inline !important;
     }
 
     /*------------------------------------------------- Capitulo 02 ------------------------------------------*/
@@ -3963,4 +4374,9 @@ body.dark-mode .video-glass-overlay {
     .small { font-size: 1rem; }
     .big { font-size: 2rem; }
     .huge { font-size: 3rem; }
+    /* ---------------------------------------------- Final Text ---------------------------------------------------*/
+    .bruma-closing-text {
+        bottom: auto !important; 
+        top: 60px; 
+    }
 }   

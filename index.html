@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="diseno.css">
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
         <title>Bruma | Para Marco</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
         <meta name="theme-color" content="#FFFFFF99">
@@ -133,17 +134,12 @@
         <section id="Capitulo01" class="Capitulo01">
             
             <div class="profile-container">
-                
                 <div class="avatar-display">
-
-                    <img id="dynamic-cover" src="" alt="Cover" class="cover-underlay">
-
+                    
+                    <video id="dynamic-cover" class="cover-underlay" src="video_intro_cap_uno.mp4" muted playsinline preload="auto"></video>
                     <h1 class="profile-chapter-title">Capitulo #01</h1>
-                    
                     <img src="mask_monte_perfil.png" alt="Shape" class="shape-underlay">
-                    
                     <img id="main-avatar" src="" alt="Avatar" class="avatar-front">
-
                     
                     <div id="avatar-controls" class="avatar-controls-panel hidden-panel">
                         <button id="btn-prev-avatar" class="side-btn"><</button>
@@ -151,23 +147,30 @@
                         <button id="btn-next-avatar" class="side-btn">></button>
                     </div>
 
-                    
+                    <div class="profile-description glass-effect-panel" id="profile-desc-card">
+                        
+                        <button id="mobile-expand-btn" class="mobile-expand-btn">
+                            <i class="ri-arrow-down-s-line"></i>
+                        </button>
 
-                </div>
-
-                <div class="profile-description">
-                        <p>
-                            Y entrégame esos labios rotos ♩.
-                        </p>
-                        <h1 id="collapsible-text" class="text-collapsed">
-                            <span class="visible-text">Si te soy sincero: Fui honesto casi todo el tiempo, y aunque tal vez mi querer y forma de expresarlo no nació en el mejor de los lugares</span>
-                            <span class="read-more-trigger">...</span>
-                            <span class="hidden-text">mi cariño e interés por ti siempre fueron reales. Hay una frase que me gusta: 'esta fue la última noche que te lloré' - Kevin Kaarl; no precisamente porque me hayas dejado de importar, sino por tranquilidad. No extraño el contexto donde te conocí, pero a ti sí. Si es que te vuelvo a conocer, que sea desde un lugar mucho más sano y libre. Puedo decir que si te quise bonito y TQM🫰🏼</span>
+                        <div class="desc-author-col">
+                            <img src="tu_foto_de_perfil.jpg" alt="Perfil Bruma" class="desc-profile-img">
+                        </div>
+                        
+                        <div class="desc-text-col">
+                            <span class="msg-meta-author">Bruma - 16:05</span>
+                            <p class="desc-phrase">Y entrégame esos labios rotos ♩.</p>
                             
-                            <span class="msg-meta">16:05 <i class="ri-check-double-fill blue-check"></i></span>
-                        </h1>
-                </div>
+                            <h1 id="collapsible-text" class="text-collapsed">
+                                <span class="visible-text">Desde mi verdad, fui honesto casi todo el tiempo. Y aunque mis sentimientos y la forma de expresarlos no nacieron en el mejor de los lugares, y algunas veces actué de manera impulsiva</span>
+                                <span class="read-more-trigger">...</span>
+                                <span class="hidden-text">mi cariño e interés por ti siempre fueron reales. Hay una frase de Kevin Kaarl que me gusta: 'esta fue la última noche que te lloré'; no precisamente porque me hayas dejado de importar, sino por mi propia tranquilidad. Al principio quizás hubo algo de transferencia, luego cambio. No extraño el contexto donde te conocí, pero a ti sí. Si es que te vuelvo a conocer, que sea desde un lugar mucho más sano y libre. No culpo a nadie por sentir, tampoco cambiaría cómo lo expresé, y puedo decir con certeza que sí te quise bonito. No miento ni exagero al decirte 'TQM 🫰🏼' </span>
+                            </h1>
+                        </div>
+                        
+                    </div>
 
+                </div>
             </div>
 
             <div class="glass-panel new-desktop-layout">
@@ -300,8 +303,8 @@
             <div class="cap3-grid">
                 
                 <div class="text-block top-left">
-                    <p><span class="k-font small">SIEMPRE</span> VOY <span class="b-font big">BUSCÁNDOTE</span></p>
-                    <p class="b-font big">ENTENDERTE DE FORMA<span class="b-font huge">MAS REAL</span></p>
+                    <p><span class="k-font small">...</span> VOY <span class="b-font big">BUSCÁNDOTE</span></p>
+                    <p class="b-font big">VOLVER A CONOCERTE DE FORMA<span class="b-font huge">MAS REAL</span></p>
                 </div>
 
                 <div class="text-block top-right">
@@ -314,7 +317,7 @@
                 </div>
 
                 <div class="text-block bottom-left">
-                    <p class="b-font big">AMAR <span class="k-font small">ES</span> <span class="huge">LIBERAR</span></p>
+                    <p class="b-font big">Brillas<span class="k-font small">Y BRILLAS</span> <span class="huge">TAN LINDO</span></p>
                 </div>
 
                 <div class="text-block bottom-right">
@@ -326,17 +329,28 @@
         </section>
         <!--Detras de camaras-->
         <div id="original-carousel-slot">
-            <div id="dynamic-shape-container">
-                <div class="neon-glow-wrapper">
-                    <!-- NUEVO: Contenedor para el efecto de vidrio esmerilado -->
-                    <div id="glass-shape-loader" class="glass-shape-loader"></div>
-                    
-                    <img id="dynamic-shape-img" src="" alt="Detrás de cámaras dinámico">
+            <div id="memory-widget" class="memory-widget">
+                
+                <div id="widget-loader" class="widget-loader">
+                    <div class="neon-glow-wrapper rotating">
+                        <div id="glass-shape-loader" class="glass-shape-loader"></div>
+                    </div>
                 </div>
+
+                <div id="widget-content" class="widget-content">
+                    <div class="widget-image-container">
+                        <div class="neon-glow-wrapper static">
+                            <img id="dynamic-shape-img" src="" alt="Detrás de cámaras dinámico">
+                        </div>
+                    </div>
+                    <div class="widget-text-container">
+                        <h1 class="Descripcion-photo" id="main-photo-desc">Detrás de cámaras</h1>
+                    </div>
+                </div>
+
             </div>
         </div>
 
-        <h1 class="Descripcion-photo">Detrás de cámaras</h1>
         <div id="full-screen" class="full-screen">
             <img id="full-screen-img" src="" alt="Full Screen Image">
             <button id="close-full-screen">Cerrar</button>
@@ -367,12 +381,29 @@
        
         <!--Modo Ambiente-->
         <div id="ambient-overlay" class="ambient-overlay">
+            
+            <div id="lottie-satelite-1" class="lottie-ambient top-left"></div>
+            <div id="lottie-satelite-2" class="lottie-ambient bottom-right"></div>
+            <div id="lottie-satelite-3" class="lottie-ambient center-right"></div>
+
             <h2 class="ambient-title">
                 Bruma
                 <span id="ambient-dynamic-text" class="phrase-smaller"></span>
             </h2>
             <div id="ambient-carousel-wrapper"></div>
             <p id="ambient-photo-desc" class="ambient-photo-desc"></p>
+        </div>
+        <!-- Efecto de Bruma de Lottie -->
+        <div id="lottie-bruma-overlay" class="lottie-bruma-overlay">
+            
+            <div id="bruma-layer-1" class="bruma-layer"></div>
+            <div id="bruma-layer-2" class="bruma-layer intensa"></div>
+            <!-- Texto de cierre con el icono del reloj -->
+            <div id="bruma-closing-text" class="bruma-closing-text">
+                <span class="material-symbols-outlined">schedule</span>
+                <span>28 de julio, 2026</span>
+            </div>
+
         </div>
         <script type="module" src="logica.js"></script> 
     </body>

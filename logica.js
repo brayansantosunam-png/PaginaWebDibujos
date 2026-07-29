@@ -183,13 +183,6 @@ function loadGallery() {
 
 document.addEventListener('DOMContentLoaded', loadGallery);
 /* ------------------------------------------------------ Capitulo 01 ------------------------------------------------ */
-const coverList = [
-    'background_minecraft.png',
-    'background_minecraft_night.png',
-    'background_cap2_light.jpg',
-    "background_cap2_night.jpg"
-];
-
 const avatarList = [
     'avatar_01.png',
     'avatar_02.png',
@@ -233,55 +226,44 @@ const themeColors = [
 function applyCurrentThemeColors() {
     const isDark = document.body.classList.contains('dark-mode');
     
-    const currentTheme = isDark ? themeColors[currentCoverIndex].dark : themeColors[currentCoverIndex].light;
+    // Usamos colorIndex en lugar de currentAvatarIndex
+    const currentTheme = isDark ? themeColors[colorIndex].dark : themeColors[colorIndex].light;
     
     document.documentElement.style.setProperty('--neon-color', currentTheme.neon);
     document.documentElement.style.setProperty('--bg-color', currentTheme.bg);
 }
 
-let currentCoverIndex = 0;
 let currentAvatarIndex = 0;
+let colorIndex = 0;
+
+setInterval(() => {
+    colorIndex = (colorIndex + 1) % themeColors.length;
+    applyCurrentThemeColors();
+}, 4000);
 
 // Referencias al DOM
 const avatarImg = document.getElementById('main-avatar');
 const btnPrev = document.getElementById('btn-prev-avatar');
 const btnNext = document.getElementById('btn-next-avatar');
 const btnSave = document.getElementById('btn-save-avatar');
-const coverImg = document.getElementById('dynamic-cover');
 const controlsPanel = document.getElementById('avatar-controls');
 const shapeImg = document.querySelector('.shape-underlay');
 const avatarDisplayContainer = document.querySelector('.avatar-display');
+const profileDescCard = document.querySelector('.profile-description');
 
-
-function rotateCover() {
-    coverImg.style.opacity = '0'; 
-    
-    setTimeout(() => {
-        currentCoverIndex = (currentCoverIndex + 1) % coverList.length;
-        coverImg.src = coverList[currentCoverIndex];
-        coverImg.classList.add('scale-up-anim'); // Reinicia/mantiene animación
-        coverImg.style.opacity = '1'; // Aparecer
-        
-        applyCurrentThemeColors(); 
-        
-    }, 800);
-}
-
-setInterval(rotateCover, 3000);
 
 avatarImg.addEventListener('click', () => {
     // Al hacer clic en el avatar, mostramos la botonera
     controlsPanel.classList.remove('hidden-panel');
+
+    if(profileDescCard) profileDescCard.classList.add('hidden-panel');
     
-    // Opcional: También cambiar el avatar al hacer clic (como antes)
     currentAvatarIndex = (currentAvatarIndex + 1) % avatarList.length;
     avatarImg.src = avatarList[currentAvatarIndex];
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Cargar primera portada
-    coverImg.src = coverList[0];
-    coverImg.classList.add('scale-up-anim');
+    
     applyCurrentThemeColors();
 
     // Cargar avatar guardado
@@ -347,6 +329,9 @@ btnSave.addEventListener('click', () => {
     
     controlsPanel.classList.add('hidden-panel');
     console.log("Perfil guardado localmente.");
+
+    if(profileDescCard) profileDescCard.classList.remove('hidden-panel'); 
+    console.log("Perfil guardado localmente.");
 });
 
 function loadSavedProfile() {
@@ -369,17 +354,114 @@ function loadSavedProfile() {
 document.addEventListener('DOMContentLoaded', () => {
     loadSavedProfile()
 });
-//Texto de perfil
+// ------------------------------------ Lógica del Texto Expandible
 document.addEventListener('DOMContentLoaded', () => {
     const trigger = document.querySelector('.read-more-trigger');
     const container = document.getElementById('collapsible-text');
+    const profileCard = document.querySelector('.profile-description'); 
+    const mobileBtn = document.getElementById('mobile-expand-btn');
 
-    if (trigger && container) {
+    if (trigger && container && profileCard) {
+        
+        // ESCRITORIO: Al hacer clic en los 3 puntos
         trigger.addEventListener('click', (e) => {
-            e.stopPropagation(); // Evita burbujeos accidentales
+            e.stopPropagation(); 
             container.classList.remove('text-collapsed');
             container.classList.add('text-expanded');
+            profileCard.style.cursor = 'pointer'; 
         });
+
+        // MÓVIL: Al hacer clic en el botón de flecha
+        if (mobileBtn) {
+            mobileBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Evita que se dispare el cierre automático de la tarjeta
+                profileCard.classList.toggle('card-expanded');
+                profileCard.style.cursor = profileCard.classList.contains('card-expanded') ? 'pointer' : 'default';
+            });
+        }
+
+        // AMBOS: Al hacer clic en cualquier parte de la tarjeta (Contrae)
+        profileCard.addEventListener('click', () => {
+            // Cierre en Escritorio
+            if (container.classList.contains('text-expanded')) {
+                container.classList.remove('text-expanded');
+                container.classList.add('text-collapsed');
+                profileCard.style.cursor = 'default'; 
+            }
+            
+            // Cierre en Móvil
+            if (profileCard.classList.contains('card-expanded')) {
+                profileCard.classList.remove('card-expanded');
+                profileCard.style.cursor = 'default';
+            }
+        });
+    }
+});
+
+// ------------------------------------ Rotación Animada de la Imagen de Perfil
+document.addEventListener('DOMContentLoaded', () => {
+    const profileImg = document.querySelector('.desc-profile-img');
+    
+    if (profileImg && typeof extraImages !== 'undefined' && extraImages.length > 0) {
+        
+        setInterval(() => {
+            profileImg.classList.add('img-updating');
+            
+            setTimeout(() => {
+                const randomIndex = Math.floor(Math.random() * extraImages.length);
+                profileImg.src = extraImages[randomIndex];
+                
+                profileImg.classList.remove('img-updating');
+            }, 400); 
+            
+        }, 3000); 
+    }
+});
+
+/* ------------------------------------------------------ Efecto Video Scroll (Scrubbing) ------------------------------------------------ */
+const coverVideo = document.getElementById('dynamic-cover');
+const capitulo01 = document.getElementById('Capitulo01');
+
+// Variables para el suavizado de la animación
+let targetScrollTime = 0;
+let isVideoScrolling = false;
+
+function renderVideoScroll() {
+    if (!coverVideo.duration) return;
+    
+    coverVideo.currentTime += (targetScrollTime - coverVideo.currentTime) * 0.04;
+
+    // Si aún no alcanza el punto exacto, sigue animando
+    if (Math.abs(targetScrollTime - coverVideo.currentTime) > 0.01) {
+        window.requestAnimationFrame(renderVideoScroll);
+    } else {
+        isVideoScrolling = false;
+    }
+}
+
+window.addEventListener('scroll', () => {
+    if (!coverVideo || !capitulo01) return;
+
+    
+    const scrollPosition = window.scrollY;
+    const sectionTop = capitulo01.offsetTop;
+    const sectionHeight = capitulo01.offsetHeight;
+    const windowHeight = window.innerHeight;
+
+    const start = sectionTop - windowHeight;
+    const end = sectionTop + sectionHeight;
+    
+    let progress = (scrollPosition - start) / (end - start);
+    
+    progress = Math.max(0, Math.min(1, progress)); 
+
+    if (coverVideo.duration) {
+        targetScrollTime = progress * coverVideo.duration;
+        
+        if (!isVideoScrolling) {
+            isVideoScrolling = true;
+            window.requestAnimationFrame(renderVideoScroll);
+        }
     }
 });
 /* ------------------------------------------------------ Welcome page ----------------------------------------------- */
@@ -536,6 +618,26 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+/* ----------------------------------------------------- Lottie Files Bruma Final ------------------------------------------------------------------------------- */
+
+let brumaAnim1;
+let brumaAnim2;
+
+function initBrumaLottie() {
+    const layer1 = document.getElementById('bruma-layer-1');
+    const layer2 = document.getElementById('bruma-layer-2');
+
+    const animConfig = {
+        renderer: 'svg',
+        loop: true,
+        autoplay: false, 
+        path: 'bruma.json',
+        rendererSettings: { preserveAspectRatio: 'xMidYMid slice' }
+    };
+
+    if (layer1) brumaAnim1 = lottie.loadAnimation({ ...animConfig, container: layer1 });
+    if (layer2) brumaAnim2 = lottie.loadAnimation({ ...animConfig, container: layer2 });
+}
 
 
 /* ----------------------------------------------------- Playlist ----------------------------------------------------------------------------------------------- */
@@ -1278,14 +1380,13 @@ function changeDynamicMask() {
     }
 }
 
-/* Cambia la fuente del audio y reproduce la canción seleccionada*/
 function selectSong(index) {
     currentSongIndex = index;
     audio.src = songs[currentSongIndex].src;
 
     document.getElementById('artist-quote-prefix').innerText = `Y como dijo ${songs[currentSongIndex].artist}...`;
     document.getElementById('artist-image').src = songs[currentSongIndex].artistImg || 'default_artist.png';
-    // Detectamos si el modo ambiente está activo para elegir el destino del texto
+    
     const root = document.documentElement;
     const songColors = songs[currentSongIndex].colors;
 
@@ -1307,9 +1408,31 @@ function selectSong(index) {
         root.style.setProperty('--dyn-card-bg', 'rgba(255, 255, 255, 0.1)');
     }
     
-    const target = ambientModeActive ? 'ambient-dynamic-text' : 'typewriter-text';
     
-    // Mandamos la frase al destino correcto
+    const brumaOverlay = document.getElementById('lottie-bruma-overlay');
+    const layer2 = document.getElementById('bruma-layer-2');
+    
+    if (brumaOverlay && brumaAnim1) {
+        if (currentSongIndex === songs.length - 1) {
+            brumaOverlay.classList.add('bruma-activa');
+            brumaAnim1.play();
+            // Asegurarnos de que la capa 2 inicie apagada si la canción vuelve a empezar
+            if(layer2) layer2.classList.remove('activa');
+            if(brumaAnim2) brumaAnim2.pause();
+        } else {
+            brumaOverlay.classList.remove('bruma-activa');
+            if(layer2) layer2.classList.remove('activa');
+            
+            setTimeout(() => {
+                if (!brumaOverlay.classList.contains('bruma-activa')) {
+                    if(brumaAnim1) brumaAnim1.pause();
+                    if(brumaAnim2) brumaAnim2.pause();
+                }
+            }, 3000); 
+        }
+    }
+    
+    const target = ambientModeActive ? 'ambient-dynamic-text' : 'typewriter-text';
     typeWriter(songs[currentSongIndex].phrase || "", target);
     
     loadPlaylist(); 
@@ -1317,6 +1440,7 @@ function selectSong(index) {
     scrollToActiveSong();
     updateMiniPlayerUI();
 }
+
 
 /* Alterna entre reproducción y pausa */
 function togglePlay() {
@@ -1560,11 +1684,28 @@ function updateSeekBar() {
         seekSlider.value = percentage;
         trackWave.style.width = percentage + "%";
         
-        /* CÁLCULO CORREGIDO: Sin el + 10px */
         trackStraight.style.left = percentage + "%";
         trackStraight.style.width = (100 - percentage) + "%";
         
         currentTimeLabel.innerText = formatTime(audio.currentTime);
+
+        if (currentSongIndex === songs.length - 1) {
+            const halfway = audio.duration / 2;
+            const layer2 = document.getElementById('bruma-layer-2');
+            
+            if (layer2 && brumaAnim2) {
+                // Si pasamos de la mitad y no está activa, activarla
+                if (audio.currentTime >= halfway && !layer2.classList.contains('activa')) {
+                    layer2.classList.add('activa');
+                    brumaAnim2.play();
+                } 
+                // Si el usuario regresa la canción antes de la mitad, desactivarla
+                else if (audio.currentTime < halfway && layer2.classList.contains('activa')) {
+                    layer2.classList.remove('activa');
+                    setTimeout(() => brumaAnim2.pause(), 4000); // Pausa tras el fade-out
+                }
+            }
+        }
 
         const timeLeft = audio.duration - audio.currentTime; 
         if (timeLeft <= FADE_TIME) {
@@ -1643,11 +1784,19 @@ function triggerVerticalPushEffect(element) {
 
 /* --------------------------------------------------- Detras de camaras Animado ------------------------------------------------ */
 const misFotos = [
-    { url: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiHVbluVfk3EzFTrxLAjsQ8UL7KSkVgHBJVb2ow0_PAA9jDHLR0KkzW-w6Zp1Dsdmtirvgpt0yFzsver7_O85OVi8FPekf7T6FZVF-7ExyyC0PF7pboe5gSvYFz4QACztj57MFTgph6UYrdxeF6gJtzGEddgcQmYpsOI2jAb8Y7sjMD5OHkNWMOTifAl7I/s2101/Gemini_Generated_Image_hd0kuwhd0kuwhd0k.png", phrase: "Explorando nuevas texturas en el arte." },
-    { url: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjhvF_mr9O61Im6hMldXxun81RCoIi45FPE6XeNW2FYtVOZhD-Q67tg_akqWy5mp_2BnZ5pgrV4hstFVjLMElrElaKgaon3zCidkECJfBMMAKzWXb8CT5vl65eV-Sc5QjhQxYf_RSTr2_RN5EiSoL6LZkuqPL1K551f94Suvq6l9jXloRfQvOSzpozhqsY/s2164/Gemini_Generated_Image_u8xiu9u8xiu9u8xi.png", phrase: "La geometría de lo cotidiano." },
-    { url: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg3JbfOn3ZZq5x_9-0sarl5aArtbMFFF38kPzIt7QbY7kIH83kXJzukwkEHaU4YSGfS5lxaN3PaOnXAsEj20ApCnN9u-UDRvujFTVjucQK13A04_2YbunhPussJVz_6hkC8b_wOOn2pIbJmx2Eqt7Hucrg7kY4lb0kq9o32WK0dZAFUYaz66xGR0nUQZHs/s1486/Gemini_Generated_Image_p9bmlwp9bmlwp9bm.png", phrase: "Oxitocina: el pulso de la creación." },
-    { url: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh2koZqBVNyjqKnXi_zASbmf-7-7dC9QJ9XC31fni-1uT5FoJgvBuulVz3EPRFoagTKRITRhrF10ufNA2TBPq_JpxjAtKqNx0QWiUACbtIPi0AXUcKpGuR-X4RRNgg5g45UTmufl6DJZHqIHeuOtvrZQby3Za09wu13q9vvf3EMmj0Co-4ZcMuhW4_2FXw/s1647/Gemini_Generated_Image_4xpw0v4xpw0v4xpw.png", phrase: "Hey hope, vamos a confeccionar una frecuencia de millón de megahertz." },
-    { url: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjHgci7hy6d_YvObom1J2-eotJp1vsqBpxll_5QU_oSxLi8YV2-VatI4Ukf6R2GUwNUsgAm2TdqdXbQdb1Y3bH39CnWLifdR_TbznLeveAc7XIFdxS79AsdVeJWDpAYyfTZT4FAI0MPkeXCYFMSa3av98tSq9B1CMfbfzarP5W4mbNua7M5U7pdHfExnLE/s1356/c26b8d93-36c3-4328-a8f7-1d8d3494827e-1_all_23465~2.jpg", phrase: "Bruma en la atmosfera de la galaxia." }
+    { url: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiHVbluVfk3EzFTrxLAjsQ8UL7KSkVgHBJVb2ow0_PAA9jDHLR0KkzW-w6Zp1Dsdmtirvgpt0yFzsver7_O85OVi8FPekf7T6FZVF-7ExyyC0PF7pboe5gSvYFz4QACztj57MFTgph6UYrdxeF6gJtzGEddgcQmYpsOI2jAb8Y7sjMD5OHkNWMOTifAl7I/s2101/Gemini_Generated_Image_hd0kuwhd0kuwhd0k.png", phrase: "Todo lo que le *escribí* en el fondo del *mar*" },
+    { url: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjhvF_mr9O61Im6hMldXxun81RCoIi45FPE6XeNW2FYtVOZhD-Q67tg_akqWy5mp_2BnZ5pgrV4hstFVjLMElrElaKgaon3zCidkECJfBMMAKzWXb8CT5vl65eV-Sc5QjhQxYf_RSTr2_RN5EiSoL6LZkuqPL1K551f94Suvq6l9jXloRfQvOSzpozhqsY/s2164/Gemini_Generated_Image_u8xiu9u8xiu9u8xi.png", phrase: "Satélites en *busca* de una *señal*" },
+    { url: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg3JbfOn3ZZq5x_9-0sarl5aArtbMFFF38kPzIt7QbY7kIH83kXJzukwkEHaU4YSGfS5lxaN3PaOnXAsEj20ApCnN9u-UDRvujFTVjucQK13A04_2YbunhPussJVz_6hkC8b_wOOn2pIbJmx2Eqt7Hucrg7kY4lb0kq9o32WK0dZAFUYaz66xGR0nUQZHs/s1486/Gemini_Generated_Image_p9bmlwp9bmlwp9bm.png", phrase: "Esta es la *historia* de una vieja *canción*" },
+    { url: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh2koZqBVNyjqKnXi_zASbmf-7-7dC9QJ9XC31fni-1uT5FoJgvBuulVz3EPRFoagTKRITRhrF10ufNA2TBPq_JpxjAtKqNx0QWiUACbtIPi0AXUcKpGuR-X4RRNgg5g45UTmufl6DJZHqIHeuOtvrZQby3Za09wu13q9vvf3EMmj0Co-4ZcMuhW4_2FXw/s1647/Gemini_Generated_Image_4xpw0v4xpw0v4xpw.png", phrase: "Si me miras *titubear* es porque no encuentro palabras, *belleza de la naturaleza*" },
+    { url: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjHgci7hy6d_YvObom1J2-eotJp1vsqBpxll_5QU_oSxLi8YV2-VatI4Ukf6R2GUwNUsgAm2TdqdXbQdb1Y3bH39CnWLifdR_TbznLeveAc7XIFdxS79AsdVeJWDpAYyfTZT4FAI0MPkeXCYFMSa3av98tSq9B1CMfbfzarP5W4mbNua7M5U7pdHfExnLE/s1356/c26b8d93-36c3-4328-a8f7-1d8d3494827e-1_all_23465~2.jpg", phrase: "*Mucha suerte*, cuando quieras, no dudes en visitarme - Visitantes"}
+];
+
+const maskData = [
+    { file: 'mascara_cuadrado.png', color: 'rgba(112, 159, 222, 0.25)' }, // Azulado
+    { file: 'mascara_pildora_version_dos.png', color: 'rgba(235, 152, 84, 0.25)' }, // Naranja
+    { file: 'mask.png', color: 'rgba(153, 43, 50, 0.25)' }, // Rojizo
+    { file: 'mask_shape_spiner.png', color: 'rgba(94, 201, 38, 0.25)' }, // Verdoso
+    { file: 'mask_shape_triangle.png', color: 'rgba(128, 128, 128, 0.25)' } // Gris
 ];
 
 let descTypewriterInterval; 
@@ -1655,34 +1804,27 @@ let currentAnimIndex = 0;
 let mainCycleTimeout;
 
 function typeWriterDescription(text) {
-    const targetMain = document.querySelector('.Descripcion-photo');
-    const targetAmbient = document.getElementById('ambient-photo-desc');
+    const targetMain = document.getElementById('main-photo-desc');
 
     clearInterval(descTypewriterInterval); 
-    
     if (targetMain) targetMain.innerHTML = ""; 
-    if (targetAmbient) targetAmbient.innerHTML = ""; 
 
     const words = text.split(" ");
     let i = 0;
 
     descTypewriterInterval = setInterval(() => {
         if (i < words.length) {
-            
             if (targetMain) {
                 const spanMain = document.createElement('span');
                 spanMain.className = 'desc-word';
-                spanMain.innerHTML = words[i] + "&nbsp;";
+                
+                let wordText = words[i];
+                
+                wordText = wordText.replace(/\*(.*?)\*/g, '<span class="big-word">$1</span>');
+
+                spanMain.innerHTML = wordText + "&nbsp;";
                 targetMain.appendChild(spanMain);
             }
-            
-            if (targetAmbient) {
-                const spanAmbient = document.createElement('span');
-                spanAmbient.className = 'desc-word';
-                spanAmbient.innerHTML = words[i] + "&nbsp;";
-                targetAmbient.appendChild(spanAmbient);
-            }
-            
             i++;
         } else {
             clearInterval(descTypewriterInterval);
@@ -1699,62 +1841,90 @@ function initDynamicShapeAnimation() {
     runShapeCycle(dynamicImg, glassLoader);
 }
 
-function runShapeCycle(dynamicImg, glassLoader) {
-    // 1. FASE DE CARGA (5 SEGUNDOS): Ocultar foto, mostrar vidrio
-    dynamicImg.style.opacity = '0';
-    glassLoader.style.opacity = '1';
+function runShapeCycle() {
+    const memoryWidget = document.getElementById('memory-widget');
+    const widgetLoader = document.getElementById('widget-loader');
+    const widgetContent = document.getElementById('widget-content');
+    const dynamicImg = document.getElementById('dynamic-shape-img');
+    const glassLoader = document.getElementById('glass-shape-loader');
     
-    // Mostramos un texto temporal mientras carga la animación
-    const descTarget = document.querySelector('.Descripcion-photo');
+    // FASE DE CARGA: Mostrar loader, ocultar contenido final
+    if(memoryWidget) {
+        memoryWidget.classList.remove('revealed');
+        memoryWidget.style.backgroundColor = 'transparent';
+    }
+    
+    // Mostramos el spinner
+    if(widgetLoader) widgetLoader.classList.remove('hidden');
+    
+    // Ocultamos el contenido final
+    if(widgetContent) {
+        widgetContent.style.opacity = '0';
+        widgetContent.style.visibility = 'hidden';
+    }
+    
+    // Limpiamos el texto para que no haya salto visual
+    const descTarget = document.getElementById('main-photo-desc');
     if (descTarget) {
         clearInterval(descTypewriterInterval);
-        descTarget.innerText = "Sintonizando recuerdo...";
+        descTarget.innerText = "";
     }
 
     let maskCount = 0;
     let lastMaskUrl = '';
+    let lastMaskColor = '';
 
-    // Función interna para cambiar la máscara aleatoriamente
     const changeMask = () => {
-        const randomMask = maskFiles[Math.floor(Math.random() * maskFiles.length)];
-        lastMaskUrl = `url('${randomMask}')`;
-        glassLoader.style.webkitMaskImage = lastMaskUrl;
-        glassLoader.style.maskImage = lastMaskUrl;
+        const randomData = maskData[Math.floor(Math.random() * maskData.length)];
+        lastMaskUrl = `url('${randomData.file}')`;
+        lastMaskColor = randomData.color;
+        
+        if(glassLoader) {
+            glassLoader.style.webkitMaskImage = lastMaskUrl;
+            glassLoader.style.maskImage = lastMaskUrl;
+        }
         maskCount++;
     };
 
-    // Ejecutamos el primer cambio inmediatamente
     changeMask();
 
-    // Bucle interno que cambia la máscara cada 1 segundo
     const maskCycle = setInterval(() => {
-        if (maskCount >= 5) { // Al llegar a 5 segundos (5 máscaras)
+        if (maskCount >= 5) { 
             clearInterval(maskCycle);
             
-            // 2. FASE DE REVELACIÓN
+            // FASE DE REVELACIÓN
             currentAnimIndex = (currentAnimIndex + 1) % misFotos.length;
             
-            // Le pasamos la última máscara generada a la imagen real para que coincidan
-            dynamicImg.style.webkitMaskImage = lastMaskUrl;
-            dynamicImg.style.maskImage = lastMaskUrl;
-            dynamicImg.src = misFotos[currentAnimIndex].url;
+            // Asignar máscara e imagen final
+            if (dynamicImg) {
+                dynamicImg.style.webkitMaskImage = lastMaskUrl;
+                dynamicImg.style.maskImage = lastMaskUrl;
+                dynamicImg.src = misFotos[currentAnimIndex].url;
+            }
             
-            // Transición cruzada: ocultamos el vidrio y mostramos la foto
-            glassLoader.style.opacity = '0';
-            dynamicImg.style.opacity = '1';
+            // Desvanecer el loader giratorio central
+            if (widgetLoader) widgetLoader.classList.add('hidden');
             
-            // Iniciamos el efecto de máquina de escribir de la foto real
+            // Mostrar y colorear el widget final con el contenido estático
+            if(memoryWidget) {
+                memoryWidget.style.backgroundColor = lastMaskColor;
+                memoryWidget.classList.add('revealed');
+            }
+            if(widgetContent) {
+                widgetContent.style.opacity = '1';
+                widgetContent.style.visibility = 'visible';
+            }
+            
             typeWriterDescription(misFotos[currentAnimIndex].phrase);
             
-            // Mantenemos la foto visible por 6 segundos antes de reiniciar todo el ciclo
             mainCycleTimeout = setTimeout(() => {
-                runShapeCycle(dynamicImg, glassLoader);
+                runShapeCycle();
             }, 6000); 
             
         } else {
             changeMask();
         }
-    }, 1000); // Se ejecuta cada 1000ms (1 segundo)
+    }, 1000); 
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -1800,13 +1970,11 @@ document.addEventListener('touchstart', resetInactivityTimer); // Para móviles
 // 3. Activar el modo ambiente
 function activateAmbientMode() {
     ambientModeActive = true;
-    const dynamicContainer = document.getElementById('dynamic-shape-container');
+    const memoryWidget = document.getElementById('memory-widget'); 
     
-    if (dynamicContainer && ambientWrapper) {
-        ambientWrapper.appendChild(dynamicContainer);
-        // Opcional: Aumentar el tamaño un poco en modo ambiente
-        dynamicContainer.style.transform = 'scale(1.3)';
-        dynamicContainer.style.transition = 'transform 1s ease';
+    if (memoryWidget && ambientWrapper) {
+        ambientWrapper.appendChild(memoryWidget);
+        memoryWidget.style.transform = 'scale(1.1)';
     }
     ambientOverlay.classList.add('active');
     
@@ -1821,21 +1989,47 @@ function deactivateAmbientMode() {
     ambientModeActive = false;
     ambientOverlay.classList.remove('active');
     
-    const dynamicContainer = document.getElementById('dynamic-shape-container');
+    const memoryWidget = document.getElementById('memory-widget');
 
     setTimeout(() => {
-        if (dynamicContainer && originalSlot) {
-            originalSlot.appendChild(dynamicContainer);
-            dynamicContainer.style.transform = 'scale(1)';
+        if (memoryWidget && originalSlot) {
+            originalSlot.appendChild(memoryWidget);
+            memoryWidget.style.transform = 'scale(1)'; // Restaurar escala
         }
 
-        // Limpiamos el texto del ambiente y lo devolvemos a la web principal
         document.getElementById('ambient-dynamic-text').innerHTML = "";
         const currentPhrase = songs[currentSongIndex].phrase || "";
         typeWriter(currentPhrase, 'typewriter-text');
     }, 800); 
 }
 
+function initAmbientLotties() {
+    // Array con los IDs de los contenedores que creamos en el HTML
+    const lottieContainers = [
+        'lottie-satelite-1',
+        'lottie-satelite-2',
+        'lottie-satelite-3'
+    ];
+
+    lottieContainers.forEach(id => {
+        const container = document.getElementById(id);
+        if (container) {
+            lottie.loadAnimation({
+                container: container, 
+                renderer: 'svg',      
+                loop: true,           
+                autoplay: true,       
+                path: 'satelite.json' 
+            });
+        }
+    });
+}
+
+// Ejecutar cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', () => {
+    initAmbientLotties();
+    initBrumaLottie();
+});
 
 /* ---------------------------------------------------------------- Efecto gradiente --------------------------------------------- */
 
