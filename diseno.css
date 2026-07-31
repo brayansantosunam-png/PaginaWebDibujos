@@ -2734,7 +2734,7 @@ h1#collapsible-text .read-more-trigger {
 
 .gallery-container {
     width: 85%;
-    margin: 0px auto 80px auto;
+    margin: 0px auto 15px auto;
     padding: 20px;
     background:var(--background-navigation);
     backdrop-filter: blur(20px) saturate(120%);
@@ -2742,7 +2742,7 @@ h1#collapsible-text .read-more-trigger {
     border: var(--border-navigation); 
     box-shadow: var(--box-navigation);
     transition: background-color 0.3s ease;
-    border-radius: 15px 15px 50px 50px;
+    border-radius: 50px 50px 15px 15px;
 }
 
 .gallery-container:hover{
@@ -2837,11 +2837,11 @@ h1#collapsible-text .read-more-trigger {
     border: var(--border-navigation); 
     box-shadow: var(--box-navigation);
     transition: background-color 0.3s ease;
-    border-radius: 50px 50px 15px 15px;
+    border-radius: 15px 15px 50px 50px;
     padding: 25px;
     display: grid;
     grid-template-columns: 1.4fr 1fr; /* Proporción: Imagen izquierda más grande que la derecha */
-    gap: 30px;
+    gap: 10px;
     align-items: center;
 }
 
@@ -4318,6 +4318,64 @@ body.dark-mode .video-glass-overlay {
     }
 
     /*------------------------------------------------- Capitulo 02 ------------------------------------------*/
+    .gallery-container {
+        width: 100%;
+        margin: 0 0 40px 0; 
+        padding: 0;
+        border-radius: 0 !important;
+        border: none;
+        background: transparent;
+        box-shadow: none;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+
+    .asymmetric-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: auto;
+        gap: 3px;
+    }
+
+    .gallery-item {
+        grid-column: auto !important;
+        grid-row: auto !important;
+        height: 220px;
+        border-radius: 15px !important;
+    }
+
+    .gallery-item:nth-child(1) {
+        grid-column: 1 / 3 !important;
+        grid-row: 1 / 3 !important;
+        height: 450px;
+    }
+
+    .gallery-item:nth-child(2) {
+        grid-column: 1 / 2 !important;
+        grid-row: 3 / 4 !important;
+    }
+    .gallery-item:nth-child(3) {
+        grid-column: 2 / 3 !important;
+        grid-row: 3 / 4 !important;
+    }
+
+    .gallery-item:nth-child(4) {
+        grid-column: 1 / 2 !important;
+        grid-row: 4 / 5 !important;
+    }
+    .gallery-item:nth-child(5) {
+        grid-column: 2 / 3 !important;
+        grid-row: 4 / 5 !important;
+    }
+
+    .gallery-item:nth-child(6) {
+        grid-column: 1 / 2 !important;
+        grid-row: 5 / 6 !important;
+    }
+    .gallery-item:nth-child(7) {
+        grid-column: 2 / 3 !important;
+        grid-row: 5 / 6 !important;
+    }
+
     .banner-cap-dos {
         height: 250px; 
         object-fit: cover; 
@@ -4331,17 +4389,11 @@ body.dark-mode .video-glass-overlay {
     .banner-wrapper::before {
         background: linear-gradient(to bottom, #E0E2F2 0%, transparent 80%);
     }
-    .asymmetric-grid {
-        grid-template-columns: 1fr; /* Una sola columna en móvil */
-        grid-auto-rows: auto;
-    }
-    .gallery-item {
-        grid-column: auto !important;
-        grid-row: auto !important;
-        height: 250px;
-        border-radius: 30px !important;
-    }
 
+    .banner-wrapper{
+        width: 95%;
+    }
+    
     .astronaut-showcase {
         grid-template-columns: 1fr; /* Colapsa a una sola columna */
         padding: 20px;

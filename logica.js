@@ -142,13 +142,13 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 /* ----------------------------------------------- Capitulo 02 ------------------------------------------------------- */
 const galleryImages = [
-    { url: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhLglp5OkXfMRE-pWuuuUUAvztnpasHsW6_NgLjNDKjFaaPEFDoYHGZHs_mAextv7dxyFDwZxCNlndbrya6JERsDsXhoZdegmpuV9sK1B1A-JdYfHZma_PF31SHkicjD1bw2LGYKV7fzZeXQn-oERZZ1mytY0ohGCcpGlk_FN_PmJG46oIY9YLQfrjxZZE/s4000/Picsart_26-03-19_18-22-14-595.jpg', text: 'Reinventarse' },
+    { url: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjzZ71dfP4MWh3pHmFHHr7zT9u_IK6CYjHTsRttYq21Vm019e8AjZ_wJ-ZK1NNsaExTvIaQ0IxiPtFT86KIfHIqR2l5QAmWT90sXmjOerHXa_UR_a0ffVJnlmBO4RJnaDwHxIsFnJz2fK1dsui5eAj-2tdys2Y3SRse9gB0OZV3r8VGduRAoKkiz1UGbn8/w437-h583/1785467727117~2.jpg', text: 'Reinventarse' },
     { url: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEia2C8eyPRdHNxmUZ4Zg04Gz7NwebWlRIDWRo4yVBdFzLnVNbzmeRQY2ynqxnXJ6qkmQKXUJFHouoy8onSDrvJIUr9Oc1jHHNQW-qHZqDyawLaLSYGl3ev1v7rfZrKThGiX_kqwvMrxGoqEnTNFpsy1pwCaTf97MuO3o8WwdIctUjTbSfr7-uexEqa0Rt8/s1724/Picsart_26-03-15_17-23-29-953.jpg', text: 'Tus ojos' },
-    { url: 'http://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhVSUgBge2DzZ5HKvMFU5wVmAng8kFKYX-3lA5UWDQRatu0q2JBIztswdQc0K6SZDJe3klHkVjDVzdgm1I-CEBQKlIlQ5miafl566wpKym6EcQxXbxBqZk83DM77gOliLpwMyzk14s6QaKjDQ5WvjcG7coatp6kOzyunV7g5FxXiEK6YXZmz9FXHl8wYbI/s2002/Pintura_03.png', text: 'Arte Gigante' },
-    { url: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjEEDA2PxA3uOHehTS8vMnRqrnuMptqiZo_SE2MKllQSjWfjviQ7RTwh3y6z2mUwKJId4BK_92vXLBtaRL7JAi8yEgFSiD6D2T3yVGLQToOqfyJ3BvRRsXIp2chSvhYAJgC4fs2FKabX8QThM1zgECXd-3MGHansQs3cCtHT8ayFqUkO6vYHEzcJfptfx4/s4032/PXL_20230325_010854250.jpg', text: 'Caminando' },
-    { url: 'https://blogger.googleusercontent.com/img/a/AVvXsEikvYxZXBDIpLRQCh9JxNzBXTAFz-nSBPzoA8KEV5svfbigfJ3QGceQ3aT0xAvkPZjdFFcPQqvzR4eNtGUCAQVCDJop4Ve0KolnyMZ9HK6ro40nlWbkEdZ1qQNqETSrOZdudfjz4KXXIgi-rpiCvIN_Vr_UzuutRFjgHV60llp6YhVc9EYxry8KncRPXps', text: 'Bruma Final' },
-    { url: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiratYj5gPTFyNAN8QcL8eET_MO999fHvr23bILi2H8GH1Dfm64R8KX5budwPjqt1J8pFbBv8fbq5eoWND1DKh_RdjgtBJHyGhETPdP8e86znH_ZaXkJvYoRZERdHjPri06w3_o37bxPMOhDmFqMAB0zSQQoDojSRggIlrXgGwKOYkG6MpR-QMStLURgDA/s1177/Screenshot_20260328-213720.png', text: 'Valioso' },
-    { url: 'https://blogger.googleusercontent.com/img/a/AVvXsEh0Egl-mCd9f09wfOcnbosurjHMgvL3wyY-6CQmVQn3JYYT0aOGpQxc4JBrNskDpx2hIb1TxkWgjAcr81N2NKQDwE0vJeCLtbK48w6DmBjB8Pj45QwfvThuIJYkz5Xr2zPt6ZcG96qpNZSNew9pxM6ZjdX8Z6DjJX_OO16fgN6uVUtupP1XkJu-Hu4bchw', text: 'Enseñame de que estamos hechos' }
+    { url: 'http://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhVSUgBge2DzZ5HKvMFU5wVmAng8kFKYX-3lA5UWDQRatu0q2JBIztswdQc0K6SZDJe3klHkVjDVzdgm1I-CEBQKlIlQ5miafl566wpKym6EcQxXbxBqZk83DM77gOliLpwMyzk14s6QaKjDQ5WvjcG7coatp6kOzyunV7g5FxXiEK6YXZmz9FXHl8wYbI/s2002/Pintura_03.png', text: 'Te he visto en frente, sonriente.' },
+    { url: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjEEDA2PxA3uOHehTS8vMnRqrnuMptqiZo_SE2MKllQSjWfjviQ7RTwh3y6z2mUwKJId4BK_92vXLBtaRL7JAi8yEgFSiD6D2T3yVGLQToOqfyJ3BvRRsXIp2chSvhYAJgC4fs2FKabX8QThM1zgECXd-3MGHansQs3cCtHT8ayFqUkO6vYHEzcJfptfx4/s4032/PXL_20230325_010854250.jpg', text: 'Sentí cariño fie' },
+    { url: 'https://blogger.googleusercontent.com/img/a/AVvXsEikvYxZXBDIpLRQCh9JxNzBXTAFz-nSBPzoA8KEV5svfbigfJ3QGceQ3aT0xAvkPZjdFFcPQqvzR4eNtGUCAQVCDJop4Ve0KolnyMZ9HK6ro40nlWbkEdZ1qQNqETSrOZdudfjz4KXXIgi-rpiCvIN_Vr_UzuutRFjgHV60llp6YhVc9EYxry8KncRPXps', text: 'Te vi a los ojos bie' },
+    { url: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiratYj5gPTFyNAN8QcL8eET_MO999fHvr23bILi2H8GH1Dfm64R8KX5budwPjqt1J8pFbBv8fbq5eoWND1DKh_RdjgtBJHyGhETPdP8e86znH_ZaXkJvYoRZERdHjPri06w3_o37bxPMOhDmFqMAB0zSQQoDojSRggIlrXgGwKOYkG6MpR-QMStLURgDA/s1177/Screenshot_20260328-213720.png', text: 'Te siento al canta' },
+    { url: 'https://blogger.googleusercontent.com/img/a/AVvXsEh0Egl-mCd9f09wfOcnbosurjHMgvL3wyY-6CQmVQn3JYYT0aOGpQxc4JBrNskDpx2hIb1TxkWgjAcr81N2NKQDwE0vJeCLtbK48w6DmBjB8Pj45QwfvThuIJYkz5Xr2zPt6ZcG96qpNZSNew9pxM6ZjdX8Z6DjJX_OO16fgN6uVUtupP1XkJu-Hu4bchw', text: 'De lo que siento ayer y hoy' }
 ];
 
 function loadGallery() {
@@ -1142,6 +1142,40 @@ const songs = [
             "si cada despedida guarda algo de ayer.",
             "<span class='lyrics-highlight'>Hay cariño en las huellas que el viento no borró,</span>",
             "<span class='lyrics-highlight'>aunque el mapa haya cambiado de dirección.</span>"
+        ]
+    },
+    {   title: "Venus", 
+        artist: "Zoé", 
+        phrase: "Vienes como el mar, vuelta en un ciclo...", 
+        colors: {
+            // navBg usa rgba (el último valor es la opacidad, 0.2 = 20%)
+            navBg: "rgba(92, 139, 176, 0.25)", 
+            navText: "#ffffff",
+            
+            // playBg usa un color sólido (Hexadecimal)
+            playBg: "#5c8bb0",      
+            playText: "#1c1d21",
+            
+            // La barra de progreso (Seekbar)
+            seekTrack: "rgba(92, 139, 176, 0.3)", // Fondo de la barra
+            seekThumb: "#5c8bb0",                   // Relleno de la barra
+            cardBg: "rgba(92, 139, 176, 0.35)"
+        },
+        artistImg: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg2Bna2H2hKJxS-OayFMBlafTVq11tOVcmYs5DecDwWAQpjU3hoA80u8jlhM2o-unXY24tgYZmlxe9TJbEJoLDd1Y_7VVNgqyQjhHBNteH7hC2DfpLkeW25UyLi-Sevx9tViDJBpEM5TbJZEwgTLwHBqDiKPgIuSqhFXaHQFDnHXsumQ8u_trZPNssc3-I/w434-h309/1783880991778.png",
+        cover: "https://blogger.googleusercontent.com/img/a/AVvXsEgTcVg31rSB5Nor_5wxcNFuiNMyd-CtLzVjedF4WUThLzpAkeakpQ5_y3SpKN6S7rotS6_7jcKd3jWIN9RaAxwfVjrqYhyDKjz6Wstl6AMGw6auuVd36pAaXSeAKr5DjUuFA__OrClDcDHwVbOGGdXUo35x_qzaSj2PxZgWCN32Z_NgzECq5mKc6KsUel8=w456-h456", 
+        src: "venus.mp3",  
+        link: "https://share.google/aimode/FGdQBB0D4nyfNwScf",
+        lyrics: [
+            "Vienes como el mar, vuelta en un ciclo",
+            "Vienes y te vas, como una Venus te apareces",
+            "Me hundiré en tus olas",
+            "Y que nos lleve la corriente",
+            "<br>",
+            "Será porque te quiero, será porque es así",
+            "Sé que no es real y nadie es propiedad",
+            "Pero te siento mío",
+            "Sé que es real y no me perteneces",
+            "<br>"
         ]
     },
     {   title: "Ser parte", 
