@@ -155,24 +155,21 @@ function loadGallery() {
     const gridContainer = document.getElementById('asymmetric-grid');
     gridContainer.innerHTML = '';
 
-    galleryImages.forEach((item) => {
-        // Creamos el contenedor del item
+    galleryImages.forEach((item, index) => {
         const container = document.createElement('div');
         container.classList.add('gallery-item');
 
-        // Creamos la imagen
         const img = document.createElement('img');
         img.src = item.url;
         img.alt = item.text;
 
-        // Creamos el overlay con el texto
         const overlay = document.createElement('div');
         overlay.classList.add('item-overlay');
         overlay.innerHTML = `<span>${item.text}</span>`;
 
-        // Evento para móvil: añade una clase al hacer clic
+        
         container.addEventListener('click', () => {
-            container.classList.toggle('active-mobile');
+            openFullScreenGallery(index);
         });
 
         container.appendChild(img);
@@ -182,6 +179,118 @@ function loadGallery() {
 }
 
 document.addEventListener('DOMContentLoaded', loadGallery);
+/* ------------------------------------------------------ Full Screen Galeria ----------------------------------------------------- */
+
+let currentGalleryIndex = 0;
+let isAnimatingFS = false;
+
+// Elementos del DOM
+const fsModal = document.getElementById('full-screen');
+const imgCurrent = document.getElementById('fs-img-current');
+const imgNext = document.getElementById('fs-img-next');
+const fsText = document.getElementById('fs-text');
+const fsSlider = document.getElementById('fs-slider');
+const fsIndicator = document.getElementById('fs-indicator');
+const fsCounter = document.getElementById('fs-counter');
+const fsBgBlur = document.getElementById('fs-bg-blur');
+
+// Abrir Modal
+function openFullScreenGallery(index) {
+    currentGalleryIndex = index;
+    
+    // Carga inicial
+    imgCurrent.src = galleryImages[currentGalleryIndex].url;
+    fsBgBlur.src = galleryImages[currentGalleryIndex].url;
+    fsText.innerText = galleryImages[currentGalleryIndex].text;
+    
+    updateFSIndicator();
+    fsModal.classList.add('active');
+}
+
+// Cerrar Modal
+document.getElementById('close-full-screen').addEventListener('click', () => {
+    fsModal.classList.remove('active');
+    fsSlider.style.transition = 'none';
+    fsSlider.style.transform = 'translateX(0)';
+});
+
+// Función de Animación de Desplazamiento (Slider)
+function slideGallery(direction) {
+    if (isAnimatingFS) return;
+    isAnimatingFS = true;
+
+    // Calcular el siguiente índice (bucle infinito)
+    let nextIndex = currentGalleryIndex + direction;
+    if (nextIndex < 0) nextIndex = galleryImages.length - 1;
+    if (nextIndex >= galleryImages.length) nextIndex = 0;
+
+    // Preparar la imagen entrante
+    imgNext.src = galleryImages[nextIndex].url;
+    fsBgBlur.src = galleryImages[nextIndex].url;
+
+    // Posicionamiento según dirección
+    if (direction === 1) { // Siguiente (Desliza a la izquierda)
+        fsSlider.style.transition = 'none';
+        fsSlider.style.transform = 'translateX(0)';
+        
+        imgNext.style.order = 2;
+        imgCurrent.style.order = 1;
+
+        // Forzar reflujo e iniciar animación
+        setTimeout(() => {
+            fsSlider.style.transition = 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)';
+            fsSlider.style.transform = 'translateX(-100%)';
+        }, 30);
+
+    } else { // Anterior (Desliza a la derecha)
+        fsSlider.style.transition = 'none';
+        fsSlider.style.transform = 'translateX(-100%)';
+        
+        imgNext.style.order = 1;
+        imgCurrent.style.order = 2;
+
+        setTimeout(() => {
+            fsSlider.style.transition = 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)';
+            fsSlider.style.transform = 'translateX(0)';
+        }, 30);
+    }
+
+    // Efecto de opacidad en el texto
+    fsText.style.opacity = 0;
+    setTimeout(() => {
+        fsText.innerText = galleryImages[nextIndex].text;
+        fsText.style.opacity = 1;
+    }, 250);
+
+    currentGalleryIndex = nextIndex;
+    updateFSIndicator();
+
+    // Resetear el DOM después de la animación para el próximo slide
+    setTimeout(() => {
+        fsSlider.style.transition = 'none';
+        fsSlider.style.transform = 'translateX(0)';
+        imgCurrent.src = galleryImages[currentGalleryIndex].url;
+        imgCurrent.style.order = 1;
+        imgNext.style.order = 2;
+        isAnimatingFS = false;
+    }, 550);
+}
+
+// Actualizar barra de navegación dinámica
+function updateFSIndicator() {
+    fsCounter.innerText = currentGalleryIndex + 1;
+
+    // Aprovechamos la variable global shapeList para rotar formas
+    const shape = shapeList[currentGalleryIndex % shapeList.length];
+    
+    fsIndicator.style.webkitMaskImage = `url('${shape}')`;
+    fsIndicator.style.maskImage = `url('${shape}')`;
+}
+
+// Botones de la barra de navegación
+document.getElementById('fs-next').addEventListener('click', () => slideGallery(1));
+document.getElementById('fs-prev').addEventListener('click', () => slideGallery(-1));
+
 /* ------------------------------------------------------ Capitulo 01 ------------------------------------------------ */
 const avatarList = [
     'avatar_01.png',
@@ -1389,7 +1498,9 @@ function scrollToActiveSong() {
     }
 }
 
-/* Cambia de forma aleatoria la mascara de la canción que este sonando */
+let miniMaskInterval = null;
+let currentMiniMaskIndex = 0;
+
 function changeDynamicMask() {
     // Buscamos la imagen dentro del elemento 'active' de la playlist
     const activeImg = document.querySelector('.song-item.active .cover-song img');
@@ -1403,13 +1514,35 @@ function changeDynamicMask() {
             currentMaskIndex = (currentMaskIndex + 1) % maskFiles.length;
             const newMaskUrl = `url('${maskFiles[currentMaskIndex]}')`;
             
-            activeImg.style.webkitMaskImage = newMaskUrl;
-            activeImg.style.maskImage = newMaskUrl;
+            // Forzamos el cambio usando setProperty para asegurar que el DOM lo tome
+            activeImg.style.setProperty('-webkit-mask-image', newMaskUrl, 'important');
+            activeImg.style.setProperty('mask-image', newMaskUrl, 'important');
         }, 300);
 
         // 3. Quitamos la clase al terminar para poder repetirla luego
         setTimeout(() => {
             activeImg.classList.remove('animate-mask');
+        }, 600);
+    }
+}
+
+function changeMiniDynamicMask() {
+    const miniCover = document.getElementById('mini-cover');
+    
+    if (miniCover) {
+        miniCover.classList.add('mini-animate-mask');
+
+        setTimeout(() => {
+            currentMiniMaskIndex = (currentMiniMaskIndex + 1) % maskFiles.length;
+            const newMaskUrl = `url('${maskFiles[currentMiniMaskIndex]}')`;
+            
+            // Usamos setProperty con 'important' para vencer cualquier estilo bloqueante
+            miniCover.style.setProperty('-webkit-mask-image', newMaskUrl, 'important');
+            miniCover.style.setProperty('mask-image', newMaskUrl, 'important');
+        }, 300); 
+
+        setTimeout(() => {
+            miniCover.classList.remove('mini-animate-mask');
         }, 600);
     }
 }
@@ -1513,7 +1646,6 @@ function playSong() {
     document.getElementById('playIcon').textContent = "pause";
     addMagneticEffect(playBtn);
 
-    // Pequeña validación de seguridad por si bgVideo no está en el HTML actual
     if (typeof bgVideo !== 'undefined' && bgVideo) {
         bgVideo.classList.add('video-playing');
     }
@@ -1524,8 +1656,14 @@ function playSong() {
         if (isVideoHidden) staticImg.src = songs[currentSongIndex].cover;
     }
 
+    // Intervalo de la máscara principal existente
     if (!maskInterval) {
         maskInterval = setInterval(changeDynamicMask, 2000);
+    }
+
+    // NUEVO: Intervalo para el mini-cover cada 3 segundos
+    if (!miniMaskInterval) {
+        miniMaskInterval = setInterval(changeMiniDynamicMask, 3000);
     }
 
     const waveElement = document.getElementById('trackWave');
@@ -1533,7 +1671,8 @@ function playSong() {
 
     const miniPlayIcon = document.getElementById('mini-play-icon');
     if (miniPlayIcon) miniPlayIcon.className = "ri-pause-fill";
-    
+
+    updateMiniPlayerUI();
 }
 
 function pauseSong() {
@@ -1545,14 +1684,18 @@ function pauseSong() {
         bgVideo.classList.remove('video-playing');
     }
 
+    // Limpieza de la máscara principal
     clearInterval(maskInterval);
     maskInterval = null;
+
+    // NUEVO: Limpieza de la máscara del mini-cover
+    clearInterval(miniMaskInterval);
+    miniMaskInterval = null;
 
     const waveElement = document.getElementById('trackWave');
     if (waveElement) waveElement.classList.remove('wave-playing');
 
-    const miniPlayIcon = document.getElementById('mini-play-icon');
-    if (miniPlayIcon) miniPlayIcon.className = "ri-play-fill";
+    updateMiniPlayerUI();
 }
 
 /**
@@ -2484,10 +2627,19 @@ function updateMiniPlayerUI() {
     const cover = document.getElementById('mini-cover');
     const title = document.getElementById('mini-title');
     const artist = document.getElementById('mini-artist');
+    const miniPlayIcon = document.getElementById('mini-play-icon');
     
     if(cover) cover.src = song.cover;
     if(title) title.innerText = song.title;
     if(artist) artist.innerText = song.artist;
+
+    if(miniPlayIcon) {
+        if (audio.paused) {
+            miniPlayIcon.className = "ri-play-fill";
+        } else {
+            miniPlayIcon.className = "ri-pause-fill";
+        }
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -2557,4 +2709,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if(fabContainer) fabContainer.classList.remove('open');
         });
     });
+});
+/* --------------------------------------------------------------- Deteccion Safari --------------------------------------------------- */
+document.addEventListener('DOMContentLoaded', () => {
+    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    
+    if (isSafari) {
+        document.body.classList.add('is-safari');
+    }
 });

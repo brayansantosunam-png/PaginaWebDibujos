@@ -351,11 +351,6 @@
 
             </div>
         </div>
-
-        <div id="full-screen" class="full-screen">
-            <img id="full-screen-img" src="" alt="Full Screen Image">
-            <button id="close-full-screen">Cerrar</button>
-        </div>
         <!--Footer-->
         <footer class="footer">
             
@@ -393,6 +388,39 @@
             </h2>
             <div id="ambient-carousel-wrapper"></div>
             <p id="ambient-photo-desc" class="ambient-photo-desc"></p>
+        </div>
+        <!-- Pantalla Completa Galería -->
+        <div id="full-screen" class="full-screen">
+
+            <img id="fs-bg-blur" class="fs-bg-blur" src="" alt="">
+
+            <button id="close-full-screen" class="fs-close-btn">
+                <i class="ri-close-line"></i>
+            </button>
+
+            <!-- Contenedor del Slider (Animación de desplazamiento) -->
+            <div class="fs-slider-wrapper">
+                <div id="fs-slider" class="fs-slider">
+                    <img id="fs-img-current" src="" alt="Gallery Image" class="fs-img" oncontextmenu="return false;" draggable="false">
+                    <img id="fs-img-next" src="" alt="Gallery Image" class="fs-img" oncontextmenu="return false;" draggable="false">
+                </div>
+            </div>
+
+            <!-- Frase de la imagen -->
+            <p id="fs-text" class="fs-text"></p>
+
+            <!-- Barra de Navegación Personalizada -->
+            <div class="fs-nav-bar">
+                <button id="fs-prev" class="fs-nav-btn">
+                    <span class="material-symbols-outlined">arrow_left_alt</span>
+                </button>
+                <div id="fs-indicator" class="fs-indicator">
+                    <span id="fs-counter">1</span>
+                </div>
+                <button id="fs-next" class="fs-nav-btn">
+                    <span class="material-symbols-outlined">arrow_right_alt</span>
+                </button>
+            </div>
         </div>
         <!-- Efecto de Bruma de Lottie -->
         <div id="lottie-bruma-overlay" class="lottie-bruma-overlay">

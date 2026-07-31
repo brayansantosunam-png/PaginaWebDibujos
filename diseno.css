@@ -410,6 +410,12 @@ body, html {
     100% { background-position: 0% 50%; }
 }
 
+@keyframes miniMaskScaleInOut {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.25); opacity: 0.6; } /* ScaleUp: Crece un 25% y se hace sutilmente transparente */
+    100% { transform: scale(1); opacity: 1; }     /* ScaleDown: Regresa a la normalidad */
+}
+
 /* -------------------------------------------------------------- Efecto gradiente ------------------------------------------------*/
 body::before,
 body::after {
@@ -424,7 +430,6 @@ body::after {
     transition: opacity 0.4s ease; /* Transición suave */
 }
 
-/* Gradiente Superior */
 body::before {
     top: 0;
     background: linear-gradient(to bottom, 
@@ -444,6 +449,11 @@ body::after {
 body.is-scrolled::before,
 body.is-scrolled::after {
     opacity: 1;
+}
+
+body.is-safari::before,
+body.is-safari::after {
+    display: none !important;
 }
 
 /* Adaptación para Modo Oscuro (Opcional) */
@@ -671,9 +681,21 @@ a {
 .mini-cover {
     width: 50px;
     height: 50px;
-    border-radius: 16px;
     object-fit: cover;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    -webkit-mask-image: url('mascara_cuadrado.png'); 
+    mask-image: url('mascara_cuadrado.png');
+    -webkit-mask-size: cover;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-size: cover;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    transition: all 0.3s ease, -webkit-mask-image 0.4s ease, mask-image 0.4s ease;
+}
+
+.mini-animate-mask {
+    animation: miniMaskScaleInOut 0.6s ease-in-out;
 }
 
 .mini-info {
@@ -751,7 +773,7 @@ body.dark-mode .mini-btn {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;            
+    height: 100dvh;          
     display: flex;            
     flex-direction: column;
     justify-content: center;
@@ -1396,18 +1418,19 @@ video {
     transition: all 0.5s ease;
 }
 
-.cover-song img{
-    width: 100%; /* Asegura que la imagen de perfil se ajuste al contenedor */
+.cover-song img {
+    width: 100%;
     height: 100%;
     object-fit: cover;
-    -webkit-mask-image: url('mascara_cuadrado.png'); /* Máscara en navegadores Webkit (Chrome, Safari, Edge) */
-    -webkit-mask-size: cover; /* Ajusta la máscara al tamaño del contenedor */
-    -webkit-mask-repeat: no-repeat; /* Evita repeticiones de la máscara */
-    -webkit-mask-position: center; /* Centra la máscara */
-    mask-image: url('mascara_cuadrado.png'); /* Máscara para otros navegadores compatibles */
+    -webkit-mask-image: url('mascara_cuadrado.png');
+    mask-image: url('mascara_cuadrado.png');
+    -webkit-mask-size: cover;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
     mask-size: cover;
     mask-repeat: no-repeat;
     mask-position: center;
+    transition: all 0.3s ease, -webkit-mask-image 0.4s ease, mask-image 0.4s ease;
 }
 
 .song-item.active .cover-song {
@@ -2007,46 +2030,6 @@ body.dark-mode .desktop-theme-fab {
     mask-position: center;
 }
 
-.full-screen {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.full-screen img {
-    max-width: 90%;
-    max-height: 90%;
-    margin: 20px;
-    border-radius: 30px;
-}
-
-#close-full-screen {
-    width: 30%;
-    height: 90%; /* Cambia el ancho a automático */
-    display: inline-block; 
-    padding: 10px 20px; /* Ajusta el padding */
-    font-size: 16px;
-    font-family: 'Lexend';
-    color: #494949; 
-    background-color: #fcfcfc; 
-    border: 2px solid #494949; 
-    border-radius: 30px; 
-    text-align: center; 
-    text-decoration: none; 
-    transition: background-color 0.3s, color 0.3s;
-}
-#close-full-screen:hover{
-    background-color: #494949; 
-    color: #fcfcfc; 
-}
-
 .user-photo {
     flex: 0 0 200px; 
     height: 320px;
@@ -2634,7 +2617,7 @@ h1#collapsible-text .read-more-trigger {
 }
 /* ------------------------------------------------------------- Capitulo 02 ---------------------------------------------------------*/
 .Capitulo02, .Capitulo01 {
-    min-height: 100vh; 
+    min-height: 100dvh;
     margin: 0;
     display: flex;
     flex-direction: column; 
@@ -3259,6 +3242,164 @@ body.dark-mode .video-glass-overlay {
   font-weight: 400;
   font-style: normal;
 }
+/* ------------------------------------------------------------ Full Screen ---------------------------------------------------*/
+
+.full-screen {
+    display: none;
+    position: fixed;
+    top: 0; 
+    left: 0;
+    width: 100vw; 
+    height: 100dvh; 
+    background: rgba(15, 15, 20, 0.65);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 100000; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; 
+}
+
+.fs-bg-blur {
+    position: absolute;
+    top: -10%; 
+    left: -10%;
+    width: 120%;
+    height: 120%;
+    object-fit: cover;
+    filter: blur(60px) saturate(200%) brightness(0.9);
+    z-index: -1; 
+}
+
+body.dark-mode .full-screen {
+    background: rgba(5, 5, 10, 0.85); 
+}
+
+body.dark-mode .fs-bg-blur {
+    filter: blur(60px) saturate(150%) brightness(0.4);
+}
+
+.full-screen.active {
+    display: flex;
+}
+
+.fs-close-btn {
+    position: absolute;
+    top: 30px; 
+    right: 30px;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 2.5rem;
+    z-index: 10;
+    transition: transform 0.2s;
+}
+
+.fs-close-btn:active {
+    transform: scale(0.8);
+}
+
+/* Contenedor del Slider */
+.fs-slider-wrapper {
+    position: relative;
+    width: 90%;
+    max-width: 500px;
+    height: 60vh;
+    overflow: hidden;
+    border-radius: 35px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+}
+
+.fs-slider {
+    display: flex;
+    width: 100%; 
+    height: 100%;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.fs-img {
+    min-width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Bloqueo de descarga */
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
+}
+
+.fs-text {
+    font-family: 'Karla', sans-serif;
+    font-size: 1.3rem;
+    color: white;
+    text-align: center;
+    margin-top: 25px;
+    min-height: 50px;
+    font-weight: 500;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    padding: 0 20px;
+    transition: opacity 0.3s ease;
+}
+
+/* --- Barra de Navegación Inferior --- */
+.fs-nav-bar {
+    position: absolute;
+    bottom: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background:rgba( 172, 206, 242, 0.15 );
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--border-glassefect); 
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    transition: background-color 0.3s ease; 
+    padding: 8px 15px;
+    border-radius: 50px;
+    width: 200px;
+}
+
+.fs-nav-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-glasseffect);
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+.fs-nav-btn:active {
+    transform: scale(0.8);
+}
+
+.fs-indicator {
+    position: relative;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #aae0e0; 
+    -webkit-mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    transition: background-color 0.4s ease;
+}
+
+.fs-indicator span {
+    font-family: 'Karla', sans-serif;
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: var(--text-glasseffect);
+    z-index: 2;
+}
+
 /* ------------------------------------------------------------- Final Bruma --------------------------------------------------*/
 
 .lottie-bruma-overlay {
@@ -4052,21 +4193,6 @@ body.dark-mode .video-glass-overlay {
         padding: 10px 20px;
     }
 
-    .full-screen img {
-        max-width: 95%;
-        max-height: 75%; 
-        border-radius: 20px;
-    }
-
-    #close-full-screen {
-        width: 80%; 
-        height: auto; 
-        padding: 15px;
-        font-size: 18px;
-        position: absolute;
-        bottom: 30px; 
-    }
-
     .memory-widget {
         flex-direction: column;
         padding: 30px 20px;
@@ -4161,7 +4287,7 @@ body.dark-mode .video-glass-overlay {
     }
 
     .profile-container {
-        height: 90vh;
+        height: 90dvh;
         padding: 10px;
         margin-top: 30px;
     }
@@ -4414,7 +4540,7 @@ body.dark-mode .video-glass-overlay {
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
-        height: 90vh;
+        height: 90dvh;
         padding-top: 80px;
         padding-bottom: 80px;
     }
@@ -4426,6 +4552,14 @@ body.dark-mode .video-glass-overlay {
     .small { font-size: 1rem; }
     .big { font-size: 2rem; }
     .huge { font-size: 3rem; }
+    /* ---------------------------------------------- Full screen --------------------------------------------------*/
+    .fs-slider-wrapper {
+        width: 85%;
+        height: 55vh;
+    }
+    .fs-nav-bar {
+        bottom: 30px;
+    }
     /* ---------------------------------------------- Final Text ---------------------------------------------------*/
     .bruma-closing-text {
         bottom: auto !important; 
