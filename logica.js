@@ -770,7 +770,7 @@ const songs = [
             seekThumb: "#e8c5d8",                   // Relleno de la barra
             cardBg: "rgba(90, 50, 75, 0.35)"
         },
-        cover: "https://cdn-images.dzcdn.net/images/cover/8498486810fb5956153f175822b7b7d8/0x1900-000000-80-0-0.jpg", 
+        cover: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEima1IbHZWOYQjKNn4dhAWNdUI_iiIKxMOJjZWd3U0jlNXnQlnBulcto6CUI31_rQkGAQ5kh7hA8HbmgFpPF0-C4wCUhSmUdSxZvYBG8xH7iSp3ZfWvDUYooauT-KdU0Jk_sX9-mfM3I-UIXNq6Y-93F76RcsbCnf_gcg8hXn0KUtpayYRK_JO0Gf2xPWw/w406-h406/07.jpg", 
         artistImg: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEikM-2x-VJrZSzhH8mQIBDUPtYs9Lnl-SC_-Qy0T-YjOEZpCFPIAQpjSwUMpP9FshprLmMtlVTQwcWuo4IHZUfMBzFU8ojcpyUn8xcpMxuI2mZKV4L1HHZ5g73MBRLoK6-3gm4-GTKZuxk7ZyyglhonXAaEM13SdryoyZtFHvnPI04lVuqtGIXbOi2DAx8/w409-h377/1783880970930.png",
         src: "sone.m4a", 
         link: "https://open.spotify.com/intl-es/track/2VhJ4nrPorAbySEgO4V0BS",
@@ -856,7 +856,7 @@ const songs = [
             cardBg: "rgba(90, 50, 75, 0.35)"
         },
         artistImg: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg2Bna2H2hKJxS-OayFMBlafTVq11tOVcmYs5DecDwWAQpjU3hoA80u8jlhM2o-unXY24tgYZmlxe9TJbEJoLDd1Y_7VVNgqyQjhHBNteH7hC2DfpLkeW25UyLi-Sevx9tViDJBpEM5TbJZEwgTLwHBqDiKPgIuSqhFXaHQFDnHXsumQ8u_trZPNssc3-I/w434-h309/1783880991778.png",
-        cover: "https://cdn-images.dzcdn.net/images/cover/8498486810fb5956153f175822b7b7d8/0x1900-000000-80-0-0.jpg", 
+        cover: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEima1IbHZWOYQjKNn4dhAWNdUI_iiIKxMOJjZWd3U0jlNXnQlnBulcto6CUI31_rQkGAQ5kh7hA8HbmgFpPF0-C4wCUhSmUdSxZvYBG8xH7iSp3ZfWvDUYooauT-KdU0Jk_sX9-mfM3I-UIXNq6Y-93F76RcsbCnf_gcg8hXn0KUtpayYRK_JO0Gf2xPWw/w406-h406/07.jpg", 
         src: "labiosrotos.m4a", 
         link: "https://share.google/aimode/FJutnTOeOMxUojUVq",
         lyrics: [
@@ -894,7 +894,7 @@ const songs = [
             cardBg: "rgba(216, 123, 90, 0.35)"
         },
         artistImg: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgXFqGjXFOS8CJcehWdxs_1tatbC-ggFlvUeXbVt0X5CQ2W-d8VpugSo8pa5CnGyngkFeK1PEP6J5MdOJ4f-tz7en_bclntaKFy405QnFVKQoMLhaKjOP9B6bA0JM3c5VdCfPC53IVw5c_1f61qKYZgtEgLhyphenhyphenpt7meGVIitoF1uJ0knzHSIMPqcS0Ddsew/w410-h410/1783881029450.png",
-        cover: "https://cdn-images.dzcdn.net/images/cover/a508833ee74e2cd3197f0641e3c73545/1900x1900-000000-80-0-0.jpg", 
+        cover: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgt0-DKA8wgFgXwbm7z0Oow1a_fEOMbOb6gn-0gsGkZpBkJT8mSuAjWl-Kr9d243MLMzvU-Knx3pZxPJg4ySuca03k6CihrEQDvj4cVouEZYlFcQBVydNsfKt0VahZRkQdnP0SIamCmDYgbutZXqPksp7wSmzfSSRyFFZbTFldwEhVo2pT36yNHh2tm_FQ/s2048/01.jpg", 
         src: "tarde.m4a", 
         link: "https://share.google/aimode/1N4OOnvlG6KLJVtCE",
         lyrics: [
@@ -931,7 +931,7 @@ const songs = [
             cardBg: "rgba(31, 89, 153, 0.35)"
         }, 
         artistImg: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgXFqGjXFOS8CJcehWdxs_1tatbC-ggFlvUeXbVt0X5CQ2W-d8VpugSo8pa5CnGyngkFeK1PEP6J5MdOJ4f-tz7en_bclntaKFy405QnFVKQoMLhaKjOP9B6bA0JM3c5VdCfPC53IVw5c_1f61qKYZgtEgLhyphenhyphenpt7meGVIitoF1uJ0knzHSIMPqcS0Ddsew/w410-h410/1783881029450.png",
-        cover: "https://images.genius.com/4d612579eb7472076b70e67617e12fb6.1000x1000x1.png", 
+        cover: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi1BJ1UJGVoDghTFUclWrGh898veap51WjJFXkl2dYioJN9zdD5527Ll_hRC7IzAVqmb3Z-qb-shPqAAfbaHq9_vUIFEh13qRXK-uG-h8PXhiQI_J9tp73F9e7Mav38wySSXvoNXwwy4wkLlKb5uGCVg1_fZ_OZsjyA-ygRae9xMJiH-pQFjyEysKX9oj8/w410-h410/03.jpg", 
         src: "me_hace_falta.mp3", 
         link: "https://open.spotify.com/intl-es/track/7EAr8k0WiV9ybItof6utFj",
         lyrics: [
@@ -1010,7 +1010,7 @@ const songs = [
             cardBg: "rgba(90, 50, 75, 0.35)"
         }, 
         artistImg: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEikM-2x-VJrZSzhH8mQIBDUPtYs9Lnl-SC_-Qy0T-YjOEZpCFPIAQpjSwUMpP9FshprLmMtlVTQwcWuo4IHZUfMBzFU8ojcpyUn8xcpMxuI2mZKV4L1HHZ5g73MBRLoK6-3gm4-GTKZuxk7ZyyglhonXAaEM13SdryoyZtFHvnPI04lVuqtGIXbOi2DAx8/w409-h377/1783880970930.png",
-        cover: "https://cdn-images.dzcdn.net/images/cover/8498486810fb5956153f175822b7b7d8/0x1900-000000-80-0-0.jpg", 
+        cover: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEima1IbHZWOYQjKNn4dhAWNdUI_iiIKxMOJjZWd3U0jlNXnQlnBulcto6CUI31_rQkGAQ5kh7hA8HbmgFpPF0-C4wCUhSmUdSxZvYBG8xH7iSp3ZfWvDUYooauT-KdU0Jk_sX9-mfM3I-UIXNq6Y-93F76RcsbCnf_gcg8hXn0KUtpayYRK_JO0Gf2xPWw/w406-h406/07.jpg", 
         src: "via_lactea.mp3", 
         link: "https://open.spotify.com/intl-es/track/1nquycJ4zLhrT23rwtH5Wj", 
         lyrics: [
@@ -1085,7 +1085,7 @@ const songs = [
             cardBg: "rgba(153, 43, 50, 0.35)"
         }, 
         artistImg: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEikM-2x-VJrZSzhH8mQIBDUPtYs9Lnl-SC_-Qy0T-YjOEZpCFPIAQpjSwUMpP9FshprLmMtlVTQwcWuo4IHZUfMBzFU8ojcpyUn8xcpMxuI2mZKV4L1HHZ5g73MBRLoK6-3gm4-GTKZuxk7ZyyglhonXAaEM13SdryoyZtFHvnPI04lVuqtGIXbOi2DAx8/w409-h377/1783880970930.png",
-        cover: "https://cdn-images.dzcdn.net/images/cover/46d64f553900fcee92fdc8e364246828/0x1900-000000-80-0-0.jpg", 
+        cover: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEglR2h5TdvBAbiEFfo_761w2jK-6S0iKbxg8z5F2fVGk5ehYctbP4fDMYhCUkm-7FUYPVcjD4_s-naBNPlEDBex5UsGiIgwiWNau-Tcn1z-BfOsQcX7XNYXE7wk2das0Sh9yKldCsliXi-8Ih3LxQL4rdBq53EcuBMr9WagG74fzPxQ6Qcgv6qnL1udgYs/w424-h424/02.png", 
         src: "velur.m4a", 
         link: "https://open.spotify.com/intl-es/track/6Bpw7j4WL3IwdM1xLPcH7Q",
         lyrics: [
@@ -1120,7 +1120,7 @@ const songs = [
             cardBg: "rgba(15, 20, 35, 0.35)"
         }, 
         artistImg: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEghzcEbx9GeXJbabInJJ7Sv-jFoHgZOyN8jwz-qRbbBTt939nfLhQpH9mk4uTiMfv0VVcefxfNbWYM5XgHURdgZlSq8sL9WFSVFATlj_Q7QyWBNois7EPw3Qj0omiEdgDCYBYmOvAuIZCHPU3PCCK5_k6TBqzqxFlZhChVIkhjYi14zZtQ_QBlnsqanwek/w334-h445/1783881050324.png",
-        cover: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg5U8VJdtWDJb3S8XRk7dXFqkf8WXFTpOvw5yn3aral845kVhajX3rrQoHAHMefY7V-6AEfWwzwLUXK6SMSvFkYslAK95Vr-XUq4YYJF1OvHqUR3CC50SZ_MaeIjd87GmDAwwjPIuAmDjDqVwSnW_gFDf7w69U5ymll5KNbq0IYfpIxhIdn_enAnp1KLSY/w492-h492/doma.jpg", 
+        cover: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhWO6D8XXJ0D4OopDrmI3FT-H9akpVLPm3rXopCV20-G5-j3tLtPacjI40qtoBUxUeXrCAqUpPcNMjrMwqiKK7dGje_hefGiejVLGec4nfrzLVJknjknKIQsJLdhx70sIRRK3d2147h5e-KTWnJNHaqioYoq5a9ytT1nfjEN6m9jo7FGxlMp3G9H3_2gNo/w428-h428/04.jpg", 
         src: "doma.mp3", 
         link: "https://open.spotify.com/intl-es/track/58cLm4PaHNt8DDr9ayZnNz",
         lyrics: [
@@ -1155,7 +1155,7 @@ const songs = [
             cardBg: "rgba(45, 20, 22, 0.35)"
         }, 
         artistImg: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgBlbkJejoxd621lsUn9MjMMfOmOZ8JBVjJp61N_HuVQ_C7ZjtCg89aax8piSYXk7oNw38PepoyoMrRJ8wpaNFqGDnLFQXCh0xAymHxeBRJR8dGmSL-0lYabPoIOX26qlQv7jgkgCiWDtwV7-ji_s3JMkDq7P0eDB2yf5z8NkJoL0Yewu19h3ba00IHHHg/w343-h378/1783881013290.png",
-        cover: "http://blogger.googleusercontent.com/img/a/AVvXsEg06Yf5cixLCsleroAlH70uig4NT9x44T9BlnO0sopNXZ3YNsiAFwpOfMXzIj-57B25ioovhLGe6s9M5OsI_O5C0J62wnB4vp5i8YjmgnrLSjdyL9nDF5vKc9FSqC5SFO6leo0JqMT0zomOxa4lTwyQgVTjNBltJujnKHzQUQ8lKqk9nEY0Y3UCMcAJzZU", 
+        cover: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg7VpIG5mPwtMYcaPlztJ3MVe0ygWZntZwuKRlW7JdhwosO8bNMaeKZTka_xK14NdN45aISMCnut189fbSN1SsVnfK6sUL9WP1HFqR7gQqeCzqYj16GMwA6St_M__3tSCQ2vuq_qwwdoK0wgDqvDsl1LAIvtqYUzL2uSTxQhtbyYT3KWZArZ8-DxHv9DXg/w440-h440/06.jpg", 
         src: "buscame_otravez.mp3", 
         link: "https://open.spotify.com/intl-es/track/4YnjesWFrSEkhwERM5Fhj7",
         lyrics: [
@@ -1192,7 +1192,7 @@ const songs = [
             cardBg: "rgba(216, 123, 90, 0.35)"
         },
         artistImg: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgXFqGjXFOS8CJcehWdxs_1tatbC-ggFlvUeXbVt0X5CQ2W-d8VpugSo8pa5CnGyngkFeK1PEP6J5MdOJ4f-tz7en_bclntaKFy405QnFVKQoMLhaKjOP9B6bA0JM3c5VdCfPC53IVw5c_1f61qKYZgtEgLhyphenhyphenpt7meGVIitoF1uJ0knzHSIMPqcS0Ddsew/w410-h410/1783881029450.png",
-        cover: "https://cdn-images.dzcdn.net/images/cover/a508833ee74e2cd3197f0641e3c73545/1900x1900-000000-80-0-0.jpg", 
+        cover: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgt0-DKA8wgFgXwbm7z0Oow1a_fEOMbOb6gn-0gsGkZpBkJT8mSuAjWl-Kr9d243MLMzvU-Knx3pZxPJg4ySuca03k6CihrEQDvj4cVouEZYlFcQBVydNsfKt0VahZRkQdnP0SIamCmDYgbutZXqPksp7wSmzfSSRyFFZbTFldwEhVo2pT36yNHh2tm_FQ/s2048/01.jpg", 
         src: "Unicos.mp3",  
         link: "https://share.google/aimode/zGdg3R3v1hB7VW9NG",
         lyrics: [
@@ -1271,7 +1271,7 @@ const songs = [
             cardBg: "rgba(92, 139, 176, 0.35)"
         },
         artistImg: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg2Bna2H2hKJxS-OayFMBlafTVq11tOVcmYs5DecDwWAQpjU3hoA80u8jlhM2o-unXY24tgYZmlxe9TJbEJoLDd1Y_7VVNgqyQjhHBNteH7hC2DfpLkeW25UyLi-Sevx9tViDJBpEM5TbJZEwgTLwHBqDiKPgIuSqhFXaHQFDnHXsumQ8u_trZPNssc3-I/w434-h309/1783880991778.png",
-        cover: "https://blogger.googleusercontent.com/img/a/AVvXsEgTcVg31rSB5Nor_5wxcNFuiNMyd-CtLzVjedF4WUThLzpAkeakpQ5_y3SpKN6S7rotS6_7jcKd3jWIN9RaAxwfVjrqYhyDKjz6Wstl6AMGw6auuVd36pAaXSeAKr5DjUuFA__OrClDcDHwVbOGGdXUo35x_qzaSj2PxZgWCN32Z_NgzECq5mKc6KsUel8=w456-h456", 
+        cover: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi9-3szxoaDFXIFpp996-tMlrrkyu4QCHEKKbqg297tG_oTPZJ-AsreA4BfZLE8MRrJHp31O6i5eUzvVpgXKJR0bCL9IfPjn7cCsBvmwmAoVrTcJD14wkGWXrrcq0SzrWE-eTojejt6f5bKFc_pgVQ7jREgjPlfBJpX12ww8PFp9adPI91cu6L3p5WMA68/w454-h454/05.jpg", 
         src: "venus.mp3",  
         link: "https://share.google/aimode/FGdQBB0D4nyfNwScf",
         lyrics: [
@@ -1305,7 +1305,7 @@ const songs = [
             cardBg: "rgba(216, 123, 90, 0.35)"
         },
         artistImg: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgXFqGjXFOS8CJcehWdxs_1tatbC-ggFlvUeXbVt0X5CQ2W-d8VpugSo8pa5CnGyngkFeK1PEP6J5MdOJ4f-tz7en_bclntaKFy405QnFVKQoMLhaKjOP9B6bA0JM3c5VdCfPC53IVw5c_1f61qKYZgtEgLhyphenhyphenpt7meGVIitoF1uJ0knzHSIMPqcS0Ddsew/w410-h410/1783881029450.png",
-        cover: "https://cdn-images.dzcdn.net/images/cover/a508833ee74e2cd3197f0641e3c73545/1900x1900-000000-80-0-0.jpg", 
+        cover: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgt0-DKA8wgFgXwbm7z0Oow1a_fEOMbOb6gn-0gsGkZpBkJT8mSuAjWl-Kr9d243MLMzvU-Knx3pZxPJg4ySuca03k6CihrEQDvj4cVouEZYlFcQBVydNsfKt0VahZRkQdnP0SIamCmDYgbutZXqPksp7wSmzfSSRyFFZbTFldwEhVo2pT36yNHh2tm_FQ/s2048/01.jpg", 
         src: "ser_parte.mp3",  
         link: "https://share.google/aimode/hMmWd26Wkbf9XoTUs",
         lyrics: [
@@ -1598,6 +1598,22 @@ function selectSong(index) {
             }, 3000); 
         }
     }
+
+    if ('mediaSession' in navigator) {
+        const currentSong = songs[currentSongIndex];
+        
+        navigator.mediaSession.metadata = new MediaMetadata({
+            title: currentSong.title,
+            artist: currentSong.artist,
+            album: 'Bruma', 
+            artwork: [
+                
+                { src: currentSong.cover, sizes: '512x512', type: 'image/jpeg' },
+                { src: currentSong.cover, sizes: '192x192', type: 'image/jpeg' },
+                { src: currentSong.cover, sizes: '256x256', type: 'image/jpeg' }
+            ]
+        });
+    }
     
     const target = ambientModeActive ? 'ambient-dynamic-text' : 'typewriter-text';
     typeWriter(songs[currentSongIndex].phrase || "", target);
@@ -1803,6 +1819,35 @@ document.addEventListener('DOMContentLoaded', () => {
     if (nextBtn) {
         nextBtn.addEventListener('click', nextSong);
     }
+
+    if ('mediaSession' in navigator) {
+        navigator.mediaSession.setActionHandler('play', () => {
+            playSong();
+        });
+        
+        navigator.mediaSession.setActionHandler('pause', () => {
+            pauseSong();
+        });
+        
+        navigator.mediaSession.setActionHandler('previoustrack', () => {
+            prevSong();
+        });
+        
+        navigator.mediaSession.setActionHandler('nexttrack', () => {
+            nextSong();
+        });
+        
+        // Opcional: Permitir adelantar/atrasar desde la barra de la notificación
+        navigator.mediaSession.setActionHandler('seekto', (details) => {
+            if (details.fastSeek && 'fastSeek' in audio) {
+                audio.fastSeek(details.seekTime);
+            } else {
+                audio.currentTime = details.seekTime;
+            }
+            updateSeekBar();
+        });
+    }
+
     shuffleBtn.addEventListener('click', () => {
         isShuffle = !isShuffle;
         shuffleBtn.style.color = isShuffle ? "#709fde" : ""; 
