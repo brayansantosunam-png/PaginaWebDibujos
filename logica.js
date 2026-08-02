@@ -1604,7 +1604,7 @@ function selectSong(index) {
         
         navigator.mediaSession.metadata = new MediaMetadata({
             title: currentSong.title,
-            artist: currentSong.artist,
+            artist: currentSong.artist + '- Bruma - Marco',
             album: 'Bruma', 
             artwork: [
                 
