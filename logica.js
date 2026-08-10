@@ -622,6 +622,7 @@ function runWelcomeSequence() {
 
             setTimeout(() => {
                 charElement.innerText = data.char;
+                charElement.setAttribute('data-text', data.char); 
                 imageLayer.style.backgroundImage = `url('${data.img}')`;
                 
                 if (data.char === 'BRUMA') {
@@ -715,9 +716,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+function initIntroLottie() {
+    const lottieContainer = document.getElementById('lottie-intro-overlay');
+    if (lottieContainer) {
+        lottie.loadAnimation({
+            container: lottieContainer,
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: 'spark.json' 
+        });
+    }
+}
+
 // Inicializar al cargar
 document.addEventListener('DOMContentLoaded', () => {
     // Iniciamos la secuencia
+    initIntroLottie();
     runWelcomeSequence();
 
     // El botón para entrar sigue funcionando igual

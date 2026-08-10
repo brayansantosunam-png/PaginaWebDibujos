@@ -416,6 +416,24 @@ body, html {
     100% { transform: scale(1); opacity: 1; }     /* ScaleDown: Regresa a la normalidad */
 }
 
+@keyframes glitch-anim-1 {
+    0% { clip-path: inset(20% 0 80% 0); }
+    20% { clip-path: inset(60% 0 10% 0); }
+    40% { clip-path: inset(40% 0 50% 0); }
+    60% { clip-path: inset(80% 0 5% 0); }
+    80% { clip-path: inset(10% 0 70% 0); }
+    100% { clip-path: inset(30% 0 50% 0); }
+}
+
+@keyframes glitch-anim-2 {
+    0% { clip-path: inset(10% 0 60% 0); }
+    20% { clip-path: inset(30% 0 20% 0); }
+    40% { clip-path: inset(70% 0 10% 0); }
+    60% { clip-path: inset(20% 0 50% 0); }
+    80% { clip-path: inset(50% 0 30% 0); }
+    100% { clip-path: inset(5% 0 80% 0); }
+}
+
 /* -------------------------------------------------------------- Efecto gradiente ------------------------------------------------*/
 body::before,
 body::after {
@@ -852,6 +870,7 @@ body.dark-mode .mini-btn {
     opacity: 0;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     margin-bottom: 20px; /* Espacio entre BRUMA y el subtítulo */
+    position: relative;
 }
 
 .intro-char.active {
@@ -861,6 +880,53 @@ body.dark-mode .mini-btn {
 
 .intro-char.word-mode {
     font-size: 10rem !important; 
+}
+
+.glitch-lottie-wrapper {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Posicionamiento del Lottie sobre las letras */
+.lottie-intro-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150%; /* Ajusta este porcentaje dependiendo del tamaño base de tu .json */
+    height: 150%;
+    pointer-events: none; /* Crucial para no bloquear los clics subyacentes */
+    z-index: 10;
+}
+
+.intro-char::before,
+.intro-char::after {
+    content: attr(data-text); /* Toma el texto exacto del HTML */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    opacity: 0.8;
+}
+
+/* Canal rojo desplazado a la izquierda */
+.intro-char::before {
+    left: 3px;
+    text-shadow: -2px 0 #ff003c;
+    clip-path: inset(20% 0 80% 0);
+    animation: glitch-anim-1 2s infinite linear alternate-reverse;
+}
+
+/* Canal cian desplazado a la derecha */
+.intro-char::after {
+    left: -3px;
+    text-shadow: 2px 0 #00e5ff;
+    clip-path: inset(80% 0 20% 0);
+    animation: glitch-anim-2 3s infinite linear alternate-reverse;
 }
 
 .controls-visible {
